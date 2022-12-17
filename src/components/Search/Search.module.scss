@@ -12,7 +12,6 @@
     order: 0;
   }
   @media (max-width: $mobile) {
-    flex: 0;
     &._visible {
       position: fixed;
       align-items: flex-start;
