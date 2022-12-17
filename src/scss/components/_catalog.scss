@@ -24,7 +24,7 @@
 
   &__filter-mobile {
     position: sticky;
-    top: 0;
+    top: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +32,9 @@
     z-index: 5;
     height: 48px;
     font-size: 18px;
+    @media (max-width: $mobile) {
+      top: 47px;
+    }
   }
 
   // .catalog__body

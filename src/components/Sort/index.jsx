@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { filterSelector, setSort } from '../../redux/slices/filterSlice';
 import { bodyLock, bodyUnlock } from '../../js/modules/functions';
+import { mobileHeight } from '../../utils/mobileHeightSortElement.js';
 
 import styles from './Sort.module.scss';
 
@@ -38,7 +39,6 @@ export const SortMobile = () => {
   const dispatch = useDispatch();
   const { sortState } = useSelector(filterSelector);
   const [isVisible, setIsVisible] = React.useState(false);
-  console.log('isVisible Sort: ', isVisible);
 
   const onClickSort = (obj) => {
     dispatch(setSort(obj));
@@ -46,7 +46,11 @@ export const SortMobile = () => {
   };
 
   React.useEffect(() => {
+    window.addEventListener('resize', mobileHeight);
     setIsVisible(false);
+    return () => {
+      window.removeEventListener('resize', mobileHeight);
+    };
   }, []);
 
   React.useEffect(() => {
