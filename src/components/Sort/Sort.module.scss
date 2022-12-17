@@ -14,8 +14,9 @@
   @media (max-width: $tablet) {
     position: fixed;
     width: 100vw;
-    min-height: 100%vh;
-    height: -webkit-fill-available;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    // height: -webkit-fill-available;
     background-color: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;

@@ -1,3 +1,5 @@
-let vh = window.innerHeight * 0.01;
+export const mobileHeight = () => {
+  let vh = window.innerHeight * 0.01;
 
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+  return document.documentElement.style.setProperty('--vh', `${vh}px`);
+}

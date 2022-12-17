@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { filterSelector, setSort } from '../../redux/slices/filterSlice';
 import { bodyLock, bodyUnlock } from '../../js/modules/functions';
+import { mobileHeight } from '../../utils/mobileHeightSortElement.js';
 
 import styles from './Sort.module.scss';
 
@@ -38,8 +39,6 @@ export const SortMobile = () => {
   const dispatch = useDispatch();
   const { sortState } = useSelector(filterSelector);
   const [isVisible, setIsVisible] = React.useState(false);
-  const [brouserHeight, setBrouserHeight] = React.useState();
-  console.log('brouserHeight: ', brouserHeight);
 
   const onClickSort = (obj) => {
     dispatch(setSort(obj));
@@ -47,15 +46,18 @@ export const SortMobile = () => {
   };
 
   React.useEffect(() => {
+    window.addEventListener('resize', mobileHeight);
     setIsVisible(false);
+    return () => {
+      window.removeEventListener('resize', mobileHeight);
+    };
   }, []);
 
   React.useEffect(() => {
-    // setBrouserHeight(document.documentElement.clientHeight);
     isVisible === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
-  }, [isVisible, brouserHeight]);
+  }, [isVisible]);
 
   return (
     <>
@@ -66,7 +68,7 @@ export const SortMobile = () => {
         {isVisible && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1, height: brouserHeight }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className={styles.wrapper}
