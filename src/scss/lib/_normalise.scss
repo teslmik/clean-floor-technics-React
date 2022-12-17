@@ -48,6 +48,12 @@ body {
 }
 .main {
   flex: 1 1 auto;
+  @media (max-width: $tablet) {
+    padding-top: 70px;
+  }
+@media (max-width: $mobile) {
+  padding-top: 47px;
+}
 }
 .ibg {
   background-position: center;

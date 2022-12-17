@@ -3,6 +3,12 @@
 
 // =========== Header ==============
 .header {
+  @media (max-width: $tablet) {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 999;
+  }
   &__top {
     background-color: $headerDark;
     padding-top: rem(7);
