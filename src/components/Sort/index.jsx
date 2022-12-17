@@ -51,7 +51,7 @@ export const SortMobile = () => {
   }, []);
 
   React.useEffect(() => {
-    setBrouserHeight(document.documentElement.clientHeight);
+    // setBrouserHeight(document.documentElement.clientHeight);
     isVisible === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
