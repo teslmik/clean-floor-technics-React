@@ -7,6 +7,10 @@
   align-items: center;
   flex: 1 1 auto;
   position: relative;
+
+@media (max-width: $mobile) {
+  flex: 0 1 auto;
+}
   
   @media (max-width: $tablet) {
     order: 0;
@@ -41,6 +45,7 @@
         padding: rem(8);
         opacity: 1;
         visibility: visible;
+        width: 100%;
       }
 
       .search__dropdown {
@@ -87,6 +92,7 @@
       opacity: 0;
       visibility: hidden;
       padding: 0;
+      width: 0;
     }
   }
 
