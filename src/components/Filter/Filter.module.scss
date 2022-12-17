@@ -16,9 +16,12 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-    top: 0;
+    top: 70px;
     left: 0;
     z-index: 9;
+  }
+  @media (max-width: $mobile) {
+    top: 47px;
   }
   &__wrapper {
     position: sticky;

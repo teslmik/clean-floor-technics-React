@@ -35,9 +35,6 @@ const Filter = () => {
     } else setIsVisible(false);
   }, [windowWidth]);
 
-  console.log('windowWidth: ', windowWidth);
-  console.log('isVisible Filter: ', isVisible);
-
   return (
     <>
       <div className={styles.filter__title} onClick={() => setIsVisible(true)}>

@@ -38,7 +38,8 @@ export const SortMobile = () => {
   const dispatch = useDispatch();
   const { sortState } = useSelector(filterSelector);
   const [isVisible, setIsVisible] = React.useState(false);
-  console.log('isVisible Sort: ', isVisible);
+  const [brouserHeight, setBrouserHeight] = React.useState();
+  console.log('brouserHeight: ', brouserHeight);
 
   const onClickSort = (obj) => {
     dispatch(setSort(obj));
@@ -50,10 +51,11 @@ export const SortMobile = () => {
   }, []);
 
   React.useEffect(() => {
+    setBrouserHeight(document.documentElement.clientHeight);
     isVisible === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
-  }, [isVisible]);
+  }, [isVisible, brouserHeight]);
 
   return (
     <>
@@ -64,7 +66,7 @@ export const SortMobile = () => {
         {isVisible && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 1, height: brouserHeight }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className={styles.wrapper}
