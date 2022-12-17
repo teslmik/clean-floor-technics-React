@@ -46,8 +46,9 @@ export const SortMobile = () => {
   };
 
   React.useEffect(() => {
-    window.addEventListener('resize', mobileHeight);
+    mobileHeight();
     setIsVisible(false);
+    window.addEventListener('resize', mobileHeight);
     return () => {
       window.removeEventListener('resize', mobileHeight);
     };

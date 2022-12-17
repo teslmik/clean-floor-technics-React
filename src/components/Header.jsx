@@ -16,6 +16,8 @@ const Header = () => {
 
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
 
+  const styleLogo = pathname === '/cart' ? { marginRight: '0px', flex: '0 0 auto' } : {};
+
   React.useEffect(() => {
     if (isMounted.current) {
       const json = JSON.stringify(items);
@@ -64,7 +66,7 @@ const Header = () => {
                 setIsVisible={setIsVisible}
               />
             )}
-            <div className="header__logo ibg">
+            <div className="header__logo ibg" style={styleLogo}>
               <a href="/">
                 <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
               </a>
@@ -72,7 +74,11 @@ const Header = () => {
             {pathname === '/cart' ? (
               <div className="cart-back">
                 <Link to={'/catalog'} className="_icon-arrow-left">
-                  {windowWidth > 384 ? 'Повернутися до покупок' : windowWidth > 336 ? 'Назад до покупок' : 'Назад'}
+                  {windowWidth > 402
+                    ? 'Повернутися до покупок'
+                    : windowWidth > 355
+                    ? 'Назад до покупок'
+                    : 'Назад'}
                 </Link>
               </div>
             ) : (
