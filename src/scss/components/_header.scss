@@ -64,9 +64,8 @@
       width: rem(127.5);
     }
     @media (max-width: $mobile) {
-      flex: 1 1 auto;
       height: rem(30);
-      width: rem(127.5);
+      width: rem(100);
     }
   }
 
@@ -91,9 +90,14 @@
   }
 }
 
-
 .actions {
   white-space: nowrap;
+
+  &.hide {
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
 
   &__contacts {
     display: flex;

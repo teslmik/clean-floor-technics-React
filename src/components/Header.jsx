@@ -72,13 +72,13 @@ const Header = () => {
             {pathname === '/cart' ? (
               <div className="cart-back">
                 <Link to={'/catalog'} className="_icon-arrow-left">
-                  Повернутися до покупок
+                  {windowWidth > 384 ? 'Повернутися до покупок' : windowWidth > 336 ? 'Назад до покупок' : 'Назад'}
                 </Link>
               </div>
             ) : (
               <Search />
             )}
-            <div className="header__actions actions">
+            <div className={`header__actions actions ${pathname === '/cart' && 'hide'}`}>
               <div className="actions__contacts">
                 <div className="actions__phones-list phones-list">
                   <div className="phones-list__item">

@@ -7,9 +7,12 @@
   // .cart__title
 
   &__title {
-    font-size: 32px;
+    @include adaptiveFont(32, 18);
     line-height: 1.1;
     @include adaptiveValue('margin-bottom', 18, 10, 1);
+    @media (max-width: $tablet) {
+      text-align: center;
+    }
   }
 
   // .cart__body
@@ -19,12 +22,18 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: rem(30);
+    @media (max-width: $tablet) {
+      flex-direction: column;
+    }
   }
 
   // .cart__user
 
   &__user {
     width: 55%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
     .cart-user {
       &__title {
         display: flex;
@@ -49,9 +58,10 @@
     display: flex;
     flex-direction: column;
     @include adaptiveValue('gap', 24, 16, 1);
+    @include adaptiveValue('padding-top', 20, 10, 1);
+    @include adaptiveValue('padding-bottom', 20, 10, 1);
     border: 1px solid #d7d7d7;
     border-radius: 4px;
-    padding: 20px 0;
   }
 
   // .cart__order-list
@@ -62,9 +72,15 @@
     width: 45%;
     border: 1px solid #d7d7d7;
     border-radius: 4px;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
 
     h3 {
-      padding: 15px 20px;
+      @include adaptiveValue('padding-top', 15, 10, 1);
+      @include adaptiveValue('padding-bottom', 15, 10, 1);
+      @include adaptiveValue('padding-left', 20, 15, 1);
+      @include adaptiveValue('padding-right', 20, 15, 1);
       border-bottom: 1px dotted #d7d7d7;
       font-size: 18px;
       font-weight: bold;
@@ -77,17 +93,19 @@
   &__title {
     font-size: 18px;
     font-weight: bold;
-    padding: 0 30px;
+    @include adaptiveValue('padding-left', 30, 10, 1);
+    @include adaptiveValue('padding-right', 30, 10, 1);
   }
 
   label {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 0 30px;
+    @include adaptiveValue("gap", 20, 0, 1);
+    @include adaptiveValue('padding-left', 30, 10, 1);
+    @include adaptiveValue('padding-right', 30, 10, 1);
 
     span {
-      width: 130px;
+      @include adaptiveValue("width", 130, 90, 1);
     }
 
     input {
@@ -102,12 +120,17 @@
         outline: 0;
         border-color: #333;
       }
+      @media (max-width: $mobile) {
+        width: 100%;
+      }
     }
   }
 
   .btn-block {
     border-top: 1px dotted #d7d7d7;
-    padding: 20px 30px 0;
+    @include adaptiveValue('padding-top', 20, 10, 1);
+    @include adaptiveValue('padding-left', 30, 10, 1);
+    @include adaptiveValue('padding-right', 30, 10, 1);
   }
   .btn {
     margin-left: 150px;
@@ -116,6 +139,15 @@
     @media (any-hover: hover) {
       &:hover {
         background-color: $greenLiteColor;
+      }
+    }
+    @media (max-width: $mobile) {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      span {
+        text-align: center;
+        margin: 0 auto;
       }
     }
 
@@ -149,27 +181,34 @@
     gap: 10px;
     padding: 15px 20px;
     align-items: center;
+    @media (max-width: $mobile) {
+      justify-content: center;
+    }
 
     h4 {
       font-size: 12px;
     }
 
     p {
-      font-size: 18px;
+      @include adaptiveFont(18, 20);
       font-weight: bold;
     }
   }
 }
 .item-order {
-  padding: 15px 20px;
+  @include adaptiveValue('padding-top', 15, 10, 1);
+  @include adaptiveValue('padding-bottom', 15, 10, 1);
+  @include adaptiveValue('padding-left', 20, 15, 1);
+  @include adaptiveValue('padding-right', 20, 15, 1);
   border-bottom: 1px dotted #d7d7d7;
   display: flex;
-  gap: 20px;
+  @include adaptiveValue('gap', 20, 10, 1);
+
   // .item-order__img
 
   &__img {
-    width: 80px;
     flex: 0 0 auto;
+    @include adaptiveValue('width', 80, 60, 1);
   }
 
   // .item-order__content
@@ -190,6 +229,8 @@
     margin-bottom: 5px;
     a {
       color: #333;
+      @include adaptiveFont(14, 13);
+
       @media (any-hover: hover) {
         &:hover {
           color: $greenLiteColor;
@@ -239,14 +280,17 @@
 
   &__cost {
     font-weight: bold;
+    @include adaptiveFont(14, 13);
   }
 }
 
 .old-price {
   text-decoration: line-through;
   color: #acacac;
+  @include adaptiveFont(14, 13);
 }
 .actual-price {
+  @include adaptiveFont(14, 13);
 }
 .btn-item {
   // .btn-item__minus
