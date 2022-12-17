@@ -58,6 +58,7 @@
 
   &__logo {
     display: flex;
+    flex: 0 0 auto;
     height: rem(50);
     width: rem(150);
     a {
@@ -70,8 +71,10 @@
       width: rem(127.5);
     }
     @media (max-width: $mobile) {
-      height: rem(30);
-      width: rem(100);
+      flex: 1 0 auto;
+      height: rem(37);
+      width: rem(117.94);
+      margin-right: 26.5px;
     }
   }
 
