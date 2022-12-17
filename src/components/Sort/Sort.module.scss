@@ -1,0 +1,118 @@
+@use 'sass:math';
+@import '../../scss/lib/variables';
+@import '../../scss/lib/functions';
+
+.sort__title {
+  p {
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.wrapper {
+  @media (max-width: $tablet) {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    z-index: 9;
+  }
+}
+
+.sort {
+  align-items: center;
+  display: flex;
+  gap: rem(8);
+  @media (max-width: $tablet) {
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    p {
+      font-size: 18px;
+      text-align: center;
+      line-height: 1;
+      padding: 14px 0;
+      width: 100%;
+      border-bottom: 1px solid #d7d7d7;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    font-size: 13px;
+    border: rem(1) solid #d7d7d7;
+    border-radius: rem(4);
+    overflow: hidden;
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      width: 100%;
+      border: none;
+    }
+
+    li {
+      padding: rem(6) rem(10);
+      cursor: pointer;
+      color: $headerLiteDark;
+      transition: color 0.2s ease-in-out;
+      user-select: none;
+
+      @media (max-width: $tablet) {
+        font-size: 16px;
+        line-height: 1;
+        padding: 15px 16px;
+        &::first-letter {
+          text-transform: uppercase;
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid #d7d7d7;
+        }
+      }
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+      &:not(:last-child) {
+        border-right: rem(1) solid #d7d7d7;
+        @media (max-width: $tablet) {
+          border-right: none;
+        }
+      }
+
+      &.active {
+        background-color: #f5f5f5;
+        cursor: default;
+        color: #000;
+        @media (any-hover: hover) {
+          &:hover {
+            color: #000;
+          }
+        }
+        @media (max-width: $tablet) {
+          position: relative;
+          color: $greenColor;
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: $greenColor;
+            border-radius: 0 8px 8px 0;
+          }
+        }
+      }
+    }
+  }
+}

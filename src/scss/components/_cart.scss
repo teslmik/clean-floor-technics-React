@@ -1,0 +1,269 @@
+@import '../lib/variables';
+@import '../lib/functions';
+
+.cart {
+  @include adaptiveValue('margin-top', 30, 20, 1);
+
+  // .cart__title
+
+  &__title {
+    font-size: 32px;
+    line-height: 1.1;
+    @include adaptiveValue('margin-bottom', 18, 10, 1);
+  }
+
+  // .cart__body
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: rem(30);
+  }
+
+  // .cart__user
+
+  &__user {
+    width: 55%;
+    .cart-user {
+      &__title {
+        display: flex;
+        height: 38px;
+      }
+
+      &__text {
+        display: inline;
+        border-radius: 4px 0 0 0;
+        border: solid #d7d7d7;
+        border-width: 1px 1px 0;
+        background: #fff !important;
+        padding: 0 15px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  // .cart__form
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    @include adaptiveValue('gap', 24, 16, 1);
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+    padding: 20px 0;
+  }
+
+  // .cart__order-list
+
+  &__order-list {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    border: 1px solid #d7d7d7;
+    border-radius: 4px;
+
+    h3 {
+      padding: 15px 20px;
+      border-bottom: 1px dotted #d7d7d7;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+.form-cart {
+  // .form-cart__title
+
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 30px;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 30px;
+
+    span {
+      width: 130px;
+    }
+
+    input {
+      display: block;
+      border: 1px solid #acacac;
+      border-radius: 4px;
+      font-size: 16px;
+      padding: 8px 10px;
+      width: 360px;
+      transition: border-color 0.2s ease-in-out;
+      &:focus {
+        outline: 0;
+        border-color: #333;
+      }
+    }
+  }
+
+  .btn-block {
+    border-top: 1px dotted #d7d7d7;
+    padding: 20px 30px 0;
+  }
+  .btn {
+    margin-left: 150px;
+    background-color: $greenColor;
+    height: 38px;
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: $greenLiteColor;
+      }
+    }
+
+    span {
+      font-family: $fontFamily;
+      color: #fff;
+      font-size: 18px;
+      font-weight: normal;
+      white-space: nowrap;
+    }
+  }
+}
+
+.order-list {
+  // .order-list__body
+
+  &__body {
+  }
+
+  // .order-list__items
+
+  &__items {
+  }
+
+  // .order-list__summary
+
+  &__summary {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 15px 20px;
+    align-items: center;
+
+    h4 {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}
+.item-order {
+  padding: 15px 20px;
+  border-bottom: 1px dotted #d7d7d7;
+  display: flex;
+  gap: 20px;
+  // .item-order__img
+
+  &__img {
+    width: 80px;
+    flex: 0 0 auto;
+  }
+
+  // .item-order__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  // .item-order__title
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 5px;
+    a {
+      color: #333;
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+    span {
+      cursor: pointer;
+      color: #b2b2b2;
+      transition: color 0.2s ease-in-out;
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+  }
+
+  // .item-order__price
+
+  &__price {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  // .item-order__control
+
+  &__control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  // .item-order__quantity
+
+  &__quantity {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    border: 1px solid #acacac;
+    height: 36px;
+  }
+
+  // .item-order__cost
+
+  &__cost {
+    font-weight: bold;
+  }
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #acacac;
+}
+.actual-price {
+}
+.btn-item {
+  // .btn-item__minus
+
+  &__minus,
+  &__plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    width: 28px;
+    font-family: $fontFamily;
+    font-size: 16px;
+    padding: 0;
+  }
+}
+.counter {
+  text-align: center;
+  width: 34px;
+}

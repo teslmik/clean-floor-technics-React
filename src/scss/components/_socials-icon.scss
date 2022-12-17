@@ -1,0 +1,29 @@
+@import '../lib/functions';
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: rem(10);
+
+  span {
+    color: #fff;
+    font-size: 12px;
+  }
+
+  &__link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    color: $greenColor;
+    font-size: 26px;
+    transition: color ease-in-out 0.2s;
+    margin: rem(-5) 0;
+
+    @media (any-hover: hover) {
+      &:hover {
+        color: $greenLiteColor;
+      }
+    }
+  }
+}

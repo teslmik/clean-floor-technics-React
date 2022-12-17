@@ -1,0 +1,89 @@
+@import '../lib/variables';
+@import '../lib/functions';
+
+.catalog {
+  display: grid;
+  // .catalog__top
+
+  &__top {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  // .catalog__title
+
+  &__title {
+    font-size: 32px;
+    line-height: 1.1;
+  }
+
+  // .catalog__filter-mobile
+
+  &__filter-mobile {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    z-index: 5;
+    height: 48px;
+    font-size: 18px;
+  }
+
+  // .catalog__body
+
+  &__body {
+    display: flex;
+    gap: 14px;
+    @include adaptiveValue('margin-bottom', 40, 20, 1);
+  }
+
+  // .catalog__items
+
+  &__items {
+    display: grid;
+    flex: 1 1 auto;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    @media (max-width: $pc) {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    @media (max-width: $tablet) {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+    @media (max-width: $mobile) {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+    @media (max-width: $mobileSmall) {
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+  }
+}
+
+.recent-products {
+  border-top: 1px solid #d7d7d7;
+  padding-top: 20px;
+
+  // .recent-products__container
+  &__container {
+    display: flex;
+    gap: 20px;
+  }
+
+  // .recent-products__head
+
+  &__head {
+    font-size: 20px;
+    font-weight: bold;
+    max-width: 150px;
+  }
+
+  // .recent-products__body
+
+  &__body {
+  }
+}

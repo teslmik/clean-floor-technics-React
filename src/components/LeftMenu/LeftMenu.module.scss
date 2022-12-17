@@ -1,0 +1,50 @@
+@use 'sass:math';
+@import '../../scss/lib/variables';
+@import '../../scss/lib/functions';
+
+.blog {
+  // .blog__menu
+
+  &__menu {
+    margin-top: 30px;
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  // .blog__list
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 220px;
+  }
+
+  // .blog__item
+
+  &__item {
+    &.active {
+      a.blog__link {
+        cursor: default;
+        background-color: #f5f5f5;
+        color: #000;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-left: -6px;
+      }
+    }
+  }
+
+  // .blog__link
+
+  &__link {
+    color: #333;
+    font-size: 17px;
+    @media (any-hover: hover) {
+      &:hover {
+        color: $greenLiteColor;
+      }
+    }
+  }
+}

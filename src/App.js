@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Routes, Route } from 'react-router-dom';
 
-function App() {
+import MainLayout from "./layouts/MainLayout";
+import FullItem from './pages/FullItem';
+import Cart from "./pages/Cart";
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import NotFound from "./pages/NotFound";
+import Blog from "./pages/Blog";
+import FullBlogItem from "./pages/FullBlogItem";
+import { ibg } from "./js/modules/functions";
+
+import './scss/app.scss';
+
+export const AppContex = React.createContext();
+
+const App = () => {
+  React.useEffect(() => {
+    ibg();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />} >
+        <Route path="" element={<Home />} />
+        <Route path="catalog" element={<Catalog />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="blog" element={<Blog />} />
+        <Route path="product/:category/:id" element={<FullItem />} />
+        <Route path="blog/:id" element={<FullBlogItem />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 
