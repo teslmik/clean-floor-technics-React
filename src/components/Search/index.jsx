@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 
 import { useDebounce } from '../../hook/debounce.ts';
 import { useInput } from '../../hook/input.ts';
@@ -15,7 +15,7 @@ const Search = () => {
   const [dropdown, setDropdown] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
-  const { windowWidth } = React.useContext(AppContex);
+  const { windowWidth } = React.useContext(AppContext);
   const debounced = useDebounce(input, 250);
 
   const inputRef = React.useRef();
@@ -28,7 +28,7 @@ const Search = () => {
   };
 
   const onClickSearchItem = (item) => {
-    navigate(`/product/${item.category}/${item.id}`);
+    navigate(`/products/${item.category}/${item.id}`);
     resetInput();
     setIsVisible(false);
   };
@@ -49,7 +49,6 @@ const Search = () => {
   React.useEffect(() => {
     ibg();
     isWebp();
-
     if (debounced.length > 1) {
       searchProduct().then(() => setDropdown(true));
     } else setDropdown(false);

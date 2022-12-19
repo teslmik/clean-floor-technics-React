@@ -5,7 +5,7 @@ import { menuListObj } from '../../js/modules/functions';
 
 import styles from './LeftMenu.module.scss';
 
-const LeftMenu = () => {
+const LeftMenu = ({ active, id }) => {
   const { pathname } = useLocation();
 
   return (
@@ -15,7 +15,11 @@ const LeftMenu = () => {
           <li
             key={i}
             className={
-              pathname === '/' + link ? `${styles.blog__item} ${styles.active}` : styles.blog__item
+              pathname === '/' + link
+                ? `${styles.blog__item} ${styles.active}`
+                : pathname === `/${link}/${id}`
+                ? `${styles.blog__item} ${styles.active}`
+                : styles.blog__item
             }>
             <Link to={'/' + link} className={styles.blog__link}>
               {menuListObj[link]}

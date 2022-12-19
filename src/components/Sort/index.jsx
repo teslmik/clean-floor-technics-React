@@ -55,6 +55,7 @@ export const SortMobile = () => {
   }, []);
 
   React.useEffect(() => {
+    mobileHeight();
     isVisible === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());

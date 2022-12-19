@@ -1,6 +1,6 @@
 export const menuListObj = {
   catalog: 'Каталог',
-  about: 'О нас',
+  about: 'Про нас',
   pay_and_delivery: 'Оплата та доставка',
   return: 'Обмін та повернення',
   contacts: 'Контактна інформація',

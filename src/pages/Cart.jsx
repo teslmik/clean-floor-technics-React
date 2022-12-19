@@ -16,7 +16,7 @@ const Cart = () => {
     if (!items.length > 0) {
       navigate('/catalog');
     }
-  }, [items]);
+  }, [items, navigate]);
 
   return (
     <section className="cart">

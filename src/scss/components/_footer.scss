@@ -145,6 +145,15 @@
       a {
         padding-left: 0;
       }
+      div {
+        transition: color ease-in-out 0.2s;
+        cursor: pointer;
+        @media (any-hover: hover) {
+          &:hover {
+            color: $greenLiteColor;
+          }
+        }
+      }
     }
 
     ._icon-location::before {
@@ -188,7 +197,7 @@
   flex-direction: column;
   gap: rem(10);
 
-  @media (max-width: $tablet) {
+  @media (max-width: $mobile) {
     display: none;
   }
 

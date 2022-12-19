@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { AppContex } from '../App';
+import { AppContext } from '../App';
 import { categoriesList, menuListObj } from '../js/modules/functions';
 
 const Footer = () => {
-  const { setIsOpenCallback, handleTooggle, scroll } = React.useContext(AppContex);
+  const { setIsOpenCallback, handleTooggle, scroll, setIsOpenMap } = React.useContext(AppContext);
 
   return (
     <footer className="footer">
@@ -16,7 +16,7 @@ const Footer = () => {
               <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
             </a>
             <div className="copyright__text">
-              <p>© Інтернет-магазин Clean Floor Technics</p>
+              <p>© Інтернет-магазин Clean&nbsp;Floor&nbsp;Technics</p>
               <p>2021-2022</p>
               <p>
                 Created by <a href="https://github.com/teslmik">Mikhaylo&nbsp;Teslenko</a>
@@ -73,7 +73,9 @@ const Footer = () => {
                 </a>
                 <div className="contacts-footer__location _icon-location">
                   <p>Одеса, вул.&nbsp;Маршала&nbsp;Говорова,&nbsp;7а</p>
-                  <a href="#">Карта&nbsp;проїзду</a>
+                  <div onClick={() => setIsOpenMap(true)}>
+                    <span>Карта&nbsp;проїзду</span>
+                  </div>
                 </div>
               </div>
             </div>
