@@ -175,10 +175,10 @@ body.lockPadding {
   .label-content {
     color: #fff;
     @media (max-width: $mobile) {
-        font-size: 12px;
-        height: rem(20);
-        line-height: 20px;
-      }
+      font-size: 12px;
+      height: rem(20);
+      line-height: 20px;
+    }
   }
 
   &__content {
@@ -324,6 +324,7 @@ body.lockPadding {
   &__block {
     display: flex;
     justify-content: space-between;
+    overflow-x: hidden;
     @include adaptiveValue('gap', 30, 20, 1);
     @media (max-width: $tablet) {
       flex-direction: column;
@@ -331,7 +332,7 @@ body.lockPadding {
   }
 
   &__content {
-    // width: calc(70% - 15px);
+    width: auto;
     @media (max-width: $tablet) {
       width: 100%;
     }
