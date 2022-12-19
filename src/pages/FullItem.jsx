@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import { AppContex } from '../App.js';
+import { AppContext } from '../App.js';
 import Breadcrumbs from '../components/Breadcrumbs/index.jsx';
 import SwiperItem from '../components/SwiperItem.jsx';
 import { da } from '../js/modules/dynamicAdapt.js';
@@ -16,7 +16,7 @@ const FullItem = () => {
   const { items } = useSelector(cartSelector);
   const [product, setProduct] = React.useState();
   const [toggleState, setToggleState] = React.useState(0);
-  const { setIsOpenCart, isOnCart, setIsOnCart } = React.useContext(AppContex);
+  const { setIsOpenCart, isOnCart, setIsOnCart } = React.useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -36,10 +36,22 @@ const FullItem = () => {
       }
     }
     fetchProduct();
-  }, []);
+  }, [navigate, id]);
+
+  const dinamycAdapt = () => {
+    da.init();
+  };
 
   React.useEffect(() => {
+    console.log(da);
     da.init();
+    ibg();
+
+    window.addEventListener('resize', dinamycAdapt);
+
+    return () => {
+      window.removeEventListener('resize', dinamycAdapt);
+    };
   });
 
   React.useEffect(() => {
@@ -61,10 +73,8 @@ const FullItem = () => {
   };
 
   if (!product) {
-    return 'Loading...';
+    return <section className="fullitem__container">'Loading...'</section>;
   }
-
-  da.init();
 
   return (
     <section className="fullitem__container">

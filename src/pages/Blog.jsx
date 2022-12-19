@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
-import LeftMenu from '../components/LeftMenu/LeftMenu';
+import LeftMenu from '../components/LeftMenu';
 import { ibg } from '../js/modules/functions';
 
 const Blog = () => {

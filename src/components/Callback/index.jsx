@@ -2,12 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import { dropIn } from '../../js/modules/functions';
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 
 import styles from './Callback.module.scss';
 
 const Callback = () => {
-  const { setIsOpenCallback } = React.useContext(AppContex);
+  const { setIsOpenCallback } = React.useContext(AppContext);
 
   return (
     <motion.div

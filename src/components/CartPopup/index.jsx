@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { cartSelector, decrement, increment, removeFromCart } from '../../redux/slices/cartSlice';
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 import { dropIn, ibg, isWebp } from '../../js/modules/functions';
 
 import styles from './CartPopup.module.scss';
@@ -12,7 +12,7 @@ import styles from './CartPopup.module.scss';
 const CartPopup = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCart, windowWidth, setIsOnCart } = React.useContext(AppContex);
+  const { setIsOpenCart, windowWidth, setIsOnCart } = React.useContext(AppContext);
 
   const navigate = useNavigate();
 

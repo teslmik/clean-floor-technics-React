@@ -4,12 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 
 import { categoriesList } from '../../js/modules/functions';
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 
 import styles from './Categories.module.scss';
 
 const Categories = () => {
-  const { handleTooggle } = React.useContext(AppContex);
+  const { handleTooggle } = React.useContext(AppContext);
 
   const swiperParams = {
     modules: [Navigation],

@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
-import LeftMenu from '../components/LeftMenu/LeftMenu';
+import LeftMenu from '../components/LeftMenu';
 import { ibg } from '../js/modules/functions';
 
 const FullBlogItem = () => {
@@ -25,13 +25,25 @@ const FullBlogItem = () => {
   }, []);
 
   if (!blogItem) {
-    return <div className="__container">Loading...</div>;
+    return (
+      <div className="__container">
+        <div className="blog__wrapper">
+          <LeftMenu active={true} id={id} />
+          <div className="blog__boby">
+            <Breadcrumbs titleBlock={'Блог'} endItem={'...'} />
+            <div className="blog__content content-blog">
+              <div className="content-blog__title">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <section className="blog__container">
       <div className="blog__wrapper">
-        <LeftMenu />
+        <LeftMenu active={true} id={id} />
         <div className="blog__boby">
           <Breadcrumbs titleBlock={'Блог'} endItem={blogItem.title} />
           <div className="blog__content content-blog">

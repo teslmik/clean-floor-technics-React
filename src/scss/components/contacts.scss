@@ -1,0 +1,21 @@
+.contacts {
+  // .contacts__container
+
+  &__container {
+    display: flex;
+  }
+
+  // .contacts__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // .contacts__title
+
+  &__title {
+    @include adaptiveFont(32, 18);
+    margin-bottom: 18px;
+  }
+}

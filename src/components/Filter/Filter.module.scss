@@ -15,14 +15,13 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-color: rgba(0, 0, 0, 0.7);
-    top: 70px;
+    top: 0;
     left: 0;
-    z-index: 9;
+    z-index: 999;
   }
-  @media (max-width: $mobile) {
-    top: 47px;
-  }
+
   &__wrapper {
     position: sticky;
     top: 10px;
@@ -37,7 +36,11 @@
       background-color: #fff;
       border-radius: 0 8px 0 0;
       overflow-y: auto;
+      padding-top: 70px;
       gap: 0;
+    }
+    @media (max-width: $mobile) {
+      padding-top: 47px;
     }
   }
 
@@ -146,7 +149,6 @@
       text-align: center;
       padding: 9px 0;
       border-radius: 8px;
-
     }
   }
 
@@ -169,7 +171,7 @@
     border-radius: 8px;
     margin: 16px;
     padding: 24px;
-    @media (max-width: $mobile) {
+    @media (max-width: $tablet) {
       display: flex;
       position: sticky;
       bottom: 0;

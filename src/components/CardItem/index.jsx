@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { addToCart, cartSelector } from '../../redux/slices/cartSlice';
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 import { ibg, isWebp } from '../../js/modules/functions';
 
 const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, category, refElem }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
-  const { setIsOpenCart } = React.useContext(AppContex);
+  const { setIsOpenCart } = React.useContext(AppContext);
 
   React.useEffect(() => {
     items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
@@ -63,12 +63,12 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
             </div>
           )}
         </div>
-        <Link to={`/product/${category}/${id}`} className="card__image ibg" title={title}>
+        <Link to={`/products/${category}/${id}`} className="card__image ibg" title={title}>
           <img src={`/assets/img/products/${imageUrl}`} alt={title} />
         </Link>
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
-          <Link to={`/product/${category}/${id}`} className="card__title" title={title}>
+          <Link to={`/products/${category}/${id}`} className="card__title" title={title}>
             {title}
           </Link>
           <div className="card__cost">

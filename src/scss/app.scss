@@ -339,7 +339,6 @@ body.lockPadding {
 
   &__blog {
     flex: 1 1 auto;
-    // width: calc(30% - 15px);
     @media (max-width: $tablet) {
       width: 100%;
     }

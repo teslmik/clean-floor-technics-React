@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import { AppContex } from '../App';
+import { AppContext } from '../App';
 import Callback from '../components/Callback';
 import CartPopup from '../components/CartPopup';
 import Footer from '../components/Footer';
@@ -11,12 +11,14 @@ import Header from '../components/Header';
 import { filterSelector, setFilter } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { bodyLock, bodyUnlock, ibg } from '../js/modules/functions';
+import RouteMap from '../components/RouteMap';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { filterState } = useSelector(filterSelector);
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
   const [isOpenCart, setIsOpenCart] = React.useState(false);
+  const [isOpenMap, setIsOpenMap] = React.useState(false);
   const [isOnCart, setIsOnCart] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.screen.width);
 
@@ -34,11 +36,11 @@ const MainLayout = () => {
   };
 
   React.useEffect(() => {
-    isOpenCallback === true || isOpenCart === true
+    isOpenCallback === true || isOpenCart === true || isOpenMap
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
     ibg();
-  }, [isOpenCallback, isOpenCart]);
+  }, [isOpenCallback, isOpenCart, isOpenMap]);
 
   React.useEffect(() => {
     window.onresize = () => {
@@ -51,7 +53,7 @@ const MainLayout = () => {
 
   return (
     <div className="wrapper">
-      <AppContex.Provider
+      <AppContext.Provider
         value={{
           isOpenCart,
           setIsOpenCart,
@@ -62,6 +64,8 @@ const MainLayout = () => {
           windowWidth,
           isOnCart,
           setIsOnCart,
+          isOpenMap,
+          setIsOpenMap,
         }}>
         <Header />
         <main className="main">
@@ -71,8 +75,9 @@ const MainLayout = () => {
         <AnimatePresence>
           {isOpenCallback && <Callback />}
           {isOpenCart && <CartPopup />}
+          {isOpenMap && <RouteMap />}
         </AnimatePresence>
-      </AppContex.Provider>
+      </AppContext.Provider>
     </div>
   );
 };

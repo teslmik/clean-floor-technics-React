@@ -2,18 +2,18 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 import { filterSelector, setFilter } from '../../redux/slices/filterSlice';
+import { productsSelector } from '../../redux/slices/productsSlice';
 import { bodyLock, bodyUnlock, categoriesList, filterList } from '../../js/modules/functions';
 
 import styles from './Filter.module.scss';
-import { productsSelector } from '../../redux/slices/productsSlice';
-
+import { mobileHeight } from '../../utils/mobileHeightSortElement';
 const Filter = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector(productsSelector);
   const { filterState } = useSelector(filterSelector);
-  const { handleTooggle, windowWidth } = React.useContext(AppContex);
+  const { handleTooggle, windowWidth } = React.useContext(AppContext);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const promoCount = (value) => {
@@ -23,17 +23,25 @@ const Filter = () => {
   };
 
   React.useEffect(() => {
-    isVisible === true && windowWidth < 881.98
+    isVisible === true && windowWidth < 882
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
   }, [isVisible, windowWidth]);
 
   React.useEffect(() => {
-    if (windowWidth > 881.98) {
+    if (windowWidth > 881) {
       setIsVisible(true);
       document.body.style.overflowY = 'visible' && bodyUnlock();
     } else setIsVisible(false);
   }, [windowWidth]);
+
+  React.useEffect(() => {
+    mobileHeight();
+    window.addEventListener('resize', mobileHeight);
+    return () => {
+      window.removeEventListener('resize', mobileHeight);
+    };
+  }, []);
 
   return (
     <>

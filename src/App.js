@@ -9,11 +9,14 @@ import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import FullBlogItem from "./pages/FullBlogItem";
+import Return from "./pages/Return";
 import { ibg } from "./js/modules/functions";
 
 import './scss/app.scss';
+import Contacts from "./pages/Contacts";
+import About from "./pages/About";
 
-export const AppContex = React.createContext();
+export const AppContext = React.createContext();
 
 const App = () => {
   React.useEffect(() => {
@@ -25,9 +28,12 @@ const App = () => {
       <Route path="/" element={<MainLayout />} >
         <Route path="" element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
+        <Route path="about" element={<About />} />
+        <Route path="return" element={<Return />} />
+        <Route path="contacts" element={<Contacts />} />
         <Route path="cart" element={<Cart />} />
         <Route path="blog" element={<Blog />} />
-        <Route path="product/:category/:id" element={<FullItem />} />
+        <Route path="products/:category/:id" element={<FullItem />} />
         <Route path="blog/:id" element={<FullBlogItem />} />
         <Route path="*" element={<NotFound />} />
       </Route>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper';
 
-import { AppContex } from '../App';
+import { AppContext } from '../App';
 import CardItem from './CardItem';
 import ErrorInfo from './ErrorInfo';
 import SkeletonLoader from './CardItem/SkeletonLoader';
@@ -12,7 +12,7 @@ import { tabsPromo } from '../js/modules/functions';
 
 const TabsPromo = () => {
   const { items, status } = useSelector(productsSelector);
-  const { getProducts } = React.useContext(AppContex);
+  const { getProducts } = React.useContext(AppContext);
   const [toggleState, setToggleState] = React.useState(0);
 
   const swiperParams = {

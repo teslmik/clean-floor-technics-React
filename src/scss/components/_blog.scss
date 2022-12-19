@@ -19,7 +19,7 @@
   // .content-blog__title
 
   &__title {
-    font-size: 32px;
+    @include adaptiveFont(32, 18);
     margin-bottom: 18px;
   }
 

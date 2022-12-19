@@ -3,13 +3,13 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Search from './Search';
-import { AppContex } from '../App';
+import { AppContext } from '../App';
 import { cartSelector } from '../redux/slices/cartSlice';
 import HeaderMenu from './HeaderMenu';
 
 const Header = () => {
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCallback, setIsOpenCart, windowWidth } = React.useContext(AppContex);
+  const { setIsOpenCallback, setIsOpenCart, windowWidth } = React.useContext(AppContext);
   const [isVisible, setIsVisible] = React.useState(false);
   const isMounted = React.useRef(false);
   const { pathname } = useLocation();

@@ -2,13 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { AppContex } from '../../App';
+import { AppContext } from '../../App';
 import { bodyLock, bodyUnlock, ibg, isWebp, menuListObj } from '../../js/modules/functions';
 
 import styles from './HeaderMenu.module.scss';
 
 const HeaderMenu = ({ windowWidth, isVisible, setIsVisible }) => {
-  const { setIsOpenCallback, isOpenCallback } = React.useContext(AppContex);
+  const { setIsOpenCallback, isOpenCallback } = React.useContext(AppContext);
 
   const menuHandler = () => {
     setIsVisible(false);

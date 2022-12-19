@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppContex } from '../App';
+import { AppContext } from '../App';
 import Breadcrumbs from '../components/Breadcrumbs';
 import CardItem from '../components/CardItem';
 import ErrorInfo from '../components/ErrorInfo';
@@ -15,7 +15,7 @@ const Catalog = () => {
   const dispatch = useDispatch();
   const { filterState, sortState } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
-  const { getProducts, windowWidth } = React.useContext(AppContex);
+  const { getProducts, windowWidth } = React.useContext(AppContext);
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -23,7 +23,11 @@ const Catalog = () => {
     return () => dispatch(setFilter([]));
   }, [sortState]);
 
-  const skeleton = [...new Array(6)].map((_, i) => <SkeletonLoader key={i} />);
+  const skeleton = [...new Array(6)].map((_, i) => (
+    <div className='skeleton__wrapper'>
+      <SkeletonLoader key={i} />
+    </div>
+  ));
   const products = items.map((obj, i) => <CardItem key={i} {...obj} />);
 
   return (
@@ -32,23 +36,23 @@ const Catalog = () => {
         <Breadcrumbs titleBlock={'Каталог'} />
         <div className="catalog__top">
           <h2 className="catalog__title title">Каталог</h2>
-          {windowWidth > 881.98 && <Sort />}
+          {windowWidth > 881 && <Sort />}
         </div>
-        {windowWidth < 881.98 && (
+        {windowWidth < 882 && (
           <div className="catalog__filter-mobile">
             <Filter />
             <SortMobile />
           </div>
         )}
         <div className="catalog__body">
-          {windowWidth > 881.98 && <Filter />}
+          {windowWidth > 881 && <Filter />}
           {status === 'error' ? (
             <ErrorInfo />
           ) : (
             <div className="catalog__items">
-              {status === 'loading'
-                ? skeleton
-                : filterState.length === 0
+                {status === 'loading' ? skeleton
+                  // : skeleton}
+              : filterState.length === 0
                 ? products
                 : filterState.map((filterValue) =>
                     items
