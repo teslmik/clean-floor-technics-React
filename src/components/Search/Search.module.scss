@@ -103,18 +103,14 @@
     display: none;
   }
 
-  .borderRadiusBottomNone {
-    border-radius: rem(4) rem(4) 0 0;
-  }
-
   .search__dropdown {
     position: absolute;
-    top: 31px;
+    top: 34px;
     left: 0;
-    max-height: 40vh;
+    max-height: 60vh;
     width: 100%;
     background-color: #fff;
-    border-radius: 0 0 4px 4px;
+    border-radius: 4px;
     overflow-y: auto;
     z-index: 9;
     box-shadow: 0 7px 15px rgb(59 55 43 / 25%);

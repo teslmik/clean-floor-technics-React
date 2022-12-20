@@ -7,7 +7,6 @@
   background-color: $footerDark;
   @include adaptiveValue('padding-top', 30, 15, 1);
   @include adaptiveValue('padding-bottom', 60, 20, 1);
-  @include adaptiveValue('margin-top', 40, 32, 1);
   color: #efefef;
   border-top: 4px solid $greenColor;
 

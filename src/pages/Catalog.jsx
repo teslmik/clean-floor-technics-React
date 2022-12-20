@@ -24,8 +24,8 @@ const Catalog = () => {
   }, [sortState]);
 
   const skeleton = [...new Array(6)].map((_, i) => (
-    <div className='skeleton__wrapper'>
-      <SkeletonLoader key={i} />
+    <div className="skeleton__wrapper" key={i}>
+      <SkeletonLoader />
     </div>
   ));
   const products = items.map((obj, i) => <CardItem key={i} {...obj} />);
@@ -50,9 +50,9 @@ const Catalog = () => {
             <ErrorInfo />
           ) : (
             <div className="catalog__items">
-                {status === 'loading' ? skeleton
-                  // : skeleton}
-              : filterState.length === 0
+              {status === 'loading'
+                ? skeleton
+                : filterState.length === 0
                 ? products
                 : filterState.map((filterValue) =>
                     items

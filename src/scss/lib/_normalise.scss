@@ -48,6 +48,7 @@ body {
 }
 .main {
   flex: 1 1 auto;
+  @include adaptiveValue('padding-bottom', 40, 32, 1);
   @media (max-width: $tablet) {
     padding-top: 70px;
   }

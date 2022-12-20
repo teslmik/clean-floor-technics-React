@@ -32,7 +32,9 @@ const FullBlogItem = () => {
           <div className="blog__boby">
             <Breadcrumbs titleBlock={'Блог'} endItem={'...'} />
             <div className="blog__content content-blog">
-              <div className="content-blog__title">Loading...</div>
+              <div className="content-blog__title">
+                <div className="loader">Loading...</div>
+              </div>
             </div>
           </div>
         </div>

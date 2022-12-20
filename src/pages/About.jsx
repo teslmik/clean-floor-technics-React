@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Breadcrumbs from '../components/Breadcrumbs'
-import LeftMenu from '../components/LeftMenu'
+import Breadcrumbs from '../components/Breadcrumbs';
+import LeftMenu from '../components/LeftMenu';
 
 const About = () => {
   return (
@@ -9,10 +9,10 @@ const About = () => {
       <LeftMenu />
       <div className="about__content">
         <Breadcrumbs titleBlock={'Про нас'} />
-        <h2 class="about__title">Про нас</h2>
+        <h2 className="about__title">Про нас</h2>
       </div>
     </section>
   );
-}
+};
 
 export default About;

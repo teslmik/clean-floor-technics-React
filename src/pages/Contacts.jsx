@@ -8,7 +8,7 @@ const Contacts = () => {
       <LeftMenu />
       <div className="contacts__content">
         <Breadcrumbs titleBlock={'Контактна інформація'} />
-        <h2 class="contacts__title">Контактна інформація</h2>
+        <h2 className="contacts__title">Контактна інформація</h2>
       </div>
     </section>
   );

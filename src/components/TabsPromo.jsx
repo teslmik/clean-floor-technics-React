@@ -15,6 +15,14 @@ const TabsPromo = () => {
   const { getProducts } = React.useContext(AppContext);
   const [toggleState, setToggleState] = React.useState(0);
 
+  const skeleton = [...new Array(6)].map((_, i) => (
+    <SwiperSlide width={'auto'} key={i}>
+      <div className="skeleton__wrapper"> 
+        <SkeletonLoader />
+      </div>
+    </SwiperSlide>
+  ));
+
   const swiperParams = {
     modules: [Navigation, Scrollbar],
     scrollbar: true,
@@ -53,17 +61,13 @@ const TabsPromo = () => {
                 key={i}
                 className={
                   toggleState === i
-                    ? 'catalog promo__catalog  __container  _active-content'
+                    ? 'catalog promo__catalog __container _active-content'
                     : 'catalog promo__catalog'
                 }
                 navigation={true}
                 {...swiperParams}>
                 {status === 'loading'
-                  ? [...new Array(6)].map((_, i) => (
-                      <SwiperSlide width={'auto'} key={i}>
-                        <SkeletonLoader />
-                      </SwiperSlide>
-                    ))
+                  ? skeleton
                   : items
                       .filter((obj) => {
                         if (obj.label[tabObj.name] || obj[tabObj.name]) return true;
