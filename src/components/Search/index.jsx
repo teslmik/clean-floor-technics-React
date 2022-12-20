@@ -16,14 +16,15 @@ const Search = () => {
   const [items, setItems] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
   const { windowWidth } = React.useContext(AppContext);
-  const debounced = useDebounce(input, 250);
+  const debounced = useDebounce(input, 150);
 
   const inputRef = React.useRef();
 
   const searchProduct = async () => {
     const { data } = await axios.get(`https://636e34f8b567eed48ad655d0.mockapi.io/products`, {
-      params: { search: debounced },
+      params: { title: debounced },
     });
+
     setItems(data);
   };
 
@@ -33,12 +34,18 @@ const Search = () => {
     setIsVisible(false);
   };
 
+  const onClickEsc = (event) => {
+    event.key === 'Esc' && onClickClose();
+    console.log('dfs');
+  }
+
   const onClickClose = () => {
     if (!input) {
       return setIsVisible(false);
     }
     resetInput();
     inputRef.current.focus();
+    setItems([]);
   };
 
   const onClickVisible = () => {
@@ -47,10 +54,21 @@ const Search = () => {
   };
 
   React.useEffect(() => {
+    document.addEventListener('keydown', onClickEsc);
     ibg();
-    isWebp();
+
+    return () => document.removeEventListener('keydown', onClickEsc);
+  });
+
+  React.useEffect(() => {
+    document.addEventListener('keydown', onClickEsc);
+    return () => document.removeEventListener('keydown', onClickEsc);
+  }, []);
+
+  React.useEffect(() => {
     if (debounced.length > 1) {
-      searchProduct().then(() => setDropdown(true));
+      setDropdown(true);
+      searchProduct();
     } else setDropdown(false);
   }, [debounced, input, dropdown]);
 
@@ -58,7 +76,6 @@ const Search = () => {
     isVisible === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
-    ibg();
   }, [isVisible]);
 
   return (
@@ -69,11 +86,7 @@ const Search = () => {
         <input
           id="inputMain"
           ref={inputRef}
-          className={
-            dropdown
-              ? `${styles.search__input} ${styles.borderRadiusBottomNone} `
-              : `${styles.search__input}`
-          }
+          className={styles.search__input}
           type="search"
           placeholder="Пошук товарів"
           {...bindInput}

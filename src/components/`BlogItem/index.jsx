@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ibg } from '../js/modules/functions';
+import { ibg } from '../../js/modules/functions';
 
 const BlogItem = ({ image, date, content, id }) => {
   const navigate = useNavigate();

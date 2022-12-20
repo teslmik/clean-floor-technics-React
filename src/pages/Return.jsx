@@ -5,13 +5,13 @@ import Breadcrumbs from '../components/Breadcrumbs';
 
 const Return = () => {
   return (
-    <section class="return__container">
+    <section className="return__container">
       <LeftMenu />
       <div className="return__content">
         <Breadcrumbs titleBlock={'Обмін та повернення '} />
-        <h2 class="return__title">Повернення та обмін товару</h2>
-        <div class="return__body">
-          <div class="pagecontent">
+        <h2 className="return__title">Повернення та обмін товару</h2>
+        <div className="return__body">
+          <div className="pagecontent">
             <p>
               Відповідно до
               <a href="https://zakon.rada.gov.ua/cgi-bin/laws/main.cgi?nreg=1023-12#n2">
@@ -39,12 +39,8 @@ const Return = () => {
             </p>
             <ul className="return__list-1">
               <li>він взагалі не може бути усунутий;</li>
-              <li>
-                на його усунення потрібно більше чотирнадцяти календарних днів;
-              </li>
-              <li>
-                він робить товар суттєво іншим, ніж передбачено в договорі.
-              </li>
+              <li>на його усунення потрібно більше чотирнадцяти календарних днів;</li>
+              <li>він робить товар суттєво іншим, ніж передбачено в договорі.</li>
             </ul>
             <br />
             <p>

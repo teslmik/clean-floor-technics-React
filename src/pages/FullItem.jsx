@@ -43,7 +43,6 @@ const FullItem = () => {
   };
 
   React.useEffect(() => {
-    console.log(da);
     da.init();
     ibg();
 
@@ -73,7 +72,11 @@ const FullItem = () => {
   };
 
   if (!product) {
-    return <section className="fullitem__container">'Loading...'</section>;
+    return (
+      <section className="fullitem__container">
+        <div className="loader">Loading...</div>
+      </section>
+    );
   }
 
   return (
