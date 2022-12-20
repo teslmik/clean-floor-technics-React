@@ -101,7 +101,7 @@ const CartPopup = () => {
                   <div className={styles.item__body}>
                     <div className={styles.item__content}>
                       <div onClick={() => setIsOpenCart(false)} className={styles.item__title}>
-                        <Link to={`/product/${item.category}/${item.id}`}>{item.title}</Link>
+                        <Link to={`/products/${item.category}/${item.id}`}>{item.title}</Link>
                       </div>
                       <div className={styles.item__price}>
                         {item.oldPrice !== '' && (
