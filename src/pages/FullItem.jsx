@@ -22,12 +22,17 @@ const FullItem = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
+    
     async function fetchProduct() {
       try {
+        setProduct();
         const { data } = await axios.get(
           `https://636e34f8b567eed48ad655d0.mockapi.io/products/${id}`,
         );
         setProduct(data);
+
+        items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
+
         ibg();
       } catch (error) {
         alert('Товар не знайдено, спробуйте пізніше...');
@@ -36,7 +41,7 @@ const FullItem = () => {
       }
     }
     fetchProduct();
-  }, [navigate, id]);
+  }, [navigate, id, isOnCart, items]);
 
   const dinamycAdapt = () => {
     da.init();
@@ -52,10 +57,6 @@ const FullItem = () => {
       window.removeEventListener('resize', dinamycAdapt);
     };
   });
-
-  React.useEffect(() => {
-    items.find((obj) => obj.id === id) && setIsOnCart(true);
-  }, [isOnCart, items]);
 
   const onClickAdd = () => {
     const { imageUrl, title, oldPrice, price } = product;

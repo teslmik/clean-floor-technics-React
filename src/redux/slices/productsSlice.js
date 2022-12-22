@@ -31,7 +31,7 @@ export const productsSlice = createSlice({
       state.items = action.payload;
       state.status = 'success';
     });
-    builder.addCase(fetchProducts.rejected, (state, action) => {
+    builder.addCase(fetchProducts.rejected, (state) => {
       state.status = 'error';
       state.items = [];
     });

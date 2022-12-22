@@ -5,7 +5,17 @@ import { AppContext } from '../App';
 import { categoriesList, menuListObj } from '../js/modules/functions';
 
 const Footer = () => {
-  const { setIsOpenCallback, handleTooggle, scroll, setIsOpenMap } = React.useContext(AppContext);
+  const { setIsOpenCallback, handleTooggle, setIsOpenMap } = React.useContext(AppContext);
+  const [scroll, setScroll] = React.useState(0);
+
+  const handleScroll = () => {
+    setScroll(window.scrollY);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <footer className="footer">
@@ -85,11 +95,15 @@ const Footer = () => {
           <div className="social-block">
             <span>Ми у соцмережах</span>
             <div className="social-icon">
-              <a href="#" className="social__link _icon-fb"></a>
+              <a href="/#" className="social__link">
+                <i className="_icon-fb"></i>
+              </a>
               <a
                 href="https://www.instagram.com/clean_floor_technics/"
                 target="_blanck"
-                className="social__link _icon-instagram"></a>
+                className="social__link">
+                <i className="_icon-instagram"></i>
+              </a>
             </div>
           </div>
         </div>
