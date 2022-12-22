@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { filterSelector, setSort } from '../../redux/slices/filterSlice';
-import { bodyLock, bodyUnlock } from '../../js/modules/functions';
 import { mobileHeight } from '../../utils/mobileHeightSortElement.js';
+import { bodyLock, bodyUnlock } from '../../js/modules/functions';
 
 import styles from './Sort.module.scss';
 

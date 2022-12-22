@@ -66,6 +66,7 @@
         }
 
         label {
+          position: relative;
           display: flex;
           align-items: center;
           span {
@@ -125,6 +126,19 @@
             margin: 0 auto;
             height: rem(24);
           }
+        }
+
+        p {
+          position: absolute;
+          font-size: 12px;
+          bottom: -16px;
+          left: 72px;
+          color: #bf1650;
+        }
+
+        p::before {
+          display: inline;
+          content: '⚠ ';
         }
       }
     }

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
-import BlogItem from '../components/`BlogItem';
+import BlogItem from '../components/BlogItem';
 import TabsPromo from '../components/TabsPromo';
 import SwiperBlock from '../components/SwiperBlock';
 import Categories from '../components/Categories';

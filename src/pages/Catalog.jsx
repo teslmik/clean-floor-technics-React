@@ -20,6 +20,7 @@ const Catalog = () => {
   React.useEffect(() => {
     window.scroll(0, 0);
     getProducts();
+
     return () => dispatch(setFilter([]));
   }, [sortState]);
 
@@ -28,6 +29,7 @@ const Catalog = () => {
       <SkeletonLoader />
     </div>
   ));
+
   const products = items.map((obj, i) => <CardItem key={i} {...obj} />);
 
   return (

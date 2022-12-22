@@ -5,12 +5,13 @@ import { AppContext } from '../../App';
 
 import { useDebounce } from '../../hook/debounce.ts';
 import { useInput } from '../../hook/input.ts';
-import { bodyLock, bodyUnlock, ibg, isWebp } from '../../js/modules/functions';
+import { bodyLock, bodyUnlock, ibg } from '../../js/modules/functions';
 
 import styles from './Search.module.scss';
 
 const Search = () => {
   const navigate = useNavigate();
+
   const [input, bindInput, resetInput] = useInput('');
   const [dropdown, setDropdown] = React.useState(false);
   const [items, setItems] = React.useState([]);
@@ -36,7 +37,6 @@ const Search = () => {
 
   const onClickEsc = (event) => {
     event.key === 'Esc' && onClickClose();
-    console.log('dfs');
   }
 
   const onClickClose = () => {
