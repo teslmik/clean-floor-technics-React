@@ -22,7 +22,10 @@
       position: relative;
       background-color: #fff;
       color: #000;
-      @include adaptiveValue('padding', 30, 22, 1);
+      @include adaptiveValue('padding-top', 30, 26, 1);
+      @include adaptiveValue('padding-bottom', 30, 22, 1);
+      @include adaptiveValue('padding-left', 30, 14, 1);
+      @include adaptiveValue('padding-right', 30, 14, 1);
       border-radius: 4px;
       box-shadow: 0 5px 35px rgb(0 0 0 / 75%);
       max-width: 800px;
@@ -50,16 +53,16 @@
       .text {
         @include adaptiveValue('margin-bottom', 32, 18, 1);
         line-height: 1.55;
-        @include adaptiveFont(14, 13);
+        font-size: 14px;
       }
 
       .form {
         display: flex;
         flex-direction: column;
-        @include adaptiveValue('gap', 20, 15, 1);
+        @include adaptiveValue('gap', 20, 18, 1);
         align-items: flex-end;
         padding-right: 10px;
-        @include adaptiveFont(14, 13);
+        font-size: 14px;
 
         @media (max-width: $mobile) {
           padding-right: 0;
@@ -80,7 +83,7 @@
         input {
           border: 1px solid $greyColor;
           border-radius: 4px;
-          @include adaptiveValue('padding', 8, 4, 1);
+          padding: 8px;
           font-size: 16px;
           margin-left: 10px;
           width: rem(360);
@@ -92,7 +95,7 @@
 
           @media (max-width: $mobile) {
             width: 100%;
-            margin-left: 2px;
+            margin-left: 5px;
           }
         }
 
@@ -112,7 +115,8 @@
 
           span {
             display: block;
-            @include adaptiveFont(18, 14);
+            @include adaptiveFont(18, 16);
+            font-weight: normal;
           }
 
           &:active {
@@ -130,15 +134,15 @@
 
         p {
           position: absolute;
-          font-size: 12px;
-          bottom: -16px;
+          @include adaptiveFont(12, 10);
+          @include adaptiveValue("bottom", -16, -12, 1);
           left: 72px;
           color: #bf1650;
-        }
 
-        p::before {
-          display: inline;
-          content: '⚠ ';
+          &::before {
+            display: inline;
+            content: '⚠ ';
+          }
         }
       }
     }

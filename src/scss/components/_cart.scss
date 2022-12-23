@@ -98,14 +98,15 @@
   }
 
   label {
+    position: relative;
     display: flex;
     align-items: center;
-    @include adaptiveValue("gap", 20, 0, 1);
+    @include adaptiveValue('gap', 20, 0, 1);
     @include adaptiveValue('padding-left', 30, 10, 1);
     @include adaptiveValue('padding-right', 30, 10, 1);
 
     span {
-      @include adaptiveValue("width", 130, 90, 1);
+      @include adaptiveValue('width', 130, 90, 1);
     }
 
     input {
@@ -122,6 +123,19 @@
       }
       @media (max-width: $mobile) {
         width: 100%;
+      }
+    }
+
+    p {
+      position: absolute;
+      @include adaptiveFont(12, 10);
+      bottom: -16px;
+      @include adaptiveValue('left', 182, 78, 1);
+      color: #bf1650;
+
+      &::before {
+        display: inline;
+        content: '⚠ ';
       }
     }
   }

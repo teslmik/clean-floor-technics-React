@@ -32,7 +32,7 @@ export const productsSlice = createSlice({
       state.status = 'success';
     });
     builder.addCase(fetchProducts.rejected, (state) => {
-      state.status = 'error';
+      state.status = 'Виникла помилка при завантаженні товарів...';
       state.items = [];
     });
   }
