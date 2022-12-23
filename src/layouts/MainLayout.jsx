@@ -12,6 +12,7 @@ import { filterSelector, setFilter } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
 import { bodyLock, bodyUnlock, ibg } from '../js/modules/functions';
 import RouteMap from '../components/RouteMap';
+import PopupAnswer from '../components/PopupAnswer';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,11 @@ const MainLayout = () => {
   const [isOpenCart, setIsOpenCart] = React.useState(false);
   const [isOpenMap, setIsOpenMap] = React.useState(false);
   const [isOnCart, setIsOnCart] = React.useState(false);
+  const [requestDone, setRequestDone] = React.useState({
+    isOpen: false,
+    title: '',
+    text: '',
+  });
   const [windowWidth, setWindowWidth] = React.useState(window.screen.width);
 
   const getProducts = () => {
@@ -36,11 +42,11 @@ const MainLayout = () => {
   };
 
   React.useEffect(() => {
-    isOpenCallback === true || isOpenCart === true || isOpenMap
+    isOpenCallback === true || isOpenCart === true || isOpenMap === true || requestDone.isOpen === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
     ibg();
-  }, [isOpenCallback, isOpenCart, isOpenMap]);
+  }, [isOpenCallback, isOpenCart, isOpenMap, requestDone]);
 
   React.useEffect(() => {
     window.onresize = () => {
@@ -66,6 +72,8 @@ const MainLayout = () => {
           setIsOnCart,
           isOpenMap,
           setIsOpenMap,
+          requestDone,
+          setRequestDone,
         }}>
         <Header />
         <main className="main">
@@ -76,6 +84,12 @@ const MainLayout = () => {
           {isOpenCallback && <Callback />}
           {isOpenCart && <CartPopup />}
           {isOpenMap && <RouteMap />}
+          {requestDone.isOpen && (
+            <PopupAnswer
+              title={requestDone.title}
+              text={requestDone.text}
+            />
+          )}
         </AnimatePresence>
       </AppContext.Provider>
     </div>

@@ -9,11 +9,9 @@ import styles from './Callback.module.scss';
 import axios from 'axios';
 
 const Callback = () => {
-  const TOKEN = process.env.REACT_APP_TOKEN_TG;
-  const CHAT_ID = process.env.REACT_APP_CHAT_ID;
-  const URL = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+  const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
 
-  const { setIsOpenCallback } = React.useContext(AppContext);
+  const { setIsOpenCallback, setRequestDone } = React.useContext(AppContext);
 
   const {
     register,
@@ -23,20 +21,34 @@ const Callback = () => {
   } = useForm({ mode: 'onBlur' });
 
   const onSubmitCallback = (data) => {
-    let message = `<b>Заявка на дзвінок!!!</b>\n`;
-    message += `<b>Замовник:</b> ${data.name}\n`;
-    message += `<b>Номер телефону:</b> ${data.phone}`;
+    let message = `<b>Заявка на дзвінок!!!</b> &#128242;&#128242;&#128242;\n`;
+    message += `<b>Замовник:</b> ${data.name.trim()}\n`;
+    message += `<b>Номер телефону:</b> ${data.phone.split(' ').join('')}`;
 
-    axios.post(URL, {
-      chat_id: CHAT_ID,
-      parse_mode: 'html',
-      text: message,
-    });
-
-    console.log('собщение ушло');
-
-    setIsOpenCallback(false);
-    reset();
+    axios
+      .post(URL, {
+        chat_id: process.env.REACT_APP_CHAT_ID,
+        parse_mode: 'html',
+        text: message,
+      })
+      .then(() =>
+        setRequestDone({
+          isOpen: true,
+          title: 'Заявка відправлена!',
+          text: `Наш менеджер незабором з вами зв'яжеться.`,
+        }),
+      )
+      .catch((error) =>
+        setRequestDone({
+          isOpen: true,
+          title: 'Виникла помилка! ⚠',
+          text: 'При роботі серверу виникла помилка: ' + error.message + '. Спробуйте пізніше...',
+        }),
+      )
+      .finally(() => {
+        setIsOpenCallback(false);
+        reset();
+      });
   };
 
   return (

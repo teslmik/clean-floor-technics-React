@@ -22,7 +22,7 @@ const FullItem = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
-    
+
     async function fetchProduct() {
       try {
         setProduct();
