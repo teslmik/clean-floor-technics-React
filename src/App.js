@@ -15,6 +15,7 @@ import { ibg } from "./js/modules/functions";
 import './scss/app.scss';
 import Contacts from "./pages/Contacts";
 import About from "./pages/About";
+import PayAndDelivery from "./pages/PayAndDelivery";
 
 export const AppContext = React.createContext();
 
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="" element={<Home />} />
         <Route path="catalog" element={<Catalog />} />
         <Route path="about" element={<About />} />
+        <Route path="pay_and_delivery" element={<PayAndDelivery />} />
         <Route path="return" element={<Return />} />
         <Route path="contacts" element={<Contacts />} />
         <Route path="cart" element={<Cart />} />
