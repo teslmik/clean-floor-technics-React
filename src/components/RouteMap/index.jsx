@@ -5,7 +5,7 @@ import { AppContext } from '../../App';
 import styles from './RouteMap.module.scss';
 
 const RouteMap = () => {
-  const { isOpenMap, setIsOpenMap } = React.useContext(AppContext);
+  const { setIsOpenMap } = React.useContext(AppContext);
 
   return (
     <motion.div
