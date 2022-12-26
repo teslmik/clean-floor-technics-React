@@ -10,6 +10,10 @@
   &__content {
     display: flex;
     flex-direction: column;
+    p {
+      margin-bottom: em(10.8);
+      line-height: 1.57143;
+    }
   }
 
   // .return__title

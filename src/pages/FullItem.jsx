@@ -7,9 +7,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { AppContext } from '../App.js';
 import Breadcrumbs from '../components/Breadcrumbs/index.jsx';
 import SwiperItem from '../components/SwiperItem.jsx';
+import { addToCart, cartSelector } from '../redux/slices/cartSlice.js';
 import { da } from '../js/modules/dynamicAdapt.js';
 import { ibg, tabsItem } from '../js/modules/functions.js';
-import { addToCart, cartSelector } from '../redux/slices/cartSlice.js';
 
 const FullItem = () => {
   const dispatch = useDispatch();
@@ -59,15 +59,7 @@ const FullItem = () => {
   });
 
   const onClickAdd = () => {
-    const { imageUrl, title, oldPrice, price } = product;
-    const item = {
-      id,
-      imageUrl,
-      title,
-      oldPrice,
-      price,
-      count: 1,
-    };
+    const item = { ...product, id, count: 1 };
     dispatch(addToCart(item));
     setIsOpenCart(true);
   };
