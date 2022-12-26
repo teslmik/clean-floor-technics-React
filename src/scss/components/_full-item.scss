@@ -442,8 +442,9 @@
       margin-bottom: 12px;
     }
     p {
+      line-height: 1.57143;
       &:not(:last-child) {
-        margin-bottom: 12px;
+        margin-bottom: em(10.8);
       }
     }
   }
