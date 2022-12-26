@@ -11,12 +11,13 @@ const FullBlogItem = () => {
   const { id } = useParams();
   const [blogItem, setBlogItem] = React.useState();
 
+  React.useEffect(() => ibg(), [blogItem]);
+
   React.useEffect(() => {
     async function fetchPost() {
       try {
         const { data } = await axios.get(`https://636e34f8b567eed48ad655d0.mockapi.io/posts/${id}`);
         setBlogItem(data);
-        ibg();
       } catch (error) {
         console.log(error.message);
       }
@@ -52,7 +53,7 @@ const FullBlogItem = () => {
             <div className="content-blog__title">{blogItem.title}</div>
             <div className="blog-item__date date-item">{blogItem.date}</div>
             <div className="blog-item__wrapper">
-              <div className="blog-item__img blog-img ">
+              <div className="blog-item__img blog-img ibg">
                 <img src={`/assets/img/blog/${blogItem.imageUrl}`} alt="" />
               </div>
               <div className="blog-text">

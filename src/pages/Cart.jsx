@@ -17,6 +17,8 @@ const Cart = () => {
   const { setRequestDone } = React.useContext(AppContext);
   const navigate = useNavigate();
 
+  console.log(items);
+
   React.useEffect(() => {
     ibg();
     isWebp();

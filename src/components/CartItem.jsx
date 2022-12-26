@@ -28,7 +28,7 @@ const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => 
       </div>
       <div className="item-order__content">
         <div className="item-order__title">
-          <Link to={`/product/${category}/${id}`}>{title}</Link>
+          <Link to={`/products/${category}/${id}`}>{title}</Link>
           <span onClick={onClickRemoveItem} className="_icon-removeItem"></span>
         </div>
         <div className="item-order__price">

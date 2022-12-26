@@ -24,6 +24,7 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
   const onClickAdd = () => {
     const item = {
       id,
+      category,
       imageUrl,
       title,
       oldPrice,

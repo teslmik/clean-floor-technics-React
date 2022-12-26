@@ -15,7 +15,7 @@ const Blog = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector(postsSelector);
 
-  const skeleton = [...new Array(5)].map((_, i) => (
+  const skeleton = [...new Array(4)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
       <SkeletonBlog />
     </div>
