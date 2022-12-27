@@ -340,6 +340,7 @@ body.lockPadding {
 
   &__blog {
     flex: 1 1 auto;
+    padding-bottom: 10px;
     @media (max-width: $tablet) {
       width: 100%;
     }
@@ -373,7 +374,7 @@ body.lockPadding {
 
   &__items {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: rem(20);
     @include adaptiveValue('margin-bottom', 20, 10, 1);
     @media (max-width: $tablet) {

@@ -37,10 +37,10 @@ const FullItem = () => {
       }
     }
     fetchProduct();
-  }, [navigate, id, isOnCart, items]);
+  }, [navigate, id, items]);
 
   const onClickAdd = () => {
-    const item = { ...product, id, count: 1 };
+    const item = { ...product, count: 1 };
     dispatch(addToCart(item));
     setIsOpenCart(true);
   };
@@ -123,7 +123,7 @@ const FullItem = () => {
                         ? 'tabs-specification__body active'
                         : 'tabs-specification__body'
                     }>
-                    <p>— Гарантія від виробника 24 місяці</p>
+                    <p>— Гарантія від виробника 12 місяці</p>
                     <p>— Обмін/повернення товару впродовж 14 днів</p>
                   </div>
                 </div>
@@ -258,7 +258,7 @@ const FullItem = () => {
                           ? 'tabs-specification__body active'
                           : 'tabs-specification__body'
                       }>
-                      <p>— Гарантія від виробника 24 місяці</p>
+                      <p>— Гарантія від виробника 12 місяці</p>
                       <p>— Обмін/повернення товару впродовж 14 днів</p>
                     </div>
                   </div>

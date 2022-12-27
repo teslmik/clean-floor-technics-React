@@ -5,7 +5,13 @@
 .filter__title {
   display: none;
   @media (max-width: $tablet) {
-    display: inline-block;
+    display: flex;
+    gap: 5px;
+  }
+
+  i {
+    display: flex;
+    align-self: center;
   }
 }
 
