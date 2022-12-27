@@ -8,6 +8,7 @@ import { AppContext } from '../../App';
 import { dropIn, ibg, isWebp } from '../../js/modules/functions';
 
 import styles from './CartPopup.module.scss';
+import { euroToHrivna } from '../../utils/euroToHrivna';
 
 const CartPopup = () => {
   const dispatch = useDispatch();
@@ -110,7 +111,7 @@ const CartPopup = () => {
                           </div>
                         )}
                         <div className={styles.item__actualPrice}>
-                          {item.price.toLocaleString()} ₴
+                          {euroToHrivna(item.price).toLocaleString()} ₴
                         </div>
                       </div>
                     </div>
@@ -127,7 +128,7 @@ const CartPopup = () => {
                       </div>
                       <div className={styles.item__cost}>
                         <div className="item-order__cost">
-                          {(item.price * item.count).toLocaleString()} ₴
+                          {(euroToHrivna(item.price) * item.count).toLocaleString()} ₴
                         </div>
                       </div>
                     </div>

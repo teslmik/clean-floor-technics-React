@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { addToCart, cartSelector } from '../../redux/slices/cartSlice';
 import { AppContext } from '../../App';
+import { euroToHrivna } from '../../utils/euroToHrivna';
 import { ibg, isWebp } from '../../js/modules/functions';
 
 const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, category, refElem }) => {
@@ -52,7 +53,7 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
           {oldPrice !== '' ? (
             <div className="labels__item _discount">
               <div className="label-content">
-                -{Math.round((100 * (oldPrice - price)) / oldPrice)}%
+                -{Math.round((100 * (oldPrice - euroToHrivna(price))) / oldPrice)}%
               </div>
             </div>
           ) : (
@@ -77,7 +78,7 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
               {oldPrice !== '' && (
                 <div className="card__old-price">{oldPrice.toLocaleString()} ₴</div>
               )}
-              <div className="card__actual-price">{price.toLocaleString()} ₴</div>
+              <div className="card__actual-price">{euroToHrivna(price).toLocaleString()} ₴</div>
             </div>
             <button
               onClick={onClickAdd}

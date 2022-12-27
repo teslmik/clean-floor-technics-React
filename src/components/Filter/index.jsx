@@ -22,6 +22,13 @@ const Filter = () => {
     return count;
   };
 
+  const onClickIsVisible = () => {
+    if (windowWidth < 882) {
+      setIsVisible(false);
+    }
+    return;
+  };
+
   React.useEffect(() => {
     isVisible === true && windowWidth < 882
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
@@ -56,7 +63,7 @@ const Filter = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className={styles.filter}
-            onClick={() => setIsVisible(false)}>
+            onClick={onClickIsVisible}>
             <motion.div
               initial={{ transform: 'translateX({-320px})' }}
               animate={{ transform: 'translateX(0px)' }}
