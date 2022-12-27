@@ -11,7 +11,7 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
-  const { setIsOpenCart } = React.useContext(AppContext);
+  const { setIsOpenCart} = React.useContext(AppContext);
 
   React.useEffect(() => {
     items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);

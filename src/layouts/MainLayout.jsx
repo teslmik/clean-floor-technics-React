@@ -20,7 +20,6 @@ const MainLayout = () => {
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
   const [isOpenCart, setIsOpenCart] = React.useState(false);
   const [isOpenMap, setIsOpenMap] = React.useState(false);
-  const [isOnCart, setIsOnCart] = React.useState(false);
   const [requestDone, setRequestDone] = React.useState({
     isOpen: false,
     title: '',
@@ -68,8 +67,6 @@ const MainLayout = () => {
           getProducts,
           handleTooggle,
           windowWidth,
-          isOnCart,
-          setIsOnCart,
           isOpenMap,
           setIsOpenMap,
           requestDone,

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const fetchProducts = createAsyncThunk('product/fetchProducstStatus', async (_, thunkAPI) => {
   const { sortState } = thunkAPI.getState().filter;
-  const order = sortState === 'rating' ? 'asc' : 'desc';
+  const order = sortState.sortProperty === 'rating' ? 'desc' : 'asc';
   const { data } = await axios
     .get(`https://636e34f8b567eed48ad655d0.mockapi.io/products?sortBy=${sortState.sortProperty}&order=${order}`);
   return data;

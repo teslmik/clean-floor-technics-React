@@ -43,6 +43,26 @@
     }
 
     .img-block {
+      &__labels {
+        position: absolute;
+        @include adaptiveValue("left", 91, -7, 1);
+        @include adaptiveValue("top", 14, 8, 1);
+        line-height: 1;
+        ._promo,
+        ._discount {
+          color: #e93f11;
+          background-color: #e93f11;
+        }
+        ._popular {
+          color: #7baf35;
+          background-color: #7baf35;
+        }
+        ._new {
+          color: #3da5ca;
+          background-color: #3da5ca;
+        }
+      }
+
       // .img-block__img
 
       &__img {
@@ -67,7 +87,7 @@
         display: flex;
         justify-content: center;
         gap: 5px;
-        @include adaptiveValue("margin-bottom", 40, 20, 1);
+        @include adaptiveValue('margin-bottom', 40, 20, 1);
       }
 
       &__tab {
@@ -94,6 +114,46 @@
         border-color: #333;
       }
     }
+
+    .labels {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      &__item {
+        position: relative;
+        z-index: 1;
+        height: rem(24);
+        line-height: 24px;
+        padding: 0 rem(9);
+        border-radius: rem(2) rem(2) rem(2) 0;
+        &:not(:last-child) {
+          margin-bottom: rem(2);
+        }
+        @media (max-width: $mobile) {
+          height: rem(20);
+        }
+        &::before {
+          content: '';
+          position: absolute;
+          top: 99%;
+          left: 0;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 0 rem(8) rem(8) 0;
+          border-color: transparent currentColor transparent transparent;
+          filter: brightness(0.7);
+        }
+      }
+    }
+    .label-content {
+      color: #fff;
+      @media (max-width: $mobile) {
+        font-size: 12px;
+        height: rem(20);
+        line-height: 20px;
+      }
+    }
   }
 
   // .fullitem__body
@@ -111,7 +171,7 @@
   &__top {
     display: flex;
     flex-direction: column;
-    @include adaptiveValue("margin-bottom", 25, 20, 1);
+    @include adaptiveValue('margin-bottom', 25, 20, 1);
   }
 
   // .body-fullitem__header

@@ -13,7 +13,7 @@ import { euroToHrivna } from '../../utils/euroToHrivna';
 const CartPopup = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCart, windowWidth, setIsOnCart } = React.useContext(AppContext);
+  const { setIsOpenCart, windowWidth } = React.useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -26,7 +26,6 @@ const CartPopup = () => {
     if (window.confirm('Видалити товар з кошика?')) {
       dispatch(removeFromCart(id));
       items.length === 1 && setIsOpenCart(false);
-      setIsOnCart(false);
     }
   };
 
