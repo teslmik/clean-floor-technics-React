@@ -38,11 +38,12 @@ const FullItem = () => {
       }
     }
     fetchProduct();
-  }, [navigate, id, items]);
+  }, [navigate]);
 
   const onClickAdd = () => {
     const item = { ...product, count: 1 };
     dispatch(addToCart(item));
+    setIsOnCart(true);
     setIsOpenCart(true);
   };
 
