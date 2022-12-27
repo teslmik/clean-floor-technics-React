@@ -9,6 +9,7 @@ import Breadcrumbs from '../components/Breadcrumbs/index.jsx';
 import SwiperItem from '../components/SwiperItem.jsx';
 import { addToCart, cartSelector } from '../redux/slices/cartSlice.js';
 import { ibg, tabsItem } from '../js/modules/functions.js';
+import { euroToHrivna } from '../utils/euroToHrivna.js';
 
 const FullItem = () => {
   const dispatch = useDispatch();
@@ -140,7 +141,7 @@ const FullItem = () => {
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
-                  {product.price.toLocaleString()} ₴
+                  {euroToHrivna(product.price).toLocaleString()} ₴
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">
@@ -181,7 +182,7 @@ const FullItem = () => {
             {windowWidth >= 683 && (
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
-                  {product.price.toLocaleString()} ₴
+                  {euroToHrivna(product.price).toLocaleString()} ₴
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">

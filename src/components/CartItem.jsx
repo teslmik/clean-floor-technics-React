@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { decrement, increment, removeFromCart } from '../redux/slices/cartSlice';
+import { euroToHrivna } from '../utils/euroToHrivna';
 
 const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => 
         </div>
         <div className="item-order__price">
           {oldPrice !== '' && <span className="old-price">{oldPrice.toLocaleString()} ₴</span>}
-          <span className="actual-price">{price.toLocaleString()} ₴</span>
+          <span className="actual-price">{euroToHrivna(price).toLocaleString()} ₴</span>
         </div>
         <div className="item-order__control">
           <div className="item-order__quantity">
@@ -44,7 +45,7 @@ const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => 
             <p className="counter">{count}</p>
             <button onClick={() => onClickPlus(id)} className="btn-item__plus _icon-plus"></button>
           </div>
-          <div className="item-order__cost">{(price * count).toLocaleString()} ₴</div>
+          <div className="item-order__cost">{(euroToHrivna(price) * count).toLocaleString()} ₴</div>
         </div>
       </div>
     </li>

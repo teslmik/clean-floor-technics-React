@@ -8,6 +8,7 @@ import { AppContext } from '../App';
 import CartItem from '../components/CartItem';
 import { cartSelector, clearCart } from '../redux/slices/cartSlice';
 import { isWebp, ibg } from '../js/modules/functions';
+import { euroToHrivna } from '../utils/euroToHrivna';
 
 const Cart = () => {
   const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
@@ -43,7 +44,7 @@ const Cart = () => {
       .map(
         (item, i) =>
           `<i>${i + 1}. ${item.title} ${item.count} шт.</i> - <b>${(
-            item.count * item.price
+            item.count * euroToHrivna(item.price)
           ).toLocaleString()}</b> грн.\n\n`,
       )
       .join('');
