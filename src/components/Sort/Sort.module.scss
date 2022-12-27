@@ -3,10 +3,18 @@
 @import '../../scss/lib/functions';
 
 .sort__title {
+  display: flex;
+  gap: 5px;
   p {
     &::first-letter {
       text-transform: uppercase;
     }
+  }
+  i {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    transform: rotate(90deg) scaleY(120%);
   }
 }
 
@@ -16,7 +24,7 @@
     width: 100vw;
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
-    // height: -webkit-fill-available;
+    height: -webkit-fill-available;
     background-color: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;

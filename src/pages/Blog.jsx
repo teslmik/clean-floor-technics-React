@@ -44,7 +44,7 @@ const Blog = () => {
               <ul className="content-blog__list">
                 {status === 'loading'
                   ? skeleton
-                  : items.map((obj, i) => (
+                  : [...items].reverse().map((obj, i) => (
                       <li key={i} className="content-blog__item">
                         <Link to={`/blog/${obj.id}`} className="blog-item__img ibg">
                           <img src={`/assets/img/blog/${obj.imageUrl}`} alt="" />

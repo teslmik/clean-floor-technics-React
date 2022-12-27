@@ -46,7 +46,7 @@ const Filter = () => {
   return (
     <>
       <div className={styles.filter__title} onClick={() => setIsVisible(true)}>
-        Фільтр
+        Фільтр<i className="_icon-filter"></i>
       </div>
       <AnimatePresence initial={false}>
         {isVisible && (

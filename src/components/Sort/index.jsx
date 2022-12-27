@@ -64,7 +64,8 @@ export const SortMobile = () => {
   return (
     <>
       <div className={styles.sort__title} onClick={() => setIsVisible(true)}>
-        <p>{sortState.name}</p>
+        <i className="_icon-sort"></i><p>{sortState.name}</p>
+        
       </div>
       <AnimatePresence>
         {isVisible && (

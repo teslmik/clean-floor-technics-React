@@ -10,7 +10,7 @@ export const menuListObj = {
 
 export const categoriesList = [
   { name: 'scrubber', value: 'Підлогомийні машини' },
-  { name: 'one-disk-machines', value: 'Oднодискові машини' },
+  { name: 'one-disk-machines', value: 'Роторні машини' },
   { name: 'vacuum-cleaner', value: 'Пилососи' },
   { name: 'extractor', value: 'Екстрактори' },
   { name: 'sweeping-machines', value: 'Підмітальні машини' },
