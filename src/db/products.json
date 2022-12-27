@@ -71,11 +71,11 @@
     "category": "scrubber",
     "title": "Багатофункціональна підлогомийна машина Truvox Multiwash II 340 PUMP",
     "availability": true,
-    "oldPrice": 175000,
-    "price": 4000,
+    "oldPrice": 190590,
+    "price": 2830,
     "label": {
       "_promo": true,
-      "popular": true,
+      "_popular": true,
       "_new": false
     },
     "imageUrl": "MW340-PUMP.webp",
@@ -140,7 +140,7 @@
     "price": 4750,
     "label": {
       "_promo": false,
-      "_popular": true,
+      "_popular": false,
       "_new": false
     },
     "imageUrl": "MW440-PUMP.webp",
@@ -197,7 +197,7 @@
   {
     "id": "MW340PB",
     "article": "MW340PB",
-    "rating": 7,
+    "rating": 9,
     "category": "scrubber",
     "title": "Багатофункціональна підлогомийна машина Truvox Multiwash II 340 PUMP Battery",
     "availability": false,
@@ -272,7 +272,7 @@
     "price": 1632,
     "label": {
       "_promo": false,
-      "_popular": true,
+      "_popular": false,
       "_new": false
     },
     "imageUrl": "Orbis-200.webp",
@@ -328,7 +328,7 @@
     "price": 1134,
     "label": {
       "_promo": false,
-      "_popular": true,
+      "_popular": false,
       "_new": true
     },
     "imageUrl": "Truvox_Orbis_Eco.webp",
@@ -440,7 +440,7 @@
   {
     "id": "ORBIS_UHSCB",
     "article": "ORBIS_UHSCB",
-    "rating": 5,
+    "rating": 9,
     "category": "one-disk-machines",
     "title": "Роторна підлогомийна машина Truvox ORBIS UHS CORDLESS BURNISHER",
     "availability": false,
@@ -448,7 +448,7 @@
     "price": 3876,
     "label": {
       "_promo": false,
-      "_popular": false,
+      "_popular": true,
       "_new": false
     },
     "imageUrl": "ORBIS-UHS-CORDLESS-BURNISHER.webp",
@@ -517,7 +517,7 @@
     "price": 2594,
     "label": {
       "_promo": false,
-      "_popular": true,
+      "_popular": false,
       "_new": true
     },
     "imageUrl": "ORBIS-Orbital-1500.webp",
@@ -564,7 +564,7 @@
   {
     "id": "TORNADO_FK20",
     "article": "TORNADO_FK20",
-    "rating": 4,
+    "rating": 8,
     "category": "one-disk-machines",
     "title": "Роторна підлогомийна машина Tornado`s Floorkeeper  20PD/20TD/24TD",
     "availability": false,
@@ -935,7 +935,7 @@
   {
     "id": "VBU",
     "article": "VBU",
-    "rating": 8,
+    "rating": 9,
     "category": "vacuum-cleaner",
     "title": "Пилосос аккумуляторний Truvox Valet Battery Upright",
     "availability": false,
@@ -943,7 +943,7 @@
     "price": 1111,
     "label": {
       "_promo": false,
-      "_popular": false,
+      "_popular": true,
       "_new": false
     },
     "imageUrl": "VBU.webp",
@@ -1010,7 +1010,7 @@
     "price": 1769.5,
     "label": {
       "_promo": false,
-      "_popular": false,
+      "_popular": true,
       "_new": true
     },
     "imageUrl": "VBB.webp",
@@ -1062,7 +1062,7 @@
   {
     "id": "VBP",
     "article": "VBP",
-    "rating": 8,
+    "rating": 7,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Backpack II eco",
     "availability": false,
@@ -1118,7 +1118,7 @@
   {
     "id": "VTVe",
     "article": "VTVe",
-    "rating": 8,
+    "rating": 6,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Tub Vac VTVe",
     "availability": false,
@@ -1174,7 +1174,7 @@
   {
     "id": "VWAV",
     "article": "VWAV",
-    "rating": 8,
+    "rating": 5,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Wide Area Vac",
     "availability": false,
@@ -1238,7 +1238,7 @@
   {
     "id": "VAHD20",
     "article": "VAHD20",
-    "rating": 8,
+    "rating": 7,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Aqua 20 Heavy Duty",
     "availability": false,
@@ -1290,7 +1290,7 @@
   {
     "id": "VAHD55",
     "article": "VAHD55",
-    "rating": 8,
+    "rating": 7,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Aqua 55 Heavy Duty",
     "availability": false,
@@ -1342,7 +1342,7 @@
   {
     "id": "VAI75",
     "article": "VAI75",
-    "rating": 8,
+    "rating": 7,
     "category": "vacuum-cleaner",
     "title": "Пилосос Truvox Valet Aqua 75 Industrial",
     "availability": false,
@@ -1393,7 +1393,7 @@
   {
     "id": "CimexCyclone",
     "article": "CimexCyclone",
-    "rating": 8,
+    "rating": 7,
     "category": "one-disk-machines",
     "title": "Роторна підлогомийна машина Cimex Cyclone",
     "availability": false,
@@ -1462,7 +1462,7 @@
   {
     "id": "CimexHD",
     "article": "CimexHD",
-    "rating": 8,
+    "rating": 6,
     "category": "one-disk-machines",
     "title": "Роторна підлогомийна машина Cimex Heavy-Duty",
     "availability": false,
@@ -1530,7 +1530,7 @@
   {
     "id": "CimexX46",
     "article": "CimexX46",
-    "rating": 8,
+    "rating": 6,
     "category": "sweeping-machines",
     "title": "Ескалаторна машина Cimex X46",
     "availability": false,
@@ -1590,7 +1590,7 @@
   {
     "id": "TS460",
     "article": "TS460",
-    "rating": 8,
+    "rating": 4,
     "category": "sweeping-machines",
     "title": "Підмітальна машина Truvox TruSweep 460",
     "availability": false,
@@ -1654,10 +1654,10 @@
     "category": "air-fan",
     "title": "Вентилятор Truvox Air Movers AM3000",
     "availability": true,
-    "oldPrice": "",
-    "price": 487,
+    "oldPrice": "20640",
+    "price": 449,
     "label": {
-      "_promo": false,
+      "_promo": true,
       "_popular": true,
       "_new": false
     },
@@ -1706,7 +1706,7 @@
   {
     "id": "AF",
     "article": "AF",
-    "rating": 8,
+    "rating": 6,
     "category": "air-fan",
     "title": "Вентилятор Truvox Axial Fan",
     "availability": false,
@@ -1761,7 +1761,7 @@
   {
     "id": "HB3400",
     "article": "HB3400",
-    "rating": 8,
+    "rating": 5,
     "category": "air-fan",
     "title": "Вентилятор Truvox Hybrid Blower 3400",
     "availability": false,
@@ -1819,7 +1819,7 @@
   {
     "id": "BrushMW",
     "article": "BrushMW",
-    "rating": 8,
+    "rating": 9,
     "category": "accessories",
     "title": "Щітки для Truvox Multiwash",
     "availability": false,

@@ -16,13 +16,14 @@ const FullItem = () => {
   const { items } = useSelector(cartSelector);
   const [product, setProduct] = React.useState();
   const [toggleState, setToggleState] = React.useState(0);
-  const { setIsOpenCart, isOnCart, setIsOnCart, windowWidth } = React.useContext(AppContext);
+  const { setIsOpenCart, windowWidth } = React.useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const isItemOnCart = items.find((obj) => obj.id === id) ? true : false;
+
   React.useEffect(() => {
     window.scroll(0, 0);
-    ibg();
     async function fetchProduct() {
       try {
         setProduct();
@@ -30,7 +31,6 @@ const FullItem = () => {
           `https://636e34f8b567eed48ad655d0.mockapi.io/products/${id}`,
         );
         setProduct(data);
-        items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
       } catch (error) {
         alert('Товар не знайдено, спробуйте пізніше...');
         console.log(error.message);
@@ -43,7 +43,6 @@ const FullItem = () => {
   const onClickAdd = () => {
     const item = { ...product, count: 1 };
     dispatch(addToCart(item));
-    setIsOnCart(true);
     setIsOpenCart(true);
   };
 
@@ -125,7 +124,7 @@ const FullItem = () => {
                         ? 'tabs-specification__body active'
                         : 'tabs-specification__body'
                     }>
-                    <p>— Гарантія від виробника 12 місяці</p>
+                    <p>— Гарантія від виробника 12 місяців</p>
                     <p>— Обмін/повернення товару впродовж 14 днів</p>
                   </div>
                 </div>
@@ -134,7 +133,14 @@ const FullItem = () => {
           </div>
         )}
         <div className="fullitem__wrapper">
-          <SwiperItem title={product.title} article={product.article} imageArr={product.imageArr} />
+          <SwiperItem
+            title={product.title}
+            article={product.article}
+            imageArr={product.imageArr}
+            label={product.label}
+            oldPrice={product.oldPrice}
+            price={product.price}
+          />
           {windowWidth < 683 && (
             <div className="body-fullitem__btn">
               <div className="fullitem-header__availability">
@@ -152,9 +158,9 @@ const FullItem = () => {
               </div>
               <button
                 onClick={onClickAdd}
-                className={isOnCart ? 'inCart' : ''}
-                disabled={isOnCart && true}>
-                <span>{isOnCart ? 'У кошику' : 'Купити'}</span>
+                className={isItemOnCart ? 'inCart' : ''}
+                disabled={isItemOnCart && true}>
+                <span>{isItemOnCart ? 'У кошику' : 'Купити'}</span>
               </button>
             </div>
           )}
@@ -198,9 +204,9 @@ const FullItem = () => {
               <div className="body-fullitem__btn">
                 <button
                   onClick={onClickAdd}
-                  className={isOnCart ? 'inCart' : ''}
-                  disabled={isOnCart && true}>
-                  <span>{isOnCart ? 'У кошику' : 'Купити'}</span>
+                  className={isItemOnCart ? 'inCart' : ''}
+                  disabled={isItemOnCart && true}>
+                  <span>{isItemOnCart ? 'У кошику' : 'Купити'}</span>
                 </button>
               </div>
               <div className="body-fullitem__specification specification">
@@ -260,7 +266,7 @@ const FullItem = () => {
                           ? 'tabs-specification__body active'
                           : 'tabs-specification__body'
                       }>
-                      <p>— Гарантія від виробника 12 місяці</p>
+                      <p>— Гарантія від виробника 12 місяців</p>
                       <p>— Обмін/повернення товару впродовж 14 днів</p>
                     </div>
                   </div>
