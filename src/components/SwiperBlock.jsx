@@ -2,9 +2,13 @@ import React from 'react';
 import { Navigation, EffectFade, Autoplay, Pagination, Lazy } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { AppContext } from '../App';
+
 import 'swiper/css/bundle';
 
 const SwiperBlock = () => {
+  const { isWebpImg } = React.useContext(AppContext);
+
   const lazyOptions = {
     enabled: true,
     onTransitionStart: false,
@@ -27,7 +31,7 @@ const SwiperBlock = () => {
         <SwiperSlide key={i}>
           <div className="swiper__img">
             <img
-              data-src={`assets/img/slider/${i + 1}.webp`}
+              data-src={`assets/img/slider/${i + 1}${isWebpImg ? '.webp' : '.jpg'}`}
               src={'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
               alt={'Slide-' + (i + 1)}
               className="swiper-lazy"
