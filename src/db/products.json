@@ -13,8 +13,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "MW240.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "MW240",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -78,8 +78,8 @@
       "_popular": true,
       "_new": false
     },
-    "imageUrl": "MW340-PUMP.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "MW340-PUMP",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -143,8 +143,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "MW440-PUMP.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "MW440-PUMP",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -208,8 +208,8 @@
       "_popular": true,
       "_new": true
     },
-    "imageUrl": "MW340-PUMP-battery.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "MW340-PUMP-battery",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -275,8 +275,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "Orbis-200.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "Orbis-200",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -331,8 +331,8 @@
       "_popular": false,
       "_new": true
     },
-    "imageUrl": "Truvox_Orbis_Eco.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "Truvox_Orbis_Eco",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -392,8 +392,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "ORBIS-UHS-1500-FH.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "ORBIS-UHS-1500-FH",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -451,8 +451,8 @@
       "_popular": true,
       "_new": false
     },
-    "imageUrl": "ORBIS-UHS-CORDLESS-BURNISHER.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "ORBIS-UHS-CORDLESS-BURNISHER",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -520,8 +520,8 @@
       "_popular": false,
       "_new": true
     },
-    "imageUrl": "ORBIS-Orbital-1500.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "ORBIS-Orbital-1500",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -575,8 +575,8 @@
       "_popular": true,
       "_new": true
     },
-    "imageUrl": "TORNADO_FK20.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "TORNADO_FK20",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -643,8 +643,8 @@
       "_popular": true,
       "_new": false
     },
-    "imageUrl": "hydromist-compact-250.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "hydromist-compact-250",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -707,8 +707,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "Hydromist_Lite.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "Hydromist_Lite",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -767,8 +767,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "Hydromist_10-10HD-20HD.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "Hydromist_10-10HD-20HD",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -827,8 +827,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "hm55-100_400.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "hm55-100_400",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -887,8 +887,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "hm35.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "hm35",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -946,8 +946,8 @@
       "_popular": true,
       "_new": false
     },
-    "imageUrl": "VBU.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "VBU",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1013,8 +1013,8 @@
       "_popular": true,
       "_new": true
     },
-    "imageUrl": "VBB.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "VBB",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1073,8 +1073,8 @@
       "_popular": false,
       "_new": true
     },
-    "imageUrl": "VBPIIe.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "VBPIIe",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1129,8 +1129,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "VTVe.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "VTVe",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1185,8 +1185,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "vwav.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "vwav",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1249,8 +1249,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "VAHD20.webp",
-    "imageArr": ["1.png", "2.png", "3.png"],
+    "imageUrl": "VAHD20",
+    "imageArr": ["1", "2", "3"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1301,8 +1301,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "VAHD55.webp",
-    "imageArr": ["1.png", "2.png", "3.png"],
+    "imageUrl": "VAHD55",
+    "imageArr": ["1", "2", "3"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1353,8 +1353,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "VAI75.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "VAI75",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1404,8 +1404,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "CimexCyclone.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "CimexCyclone",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1473,8 +1473,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "CimexHD.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "CimexHD",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1541,8 +1541,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "CimexX46.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "CimexX46",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1601,8 +1601,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "TruSweep_460.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "TruSweep_460",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1661,8 +1661,8 @@
       "_popular": true,
       "_new": false
     },
-    "imageUrl": "AM3000.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "AM3000",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1717,8 +1717,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "AF.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "AF",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1772,8 +1772,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "HB3400.webp",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "HB3400",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",
@@ -1830,8 +1830,8 @@
       "_popular": false,
       "_new": false
     },
-    "imageUrl": "brushes.png",
-    "imageArr": ["1.png", "2.png", "3.png", "4.png"],
+    "imageUrl": "brushes",
+    "imageArr": ["1", "2", "3", "4"],
     "specification": [
       {
         "name": "Країна-виробник",

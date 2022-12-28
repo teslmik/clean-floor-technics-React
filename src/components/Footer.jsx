@@ -5,7 +5,7 @@ import { AppContext } from '../App';
 import { categoriesList, menuListObj } from '../js/modules/functions';
 
 const Footer = () => {
-  const { setIsOpenCallback, handleTooggle, setIsOpenMap } = React.useContext(AppContext);
+  const { setIsOpenCallback, handleTooggle, setIsOpenMap, isWebpImg } = React.useContext(AppContext);
   const [scroll, setScroll] = React.useState(0);
 
   const handleScroll = () => {
@@ -23,7 +23,10 @@ const Footer = () => {
         <div className="footer__layout">
           <div className="footer__copyright copyright">
             <a href="/" className="copyright__logo ibg">
-              <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
+              <img
+                src={`/assets/img/logo/logo-transparent${isWebpImg ? '.webp' : '.png'}`}
+                alt="logo"
+              />
             </a>
             <div className="copyright__text">
               <p>© Інтернет-магазин Clean&nbsp;Floor&nbsp;Technics</p>

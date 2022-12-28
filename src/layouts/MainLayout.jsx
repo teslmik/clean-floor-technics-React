@@ -10,13 +10,14 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { filterSelector, setFilter } from '../redux/slices/filterSlice';
 import { fetchProducts } from '../redux/slices/productsSlice';
-import { bodyLock, bodyUnlock, ibg } from '../js/modules/functions';
+import { bodyLock, bodyUnlock, ibg, isWebp } from '../js/modules/functions';
 import RouteMap from '../components/RouteMap';
 import PopupAnswer from '../components/PopupAnswer';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { filterState } = useSelector(filterSelector);
+  const [isWebpImg, setIsWebpImg] = React.useState(false);
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
   const [isOpenCart, setIsOpenCart] = React.useState(false);
   const [isOpenMap, setIsOpenMap] = React.useState(false);
@@ -41,7 +42,18 @@ const MainLayout = () => {
   };
 
   React.useEffect(() => {
-    isOpenCallback === true || isOpenCart === true || isOpenMap === true || requestDone.isOpen === true
+    isWebp();
+    if (document.getElementsByClassName('webp')) {
+      setIsWebpImg(true);
+      console.log('isWebpImg: ', isWebpImg);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    isOpenCallback === true ||
+    isOpenCart === true ||
+    isOpenMap === true ||
+    requestDone.isOpen === true
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
     ibg();
@@ -71,6 +83,7 @@ const MainLayout = () => {
           setIsOpenMap,
           requestDone,
           setRequestDone,
+          isWebpImg,
         }}>
         <Header />
         <main className="main">
@@ -81,12 +94,7 @@ const MainLayout = () => {
           {isOpenCallback && <Callback />}
           {isOpenCart && <CartPopup />}
           {isOpenMap && <RouteMap />}
-          {requestDone.isOpen && (
-            <PopupAnswer
-              title={requestDone.title}
-              text={requestDone.text}
-            />
-          )}
+          {requestDone.isOpen && <PopupAnswer title={requestDone.title} text={requestDone.text} />}
         </AnimatePresence>
       </AppContext.Provider>
     </div>

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { AppContext } from '../App';
 import { ibg } from '../js/modules/functions';
 import { euroToHrivna } from '../utils/euroToHrivna';
 
 const SwiperItem = ({ title, article, imageArr, label, oldPrice, price }) => {
   const [toggleState, setToggleState] = React.useState(0);
+  const { isWebpImg } = React.useContext(AppContext);
 
   React.useEffect(() => {
     ibg();
@@ -41,7 +43,12 @@ const SwiperItem = ({ title, article, imageArr, label, oldPrice, price }) => {
             )}
           </div>
         )}
-        <img src={`/assets/img/products/${article}/${imageArr[toggleState]}`} alt={title} />
+        <img
+          src={`/assets/img/products/${article}/${imageArr[toggleState]}${
+            isWebpImg ? '.webp' : '.png'
+          }`}
+          alt={title}
+        />
       </div>
       <div className="img-block__tabs">
         {imageArr.map((image, i) => (
@@ -49,7 +56,10 @@ const SwiperItem = ({ title, article, imageArr, label, oldPrice, price }) => {
             key={image[i]}
             className={toggleState === i ? 'img-block__tab active' : 'img-block__tab'}
             onClick={() => setToggleState(i)}>
-            <img src={`/assets/img/products/${article}/${image}`} alt={title} />
+            <img
+              src={`/assets/img/products/${article}/${image}${isWebpImg ? '.webp' : '.png'}`}
+              alt={title}
+            />
           </div>
         ))}
       </div>

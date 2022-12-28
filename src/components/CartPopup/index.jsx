@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { cartSelector, decrement, increment, removeFromCart } from '../../redux/slices/cartSlice';
 import { AppContext } from '../../App';
-import { dropIn, ibg, isWebp } from '../../js/modules/functions';
+import { dropIn, ibg } from '../../js/modules/functions';
 
 import styles from './CartPopup.module.scss';
 import { euroToHrivna } from '../../utils/euroToHrivna';
@@ -13,7 +13,7 @@ import { euroToHrivna } from '../../utils/euroToHrivna';
 const CartPopup = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCart, windowWidth } = React.useContext(AppContext);
+  const { setIsOpenCart, windowWidth, isWebpImg } = React.useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -62,7 +62,6 @@ const CartPopup = () => {
 
   React.useEffect(() => {
     ibg();
-    isWebp();
   }, []);
 
   return (
@@ -96,7 +95,7 @@ const CartPopup = () => {
                     onClick={() => onClickRemoveItem(item.id)}
                     className={`${styles.removItem} _icon-removeItem`}></span>
                   <div className={`${styles.item__img} ibg`}>
-                    <img src={`/assets/img/products/${item.imageUrl}`} alt="" />
+                    <img src={`/assets/img/products/${item.imageUrl}${isWebpImg ? '.webp' : '.png'}`} alt="" />
                   </div>
                   <div className={styles.item__body}>
                     <div className={styles.item__content}>

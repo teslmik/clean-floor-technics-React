@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../App';
 
 import { decrement, increment, removeFromCart } from '../redux/slices/cartSlice';
 import { euroToHrivna } from '../utils/euroToHrivna';
 
 const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => {
   const dispatch = useDispatch();
+  const { isWebpImg } = React.useContext(AppContext);
 
   const onClickRemoveItem = () => {
     if (window.confirm('Видалити товар з кошика?')) {
@@ -25,7 +27,10 @@ const CartItem = ({ id, title, imageUrl, oldPrice, price, count, category }) => 
   return (
     <li className="order-list__item item-order">
       <div className="item-order__img ibg">
-        <img src={`assets/img/products/${imageUrl}`} alt="product img" />
+        <img
+          src={`assets/img/products/${imageUrl}${isWebpImg ? '.webp' : '.png'}`}
+          alt="product img"
+        />
       </div>
       <div className="item-order__content">
         <div className="item-order__title">

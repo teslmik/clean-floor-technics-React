@@ -9,7 +9,7 @@ import HeaderMenu from './HeaderMenu';
 
 const Header = () => {
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCallback, setIsOpenCart, windowWidth } = React.useContext(AppContext);
+  const { setIsOpenCallback, setIsOpenCart, windowWidth, isWebpImg } = React.useContext(AppContext);
   const [isVisible, setIsVisible] = React.useState(false);
   const isMounted = React.useRef(false);
   const { pathname } = useLocation();
@@ -68,7 +68,7 @@ const Header = () => {
             )}
             <div className="header__logo ibg" style={styleLogo}>
               <a href="/">
-                <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
+                <img src={`/assets/img/logo/logo-transparent${isWebpImg ? '.webp' : '.png'}`} alt="logo" />
               </a>
             </div>
             {pathname === '/cart' ? (

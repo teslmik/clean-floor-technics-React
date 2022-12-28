@@ -3,22 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { addToCart, cartSelector } from '../../redux/slices/cartSlice';
-import { AppContext } from '../../App';
+import { AppContext} from '../../App';
 import { euroToHrivna } from '../../utils/euroToHrivna';
-import { ibg, isWebp } from '../../js/modules/functions';
+import { ibg } from '../../js/modules/functions';
 
 const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, category, refElem }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
-  const { setIsOpenCart} = React.useContext(AppContext);
+  const { setIsOpenCart, isWebpImg} = React.useContext(AppContext);
 
   React.useEffect(() => {
     items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
   }, [isOnCart, items]);
 
   React.useEffect(() => {
-    isWebp();
     ibg();
   }, []);
 
@@ -66,7 +65,7 @@ const CardItem = ({ id, label, imageUrl, article, title, oldPrice, price, catego
           )}
         </div>
         <Link to={`/products/${category}/${id}`} className="card__image ibg" title={title}>
-          <img src={`/assets/img/products/${imageUrl}`} alt={title} />
+          <img src={`/assets/img/products/${imageUrl}${isWebpImg ? '.webp' : '.png'}`} alt={title} />
         </Link>
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
