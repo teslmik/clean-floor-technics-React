@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { ibg, isWebp } from '../../js/modules/functions';
+import { ibg } from '../../js/modules/functions';
 
 const NotFoundBlock = () => {
   React.useEffect(() => {
     ibg();
-    isWebp();
   }, []);
 
   return (

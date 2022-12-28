@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { AppContext } from '../App';
 import CartItem from '../components/CartItem';
 import { cartSelector, clearCart } from '../redux/slices/cartSlice';
-import { isWebp, ibg } from '../js/modules/functions';
+import { ibg } from '../js/modules/functions';
 import { euroToHrivna } from '../utils/euroToHrivna';
 
 const Cart = () => {
@@ -22,7 +22,6 @@ const Cart = () => {
 
   React.useEffect(() => {
     ibg();
-    isWebp();
     if (!items.length > 0) {
       navigate('/catalog');
     }

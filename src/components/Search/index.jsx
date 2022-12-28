@@ -16,7 +16,7 @@ const Search = () => {
   const [dropdown, setDropdown] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
-  const { windowWidth } = React.useContext(AppContext);
+  const { windowWidth, isWebpImg } = React.useContext(AppContext);
   const debounced = useDebounce(input, 150);
 
   const inputRef = React.useRef();
@@ -37,7 +37,7 @@ const Search = () => {
 
   const onClickEsc = (event) => {
     event.key === 'Esc' && onClickClose();
-  }
+  };
 
   const onClickClose = () => {
     if (!input) {
@@ -104,7 +104,10 @@ const Search = () => {
               {items.map((item) => (
                 <li key={item.id} onClick={() => onClickSearchItem(item)}>
                   <div className={`${styles.dropdown__img} ibg`}>
-                    <img src={`/assets/img/products/${item.imageUrl}`} alt={item.title} />
+                    <img
+                      src={`/assets/img/products/${item.imageUrl}${isWebpImg ? '.webp' : '.png'}`}
+                      alt={item.title}
+                    />
                   </div>
                   <div className={styles.dropdown__content}>
                     <h3 className={styles.title}>{item.title}</h3>

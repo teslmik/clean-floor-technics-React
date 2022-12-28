@@ -27,7 +27,7 @@ const SwiperBlock = () => {
         <SwiperSlide key={i}>
           <div className="swiper__img">
             <img
-              data-src={`assets/img/slider/${i + 1}.jpg`}
+              data-src={`assets/img/slider/${i + 1}.webp`}
               src={'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
               alt={'Slide-' + (i + 1)}
               className="swiper-lazy"

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { AppContext } from '../../App';
-import { bodyLock, bodyUnlock, ibg, isWebp, menuListObj } from '../../js/modules/functions';
+import { bodyLock, bodyUnlock, ibg, menuListObj } from '../../js/modules/functions';
 
 import styles from './HeaderMenu.module.scss';
 
@@ -20,7 +20,6 @@ const HeaderMenu = ({ windowWidth, isVisible, setIsVisible }) => {
       ? (document.body.style.overflowY = 'hidden' && bodyLock())
       : (document.body.style.overflowY = 'visible' && bodyUnlock());
     ibg();
-    isWebp();
   }, [isVisible, isOpenCallback]);
 
   return (

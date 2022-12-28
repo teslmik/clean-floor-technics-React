@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound";
 import Blog from "./pages/Blog";
 import FullBlogItem from "./pages/FullBlogItem";
 import Return from "./pages/Return";
-import { ibg } from "./js/modules/functions";
 
 import './scss/app.scss';
 import Contacts from "./pages/Contacts";
@@ -20,10 +19,6 @@ import PayAndDelivery from "./pages/PayAndDelivery";
 export const AppContext = React.createContext();
 
 const App = () => {
-  React.useEffect(() => {
-    ibg();
-  }, []);
-
   return (
     <Routes>
       <Route path="/" element={<MainLayout />} >
