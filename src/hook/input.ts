@@ -1,16 +1,16 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 export const useInput = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
 
-  const reset = () => setValue(initialValue);
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => setValue(e.currentTarget.value),
+    []
+  );
 
-  const bind = {
+  return {
     value,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value)
-    }
+    onChange,
+    setValue
   }
-
-  return [value, bind, reset];
-}
+};

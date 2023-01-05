@@ -31,8 +31,11 @@
 
   &__user {
     width: 55%;
+    position: sticky;
+    top: 18px;
     @media (max-width: $tablet) {
       width: 100%;
+      position: static;
     }
     .cart-user {
       &__title {
