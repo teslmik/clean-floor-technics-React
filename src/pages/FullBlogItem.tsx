@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import ErrorInfo from '../components/ErrorInfo';
@@ -16,6 +16,7 @@ const FullBlogItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const { id } = useParams();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     const _id = String(id);
@@ -28,7 +29,7 @@ const FullBlogItem: React.FC = () => {
 
   return (
     <section className="blog__container">
-      <Head title={`Блог - ${status === Status.SUCCESS ? items[0].title.toString() : '...'}`} />
+      {status === Status.SUCCESS && <Head title={`Блог - ${items[0].title.toString()}`} imageUrl={`blog/${items[0].imageUrl}`} url={pathname} />}
       <div className="blog__wrapper">
         <LeftMenu id={id} />
         <div className="blog__boby">

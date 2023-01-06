@@ -1,11 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs'
-import LeftMenu from '../components/LeftMenu'
-import Head from '../layouts/Head'
+import Breadcrumbs from '../components/Breadcrumbs';
+import LeftMenu from '../components/LeftMenu';
+import Head from '../layouts/Head';
 
-const Services = () => {
+const Services: React.FC = () => {
   const { pathname } = useLocation();
 
   return (
@@ -20,4 +20,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default Services;

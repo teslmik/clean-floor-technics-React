@@ -57,7 +57,7 @@ const FullItem: React.FC = () => {
 
   return (
     <section className="fullitem__container">
-      <Head title={product.title} url={pathname} imageUrl={`products/${product.imageUrl}`} />
+      <Head title={product.title} url={pathname} imageUrl={`products/${product.imageUrl}.png`} />
       {windowWidth < 683 && <Breadcrumbs title={product.title} category={product.category} />}
       <div className="fullitem__content">
         {windowWidth < 683 && (

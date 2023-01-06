@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import CartItem from '../components/CartItem';
@@ -19,6 +19,7 @@ const Cart: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const { setRequestDone } = useGlobalContext();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     ibg(); 
