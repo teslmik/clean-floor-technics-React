@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import SwiperItem from '../components/SwiperItem';
@@ -11,6 +11,7 @@ import { IProductItem } from '../redux/slices/productsSlice';
 import { tabsItem } from '../utils/listConstant.js';
 import { euroToHrivna } from '../utils/euroToHrivna.js';
 import { useGlobalContext } from '../hook/useGlobalContext';
+import Head from '../layouts/Head';
 
 const FullItem: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const FullItem: React.FC = () => {
   const [toggleState, setToggleState] = React.useState(0);
   const { setIsOpenCart, windowWidth } = useGlobalContext();
   const { id } = useParams();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const isItemOnCart = items.find((obj) => obj.id === id) ? true : false;
@@ -55,6 +57,7 @@ const FullItem: React.FC = () => {
 
   return (
     <section className="fullitem__container">
+      <Head title={product.title} url={pathname} imageUrl={`products/${product.imageUrl}`} />
       {windowWidth < 683 && <Breadcrumbs title={product.title} category={product.category} />}
       <div className="fullitem__content">
         {windowWidth < 683 && (

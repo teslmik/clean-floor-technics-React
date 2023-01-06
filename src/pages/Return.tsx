@@ -2,10 +2,12 @@ import React from 'react';
 
 import LeftMenu from '../components/LeftMenu';
 import Breadcrumbs from '../components/Breadcrumbs';
+import Head from '../layouts/Head';
 
 const Return: React.FC = () => {
   return (
     <section className="return__container">
+      <Head title={'Обмін та повернення '} />
       <LeftMenu />
       <div className="return__content">
         <Breadcrumbs titleBlock={'Обмін та повернення '} />

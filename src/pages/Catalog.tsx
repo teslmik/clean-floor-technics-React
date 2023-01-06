@@ -11,6 +11,7 @@ import { filterSelector } from '../redux/slices/filterSlice';
 import { fetchProducts, productsSelector, Status } from '../redux/slices/productsSlice';
 import { useAppDispatch } from '../redux/store';
 import { useGlobalContext } from '../hook/useGlobalContext';
+import Head from '../layouts/Head';
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const Catalog: React.FC = () => {
 
   return (
     <>
+      <Head title={'Каталог'} />
       <section className="catalog__container">
         <Breadcrumbs titleBlock={'Каталог'} />
         <div className="catalog__top">
@@ -64,14 +66,14 @@ const Catalog: React.FC = () => {
           )}
         </div>
       </section>
-      <section className="recent-products">
+      {/* <section className="recent-products">
         <div className="recent-products__container">
           <div className="recent-products__head">
             <h2>Переглянуті товари</h2>
           </div>
           <div className="recent-products__body"></div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

@@ -10,6 +10,7 @@ import { ibg } from '../utils/ibg';
 import { euroToHrivna } from '../utils/euroToHrivna';
 import { useGlobalContext } from '../hook/useGlobalContext';
 import { IDataMessage } from '../components/Callback';
+import Head from '../layouts/Head';
 
 const Cart: React.FC = () => {
   const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
@@ -75,6 +76,7 @@ const Cart: React.FC = () => {
 
   return (
     <section className="cart">
+      <Head title={'Кошик'} />
       <div className="cart__container">
         <div className="cart__title">Оформлення замовлення</div>
         <div className="cart__body">

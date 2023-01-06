@@ -1,10 +1,13 @@
 import React from 'react';
+
 import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
+import Head from '../layouts/Head';
 
 const PayAndDelivery: React.FC = () => {
   return (
     <section className="paydelivery__container">
+      <Head title={'Оплата та доставка'} />
       <LeftMenu />
       <div className="paydelivery__content">
         <Breadcrumbs titleBlock={'Оплата та доставка'} />
