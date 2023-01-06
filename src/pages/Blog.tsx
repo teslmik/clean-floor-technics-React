@@ -11,6 +11,7 @@ import { fetchPosts, postsSelector } from '../redux/slices/postsSlice';
 import { useAppDispatch } from '../redux/store';
 import { ibg } from '../utils/ibg';
 import { Status } from '../redux/slices/productsSlice';
+import Head from '../layouts/Head';
 
 const Blog: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -33,6 +34,7 @@ const Blog: React.FC = () => {
 
   return (
     <section className="blog__container">
+      <Head title={'Блог'} />
       <div className="blog__wrapper">
         <LeftMenu />
         <div className="blog__boby">

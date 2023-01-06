@@ -1,10 +1,13 @@
 import React from 'react';
+
 import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
+import Head from '../layouts/Head';
 
 const Contacts: React.FC = () => {
   return (
     <section className="contacts__container">
+      <Head title={'Контактна інформація'} />
       <LeftMenu />
       <div className="contacts__content">
         <Breadcrumbs titleBlock={'Контактна інформація'} />

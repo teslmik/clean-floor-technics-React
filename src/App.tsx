@@ -15,6 +15,7 @@ import './scss/app.scss';
 import Contacts from "./pages/Contacts";
 import About from "./pages/About";
 import PayAndDelivery from "./pages/PayAndDelivery";
+import Services from "./pages/Services";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="contacts" element={<Contacts />} />
         <Route path="cart" element={<Cart />} />
         <Route path="blog" element={<Blog />} />
+        <Route path="services" element={<Services />} />
         <Route path="products/:category/:id" element={<FullItem />} />
         <Route path="blog/:id" element={<FullBlogItem />} />
         <Route path="*" element={<NotFound />} />

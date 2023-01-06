@@ -10,13 +10,12 @@ import { ibg } from '../utils/ibg.js';
 import { fetchPosts, postsSelector } from '../redux/slices/postsSlice';
 import { Status } from '../redux/slices/productsSlice';
 import { useAppDispatch } from '../redux/store';
+import Head from '../layouts/Head';
 
 const FullBlogItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const { id } = useParams();
-  console.log('id: ', id);
-  console.log('items: ', items);
 
   React.useEffect(() => {
     const _id = String(id);
@@ -29,12 +28,11 @@ const FullBlogItem: React.FC = () => {
 
   return (
     <section className="blog__container">
+      <Head title={`Блог - ${status === Status.SUCCESS ? items[0].title.toString() : '...'}`} />
       <div className="blog__wrapper">
         <LeftMenu id={id} />
         <div className="blog__boby">
-
           <Breadcrumbs titleBlock={'Блог'} endItem={status === Status.SUCCESS ? items[0].title : '...'} />
-
           <div className="blog__content content-blog">
             {status === Status.ERROR ? (
               <ErrorInfo />
