@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { Helmet } from 'react-helmet';
 
 import BlogItem from '../components/BlogItem';
 import TabsPromo from '../components/TabsPromo';
@@ -21,6 +22,11 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <Helmet>
+        <meta property="og:title" content="Промислові та комерційні машини Truvox для миття будь-якого типу підлоги" />
+        <meta property="og:url" content="https://cleanfloor.com.ua/" />
+        <meta property="og:image" content="https://cleanfloor.com.ua/assets/img/logo/logo_insta.png" />
+      </Helmet>
       <SwiperBlock />
       <TabsPromo />
       <Categories />
