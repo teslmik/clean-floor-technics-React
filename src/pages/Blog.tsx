@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
@@ -16,6 +16,7 @@ import Head from '../layouts/Head';
 const Blog: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
+  const { pathname } = useLocation();
 
   const skeleton = [...new Array(4)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
@@ -34,7 +35,7 @@ const Blog: React.FC = () => {
 
   return (
     <section className="blog__container">
-      <Head title={'Блог'} />
+      <Head title={'Блог'} url={pathname} />
       <div className="blog__wrapper">
         <LeftMenu />
         <div className="blog__boby">

@@ -1,13 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
 import Head from '../layouts/Head';
 
 const Contacts: React.FC = () => {
+  const { pathname } = useLocation();
+
   return (
     <section className="contacts__container">
-      <Head title={'Контактна інформація'} />
+      <Head title={'Контактна інформація'} url={pathname} />
       <LeftMenu />
       <div className="contacts__content">
         <Breadcrumbs titleBlock={'Контактна інформація'} />

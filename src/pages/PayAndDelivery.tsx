@@ -1,13 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
 import Head from '../layouts/Head';
 
 const PayAndDelivery: React.FC = () => {
+  const { pathname } = useLocation();
+
   return (
     <section className="paydelivery__container">
-      <Head title={'Оплата та доставка'} />
+      <Head title={'Оплата та доставка'} url={pathname} />
       <LeftMenu />
       <div className="paydelivery__content">
         <Breadcrumbs titleBlock={'Оплата та доставка'} />

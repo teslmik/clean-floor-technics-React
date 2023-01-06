@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import CardItem from '../components/CardItem';
@@ -18,6 +19,7 @@ const Catalog: React.FC = () => {
   const { filterState, sortState } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();
+  const { pathname } = useLocation();
 
   const skeleton = [...new Array(6)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
@@ -34,7 +36,7 @@ const Catalog: React.FC = () => {
 
   return (
     <>
-      <Head title={'Каталог'} />
+      <Head title={'Каталог'} url={pathname} />
       <section className="catalog__container">
         <Breadcrumbs titleBlock={'Каталог'} />
         <div className="catalog__top">
