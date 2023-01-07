@@ -24,16 +24,16 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/" element={<MainLayout />} >
         <Route path="" element={<Home />} />
-        <Route path="catalog" element={<Catalog />} />
-        <Route path="about" element={<About />} />
-        <Route path="pay_and_delivery" element={<PayAndDelivery />} />
-        <Route path="return" element={<Return />} />
-        <Route path="contacts" element={<Contacts />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="services" element={<Services />} />
-        <Route path="products/:category/:_id" element={<FullItem />} />
-        <Route path="blog/:id" element={<FullBlogItem />} />
+        <Route path="catalog" element={<Suspense fallback={<CircleLoader />}><Catalog /></Suspense>} />
+        <Route path="about" element={<Suspense fallback={<CircleLoader />}><About /></Suspense>} />
+        <Route path="pay_and_delivery" element={<Suspense fallback={<CircleLoader />}><PayAndDelivery /></Suspense>} />
+        <Route path="return" element={<Suspense fallback={<CircleLoader />}><Return /></Suspense>} />
+        <Route path="contacts" element={<Suspense fallback={<CircleLoader />}><Contacts /></Suspense>} />
+        <Route path="cart" element={<Suspense fallback={<CircleLoader />}><Cart /></Suspense>} />
+        <Route path="blog" element={<Suspense fallback={<CircleLoader />}><Blog /></Suspense>} />
+        <Route path="services" element={<Suspense fallback={<CircleLoader />}><Services /></Suspense>} />
+        <Route path="products/:category/:_id" element={<Suspense fallback={<CircleLoader/>}><FullItem /></Suspense>} />
+        <Route path="blog/:id" element={<Suspense fallback={<CircleLoader />}><FullBlogItem /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
