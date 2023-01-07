@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { setFilter } from '../../redux/filter/slice';
 import { categoriesList } from '../../utils/listConstant';
-import { setFilter } from '../../redux/slices/filterSlice';
 
 import styles from './Breadcrumbs.module.scss';
 

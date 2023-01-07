@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Helmet } from 'react-helmet';
 
-import BlogItem from '../components/BlogItem';
-import TabsPromo from '../components/TabsPromo';
-import SwiperBlock from '../components/SwiperBlock';
 import Categories from '../components/Categories';
-import { useSelector } from 'react-redux';
-import { fetchPosts, postsSelector } from '../redux/slices/postsSlice';
+import { fetchPosts } from '../redux/posts/asyncActions';
 import { useAppDispatch } from '../redux/store';
+import CircleLoader from '../components/CircleLoader';
+
+const SwiperBlock = React.lazy(() => import(/* webpackChunkName: "SwiperBlock" */'../components/SwiperBlock'));
+const TabsPromo = React.lazy(() => import(/* webpackChunkName: "TabsPromo" */'../components/TabsPromo'));
+const BlogBlock = React.lazy(() => import(/* webpackChunkName: "BlogBlock" */'../components/BlogBlock'));
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { items } = useSelector(postsSelector);
 
   React.useEffect(() => {
-    dispatch(fetchPosts({}));
+    dispatch(fetchPosts());
   }, []);
 
   return (
@@ -27,8 +27,8 @@ const Home: React.FC = () => {
         <meta property="og:url" content="https://cleanfloor.com.ua/" />
         <meta property="og:image" content="https://cleanfloor.com.ua/assets/img/logo/logo_insta.png" />
       </Helmet>
-      <SwiperBlock />
-      <TabsPromo />
+      <Suspense fallback={<CircleLoader />}><SwiperBlock /></Suspense>
+      <Suspense fallback={<CircleLoader />}><TabsPromo /></Suspense>
       <Categories />
       <section className="benefits">
         <div className="benefits__container">
@@ -62,7 +62,7 @@ const Home: React.FC = () => {
                 для обслуговування підлог. Компанія заснована в Саутгемптоні (Southampton),
                 Великобританія. З дня виробництва нашого першого електричного полірувальника на
                 початку 1960-х років Truvox успішно розширила як асортимент, так і території
-                поширення продукції, в даний час, кількість країн досягає більш ніж 60 по всьому
+                поширення продукції, в даний час, кількість країн досягає більш ніж 70 по всьому
                 світу.
               </ReactMarkdown>
               <ReactMarkdown>
@@ -80,17 +80,7 @@ const Home: React.FC = () => {
           </div>
           <div className="about__blog blog-about">
             <div className="blog-about__title">Блог</div>
-            <div className="blog-about__items">
-              {items.map((obj, i) => (
-                <BlogItem
-                  id={obj.id}
-                  key={i}
-                  image={`assets/img/blog/${obj.imageUrl}`}
-                  date={obj.date}
-                  title={obj.title}
-                />
-              ))}
-            </div>
+            <Suspense fallback={<CircleLoader />}><BlogBlock /></Suspense>
             <button onClick={() => navigate('/blog')} type="button" className="blog-about__btn">
               <span>Архів</span>
             </button>

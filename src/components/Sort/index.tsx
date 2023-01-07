@@ -2,24 +2,26 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { filterSelector, setSort } from '../../redux/slices/filterSlice';
-import { mobileHeight } from '../../utils/mobileHeightSortElement.js';
+import { filterSelector } from '../../redux/filter/selectors';
+import { setSort } from '../../redux/filter/slice';
+import { SortPropertyEnum } from '../../redux/filter/types';
+import { mobileHeight } from '../../utils/mobileHeightSortElement';
 import { bodyLock, bodyUnlock } from '../../utils/bodyLockUnlock';
 
 import styles from './Sort.module.scss';
 
 interface ISortList {
   name: string;
-  sortProperty: 'rating' | 'price' | 'title';
+  sortProperty: SortPropertyEnum;
 }
 
 const sortList: ISortList[] = [
-  { name: 'по популярності', sortProperty: 'rating' },
-  { name: 'спочатку дешевщі', sortProperty: 'price' },
-  { name: 'по назві', sortProperty: 'title' },
+  { name: 'по популярності', sortProperty: SortPropertyEnum.RATING },
+  { name: 'спочатку дешевщі', sortProperty: SortPropertyEnum.PRICE },
+  { name: 'по назві', sortProperty: SortPropertyEnum.TITLE },
 ];
 
-const Sort: React.FC = () => {
+export const Sort: React.FC = () => {
   const dispatch = useDispatch();
   const { sortState } = useSelector(filterSelector);
 
@@ -109,5 +111,3 @@ export const SortMobile = () => {
     </>
   );
 };
-
-export default Sort;

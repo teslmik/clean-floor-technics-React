@@ -6,10 +6,12 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Breadcrumbs from '../components/Breadcrumbs';
 import SwiperItem from '../components/SwiperItem';
-import { addToCart, cartSelector } from '../redux/slices/cartSlice';
-import { IProductItem } from '../redux/slices/productsSlice';
-import { tabsItem } from '../utils/listConstant.js';
-import { euroToHrivna } from '../utils/euroToHrivna.js';
+import { cartSelector } from '../redux/cart/selectors';
+import { addToCart } from '../redux/cart/slice';
+import { ICartItem } from '../redux/cart/types';
+import { IProductItem } from '../redux/products/types';
+import { tabsItem } from '../utils/listConstant';
+import { euroToHrivna } from '../utils/euroToHrivna';
 import { useGlobalContext } from '../hook/useGlobalContext';
 import Head from '../layouts/Head';
 
@@ -17,23 +19,25 @@ const FullItem: React.FC = () => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [product, setProduct] = React.useState<IProductItem>();
+  const [cartItem, setCartItem] = React.useState<ICartItem>();
   const [toggleState, setToggleState] = React.useState(0);
   const { setIsOpenCart, windowWidth } = useGlobalContext();
-  const { id } = useParams();
+  const { _id } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const isItemOnCart = items.find((obj) => obj.id === id) ? true : false;
+  const isItemOnCart = items.find((obj) => obj.id === _id) ? true : false;
 
   React.useEffect(() => {
     window.scroll(0, 0);
     async function fetchProduct() {
       try {
-        setProduct(undefined);
-        const { data } = await axios.get(
-          `https://636e34f8b567eed48ad655d0.mockapi.io/products/${id}`,
+        const { data } = await axios.get<IProductItem>(
+          `https://636e34f8b567eed48ad655d0.mockapi.io/products/${_id}`,
         );
         setProduct(data);
+        const { id, category, imageUrl, title, oldPrice, price }: ICartItem = data;
+        setCartItem({ id, category, imageUrl, title, oldPrice, price, count: 1 });
       } catch (error) {
         alert('Товар не знайдено, спробуйте пізніше...');
         navigate('/catalog');
@@ -43,13 +47,13 @@ const FullItem: React.FC = () => {
   }, [navigate]);
 
   const onClickAdd = () => {
-    product && dispatch(addToCart(product));
+    cartItem && dispatch(addToCart(cartItem));
     setIsOpenCart(true);
   };
 
   if (!product) {
     return (
-      <section className="fullitem__container">
+      <section className="__container">
         <div className="loader">Loading...</div>
       </section>
     );

@@ -104,7 +104,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    @include adaptiveValue('gap', 20, 0, 1);
+    @include adaptiveValue('gap', 20, 5, 1);
     @include adaptiveValue('padding-left', 30, 10, 1);
     @include adaptiveValue('padding-right', 30, 10, 1);
 

@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { decrement, increment, removeFromCart } from '../redux/slices/cartSlice';
 import { useGlobalContext } from '../hook/useGlobalContext';
+import { removeFromCart, decrement, increment } from '../redux/cart/slice';
 import { euroToHrivna } from '../utils/euroToHrivna';
 
 interface ICartItemProps {

@@ -4,10 +4,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper';
 
 import CardItem from './CardItem';
-import ErrorInfo from './ErrorInfo';
 import SkeletonLoader from './CardItem/SkeletonLoader';
-import { fetchProducts, productsSelector, Status } from '../redux/slices/productsSlice';
+import ErrorInfo from './ErrorInfo';
 import { useAppDispatch } from '../redux/store';
+import { fetchProducts } from '../redux/products/asyncActions';
+import { productsSelector } from '../redux/products/selectors';
+import { Status } from '../redux/products/types';
 import { tabsPromo } from '../utils/listConstant';
 
 const TabsPromo: React.FC = () => {

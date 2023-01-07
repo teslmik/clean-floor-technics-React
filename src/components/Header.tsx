@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Search from './Search';
-import { cartSelector } from '../redux/slices/cartSlice';
 import HeaderMenu from './HeaderMenu';
 import { useGlobalContext } from '../hook/useGlobalContext';
+import { cartSelector } from '../redux/cart/selectors';
 
 const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);

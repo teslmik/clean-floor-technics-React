@@ -5,11 +5,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import CartItem from '../components/CartItem';
-import { cartSelector, clearCart } from '../redux/slices/cartSlice';
+import { IDataMessage } from '../components/Callback';
+import { cartSelector } from '../redux/cart/selectors';
+import { clearCart } from '../redux/cart/slice';
 import { ibg } from '../utils/ibg';
 import { euroToHrivna } from '../utils/euroToHrivna';
 import { useGlobalContext } from '../hook/useGlobalContext';
-import { IDataMessage } from '../components/Callback';
 import Head from '../layouts/Head';
 
 const Cart: React.FC = () => {
@@ -77,7 +78,7 @@ const Cart: React.FC = () => {
 
   return (
     <section className="cart">
-      <Head title={'Кошик'} />
+      <Head title={'Кошик'} url={pathname} />
       <div className="cart__container">
         <div className="cart__title">Оформлення замовлення</div>
         <div className="cart__body">
@@ -85,7 +86,7 @@ const Cart: React.FC = () => {
             <form className="cart__form form-cart" onSubmit={handleSubmit(onSubmitCallback)}>
               <h2 className="form-cart__title">Одержувач замовлення</h2>
               <label htmlFor="nameOrder">
-                <span>ПІБ</span>
+                <span>Прізвище, Ім'я</span>
                 <input
                   placeholder="Ваше Ім'я та Прізвище"
                   type="text"
@@ -93,8 +94,8 @@ const Cart: React.FC = () => {
                     required: `Заповніть поле!`,
                     minLength: { value: 3, message: `Введіть ім'я менше 3-х літер!` },
                     pattern: {
-                      value: /^[A-Za-zА-Яа-яЁё][A-Za-zА-Яа-яЁёІі]+$/,
-                      message: `Ім'я може складатись тільки з літер!`,
+                      value: /^([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})[\s]([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})?$/,
+                      message: `Невірний формат Ім'я та Прізвища!`,
                     },
                   })}
                 />
@@ -108,7 +109,7 @@ const Cart: React.FC = () => {
                   {...register('phone', {
                     required: `Заповніть поле!`,
                     pattern: {
-                      value: /^(\+38|38)?0\d{9}$/,
+                      value: /^\+?[380]?\d{9}/g,
                       message: `Невірний формат номеру телефона!`,
                     },
                   })}

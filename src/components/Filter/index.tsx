@@ -2,12 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { filterSelector, setFilter } from '../../redux/slices/filterSlice';
-import { productsSelector } from '../../redux/slices/productsSlice';
+import { setFilter } from '../../redux/filter/slice';
+import { filterSelector } from '../../redux/filter/selectors';
+import { productsSelector } from '../../redux/products/selectors';
 import { mobileHeight } from '../../utils/mobileHeightSortElement';
-import { useGlobalContext } from '../../hook/useGlobalContext';
 import { bodyLock, bodyUnlock} from '../../utils/bodyLockUnlock';
 import { categoriesList, filterList } from '../../utils/listConstant';
+import { useGlobalContext } from '../../hook/useGlobalContext';
 
 import styles from './Filter.module.scss';
 

@@ -16,6 +16,7 @@ interface IHeaderMenuProps {
 }
 
 const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible, setIsVisible }) => {
+  
   const { setIsOpenCallback, isOpenCallback } = useGlobalContext();
 
   const menuHandler = () => {

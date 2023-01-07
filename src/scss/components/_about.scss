@@ -10,12 +10,15 @@
   &__content {
     display: flex;
     flex-direction: column;
+    img {
+      margin-bottom: rem(18);
+    }
   }
 
   // .about__title
 
   &__title {
     @include adaptiveFont(32, 18);
-    margin-bottom: 18px;
+    margin-bottom: rem(18);
   }
 }
