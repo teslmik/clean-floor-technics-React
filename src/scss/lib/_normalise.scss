@@ -52,9 +52,9 @@ body {
   @media (max-width: $tablet) {
     padding-top: 70px;
   }
-@media (max-width: $mobile) {
-  padding-top: 47px;
-}
+  @media (max-width: $mobile) {
+    padding-top: 47px;
+  }
 }
 .ibg {
   background-position: center;

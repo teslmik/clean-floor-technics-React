@@ -14,7 +14,7 @@ body.lockPadding {
 
 [class*='__container'] {
   @media (max-width: $tablet) {
-    padding: 0 16px;
+    padding: 0 16px !important;
   }
 }
 
