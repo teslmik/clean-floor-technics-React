@@ -1,6 +1,3 @@
-@import '../lib/variables';
-@import '../lib/functions';
-
 .loader {
   font-size: 10px;
   margin: 50px auto;
@@ -37,7 +34,7 @@
     height: 75%;
     border-radius: 50%;
     content: '';
-    margin: auto; 
+    margin: auto;
     position: absolute;
     top: 0;
     left: 0;
