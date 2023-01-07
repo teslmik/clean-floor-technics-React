@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -6,6 +6,9 @@ import { AnimatePresence } from 'framer-motion';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import PopupAnswer from '../components/PopupAnswer';
+import Callback from '../components/Callback';
+import CartPopup from '../components/CartPopup';
+import RouteMap from '../components/RouteMap';
 import { useAppDispatch } from '../redux/store';
 import { filterSelector } from '../redux/filter/selectors';
 import { setFilter } from '../redux/filter/slice';
@@ -13,11 +16,6 @@ import { ibg } from '../utils/ibg';
 import { isWebp } from '../utils/isWebp';
 import { bodyLock, bodyUnlock } from '../utils/bodyLockUnlock';
 import { MyGlobalContext } from '../hook/useGlobalContext';
-import CircleLoader from '../components/CircleLoader';
-
-const Callback = React.lazy(() => import(/* webpackChunkName: "Callback" */'../components/Callback'));
-const CartPopup = React.lazy(() => import(/* webpackChunkName: "CartPopup" */'../components/CartPopup'));
-const RouteMap = React.lazy(() => import(/* webpackChunkName: "RouteMap" */'../components/RouteMap'));
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -75,15 +73,13 @@ const MainLayout: React.FC = () => {
         }}>
         <Header />
         <main className="main">
-          <Suspense fallback={<CircleLoader />}>
-            <Outlet />
-          </Suspense>
+          <Outlet />
         </main>
         <Footer />
         <AnimatePresence>
-          {isOpenCallback && <Suspense fallback={<CircleLoader />}><Callback /></Suspense>}
-          {isOpenCart && <Suspense fallback={<CircleLoader />}><CartPopup /></Suspense>}
-          {isOpenMap && <Suspense fallback={<CircleLoader />}><RouteMap /></Suspense>}
+          {isOpenCallback && <Callback />}
+          {isOpenCart && <CartPopup />}
+          {isOpenMap && <RouteMap />}
           {requestDone.isOpen && <PopupAnswer title={requestDone.title} text={requestDone.text} />}
         </AnimatePresence>
       </MyGlobalContext.Provider>
