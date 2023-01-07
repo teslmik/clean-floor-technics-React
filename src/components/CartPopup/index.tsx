@@ -64,7 +64,7 @@ const CartPopup: React.FC = () => {
 
   React.useEffect(() => {
     ibg();
-  }, []);
+  });
 
   return (
     <motion.div
