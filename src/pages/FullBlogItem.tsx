@@ -6,34 +6,37 @@ import { useLocation, useParams } from 'react-router-dom';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ErrorInfo from '../components/ErrorInfo';
 import LeftMenu from '../components/LeftMenu';
-import { ibg } from '../utils/ibg.js';
-import { fetchPosts, postsSelector } from '../redux/slices/postsSlice';
-import { Status } from '../redux/slices/productsSlice';
 import { useAppDispatch } from '../redux/store';
+import { fetchPosts } from '../redux/posts/asyncActions';
+import { postsSelector } from '../redux/posts/selectors';
+import { IPostItem } from '../redux/posts/types';
+import { Status } from '../redux/products/types';
+import { ibg } from '../utils/ibg';
 import Head from '../layouts/Head';
 
 const FullBlogItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
+  const [item, setItem] = React.useState<IPostItem>();
   const { id } = useParams();
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    const _id = String(id);
-    dispatch(fetchPosts({_id}));
+    dispatch(fetchPosts());
   }, []);
 
   React.useEffect(() => {
+    items.length > 0 && items.map((obj) => obj.id.toString() === id?.toString() && setItem(obj));
     ibg();
-  }, [items]);
-
+  }, [items, item]);
+  
   return (
     <section className="blog__container">
-      {status === Status.SUCCESS && <Head title={`Блог - ${items[0].title.toString()}`} imageUrl={`blog/${items[0].imageUrl}`} url={pathname} />}
+      {item && <Head title={`Блог - ${item.title}`} imageUrl={`blog/${item.imageUrl}`} url={pathname} />}
       <div className="blog__wrapper">
         <LeftMenu id={id} />
         <div className="blog__boby">
-          <Breadcrumbs titleBlock={'Блог'} endItem={status === Status.SUCCESS ? items[0].title : '...'} />
+          <Breadcrumbs titleBlock={'Блог'} endItem={item ? item.title : '...'} />
           <div className="blog__content content-blog">
             {status === Status.ERROR ? (
               <ErrorInfo />
@@ -41,16 +44,16 @@ const FullBlogItem: React.FC = () => {
               <div className="content-blog__title">
                 <div className="loader">Loading...</div>
               </div>
-            ) : status === Status.SUCCESS && (
+            ) : item && (
               <>
-                <div className="content-blog__title">{items[0].title}</div>
-                <div className="blog-item__date date-item">{items[0].date}</div>
+                <div className="content-blog__title">{item.title}</div>
+                <div className="blog-item__date date-item">{item.date}</div>
                 <div className="blog-item__wrapper">
                   <div className="blog-item__img blog-img ibg">
-                    <img src={`/assets/img/blog/${items[0].imageUrl}`} alt="" />
+                    <img src={`/assets/img/blog/${item.imageUrl}`} alt="" />
                   </div>
                   <div className="blog-text">
-                    {items[0].text.map((str, i) => (
+                    {item.text.map((str, i) => (
                       <ReactMarkdown key={i} children={str} />
                     ))}
                   </div>

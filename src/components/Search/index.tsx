@@ -2,13 +2,13 @@ import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { IProductItem } from '../../redux/products/types';
 import { useDebounce } from '../../hook/debounce';
 import { useInput } from '../../hook/input';
 import { useGlobalContext } from '../../hook/useGlobalContext';
 import { bodyLock, bodyUnlock } from '../../utils/bodyLockUnlock';
 import { ibg } from '../../utils/ibg';
 import { euroToHrivna } from '../../utils/euroToHrivna';
-import { IProductItem } from '../../redux/slices/productsSlice';
 
 import styles from './Search.module.scss';
 

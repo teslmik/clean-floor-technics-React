@@ -7,10 +7,12 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import LeftMenu from '../components/LeftMenu';
 import SkeletonBlog from '../components/BlogItem/SkeletonBlog';
 import ErrorInfo from '../components/ErrorInfo';
-import { fetchPosts, postsSelector } from '../redux/slices/postsSlice';
 import { useAppDispatch } from '../redux/store';
+import { fetchPosts } from '../redux/posts/asyncActions';
+import { postsSelector } from '../redux/posts/selectors';
+import { IPostItem } from '../redux/posts/types';
+import { Status } from '../redux/products/types';
 import { ibg } from '../utils/ibg';
-import { Status } from '../redux/slices/productsSlice';
 import Head from '../layouts/Head';
 
 const Blog: React.FC = () => {
@@ -26,7 +28,7 @@ const Blog: React.FC = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
-    dispatch(fetchPosts({}));
+    dispatch(fetchPosts());
   }, []);
 
   React.useEffect(() => {
@@ -48,7 +50,7 @@ const Blog: React.FC = () => {
               <ul className="content-blog__list">
                 {status === Status.LOADING
                   ? skeleton
-                  : [...items].reverse().map((obj, i) => (
+                  : [...items as IPostItem[]].reverse().map((obj, i) => (
                       <li key={i} className="content-blog__item">
                         <Link to={`/blog/${obj.id}`} className="blog-item__img ibg">
                           <img src={`/assets/img/blog/${obj.imageUrl}`} alt="" />

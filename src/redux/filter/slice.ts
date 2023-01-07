@@ -1,19 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 
-export type SortTypeState = {
-  name: string;
-  sortProperty: 'rating' | 'price' | 'title';
-}
-
-export interface IFilterSliceState {
-  filterState: string[],
-  sortState: SortTypeState,
-}
+import { IFilterSliceState, SortPropertyEnum, SortTypeState } from './types';
 
 const initialState: IFilterSliceState = {
   filterState: [],
-  sortState: { name: 'по популярності', sortProperty: 'rating' },
+  sortState: { name: 'по популярності', sortProperty: SortPropertyEnum.RATING },
 }
 
 export const filterSlice = createSlice({
@@ -28,8 +19,6 @@ export const filterSlice = createSlice({
     },
   },
 });
-
-export const filterSelector = (state: RootState) => state.filter;
 
 export const { setFilter, setSort } = filterSlice.actions;
 

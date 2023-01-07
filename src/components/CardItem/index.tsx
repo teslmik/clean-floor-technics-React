@@ -2,9 +2,11 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addToCart, cartSelector, ICartItem } from '../../redux/slices/cartSlice';
-import { IProductItem } from '../../redux/slices/productsSlice';
 import { useGlobalContext } from '../../hook/useGlobalContext';
+import { cartSelector } from '../../redux/cart/selectors';
+import { addToCart } from '../../redux/cart/slice';
+import { ICartItem } from '../../redux/cart/types';
+import { IProductItem } from '../../redux/products/types';
 import { euroToHrivna } from '../../utils/euroToHrivna';
 import { ibg } from '../../utils/ibg';
 

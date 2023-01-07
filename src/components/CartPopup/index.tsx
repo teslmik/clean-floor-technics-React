@@ -3,11 +3,12 @@ import { motion, MotionProps } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { cartSelector, decrement, increment, removeFromCart } from '../../redux/slices/cartSlice';
 import { euroToHrivna } from '../../utils/euroToHrivna';
 import { useGlobalContext } from '../../hook/useGlobalContext';
 import { dropIn } from '../../utils/listConstant';
 import { ibg } from '../../utils/ibg';
+import { cartSelector } from '../../redux/cart/selectors';
+import { removeFromCart, decrement, increment } from '../../redux/cart/slice';
 
 import styles from './CartPopup.module.scss';
 

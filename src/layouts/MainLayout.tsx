@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import Callback from '../components/Callback';
-import CartPopup from '../components/CartPopup';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import RouteMap from '../components/RouteMap';
 import PopupAnswer from '../components/PopupAnswer';
 import { useAppDispatch } from '../redux/store';
-import { filterSelector, setFilter } from '../redux/slices/filterSlice';
-import { MyGlobalContext } from '../hook/useGlobalContext';
+import { filterSelector } from '../redux/filter/selectors';
+import { setFilter } from '../redux/filter/slice';
 import { ibg } from '../utils/ibg';
 import { isWebp } from '../utils/isWebp';
 import { bodyLock, bodyUnlock } from '../utils/bodyLockUnlock';
+import { MyGlobalContext } from '../hook/useGlobalContext';
+import CircleLoader from '../components/CircleLoader';
+
+const Callback = React.lazy(() => import(/* webpackChunkName: "Callback" */'../components/Callback'));
+const CartPopup = React.lazy(() => import(/* webpackChunkName: "CartPopup" */'../components/CartPopup'));
+const RouteMap = React.lazy(() => import(/* webpackChunkName: "RouteMap" */'../components/RouteMap'));
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -23,7 +26,7 @@ const MainLayout: React.FC = () => {
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
   const [isOpenCart, setIsOpenCart] = React.useState(false);
   const [isOpenMap, setIsOpenMap] = React.useState(false);
-  const [requestDone, setRequestDone] = React.useState({isOpen: false, title: '', text: ''});
+  const [requestDone, setRequestDone] = React.useState({ isOpen: false, title: '', text: '' });
   const [windowWidth, setWindowWidth] = React.useState(window.screen.width);
 
   const handleTooggle = (value: string) => {
@@ -72,13 +75,15 @@ const MainLayout: React.FC = () => {
         }}>
         <Header />
         <main className="main">
-          <Outlet />
+          <Suspense fallback={<CircleLoader />}>
+            <Outlet />
+          </Suspense>
         </main>
         <Footer />
         <AnimatePresence>
-          {isOpenCallback && <Callback />}
-          {isOpenCart && <CartPopup />}
-          {isOpenMap && <RouteMap />}
+          {isOpenCallback && <Suspense fallback={<CircleLoader />}><Callback /></Suspense>}
+          {isOpenCart && <Suspense fallback={<CircleLoader />}><CartPopup /></Suspense>}
+          {isOpenMap && <Suspense fallback={<CircleLoader />}><RouteMap /></Suspense>}
           {requestDone.isOpen && <PopupAnswer title={requestDone.title} text={requestDone.text} />}
         </AnimatePresence>
       </MyGlobalContext.Provider>

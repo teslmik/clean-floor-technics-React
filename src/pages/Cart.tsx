@@ -5,11 +5,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import CartItem from '../components/CartItem';
-import { cartSelector, clearCart } from '../redux/slices/cartSlice';
+import { IDataMessage } from '../components/Callback';
+import { cartSelector } from '../redux/cart/selectors';
+import { clearCart } from '../redux/cart/slice';
 import { ibg } from '../utils/ibg';
 import { euroToHrivna } from '../utils/euroToHrivna';
 import { useGlobalContext } from '../hook/useGlobalContext';
-import { IDataMessage } from '../components/Callback';
 import Head from '../layouts/Head';
 
 const Cart: React.FC = () => {
