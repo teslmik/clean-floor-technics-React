@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useForm} from 'react-hook-form';
 import axios from 'axios';
 
-import { dropIn } from '../../utils/listConstant';
+import { dropIn } from '../../utils';
 import { useGlobalContext } from '../../hook/useGlobalContext';
 
 import styles from './Callback.module.scss';
@@ -13,7 +13,7 @@ export interface IDataMessage {
   phone: string;
 }
 
-const Callback: React.FC = () => {
+export const Callback: React.FC = () => {
   const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
 
   const { setIsOpenCallback, setRequestDone } = useGlobalContext();
@@ -120,5 +120,3 @@ const Callback: React.FC = () => {
     </motion.div>
   );
 };
-
-export default Callback;

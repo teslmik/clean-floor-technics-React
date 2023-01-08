@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import CircleLoader from "./components/CircleLoader";
+import { CircleLoader } from "./components";
 
 import './scss/app.scss';
 
@@ -32,7 +32,7 @@ const App: React.FC = () => {
         <Route path="cart" element={<Suspense fallback={<CircleLoader />}><Cart /></Suspense>} />
         <Route path="blog" element={<Suspense fallback={<CircleLoader />}><Blog /></Suspense>} />
         <Route path="services" element={<Suspense fallback={<CircleLoader />}><Services /></Suspense>} />
-        <Route path="products/:category/:_id" element={<Suspense fallback={<CircleLoader/>}><FullItem /></Suspense>} />
+        <Route path="products/:category/:_id" element={<Suspense fallback={<CircleLoader />}><FullItem /></Suspense>} />
         <Route path="blog/:id" element={<Suspense fallback={<CircleLoader />}><FullBlogItem /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Route>

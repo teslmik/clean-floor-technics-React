@@ -5,8 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { filterSelector } from '../../redux/filter/selectors';
 import { setSort } from '../../redux/filter/slice';
 import { SortPropertyEnum } from '../../redux/filter/types';
-import { mobileHeight } from '../../utils/mobileHeightSortElement';
-import { bodyLock, bodyUnlock } from '../../utils/bodyLockUnlock';
+import { mobileHeight, bodyLock, bodyUnlock } from '../../utils';
 
 import styles from './Sort.module.scss';
 

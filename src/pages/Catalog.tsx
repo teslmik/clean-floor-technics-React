@@ -2,12 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs';
-import CardItem from '../components/CardItem';
-import ErrorInfo from '../components/ErrorInfo';
-import SkeletonLoader from '../components/CardItem/SkeletonLoader';
-import Filter from '../components/Filter';
-import { Sort, SortMobile } from '../components/Sort';
+import { Breadcrumbs, CardItem, ErrorInfo, SkeletonLoader, Filter, Sort, SortMobile } from '../components';
 import { filterSelector } from '../redux/filter/selectors';
 import { fetchProducts } from '../redux/products/asyncActions';
 import { productsSelector } from '../redux/products/selectors';
@@ -60,8 +55,8 @@ const Catalog: React.FC = () => {
               {status === Status.LOADING
                 ? skeleton
                 : filterState.length === 0
-                ? products
-                : filterState.map((filterValue) =>
+                  ? products
+                  : filterState.map((filterValue) =>
                     items
                       .filter((elem: any) => elem.category === filterValue || elem.label[filterValue])
                       .map((obj, i) => <CardItem key={i} {...obj} />),

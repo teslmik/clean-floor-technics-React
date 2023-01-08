@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const SkeletonBlog: React.FC = () => {
+export const SkeletonBlog: React.FC = () => {
   return (
     <ContentLoader
       speed={3}
@@ -16,5 +16,3 @@ const SkeletonBlog: React.FC = () => {
     </ContentLoader>
   );
 };
-
-export default SkeletonBlog;

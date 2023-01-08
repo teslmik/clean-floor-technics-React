@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useGlobalContext } from '../../hook/useGlobalContext';
-import { bodyLock, bodyUnlock } from '../../utils/bodyLockUnlock';
-import { ibg } from '../../utils/ibg';
-import { menuListArr } from '../../utils/listConstant';
+import { bodyLock, bodyUnlock, ibg, menuListArr } from '../../utils';
 
 import styles from './HeaderMenu.module.scss';
 
@@ -15,8 +13,8 @@ interface IHeaderMenuProps {
   setIsVisible?: (state: boolean) => void;
 }
 
-const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible, setIsVisible }) => {
-  
+export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible, setIsVisible }) => {
+
   const { setIsOpenCallback, isOpenCallback } = useGlobalContext();
 
   const menuHandler = () => {
@@ -120,5 +118,3 @@ const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible, setIsV
     </>
   );
 };
-
-export default HeaderMenu;

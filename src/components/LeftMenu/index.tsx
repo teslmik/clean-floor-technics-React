@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { menuListArr } from '../../utils/listConstant';
+import { menuListArr } from '../../utils';
 
 import styles from './LeftMenu.module.scss';
 
@@ -9,7 +9,7 @@ interface ILeftMenuProps {
   id?: string;
 }
 
-const LeftMenu: React.FC<ILeftMenuProps> = ({ id }) => {
+export const LeftMenu: React.FC<ILeftMenuProps> = ({ id }) => {
   const { pathname } = useLocation();
 
   return (
@@ -34,5 +34,3 @@ const LeftMenu: React.FC<ILeftMenuProps> = ({ id }) => {
     </aside>
   );
 };
-
-export default LeftMenu;

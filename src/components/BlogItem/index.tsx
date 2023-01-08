@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ibg } from '../../utils/ibg';
+import { ibg } from '../../utils';
 
 export interface IBlogItemProps {
   image: string;
@@ -10,7 +10,7 @@ export interface IBlogItemProps {
   id: string;
 }
 
-const BlogItem: React.FC<IBlogItemProps> = ({ image, date, title, id }) => {
+export const BlogItem: React.FC<IBlogItemProps> = ({ image, date, title, id }) => {
   const navigate = useNavigate();
   const onClickBlogItem = () => {
     navigate(`/blog/${id}`);
@@ -33,5 +33,3 @@ const BlogItem: React.FC<IBlogItemProps> = ({ image, date, title, id }) => {
     </div>
   );
 };
-
-export default BlogItem;

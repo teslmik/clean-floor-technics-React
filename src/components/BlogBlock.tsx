@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 
 import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
-import BlogItem from './BlogItem';
+import { BlogItem } from '../components';
 
-const BlogBlock: React.FC = () => {
+export const BlogBlock: React.FC = () => {
   const { items } = useSelector(postsSelector);
 
   return (
@@ -21,6 +21,4 @@ const BlogBlock: React.FC = () => {
       ))}
     </div>
   )
-}
-
-export default BlogBlock;
+};

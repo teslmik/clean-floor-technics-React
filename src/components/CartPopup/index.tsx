@@ -3,16 +3,14 @@ import { motion, MotionProps } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { euroToHrivna } from '../../utils/euroToHrivna';
+import { euroToHrivna, dropIn, ibg } from '../../utils';
 import { useGlobalContext } from '../../hook/useGlobalContext';
-import { dropIn } from '../../utils/listConstant';
-import { ibg } from '../../utils/ibg';
 import { cartSelector } from '../../redux/cart/selectors';
 import { removeFromCart, decrement, increment } from '../../redux/cart/slice';
 
 import styles from './CartPopup.module.scss';
 
-const CartPopup: React.FC = () => {
+export const CartPopup: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
   const { setIsOpenCart, windowWidth, isWebpImg } = useGlobalContext();
@@ -158,5 +156,3 @@ const CartPopup: React.FC = () => {
     </motion.div>
   );
 };
-
-export default CartPopup;

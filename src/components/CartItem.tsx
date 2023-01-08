@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useGlobalContext } from '../hook/useGlobalContext';
 import { removeFromCart, decrement, increment } from '../redux/cart/slice';
-import { euroToHrivna } from '../utils/euroToHrivna';
+import { euroToHrivna } from '../utils';
 
 interface ICartItemProps {
   id: string;
@@ -16,7 +16,7 @@ interface ICartItemProps {
   category: string;
 }
 
-const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPrice, price, count, category }) => {
+export const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPrice, price, count, category }) => {
   const dispatch = useDispatch();
   const { isWebpImg } = useGlobalContext();
   
@@ -66,5 +66,3 @@ const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPrice, pri
     </li>
   );
 };
-
-export default CartItem;

@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { useGlobalContext } from '../hook/useGlobalContext';
-import { ibg } from '../utils/ibg';
-import { euroToHrivna } from '../utils/euroToHrivna';
+import { ibg, euroToHrivna } from '../utils';
 
 interface ISwiperItem {
   title: string;
@@ -17,7 +16,7 @@ interface ISwiperItem {
   price: number;
 }
 
-const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, label, oldPrice, price }) => {
+export const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, label, oldPrice, price }) => {
   const [toggleState, setToggleState] = React.useState(0);
   const { isWebpImg } = useGlobalContext();
 
@@ -79,5 +78,3 @@ const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, label, ol
     </div>
   );
 };
-
-export default SwiperItem;

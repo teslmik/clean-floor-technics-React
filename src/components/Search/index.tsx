@@ -6,13 +6,11 @@ import { IProductItem } from '../../redux/products/types';
 import { useDebounce } from '../../hook/debounce';
 import { useInput } from '../../hook/input';
 import { useGlobalContext } from '../../hook/useGlobalContext';
-import { bodyLock, bodyUnlock } from '../../utils/bodyLockUnlock';
-import { ibg } from '../../utils/ibg';
-import { euroToHrivna } from '../../utils/euroToHrivna';
+import { bodyLock, bodyUnlock, ibg, euroToHrivna } from '../../utils';
 
 import styles from './Search.module.scss';
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const navigate = useNavigate();
 
   const { value, onChange, setValue } = useInput('');
@@ -123,5 +121,3 @@ const Search: React.FC = () => {
     </div>
   );
 };
-
-export default Search;

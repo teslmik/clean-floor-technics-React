@@ -4,14 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs';
-import SwiperItem from '../components/SwiperItem';
+import { Breadcrumbs, SwiperItem } from '../components';
 import { cartSelector } from '../redux/cart/selectors';
 import { addToCart } from '../redux/cart/slice';
 import { ICartItem } from '../redux/cart/types';
 import { IProductItem } from '../redux/products/types';
-import { tabsItem } from '../utils/listConstant';
-import { euroToHrivna } from '../utils/euroToHrivna';
+import { tabsItem, euroToHrivna } from '../utils';
 import { useGlobalContext } from '../hook/useGlobalContext';
 import Head from '../layouts/Head';
 
@@ -32,6 +30,7 @@ const FullItem: React.FC = () => {
     window.scroll(0, 0);
     async function fetchProduct() {
       try {
+        setProduct(undefined);
         const { data } = await axios.get<IProductItem>(
           `https://636e34f8b567eed48ad655d0.mockapi.io/products/${_id}`,
         );

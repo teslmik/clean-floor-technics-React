@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import CartItem from '../components/CartItem';
-import { IDataMessage } from '../components/Callback';
+import { CartItem, IDataMessage } from '../components';
 import { cartSelector } from '../redux/cart/selectors';
 import { clearCart } from '../redux/cart/slice';
-import { ibg } from '../utils/ibg';
-import { euroToHrivna } from '../utils/euroToHrivna';
+import { ibg, euroToHrivna } from '../utils';
 import { useGlobalContext } from '../hook/useGlobalContext';
 import Head from '../layouts/Head';
 
@@ -23,7 +21,7 @@ const Cart: React.FC = () => {
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    ibg(); 
+    ibg();
 
     if (items.length < 1) {
       navigate('/catalog');

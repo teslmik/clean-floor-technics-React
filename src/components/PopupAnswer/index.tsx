@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import { useGlobalContext } from '../../hook/useGlobalContext';
-import { dropIn } from '../../utils/listConstant';
+import { dropIn } from '../../utils';
 
 import styles from './PopupAnswer.module.scss';
 
@@ -11,7 +11,7 @@ interface IPopupAnswerProps {
   text: string;
 }
 
-const PopupAnswer: React.FC<IPopupAnswerProps> = ({ title, text }) => {
+export const PopupAnswer: React.FC<IPopupAnswerProps> = ({ title, text }) => {
   const { setRequestDone } = useGlobalContext();
 
   return (
@@ -37,5 +37,3 @@ const PopupAnswer: React.FC<IPopupAnswerProps> = ({ title, text }) => {
     </motion.div>
   );
 };
-
-export default PopupAnswer;

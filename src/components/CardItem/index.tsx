@@ -7,10 +7,9 @@ import { cartSelector } from '../../redux/cart/selectors';
 import { addToCart } from '../../redux/cart/slice';
 import { ICartItem } from '../../redux/cart/types';
 import { IProductItem } from '../../redux/products/types';
-import { euroToHrivna } from '../../utils/euroToHrivna';
-import { ibg } from '../../utils/ibg';
+import { euroToHrivna, ibg } from '../../utils';
 
-const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article, title, oldPrice, price, category }) => {
+export const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article, title, oldPrice, price, category }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
@@ -94,5 +93,3 @@ const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article, title,
     </div>
   );
 };
-
-export default CardItem;

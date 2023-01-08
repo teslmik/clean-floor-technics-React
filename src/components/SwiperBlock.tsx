@@ -6,7 +6,7 @@ import { useGlobalContext } from '../hook/useGlobalContext';
 
 import 'swiper/css/bundle';
 
-const SwiperBlock: React.FC = () => {
+export const SwiperBlock: React.FC = () => {
   const { isWebpImg } = useGlobalContext();
 
   const lazyOptions = {
@@ -43,5 +43,3 @@ const SwiperBlock: React.FC = () => {
     </Swiper>
   );
 };
-
-export default SwiperBlock;

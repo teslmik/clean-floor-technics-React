@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { useGlobalContext } from '../hook/useGlobalContext';
-import { categoriesList, menuListArr } from '../utils/listConstant';
+import { categoriesList, menuListArr } from '../utils';
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const { setIsOpenCallback, handleTooggle, setIsOpenMap, isWebpImg } = useGlobalContext();
   const [scroll, setScroll] = React.useState(0);
 
@@ -122,5 +122,3 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
-export default Footer;

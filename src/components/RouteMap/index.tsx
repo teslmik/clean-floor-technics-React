@@ -5,7 +5,7 @@ import { useGlobalContext } from '../../hook/useGlobalContext';
 
 import styles from './RouteMap.module.scss';
 
-const RouteMap: React.FC = () => {
+export const RouteMap: React.FC = () => {
   const { setIsOpenMap } = useGlobalContext();
 
   return (
@@ -34,5 +34,3 @@ const RouteMap: React.FC = () => {
     </motion.div>
   );
 };
-
-export default RouteMap;

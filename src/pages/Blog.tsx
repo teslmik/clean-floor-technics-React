@@ -3,16 +3,13 @@ import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs';
-import LeftMenu from '../components/LeftMenu';
-import SkeletonBlog from '../components/BlogItem/SkeletonBlog';
-import ErrorInfo from '../components/ErrorInfo';
+import { Breadcrumbs, LeftMenu, SkeletonBlog, ErrorInfo } from '../components';
 import { useAppDispatch } from '../redux/store';
 import { fetchPosts } from '../redux/posts/asyncActions';
 import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
 import { Status } from '../redux/products/types';
-import { ibg } from '../utils/ibg';
+import { ibg } from '../utils';
 import Head from '../layouts/Head';
 
 const Blog: React.FC = () => {
@@ -51,16 +48,16 @@ const Blog: React.FC = () => {
                 {status === Status.LOADING
                   ? skeleton
                   : [...items as IPostItem[]].reverse().map((obj, i) => (
-                      <li key={i} className="content-blog__item">
-                        <Link to={`/blog/${obj.id}`} className="blog-item__img ibg">
-                          <img src={`/assets/img/blog/${obj.imageUrl}`} alt="" />
-                        </Link>
-                        <div className="blog-item__date">{obj.date}</div>
-                        <Link to={`/blog/${obj.id}`} className="blog-item__text">
-                          {<ReactMarkdown children={obj.title} />}
-                        </Link>
-                      </li>
-                    ))}
+                    <li key={i} className="content-blog__item">
+                      <Link to={`/blog/${obj.id}`} className="blog-item__img ibg">
+                        <img src={`/assets/img/blog/${obj.imageUrl}`} alt="" />
+                      </Link>
+                      <div className="blog-item__date">{obj.date}</div>
+                      <Link to={`/blog/${obj.id}`} className="blog-item__text">
+                        {<ReactMarkdown children={obj.title} />}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             )}
           </div>

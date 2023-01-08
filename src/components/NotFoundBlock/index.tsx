@@ -1,11 +1,6 @@
 import React from 'react';
 
-// import { ibg } from '../../utils/ibg';
-
-const NotFoundBlock: React.FC = () => {
-  // React.useEffect(() => {
-  //   ibg();
-  // }, []);
+export const NotFoundBlock: React.FC = () => {
 
   return (
     <div
@@ -23,5 +18,3 @@ const NotFoundBlock: React.FC = () => {
     </div>
   );
 };
-
-export default NotFoundBlock;

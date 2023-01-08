@@ -5,14 +5,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { setFilter } from '../../redux/filter/slice';
 import { filterSelector } from '../../redux/filter/selectors';
 import { productsSelector } from '../../redux/products/selectors';
-import { mobileHeight } from '../../utils/mobileHeightSortElement';
-import { bodyLock, bodyUnlock} from '../../utils/bodyLockUnlock';
-import { categoriesList, filterList } from '../../utils/listConstant';
 import { useGlobalContext } from '../../hook/useGlobalContext';
+import { mobileHeight, bodyLock, bodyUnlock, categoriesList, filterList } from '../../utils';
 
 import styles from './Filter.module.scss';
 
-const Filter: React.FC = () => {
+export const Filter: React.FC = () => {
   const dispatch = useDispatch();
   const { items, status } = useSelector(productsSelector);
   const { filterState } = useSelector(filterSelector);
@@ -132,5 +130,3 @@ const Filter: React.FC = () => {
     </>
   );
 };
-
-export default Filter;

@@ -3,15 +3,13 @@ import ReactMarkdown from 'react-markdown';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs';
-import ErrorInfo from '../components/ErrorInfo';
-import LeftMenu from '../components/LeftMenu';
+import { Breadcrumbs, ErrorInfo, LeftMenu } from '../components';
 import { useAppDispatch } from '../redux/store';
 import { fetchPosts } from '../redux/posts/asyncActions';
 import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
 import { Status } from '../redux/products/types';
-import { ibg } from '../utils/ibg';
+import { ibg } from '../utils';
 import Head from '../layouts/Head';
 
 const FullBlogItem: React.FC = () => {
@@ -29,7 +27,7 @@ const FullBlogItem: React.FC = () => {
     items.length > 0 && items.map((obj) => obj.id.toString() === id?.toString() && setItem(obj));
     ibg();
   }, [items, item]);
-  
+
   return (
     <section className="blog__container">
       {item && <Head title={`Блог - ${item.title}`} imageUrl={`blog/${item.imageUrl}`} url={pathname} />}

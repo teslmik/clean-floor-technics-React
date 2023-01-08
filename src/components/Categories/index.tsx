@@ -4,11 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 
 import { useGlobalContext } from '../../hook/useGlobalContext';
-import { categoriesList } from '../../utils/listConstant';
+import { categoriesList } from '../../utils';
 
 import styles from './Categories.module.scss';
 
-const Categories: React.FC = () => {
+export const Categories: React.FC = () => {
   const { handleTooggle } = useGlobalContext();
 
   return (
@@ -39,5 +39,3 @@ const Categories: React.FC = () => {
     </section>
   );
 };
-
-export default Categories;

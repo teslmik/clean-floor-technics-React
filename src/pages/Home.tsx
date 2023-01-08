@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { Helmet } from 'react-helmet';
 
-import Categories from '../components/Categories';
+import { Categories, CircleLoader } from '../components';
 import { fetchPosts } from '../redux/posts/asyncActions';
 import { useAppDispatch } from '../redux/store';
-import CircleLoader from '../components/CircleLoader';
 
-const SwiperBlock = React.lazy(() => import(/* webpackChunkName: "SwiperBlock" */'../components/SwiperBlock'));
-const TabsPromo = React.lazy(() => import(/* webpackChunkName: "TabsPromo" */'../components/TabsPromo'));
-const BlogBlock = React.lazy(() => import(/* webpackChunkName: "BlogBlock" */'../components/BlogBlock'));
+const SwiperBlock = React.lazy(() => import(/* webpackChunkName: "SwiperBlock" */'../components').then((m) => ({ default: m.SwiperBlock })));
+const TabsPromo = React.lazy(() => import(/* webpackChunkName: "TabsPromo" */'../components').then((m) => ({ default: m.TabsPromo })));
+const BlogBlock = React.lazy(() => import(/* webpackChunkName: "BlogBlock" */'../components').then((m) => ({ default: m.BlogBlock })));
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

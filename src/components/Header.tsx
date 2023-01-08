@@ -2,12 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import Search from './Search';
-import HeaderMenu from './HeaderMenu';
+import { Search, HeaderMenu } from '../components';
 import { useGlobalContext } from '../hook/useGlobalContext';
 import { cartSelector } from '../redux/cart/selectors';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const { items, totalPrice } = useSelector(cartSelector);
   const { setIsOpenCallback, setIsOpenCart, windowWidth, isWebpImg } = useGlobalContext();
   const [isVisible, setIsVisible] = React.useState(false);
@@ -77,8 +76,8 @@ const Header: React.FC = () => {
                   {windowWidth > 402
                     ? 'Повернутися до покупок'
                     : windowWidth > 355
-                    ? 'Назад до покупок'
-                    : 'Назад'}
+                      ? 'Назад до покупок'
+                      : 'Назад'}
                 </Link>
               </div>
             ) : (
@@ -131,5 +130,3 @@ const Header: React.FC = () => {
     </header>
   );
 };
-
-export default Header;

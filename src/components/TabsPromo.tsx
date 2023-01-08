@@ -3,23 +3,21 @@ import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar } from 'swiper';
 
-import CardItem from './CardItem';
-import SkeletonLoader from './CardItem/SkeletonLoader';
-import ErrorInfo from './ErrorInfo';
+import { CardItem, SkeletonLoader, ErrorInfo } from '../components';
 import { useAppDispatch } from '../redux/store';
 import { fetchProducts } from '../redux/products/asyncActions';
 import { productsSelector } from '../redux/products/selectors';
 import { Status } from '../redux/products/types';
-import { tabsPromo } from '../utils/listConstant';
+import { tabsPromo } from '../utils';
 
-const TabsPromo: React.FC = () => {
+export const TabsPromo: React.FC = () => {
   const { items, status } = useSelector(productsSelector);
   const dispatch = useAppDispatch();
   const [toggleState, setToggleState] = React.useState(0);
 
   const skeleton = [...new Array(6)].map((_, i) => (
     <SwiperSlide key={i}>
-      <div className="skeleton__wrapper"> 
+      <div className="skeleton__wrapper">
         <SkeletonLoader />
       </div>
     </SwiperSlide>
@@ -51,8 +49,8 @@ const TabsPromo: React.FC = () => {
                 key={i}
                 className={
                   toggleState === i
-                  ? 'catalog promo__catalog __container _active-content'
-                  : 'catalog promo__catalog'
+                    ? 'catalog promo__catalog __container _active-content'
+                    : 'catalog promo__catalog'
                 }
                 modules={[Navigation, Scrollbar]}
                 scrollbar={true}
@@ -63,18 +61,18 @@ const TabsPromo: React.FC = () => {
                 spaceBetween={10}
                 slideNextClass='promo-next'
                 slidePrevClass='promo-prev'>
-              {status === Status.LOADING
-                ? skeleton
-                : items
-                  .filter((obj: any) => {
-                    if (obj.label[tabObj.name] || obj[tabObj.name]) return true;
-                    return false;
-                  })
-                  .map((obj, i) => (
-                    <SwiperSlide key={i}>
-                      <CardItem {...obj} />
-                    </SwiperSlide>
-                  ))}
+                {status === Status.LOADING
+                  ? skeleton
+                  : items
+                    .filter((obj: any) => {
+                      if (obj.label[tabObj.name] || obj[tabObj.name]) return true;
+                      return false;
+                    })
+                    .map((obj, i) => (
+                      <SwiperSlide key={i}>
+                        <CardItem {...obj} />
+                      </SwiperSlide>
+                    ))}
               </Swiper>
             ))}
           </div>
@@ -83,5 +81,3 @@ const TabsPromo: React.FC = () => {
     </section>
   );
 };
-
-export default TabsPromo;

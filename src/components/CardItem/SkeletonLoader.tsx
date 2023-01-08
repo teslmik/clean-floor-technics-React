@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
 
-const SkeletonLoader: React.FC = () => {
+export const SkeletonLoader: React.FC = () => {
   return (
     <ContentLoader
       speed={2}
@@ -18,5 +18,3 @@ const SkeletonLoader: React.FC = () => {
     </ContentLoader>
   );
 };
-
-export default SkeletonLoader;

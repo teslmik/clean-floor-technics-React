@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { setFilter } from '../../redux/filter/slice';
-import { categoriesList } from '../../utils/listConstant';
+import { categoriesList } from '../../utils';
 
 import styles from './Breadcrumbs.module.scss';
 
@@ -14,7 +14,7 @@ interface IBreadcrumbsProps {
   endItem?: string;
 }
 
-const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ title, titleBlock, category, endItem }) => {
+export const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ title, titleBlock, category, endItem }) => {
   const dispatch = useDispatch();
 
   return (
@@ -50,5 +50,3 @@ const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({ title, titleBlock, category,
     </nav>
   );
 };
-
-export default Breadcrumbs;

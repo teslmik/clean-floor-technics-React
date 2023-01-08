@@ -1,8 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import LeftMenu from '../components/LeftMenu';
-import Breadcrumbs from '../components/Breadcrumbs';
+import {LeftMenu, Breadcrumbs} from '../components';
 import Head from '../layouts/Head';
 
 const Return: React.FC = () => {

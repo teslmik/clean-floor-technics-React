@@ -2,8 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useLocation } from 'react-router-dom';
 
-import Breadcrumbs from '../components/Breadcrumbs';
-import LeftMenu from '../components/LeftMenu';
+import { Breadcrumbs, LeftMenu } from '../components';
 import Head from '../layouts/Head';
 
 const About: React.FC = () => {

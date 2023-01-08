@@ -3,18 +3,11 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import PopupAnswer from '../components/PopupAnswer';
-import Callback from '../components/Callback';
-import CartPopup from '../components/CartPopup';
-import RouteMap from '../components/RouteMap';
+import { Footer, Header, PopupAnswer, Callback, CartPopup, RouteMap } from '../components';
 import { useAppDispatch } from '../redux/store';
 import { filterSelector } from '../redux/filter/selectors';
 import { setFilter } from '../redux/filter/slice';
-import { ibg } from '../utils/ibg';
-import { isWebp } from '../utils/isWebp';
-import { bodyLock, bodyUnlock } from '../utils/bodyLockUnlock';
+import { ibg, isWebp, bodyLock, bodyUnlock } from '../utils';
 import { MyGlobalContext } from '../hook/useGlobalContext';
 
 const MainLayout: React.FC = () => {
