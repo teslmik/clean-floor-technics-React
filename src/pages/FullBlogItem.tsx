@@ -9,6 +9,7 @@ import { fetchPosts } from '../redux/posts/asyncActions';
 import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
 import { Status } from '../redux/products/types';
+import { useGlobalContext } from '../hook/useGlobalContext';
 import { ibg } from '../utils';
 import Head from '../layouts/Head';
 
@@ -16,6 +17,7 @@ const FullBlogItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const [item, setItem] = React.useState<IPostItem>();
+  const { windowWidth } = useGlobalContext();
   const { id } = useParams();
   const { pathname } = useLocation();
 
@@ -31,10 +33,11 @@ const FullBlogItem: React.FC = () => {
   return (
     <section className="blog__container">
       {item && <Head title={`Блог - ${item.title}`} imageUrl={`blog/${item.imageUrl}`} url={pathname} />}
+      {windowWidth < 882 && <Breadcrumbs titleBlock={'Блог'} endItem={item ? item.title : '...'} />}
       <div className="blog__wrapper">
         <LeftMenu id={id} />
         <div className="blog__boby">
-          <Breadcrumbs titleBlock={'Блог'} endItem={item ? item.title : '...'} />
+          {windowWidth > 881 && <Breadcrumbs titleBlock={'Блог'} endItem={item ? item.title : '...'} />}
           <div className="blog__content content-blog">
             {status === Status.ERROR ? (
               <ErrorInfo />

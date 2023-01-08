@@ -6,7 +6,7 @@
 
   &__wrapper {
     display: flex;
-    gap: 20px;
+    gap: rem(20);
   }
 
   // .blog__boby
@@ -20,7 +20,7 @@
 
   &__title {
     @include adaptiveFont(32, 18);
-    margin-bottom: 18px;
+    margin-bottom: rem(18);
   }
 
   // .content-blog__list
@@ -29,7 +29,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 30px;
+    gap: rem(30);
   }
 
   // .content-blog__item
@@ -45,14 +45,14 @@
     &__img {
       cursor: pointer;
       width: 100%;
-      height: 200px;
-      margin-bottom: 14px;
+      height: rem(200);
+      margin-bottom: rem(14);
     }
 
     // .blog-item__date
 
     &__date {
-      margin-bottom: 2px;
+      margin-bottom: rem(2);
     }
 
     // .blog-item__text
@@ -69,7 +69,7 @@
 
     &__wrapper {
       line-height: 20px;
-      @media (max-width: $mobileSmall) {
+      @media (max-width: $mobile) {
         display: flex;
         flex-direction: column;
       }
@@ -77,7 +77,7 @@
   }
 
   .date-item {
-    margin-bottom: 10px;
+    margin-bottom: rem(10);
   }
 
   .blog-text {
@@ -108,9 +108,10 @@
   .blog-img {
     float: left;
     cursor: default;
-    width: 288px;
-    margin: 3px 30px 10px 0;
-    @media (max-width: $mobileSmall) {
+    @include adaptiveValue("height", 300, 250, 1);
+    @include adaptiveValue("width", 400, 288, 1);
+    margin: rem(3) rem(30) rem(10) 0;
+    @media (max-width: $mobile) {
       float: none;
       margin-left: auto;
       margin-right: auto;

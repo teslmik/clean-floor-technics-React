@@ -9,16 +9,18 @@ export const BlogBlock: React.FC = () => {
   const { items } = useSelector(postsSelector);
 
   return (
-    <div className="blog-about__items">
-      {(items as IPostItem[]).map((obj, i) => (
-        <BlogItem
-          id={obj.id}
-          key={i}
-          image={`assets/img/blog/${obj.imageUrl}`}
-          date={obj.date}
-          title={obj.title}
-        />
-      ))}
+    <div className="blog-about__items-wrapper">
+      <div className="blog-about__items">
+        {(items as IPostItem[]).slice(-3).map((obj, i) => (
+          <BlogItem
+            id={obj.id}
+            key={i}
+            image={`assets/img/blog/${obj.imageUrl}`}
+            date={obj.date}
+            title={obj.title}
+          />
+        ))}
+      </div>
     </div>
   )
 };

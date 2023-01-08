@@ -372,24 +372,31 @@ body.lockPadding {
     @include adaptiveValue('margin-bottom', 15, 10, 1);
   }
 
+  &__items-wrapper {
+    overflow-x: scroll;
+    width: 100%;
+  }
+
   &__items {
     display: flex;
     flex-direction: column-reverse;
     gap: rem(20);
     @include adaptiveValue('margin-bottom', 20, 10, 1);
     @media (max-width: $tablet) {
-      flex-direction: row;
-      overflow-x: auto;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
       padding-bottom: 10px;
     }
   }
 
   &__item {
     display: flex;
+    flex: 0 1 auto;
     gap: rem(20);
     cursor: pointer;
     @media (max-width: $tablet) {
       flex-direction: column;
+      max-width: 180px;
     }
   }
 
@@ -423,7 +430,6 @@ body.lockPadding {
       background-size: cover;
     }
     @media (max-width: $tablet) {
-      border-radius: 0;
       width: 180px;
       height: 120px;
     }
