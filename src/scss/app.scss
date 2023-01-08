@@ -373,7 +373,7 @@ body.lockPadding {
   }
 
   &__items-wrapper {
-    overflow-x: scroll;
+    overflow-x: auto;
     width: 100%;
   }
 
@@ -385,7 +385,7 @@ body.lockPadding {
     @media (max-width: $tablet) {
       flex-direction: row-reverse;
       justify-content: flex-end;
-      padding-bottom: 10px;
+      padding-bottom: rem(10);
     }
   }
 
@@ -396,14 +396,14 @@ body.lockPadding {
     cursor: pointer;
     @media (max-width: $tablet) {
       flex-direction: column;
-      max-width: 180px;
+      max-width: rem(180);
     }
   }
 
   &__btn {
     cursor: pointer;
     border: 1px solid #7e7e7e;
-    border-radius: 4px;
+    border-radius: rem(4);
     padding: rem(3) rem(12) rem(3);
     background-color: #fff;
     color: #363636;
@@ -421,17 +421,17 @@ body.lockPadding {
 }
 .blog-item {
   &__img {
-    height: 80px;
-    width: 120px;
-    border-radius: 4px;
+    height: rem(80);
+    width: rem(180);
+    border-radius: rem(4);
     overflow: hidden;
     flex: 0 0 auto;
     &.ibg {
       background-size: cover;
     }
     @media (max-width: $tablet) {
-      width: 180px;
-      height: 120px;
+      width: rem(180);
+      height: rem(120);
     }
   }
 
@@ -447,7 +447,7 @@ body.lockPadding {
   }
 
   &__text {
-    min-width: 120px;
+    min-width: rem(120);
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 3;
