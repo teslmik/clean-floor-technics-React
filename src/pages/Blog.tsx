@@ -26,7 +26,7 @@ const Blog: React.FC = () => {
   React.useEffect(() => {
     window.scroll(0, 0);
     dispatch(fetchPosts());
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     ibg();

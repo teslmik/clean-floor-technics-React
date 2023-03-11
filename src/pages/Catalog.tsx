@@ -29,7 +29,7 @@ const Catalog: React.FC = () => {
   React.useEffect(() => {
     window.scroll(0, 0);
     dispatch(fetchProducts());
-  }, [sortState]);
+  }, [dispatch, sortState]);
 
   return (
     <>

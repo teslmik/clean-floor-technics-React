@@ -43,7 +43,7 @@ const FullItem: React.FC = () => {
       }
     }
     fetchProduct();
-  }, [navigate]);
+  }, [_id, navigate]);
 
   const onClickAdd = () => {
     cartItem && dispatch(addToCart(cartItem));

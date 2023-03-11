@@ -17,7 +17,7 @@ export const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article,
 
   React.useEffect(() => {
     items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
-  }, [isOnCart, items]);
+  }, [id, isOnCart, items]);
 
   React.useEffect(() => {
     ibg();

@@ -23,12 +23,12 @@ const FullBlogItem: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchPosts());
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     items.length > 0 && items.map((obj) => obj.id.toString() === id?.toString() && setItem(obj));
     ibg();
-  }, [items, item]);
+  }, [items, item, id]);
 
   return (
     <section className="blog__container">

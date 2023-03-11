@@ -22,31 +22,31 @@ export const Search: React.FC = () => {
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const searchProduct = async () => {
+  const searchProduct = React.useCallback(async () => {
     const { data } = await axios.get(`https://636e34f8b567eed48ad655d0.mockapi.io/products`, {
       params: { title: debounced },
     });
     setItems(data);
-  };
+  }, [debounced]);
 
   const onClickSearchItem = (item: IProductItem) => {
     navigate(`/products/${item.category}/${item.id}`);
     setIsVisible(false);
     setValue('');
   };
-
-  const onClickEsc = (event: KeyboardEvent) => {
-    event.key === 'Esc' && onClickClose();
-  };
-
-  const onClickClose = () => {
+  
+  const onClickClose = React.useCallback(() => {
     if (!value) {
       return setIsVisible(false);
     }
     setValue('');
     inputRef.current?.focus();
     setItems([]);
-  };
+  }, [setValue, value]);
+
+  const onClickEsc = React.useCallback((event: KeyboardEvent) => {
+    event.key === 'Esc' && onClickClose();
+  }, [onClickClose]);
 
   const onClickVisible = () => {
     setIsVisible(true);
@@ -63,14 +63,14 @@ export const Search: React.FC = () => {
   React.useEffect(() => {
     document.addEventListener('keydown', onClickEsc);
     return () => document.removeEventListener('keydown', onClickEsc);
-  }, []);
+  }, [onClickEsc]);
 
   React.useEffect(() => {
-    if (typeof(debounced) === 'string' && debounced.length > 1) {
+    if (typeof (debounced) === 'string' && debounced.length > 1) {
       setDropdown(true);
       searchProduct();
     } else setDropdown(false);
-  }, [debounced, value, dropdown]);
+  }, [debounced, value, dropdown, searchProduct]);
 
   React.useEffect(() => {
     isVisible === true ? bodyLock() : bodyUnlock();

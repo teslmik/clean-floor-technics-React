@@ -25,7 +25,7 @@ export const TabsPromo: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="promo">

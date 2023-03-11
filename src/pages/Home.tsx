@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchPosts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
