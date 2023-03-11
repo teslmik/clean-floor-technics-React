@@ -7,10 +7,9 @@ import { categoriesList, menuListArr } from '../utils';
 export const Footer: React.FC = () => {
   const { setIsOpenCallback, handleTooggle, setIsOpenMap, isWebpImg } = useGlobalContext();
   const [scroll, setScroll] = React.useState(0);
+  const currentYear = new Date().getUTCFullYear();
 
-  const handleScroll = () => {
-    setScroll(window.scrollY);
-  };
+  const handleScroll = () => setScroll(window.scrollY);
 
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -30,7 +29,7 @@ export const Footer: React.FC = () => {
             </a>
             <div className="copyright__text">
               <h1>© Інтернет-магазин Clean&nbsp;Floor&nbsp;Technics</h1>
-              <p>2021-2022</p>
+              <p>{`2021-${currentYear}`}</p>
               <p>
                 Created by <a href="https://github.com/teslmik">Mikhaylo&nbsp;Teslenko</a>
               </p>

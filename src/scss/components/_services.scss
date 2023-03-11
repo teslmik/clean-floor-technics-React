@@ -23,5 +23,20 @@
 
   &__subtitle {
     @include adaptiveFont(20, 16);
+    margin-bottom: rem(18);
+  }
+
+  // .services__text
+
+  &__text {
+    margin-bottom: rem(18);
+    
+    p {
+      text-align: justify;
+      line-height: 1.6;
+      &:not(:last-child) {
+        margin-bottom: em(8.4);
+      }
+    }
   }
 }
