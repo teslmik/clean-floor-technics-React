@@ -13,9 +13,9 @@ export const Categories: React.FC = () => {
 
   return (
     <section className="categories_block__container">
-      <h1 className={styles.categories_block__title}>
+      {/* <h1 className={styles.categories_block__title}>
         <Link to={'catalog'}>Всі категорії товарів</Link>
-      </h1>
+      </h1> */}
       <Swiper
         className={styles.categories_block__items}
         modules={[Navigation]}

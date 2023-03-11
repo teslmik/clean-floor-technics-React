@@ -1,0 +1,1 @@
+export const CURRENT_EURO: number = 42.4;

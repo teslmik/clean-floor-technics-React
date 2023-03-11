@@ -1,21 +1,27 @@
 .services {
-  // .about__container
+  // .services__container
 
   &__container {
     display: flex;
   }
 
-  // .about__content
+  // .services__content
 
   &__content {
     display: flex;
     flex-direction: column;
   }
 
-  // .about__title
+  // .services__title
 
   &__title {
     @include adaptiveFont(32, 18);
     margin-bottom: 18px;
+  }
+
+  // .services__subtitle
+
+  &__subtitle {
+    @include adaptiveFont(20, 16);
   }
 }

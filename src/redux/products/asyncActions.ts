@@ -4,7 +4,9 @@ import axios from "axios";
 import { RootState } from "../store";
 import { IProductItem } from "./types";
 
-export const fetchProducts = createAsyncThunk<IProductItem[], void, { state: RootState }>('product/fetchProductsStatus', async (_, thunkApi) => {
+export const fetchProducts =
+  createAsyncThunk<IProductItem[], void, { state: RootState }>(
+    'product/fetchProductsStatus', async (_, thunkApi) => {
   const { filter } = thunkApi.getState();
   const order = filter.sortState.sortProperty === 'rating' ? 'desc' : 'asc';
   const { data } = await axios

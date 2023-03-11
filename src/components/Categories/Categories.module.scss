@@ -1,28 +1,23 @@
 @use 'sass:math';
 @import '../../scss/lib/variables';
-@import '../../scss/lib/functions';
 
 .categories_block {
-  &__container {
-    @include adaptiveValue('margin-top', 60, 60, 1);
-    @include adaptiveValue('margin-bottom', 60, 60, 1);
-  }
 
-  &__title {
-    text-align: center;
-    @include adaptiveValue('margin-bottom', 25, 10, 1);
-    @include adaptiveFont(20, 18);
-    font-weight: bold;
-    color: #3d3d3d;
-    a {
-      color: $greenColor;
-      @media (any-hover: hover) {
-        &:hover {
-          color: $greenLiteColor;
-        }
-      }
-    }
-  }
+  // &__title {
+  //   text-align: center;
+  //   @include adaptiveValue('margin-bottom', 25, 10, 1);
+  //   @include adaptiveFont(20, 18);
+  //   font-weight: bold;
+  //   color: #3d3d3d;
+  //   a {
+  //     color: $greenColor;
+  //     @media (any-hover: hover) {
+  //       &:hover {
+  //         color: $greenLiteColor;
+  //       }
+  //     }
+  //   }
+  // }
 
   &__items {
     display: grid;
@@ -45,7 +40,8 @@
 
   &__item {
     i {
-      color: $footerDark;
+      // color: $footerDark;
+      color: $greenColor;
       transition: color 0.2s ease-in-out;
       @include adaptiveFont(100, 60);
       text-align: center;
@@ -60,8 +56,6 @@
       transition: all 0.2s ease-in-out;
       @media (any-hover: hover) {
         &:hover {
-          border-radius: 4px;
-          box-shadow: 0 7px 15px rgb(59 55 43 / 25%);
           i,
           p {
             color: $greenLiteColor;
@@ -75,6 +69,8 @@
         flex: 1 0 auto;
         align-items: flex-end;
         transition: all 0.2s ease-in-out;
+        @include adaptiveFont(18, 14);
+        font-weight: bold;
       }
     }
   }

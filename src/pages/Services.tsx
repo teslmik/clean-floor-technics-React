@@ -14,6 +14,7 @@ const Services: React.FC = () => {
       <div className="services__content">
         <Breadcrumbs titleBlock={'Послуги'} />
         <h2 className="services__title">Послуги</h2>
+        <h3 className="services__subtitle">Надаємо послуги з чищення твердих та м'яких підлогових покриттів</h3>
       </div>
     </section>
   )
