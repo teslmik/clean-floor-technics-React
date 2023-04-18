@@ -35,8 +35,9 @@ export const filterList = [
 ];
 
 export const tabsPromo = [
+  { name: 'availability', value: 'У навності' },
   { name: '_popular', value: 'Хіти' },
-  { name: 'oldPrice', value: 'Розпродаж' },
+  // { name: 'oldPrice', value: 'Розпродаж' },
   { name: '_new', value: 'Новинки' },
 ];
 
