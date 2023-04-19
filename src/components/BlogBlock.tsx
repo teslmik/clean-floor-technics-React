@@ -4,9 +4,13 @@ import { useSelector } from 'react-redux';
 import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
 import { BlogItem } from '../components';
+import { useGlobalContext } from '../hook/useGlobalContext';
 
 export const BlogBlock: React.FC = () => {
   const { items } = useSelector(postsSelector);
+  console.log('items: ', items);
+  const { isWebpImg } = useGlobalContext();
+  console.log('isWebpImg: ', isWebpImg);
 
   return (
     <div className="blog-about__items-wrapper">
@@ -15,7 +19,7 @@ export const BlogBlock: React.FC = () => {
           <BlogItem
             id={obj.id}
             key={i}
-            image={`assets/img/blog/${obj.imageUrl}`}
+            image={`assets/img/blog/${obj.imageUrl}${isWebpImg ? '.webp' : '.jpg'}`}
             date={obj.date}
             title={obj.title}
           />

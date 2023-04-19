@@ -11,11 +11,13 @@ import { IPostItem } from '../redux/posts/types';
 import { Status } from '../redux/products/types';
 import { ibg } from '../utils';
 import Head from '../layouts/Head';
+import { useGlobalContext } from '../hook/useGlobalContext';
 
 const Blog: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const { pathname } = useLocation();
+  const { isWebpImg } = useGlobalContext();
 
   const skeleton = [...new Array(4)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
@@ -50,7 +52,7 @@ const Blog: React.FC = () => {
                   : [...items as IPostItem[]].reverse().map((obj, i) => (
                     <li key={i} className="content-blog__item">
                       <Link to={`/blog/${obj.id}`} className="blog-item__img ibg">
-                        <img src={`/assets/img/blog/${obj.imageUrl}`} alt="" />
+                        <img src={`/assets/img/blog/${obj.imageUrl}${isWebpImg ? '.webp' : '.jpg'}`} alt="blogImage" />
                       </Link>
                       <div className="blog-item__date">{obj.date}</div>
                       <Link to={`/blog/${obj.id}`} className="blog-item__text">

@@ -1,6 +1,15 @@
+.loader__warapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+  height: 200px;
+  overflow: hidden;
+}
+
 .loader {
   font-size: 10px;
-  margin: 50px auto;
+  margin: auto;
   text-indent: -9999em;
   width: 10em;
   height: 10em;

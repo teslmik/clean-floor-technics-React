@@ -29,6 +29,7 @@ export const categoriesList = [
 ];
 
 export const filterList = [
+  { name: 'availability', value: 'У навності' },
   { name: '_promo', value: 'Акція' },
   { name: '_popular', value: 'Хіт' },
   { name: '_new', value: 'Новинка' },

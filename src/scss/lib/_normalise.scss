@@ -43,10 +43,12 @@ body {
 }
 .wrapper {
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 .main {
+  height: 100%;
   flex: 1 1 auto;
   @include adaptiveValue('padding-bottom', 40, 32, 1);
   @media (max-width: $tablet) {

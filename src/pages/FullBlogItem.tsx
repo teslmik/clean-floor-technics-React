@@ -17,7 +17,7 @@ const FullBlogItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const [item, setItem] = React.useState<IPostItem>();
-  const { windowWidth } = useGlobalContext();
+  const { windowWidth, isWebpImg } = useGlobalContext();
   const { id } = useParams();
   const { pathname } = useLocation();
 
@@ -51,7 +51,7 @@ const FullBlogItem: React.FC = () => {
                 <div className="blog-item__date date-item">{item.date}</div>
                 <div className="blog-item__wrapper">
                   <div className="blog-item__img blog-img ibg">
-                    <img src={`/assets/img/blog/${item.imageUrl}`} alt="" />
+                    <img src={`/assets/img/blog/${item.imageUrl}${isWebpImg ? '.webp' : '.jpg'}`} alt="blog_image" />
                   </div>
                   <div className="blog-text">
                     {item.text.map((str, i) => (

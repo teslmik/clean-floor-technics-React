@@ -16,6 +16,7 @@ export const BlogItem: React.FC<IBlogItemProps> = ({ image, date, title, id }) =
     navigate(`/blog/${id}`);
     window.scroll(0, 0);
   };
+  console.log('image: ', image);
 
   React.useEffect(() => {
     ibg();
@@ -24,7 +25,7 @@ export const BlogItem: React.FC<IBlogItemProps> = ({ image, date, title, id }) =
   return (
     <div onClick={onClickBlogItem} className="blog-about__item blog-item">
       <div className="blog-item__img ibg">
-        <img src={image} alt="blog" />
+        <img src={image} alt="blog_image" />
       </div>
       <div className="blog-item__content">
         <div className="blog-item__date">{date}</div>

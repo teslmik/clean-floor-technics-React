@@ -19,7 +19,7 @@ export const Filter: React.FC = () => {
 
   const promoCount = (value: string) => {
     let count = 0;
-    items.map((obj: any) => (obj.label[value] || obj.category === value ? (count = count + 1) : count));
+    items.map((obj: any) => (obj.label[value] || obj.category === value || obj.availability === true ? (count = count + 1) : count));
     return count;
   };
 
