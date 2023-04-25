@@ -15,7 +15,7 @@ const Contacts: React.FC = () => {
         <Breadcrumbs titleBlock={'Контактна інформація'} />
         <h2 className="contacts__title">Контактна інформація</h2>
         <div className="contacts__wrapper">
-          <div className="contacts__text">
+          <address className="contacts__text">
             <div className="contacts__adress">
               <p>Адреса:</p>
               <span>м. Одеса, вул. Маршала Говорова 7а</span>
@@ -37,7 +37,7 @@ const Contacts: React.FC = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </address>
           <div className="contacts__maps">
             <iframe
               title="Rout map to store"

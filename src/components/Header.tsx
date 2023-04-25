@@ -85,7 +85,7 @@ export const Header: React.FC = () => {
             )}
             <div className={`header__actions actions ${pathname === '/cart' && 'hide'}`}>
               <div className="actions__contacts">
-                <div className="actions__phones-list phones-list">
+                <address className="actions__phones-list phones-list">
                   <div className="phones-list__item">
                     <a className="_icon-phone" href="tel:+380970948777">
                       097 094-87-77
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
                       066 141-66-62
                     </a>
                   </div>
-                </div>
+                </address>
                 <div onClick={() => setIsOpenCallback(true)} className="actions__phones-text">
                   <span>Передзвонити Вам?</span>
                 </div>
