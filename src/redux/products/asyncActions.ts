@@ -10,6 +10,6 @@ export const fetchProducts =
   const { filter } = thunkApi.getState();
   const order = filter.sortState.sortProperty === 'rating' ? 'desc' : 'asc';
   const { data } = await axios
-    .get<IProductItem[]>(`https://636e34f8b567eed48ad655d0.mockapi.io/products?sortBy=${filter.sortState.sortProperty}&order=${order}`);
+    .get<IProductItem[]>(`${process.env.REACT_APP_FETCH_URL}/products?sortBy=${filter.sortState.sortProperty}&order=${order}`);
   return data;
 });

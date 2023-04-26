@@ -32,7 +32,7 @@ const FullItem: React.FC = () => {
       try {
         setProduct(undefined);
         const { data } = await axios.get<IProductItem>(
-          `https://636e34f8b567eed48ad655d0.mockapi.io/products/${_id}`,
+          `${process.env.REACT_APP_FETCH_URL}/products/${_id}`,
         );
         setProduct(data);
         const { id, category, imageUrl, title, oldPrice, price }: ICartItem = data;

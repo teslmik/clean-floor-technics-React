@@ -23,7 +23,7 @@ export const Search: React.FC = () => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const searchProduct = React.useCallback(async () => {
-    const { data } = await axios.get(`https://636e34f8b567eed48ad655d0.mockapi.io/products`, {
+    const { data } = await axios.get(`${process.env.REACT_APP_FETCH_URL}/products`, {
       params: { title: debounced },
     });
     setItems(data);
