@@ -1,0 +1,47 @@
+.services {
+  // .services__container
+
+  &__container {
+    display: flex;
+  }
+
+  // .services__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // .services__title
+
+  &__title {
+    @include adaptiveFont(32, 18);
+    margin-bottom: 18px;
+  }
+
+  // .services__subtitle
+
+  &__subtitle {
+    @include adaptiveFont(20, 16);
+    margin-bottom: rem(18);
+  }
+
+  // .services__text
+
+  &__text {
+    margin-bottom: rem(18);
+
+    p {
+      text-align: justify;
+      line-height: 1.6;
+      &:not(:last-child) {
+        margin-bottom: em(8.4);
+      }
+    }
+
+    li {
+      padding-left: 10px;
+      margin-bottom: em(8);
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@use 'sass:math';
+@import '../../scss/lib/variables';
+@import '../../scss/lib/functions';
+
+.breadcrumbs {
+  @include adaptiveValue('margin-top', 30, 10, 1);
+  @include adaptiveValue('margin-bottom', 10, 5, 1);
+  overflow-x: auto;
+  padding-bottom: 5px;
+
+  ul {
+    display: flex;
+    gap: rem(24);
+  }
+
+  li {
+    position: relative;
+
+    &:last-child {
+      cursor: default;
+    }
+
+    &:not(:last-child) > .breadcrumbs__link {
+      cursor: pointer;
+      &:hover {
+        color: $greenLiteColor;
+      }
+    }
+
+    &:not(:last-child)::before {
+      content: '\e90e';
+      cursor: default;
+      font-family: 'icons' !important;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      transform: rotate(90deg);
+
+      /* Better Font Rendering =========== */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: absolute;
+      right: -20px;
+      top: 3px;
+      color: $greyColor;
+    }
+  }
+
+  // .breadcrumbs__link
+
+  &__link {
+    color: $greyColor;
+    font-size: 11px;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+}

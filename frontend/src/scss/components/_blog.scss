@@ -1,0 +1,120 @@
+@import '../lib/variables';
+@import '../lib/functions';
+
+.blog {
+  // .blog__wrapper
+
+  &__wrapper {
+    display: flex;
+    gap: rem(20);
+  }
+
+  // .blog__boby
+
+  &__boby {
+    flex: 1 1 auto;
+  }
+}
+.content-blog {
+  // .content-blog__title
+
+  &__title {
+    @include adaptiveFont(32, 18);
+    margin-bottom: rem(18);
+  }
+
+  // .content-blog__list
+
+  &__list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: rem(30);
+  }
+
+  // .content-blog__item
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-item {
+    // .blog-item__img
+
+    &__img {
+      cursor: pointer;
+      width: 100%;
+      height: rem(200);
+      margin-bottom: rem(14);
+    }
+
+    // .blog-item__date
+
+    &__date {
+      margin-bottom: rem(2);
+    }
+
+    // .blog-item__text
+
+    &__text {
+      cursor: pointer;
+      -webkit-line-clamp: 3;
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+
+    &__wrapper {
+      line-height: 20px;
+      @media (max-width: $mobile) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .date-item {
+    margin-bottom: rem(10);
+  }
+
+  .blog-text {
+    @include adaptiveFont(18, 14);
+    a {
+      color: $greenColor;
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+    p, ul {
+      cursor: text;
+      text-align: justify;
+      line-height: 1.57143;
+      &:not(:last-child) {
+        margin-bottom: em(10.8);
+      }
+    }
+    @media (any-hover: hover) {
+      &:hover {
+        color: inherit;
+      }
+    }
+  }
+
+  .blog-img {
+    float: left;
+    cursor: default;
+    @include adaptiveValue("height", 300, 250, 1);
+    @include adaptiveValue("width", 400, 288, 1);
+    margin: rem(3) rem(30) rem(10) 0;
+    @media (max-width: $mobile) {
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
