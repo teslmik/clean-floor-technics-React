@@ -9,6 +9,7 @@ import { filterSelector } from '../redux/filter/selectors';
 import { setFilter } from '../redux/filter/slice';
 import { ibg, isWebp, bodyLock, bodyUnlock } from '../utils';
 import { MyGlobalContext } from '../hook/useGlobalContext';
+import { CallBackImg } from '../components/CallBackImg';
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -77,6 +78,7 @@ const MainLayout: React.FC = () => {
           {isOpenMap && <RouteMap />}
           {requestDone.isOpen && <PopupAnswer title={requestDone.title} text={requestDone.text} />}
         </AnimatePresence>
+        <CallBackImg setIsOpenCallback={setIsOpenCallback} />
       </MyGlobalContext.Provider>
     </div>
   );

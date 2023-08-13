@@ -110,12 +110,6 @@ export const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="callback-block" onClick={() => setIsOpenCallback(true)}>
-        <img src="/assets/img/phone-call.png" alt="callback-img" width={60} />
-        <div className="hover-text">
-          <span>Замовити дзвінок</span>
-        </div>
-      </div>
       <div
         className="page-up"
         style={scroll > 300 ? { transform: 'translateY(-40px)' } : {}}
