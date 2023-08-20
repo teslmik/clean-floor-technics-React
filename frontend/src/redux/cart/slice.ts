@@ -22,17 +22,17 @@ export const cartSlice = createSlice({
       state.totalPrice = calcTotalPrice(state.items);
     },
     increment(state, action: PayloadAction<string>) {
-      const findItem = state.items.find(obj => obj.id === action.payload);
+      const findItem = state.items.find(obj => obj._id === action.payload);
       findItem && findItem.count++;
       state.totalPrice = calcTotalPrice(state.items);
     },
     decrement(state, action: PayloadAction<string>) {
-      const findItem = state.items.find(obj => obj.id === action.payload);
+      const findItem = state.items.find(obj => obj._id === action.payload);
       findItem && findItem.count--;
       state.totalPrice = calcTotalPrice(state.items);
     },
     removeFromCart(state, action: PayloadAction<string>) {
-      state.items = state.items.filter(obj => obj.id !== action.payload);
+      state.items = state.items.filter(obj => obj._id !== action.payload);
       state.totalPrice = calcTotalPrice(state.items);
     },
     clearCart(state) {

@@ -59,7 +59,7 @@ const Catalog: React.FC = () => {
                   : filterState.map((filterValue) =>
                     items
                       .filter((elem: any) => elem.category === filterValue || elem.label[filterValue] || elem.availability === true)
-                      .map((obj, i) => <CardItem key={i} {...obj} />),
+                      .map((obj) => <CardItem key={obj._id} {...obj} />),
                   )}
             </div>
           )}

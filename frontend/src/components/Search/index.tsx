@@ -30,7 +30,7 @@ export const Search: React.FC = () => {
   }, [debounced]);
 
   const onClickSearchItem = (item: IProductItem) => {
-    navigate(`/products/${item.category}/${item.id}`);
+    navigate(`/products/${item.category}/${item._id}`);
     setIsVisible(false);
     setValue('');
   };
@@ -101,7 +101,7 @@ export const Search: React.FC = () => {
           <div className={styles.search__dropdown}>
             <ul>
               {items.map((item: IProductItem) => (
-                <li key={item.id} onClick={() => onClickSearchItem(item)}>
+                <li key={item._id} onClick={() => onClickSearchItem(item)}>
                   <div className={`${styles.dropdown__img} ibg`}>
                     <img
                       src={`/assets/img/products/${item.imageUrl}${isWebpImg ? '.webp' : '.png'}`}

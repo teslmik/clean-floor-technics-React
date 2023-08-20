@@ -10,7 +10,7 @@ import { postsSelector } from '../redux/posts/selectors';
 import { IPostItem } from '../redux/posts/types';
 import { Status } from '../redux/products/types';
 import { useGlobalContext } from '../hook/useGlobalContext';
-import { ibg } from '../utils';
+import { formatDate, ibg } from '../utils';
 import Head from '../layouts/Head';
 
 const FullBlogItem: React.FC = () => {
@@ -26,7 +26,7 @@ const FullBlogItem: React.FC = () => {
   }, [dispatch]);
 
   React.useEffect(() => {
-    items.length > 0 && items.map((obj) => obj.id.toString() === id?.toString() && setItem(obj));
+    items.length > 0 && items.map((obj) => obj._id === id && setItem(obj));
     ibg();
   }, [items, item, id]);
 
@@ -48,7 +48,7 @@ const FullBlogItem: React.FC = () => {
             ) : item && (
               <>
                 <div className="content-blog__title">{item.title}</div>
-                <div className="blog-item__date date-item">{item.date}</div>
+                    <div className="blog-item__date date-item">{formatDate(item.createdAt)}</div>
                 <div className="blog-item__wrapper">
                   <div className="blog-item__img blog-img ibg">
                     <img src={`/assets/img/blog/${item.imageUrl}${isWebpImg ? '.webp' : '.jpg'}`} alt="blog_image" />

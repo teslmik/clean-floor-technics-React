@@ -68,8 +68,8 @@ export const TabsPromo: React.FC = () => {
                       if (obj.label[tabObj.name] || obj[tabObj.name]) return true;
                       return false;
                     })
-                    .map((obj, i) => (
-                      <SwiperSlide key={i}>
+                    .map((obj) => (
+                      <SwiperSlide key={obj._id}>
                         <CardItem {...obj} />
                       </SwiperSlide>
                     ))}

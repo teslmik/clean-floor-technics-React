@@ -20,11 +20,11 @@ export const menuListArr = [
 
 export const categoriesList = [
   { name: 'scrubber', value: 'Підлогомийні машини' },
-  { name: 'one-disk-machines', value: 'Роторні машини' },
-  { name: 'vacuum-cleaner', value: 'Пилососи' },
+  { name: 'rotary', value: 'Роторні машини' },
+  { name: 'vacuum', value: 'Пилососи' },
   { name: 'extractor', value: 'Екстрактори' },
-  { name: 'sweeping-machines', value: 'Підмітальні машини' },
-  { name: 'air-fan', value: 'Сушильні вентилятори' },
+  { name: 'sweeping', value: 'Підмітальні машини' },
+  { name: 'fan', value: 'Сушильні вентилятори' },
   { name: 'accessories', value: 'Комплектуючі' },
 ];
 

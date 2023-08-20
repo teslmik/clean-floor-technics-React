@@ -4,7 +4,7 @@ export interface ISpecification {
 };
 
 export interface IProductItem {
-  id: string;
+  _id: string;
   description: string[];
   specification: ISpecification[];
   title: string;

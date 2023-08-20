@@ -7,7 +7,7 @@ import { removeFromCart, decrement, increment } from '../redux/cart/slice';
 import { euroToHrivna } from '../utils';
 
 interface ICartItemProps {
-  id: string;
+  _id: string;
   title: string;
   imageUrl: string;
   oldPrice: string;
@@ -16,13 +16,13 @@ interface ICartItemProps {
   category: string;
 }
 
-export const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPrice, price, count, category }) => {
+export const CartItem: React.FC<ICartItemProps> = ({ _id, title, imageUrl, oldPrice, price, count, category }) => {
   const dispatch = useDispatch();
   const { isWebpImg } = useGlobalContext();
   
   const onClickRemoveItem = () => {
     if (window.confirm('Видалити товар з кошика?')) {
-      dispatch(removeFromCart(id));
+      dispatch(removeFromCart(_id));
     }
   };
 
@@ -44,7 +44,7 @@ export const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPri
       </div>
       <div className="item-order__content">
         <div className="item-order__title">
-          <Link to={`/products/${category}/${id}`}>{title}</Link>
+          <Link to={`/products/${category}/${_id}`}>{title}</Link>
           <span onClick={onClickRemoveItem} className="_icon-removeItem"></span>
         </div>
         <div className="item-order__price">
@@ -55,10 +55,10 @@ export const CartItem: React.FC<ICartItemProps> = ({ id, title, imageUrl, oldPri
           <div className="item-order__quantity">
             <button
               disabled={count === 1 ? true : false}
-              onClick={() => onClickMinus(id)}
+              onClick={() => onClickMinus(_id)}
               className="btn-item__minus _icon-minus"></button>
             <p className="counter">{count}</p>
-            <button onClick={() => onClickPlus(id)} className="btn-item__plus _icon-plus"></button>
+            <button onClick={() => onClickPlus(_id)} className="btn-item__plus _icon-plus"></button>
           </div>
           <div className="item-order__cost">{(euroToHrivna(price) * count).toLocaleString()} ₴</div>
         </div>

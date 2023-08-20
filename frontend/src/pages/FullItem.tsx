@@ -24,7 +24,7 @@ const FullItem: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const isItemOnCart = items.find((obj) => obj.id === _id) ? true : false;
+  const isItemOnCart = items.find((obj) => obj._id === _id) ? true : false;
 
   React.useEffect(() => {
     window.scroll(0, 0);
@@ -35,8 +35,8 @@ const FullItem: React.FC = () => {
           `${process.env.REACT_APP_FETCH_URL}/products/${_id}`,
         );
         setProduct(data);
-        const { id, category, imageUrl, title, oldPrice, price }: ICartItem = data;
-        setCartItem({ id, category, imageUrl, title, oldPrice, price, count: 1 });
+        const { _id: id, category, imageUrl, title, oldPrice, price }: ICartItem = data;
+        setCartItem({ _id: id, category, imageUrl, title, oldPrice, price, count: 1 });
       } catch (error) {
         alert('Товар не знайдено, спробуйте пізніше...');
         navigate('/catalog');

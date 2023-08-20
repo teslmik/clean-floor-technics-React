@@ -6,3 +6,4 @@ export * from './ibg';
 export * from './isWebp';
 export * from './listConstant';
 export * from './mobileHeightSortElement';
+export * from './format-data';

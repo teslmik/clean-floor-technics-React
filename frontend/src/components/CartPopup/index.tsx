@@ -90,9 +90,9 @@ export const CartPopup: React.FC = () => {
             </div>
             <ul className={styles.cart__section}>
               {items.map((item) => (
-                <li key={item.id} className={styles.cart_item}>
+                <li key={item._id} className={styles.cart_item}>
                   <span
-                    onClick={() => onClickRemoveItem(item.id)}
+                    onClick={() => onClickRemoveItem(item._id)}
                     className={`${styles.removItem} _icon-removeItem`}></span>
                   <div className={`${styles.item__img} ibg`}>
                     <img src={`/assets/img/products/${item.imageUrl}${isWebpImg ? '.webp' : '.png'}`} alt="" />
@@ -100,7 +100,7 @@ export const CartPopup: React.FC = () => {
                   <div className={styles.item__body}>
                     <div className={styles.item__content}>
                       <div onClick={() => setIsOpenCart(false)} className={styles.item__title}>
-                        <Link to={`/products/${item.category}/${item.id}`}>{item.title}</Link>
+                        <Link to={`/products/${item.category}/${item._id}`}>{item.title}</Link>
                       </div>
                       <div className={styles.item__price}>
                         {item.oldPrice !== '' && (
@@ -117,11 +117,11 @@ export const CartPopup: React.FC = () => {
                       <div className={styles.item__quantity}>
                         <button
                           disabled={item.count === 1 ? true : false}
-                          onClick={() => onClickMinus(item.id)}
+                          onClick={() => onClickMinus(item._id)}
                           className={`${styles.btn_item__minus} _icon-minus`}></button>
                         <p className={styles.counter}>{item.count}</p>
                         <button
-                          onClick={() => onClickPlus(item.id)}
+                          onClick={() => onClickPlus(item._id)}
                           className={`${styles.btn_item__plus} _icon-plus`}></button>
                       </div>
                       <div className={styles.item__cost}>

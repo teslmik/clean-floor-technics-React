@@ -9,15 +9,15 @@ import { ICartItem } from '../../redux/cart/types';
 import { IProductItem } from '../../redux/products/types';
 import { euroToHrivna, ibg } from '../../utils';
 
-export const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article, title, oldPrice, price, category }) => {
+export const CardItem: React.FC<IProductItem> = ({ _id, label, imageUrl, article, title, oldPrice, price, category }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
   const { setIsOpenCart, isWebpImg } = useGlobalContext();
 
   React.useEffect(() => {
-    items.find((obj) => obj.id === id) ? setIsOnCart(true) : setIsOnCart(false);
-  }, [id, isOnCart, items]);
+    items.find((obj) => obj._id === _id) ? setIsOnCart(true) : setIsOnCart(false);
+  }, [_id, isOnCart, items]);
 
   React.useEffect(() => {
     ibg();
@@ -25,7 +25,7 @@ export const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article,
 
   const onClickAdd = () => {
     const item: ICartItem = {
-      id,
+      _id,
       category,
       imageUrl,
       title,
@@ -66,12 +66,12 @@ export const CardItem: React.FC<IProductItem> = ({ id, label, imageUrl, article,
             </div>
           )}
         </div>
-        <Link to={`/products/${category}/${id}`} className="card__image ibg" title={title}>
+        <Link to={`/products/${category}/${_id}`} className="card__image ibg" title={title}>
           <img src={`/assets/img/products/${imageUrl}${isWebpImg ? '.webp' : '.png'}`} alt={title} />
         </Link>
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
-          <Link to={`/products/${category}/${id}`} className="card__title" title={title}>
+          <Link to={`/products/${category}/${_id}`} className="card__title" title={title}>
             {title}
           </Link>
           <div className="card__cost">

@@ -1,8 +1,9 @@
 import { Status } from "../products/types";
 
 export interface IPostItem {
-  date: string;
-  id: string;
+  createdAt: string;
+  deletedAt: string;
+  _id: string;
   imageUrl: string;
   text: string[];
   title: string;

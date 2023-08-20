@@ -126,7 +126,7 @@ const Cart: React.FC = () => {
             <div className="order-list__body">
               <ul className="order-list__items">
                 {items.map((item) => (
-                  <CartItem key={item.id} {...item} />
+                  <CartItem key={item._id} {...item} />
                 ))}
               </ul>
             </div>
