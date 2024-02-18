@@ -1,3 +1,4 @@
 export type RatesType = {
-  value: number
+  currency: string;
+  value: number;
 };

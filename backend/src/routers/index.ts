@@ -7,6 +7,7 @@ const router = Router();
 
 router.get("/products", productController.getAllProducts);
 router.get("/products/:id", productController.getOneProductById);
+router.put("/products/:id", productController.editOne);
 
 router.get("/posts", postController.getAllPosts);
 router.get("/posts/:id", postController.getOnePostById);

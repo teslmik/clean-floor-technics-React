@@ -20,7 +20,6 @@ export const postsSlice = createSlice({
       state.items = [];
     });
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      console.log('action.payload: ', action.payload);
       state.items = action.payload;
       state.status = Status.SUCCESS;
     });

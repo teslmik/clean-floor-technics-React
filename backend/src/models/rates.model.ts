@@ -1,12 +1,15 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-import { RatesType } from '../types';
+import { RatesType } from "../types";
 
-const RatesSchema = new Schema<RatesType>({
-  value: Number,
-},
+const RatesSchema = new Schema<RatesType>(
+  {
+    currency: String,
+    value: Number,
+  },
   {
     timestamps: true,
-  });
+  },
+);
 
-export default model<RatesType>('Rates', RatesSchema);
+export default model<RatesType>("Rates", RatesSchema);
