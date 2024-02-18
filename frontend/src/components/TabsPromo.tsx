@@ -5,14 +5,12 @@ import { Navigation, Scrollbar } from 'swiper';
 
 import { CardItem, SkeletonLoader, ErrorInfo } from '../components';
 import { useAppDispatch } from '../redux/store';
-import { fetchProducts } from '../redux/products/asyncActions';
 import { productsSelector } from '../redux/products/selectors';
 import { Status } from '../redux/products/types';
 import { tabsPromo } from '../utils';
 
 export const TabsPromo: React.FC = () => {
   const { items, status } = useSelector(productsSelector);
-  const dispatch = useAppDispatch();
   const [toggleState, setToggleState] = React.useState(0);
 
   const skeleton = [...new Array(6)].map((_, i) => (
@@ -22,10 +20,6 @@ export const TabsPromo: React.FC = () => {
       </div>
     </SwiperSlide>
   ));
-
-  React.useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   return (
     <section className="promo">

@@ -218,8 +218,7 @@ const FullItem: React.FC = () => {
                 <div className="specification__text">
                   <div className="specification__title">Характеристики </div>
                   <div className="specification__list">
-                    {product.specification &&
-                      product.specification.map((item, i) => (
+                    {product.specification?.map((item, i) => (
                         <React.Fragment key={i}>
                           <p className="list-first">{item.name}</p>
                           <p className="list-second">{item.value}</p>
