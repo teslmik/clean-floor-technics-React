@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { Categories, CircleLoader } from '../components';
 import { fetchPosts } from '../redux/posts/asyncActions';
 import { useAppDispatch } from '../redux/store';
+import { fetchProducts } from '../redux/products/asyncActions';
 
 const SwiperBlock = React.lazy(() => import(/* webpackChunkName: "SwiperBlock" */'../components').then((m) => ({ default: m.SwiperBlock })));
 const TabsPromo = React.lazy(() => import(/* webpackChunkName: "TabsPromo" */'../components').then((m) => ({ default: m.TabsPromo })));
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(fetchPosts());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   return (

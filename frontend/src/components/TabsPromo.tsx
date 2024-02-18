@@ -23,10 +23,6 @@ export const TabsPromo: React.FC = () => {
     </SwiperSlide>
   ));
 
-  React.useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-
   return (
     <section className="promo">
       <div className="promo__block">
