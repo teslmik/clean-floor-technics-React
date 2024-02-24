@@ -4,6 +4,12 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import UserModel from "../models/user.model";
 
 class UserService {
+  async findUserById(id: string) {
+    const user = await UserModel.findOne({ id });
+
+    return user;
+  }
+
   async singUp(email: string, password: string): Promise<{ token: string }> {
     const checkEmail = await UserModel.findOne({ email });
 
@@ -48,6 +54,23 @@ class UserService {
       expiresIn: process.env.JWT_EXPIRATION,
     });
     return `Bearer ${token}`;
+  }
+
+  validateToken(token: string) {
+    const splitToken = token.replace("Bearer ", "");
+    try {
+      const userData = jwt.verify(
+        splitToken,
+        process.env.JWT_SECRET as string,
+      ) as {
+        id: string;
+        role: "admin" | "user";
+      };
+
+      return userData.id;
+    } catch (error) {
+      return String(error);
+    }
   }
 }
 

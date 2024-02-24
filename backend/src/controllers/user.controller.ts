@@ -3,6 +3,13 @@ import { NextFunction, Request, Response } from "express";
 import { userService } from "../services/user.service";
 
 class UserController {
+  async getOneUserById(req: Request, res: Response) {
+    const id = userService.validateToken(req.headers.authorization as string);
+
+    const user = await userService.findUserById(id);
+    res.json(user);
+  }
+
   async register(
     req: Request<object, unknown, { email: string; password: string }>,
     res: Response,
