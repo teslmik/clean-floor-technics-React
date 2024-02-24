@@ -1,0 +1,269 @@
+@import '../lib/variables';
+@import '../lib/functions';
+
+// =========== Header ==============
+.header {
+  @media (max-width: $tablet) {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 999;
+  }
+  &__top {
+    background-color: $headerDark;
+    padding-top: rem(7);
+    padding-bottom: rem(7);
+    .header__layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(20);
+    }
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__left,
+  &__right {
+    height: 100%;
+    display: flex;
+  }
+
+  &__bottom {
+    background-color: $headerLiteDark;
+    .header__layout {
+      padding: 17px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include adaptiveValue('gap', 40, 16, 1);
+      @media (max-width: $tablet) {
+        padding: 15px 0;
+      }
+      @media (max-width: $mobile) {
+        padding: 5px 0;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    @include adaptiveValue('gap', 24, 10, 1);
+    @media (max-width: $tablet) {
+      order: 2;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    flex: 0 0 auto;
+    height: rem(50);
+    width: rem(150);
+    a {
+      width: 100%;
+      height: 100%;
+    }
+    @media (max-width: $tablet) {
+      order: 1;
+      height: rem(40);
+      width: rem(127.5);
+    }
+    @media (max-width: $mobile) {
+      flex: 1 0 auto;
+      height: rem(37);
+      width: rem(117.94);
+      margin-right: 26.5px;
+    }
+  }
+
+  .cart-back {
+    display: flex;
+    flex: 1 1 auto;
+    padding-left: 6px;
+    a {
+      cursor: pointer;
+      color: #fff;
+      &::before {
+        position: relative;
+        margin-right: 10px;
+        top: 1px;
+      }
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  white-space: nowrap;
+
+  &.hide {
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__phones-list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(6);
+    font-size: 16px;
+  }
+
+  &__phones-text {
+    span {
+      cursor: pointer;
+      color: #fff;
+      line-height: 1;
+      transition: color ease-in-out 0.2s;
+      padding-left: rem(22);
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+    font-size: 12px;
+  }
+
+  &__cart {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    @include adaptiveValue('gap', 12, 5, 1);
+  }
+}
+
+.phones-list {
+  &__item {
+    font-size: 17px;
+    position: relative;
+    color: #ccc;
+    font-style: normal;
+
+    a {
+      color: #fff;
+      line-height: 1;
+      padding-left: rem(22);
+
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+
+    ._icon-phone:before,
+    ._icon-viber:before {
+      position: absolute;
+      color: #ccc;
+      left: 0;
+      top: 50%;
+      transition: color ease-in-out 0.2s;
+      transform: translateY(-8px);
+    }
+
+    @media (any-hover: hover) {
+      a:hover._icon-phone::before,
+      a:hover._icon-viber::before {
+        color: $greenLiteColor;
+      }
+    }
+  }
+}
+.cart-header {
+  @media (any-hover: hover) {
+    &:hover &__title,
+    &:hover &__icon {
+      color: $greenLiteColor;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    width: rem(37);
+    height: rem(37);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $greenColor;
+    font-size: 36px;
+    transition: color ease-in-out 0.2s;
+    p {
+      position: absolute;
+      font-size: 14px;
+      color: #fff;
+      font-weight: 700;
+      font-style: italic;
+      top: rem(4);
+      right: 0;
+      text-align: center;
+      width: 90%;
+    }
+    @media (max-width: $tablet) {
+      order: 1;
+      font-size: 24px;
+      color: #fff;
+      p {
+        display: inline-block;
+        text-align: center;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $greenColor;
+        font-size: 10px;
+        padding: 2px 1px 0 0;
+        font-weight: normal;
+      }
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: rem(4);
+    @media (max-width: $tablet) {
+      order: 0;
+    }
+    @media (max-width: $mobile) {
+      display: none;
+    }
+  }
+
+  &__title {
+    color: $greenColor;
+    font-size: 17px;
+    font-weight: 700;
+    transition: color ease-in-out 0.2s;
+    @media (max-width: $tablet) {
+      display: none;
+    }
+  }
+
+  &__price {
+    font-size: 14px;
+    color: #fff;
+    text-align: right;
+    @media (max-width: $tablet) {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
+
+// =================================================

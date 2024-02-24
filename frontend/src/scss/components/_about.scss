@@ -1,0 +1,24 @@
+.about {
+  // .about__container
+
+  &__container {
+    display: flex;
+  }
+
+  // .about__content
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    img {
+      margin-bottom: rem(18);
+    }
+  }
+
+  // .about__title
+
+  &__title {
+    @include adaptiveFont(32, 18);
+    margin-bottom: rem(18);
+  }
+}

@@ -1,0 +1,87 @@
+// =============== Icon Fonts css  ================
+
+[class^='_icon-']:before,
+[class*=' _icon-']:before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+._icon-sort:before {
+  content: "\e916";
+}
+._icon-search:before {
+  content: "\e914";
+}
+._icon-arrow-left:before {
+  content: "\e913";
+}
+._icon-removeItem:before {
+  content: "\e911";
+}
+._icon-filter:before {
+  content: "\e915";
+}
+._icon-minus:before {
+  content: "\e912";
+}
+._icon-plus:before {
+  content: "\e910";
+}
+._icon-close:before {
+  content: "\e90f";
+}
+._icon-arrow:before {
+  content: "\e90e";
+}
+._icon-accessories:before {
+  content: "\e907";
+}
+._icon-extractor:before {
+  content: "\e908";
+}
+._icon-rotary:before {
+  content: "\e909";
+}
+._icon-scrubber:before {
+  content: "\e90a";
+}
+._icon-sweeping:before {
+  content: "\e90b";
+}
+._icon-vacuum:before {
+  content: "\e90c";
+}
+._icon-fan:before {
+  content: "\e90d";
+}
+._icon-cart:before {
+  content: "\e906";
+}
+._icon-fb:before {
+  content: "\e900";
+}
+._icon-instagram:before {
+  content: "\e901";
+}
+._icon-phone:before {
+  content: "\e902";
+}
+._icon-viber:before {
+  content: "\e903";
+}
+._icon-mail:before {
+  content: "\e904";
+}
+._icon-location:before {
+  content: "\e905";
+}
