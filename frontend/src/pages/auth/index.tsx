@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { TextField, Button, Typography, Container } from "@mui/material";
-import { loginValidate } from "../constants/auth-validation";
-import { CircleLoader } from "../components";
-import { ROUTER_KEYS } from "../constants/app-keys";
+import { loginValidate } from "../../constants/auth-validation";
+import { CircleLoader } from "../../components";
+import { ROUTER_KEYS } from "../../constants/app-keys";
 
 import styles from "./auth.module.scss";
 

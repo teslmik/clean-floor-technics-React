@@ -4,11 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import { CircleLoader } from "./components";
+import { CircleLoader, PublicRoute } from "./components";
 import { ROUTER_KEYS } from "./constants/app-keys";
 
 import "./scss/app.scss";
-import { AuthPage } from "./auth";
+import { AuthPage } from "./pages/auth";
 
 const FullItem = React.lazy(
   () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem")
@@ -45,7 +45,14 @@ const Services = React.lazy(
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path={ROUTER_KEYS.AUTH} element={<AuthPage />} />
+      <Route
+        path={ROUTER_KEYS.AUTH}
+        element={
+          <PublicRoute>
+            <AuthPage />
+          </PublicRoute>
+        }
+      />
       <Route path={ROUTER_KEYS.ROOT} element={<MainLayout />}>
         <Route path={ROUTER_KEYS.HOME} element={<Home />} />
         <Route
