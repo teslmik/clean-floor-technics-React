@@ -5,7 +5,7 @@ import UserModel from "../models/user.model";
 
 class UserService {
   async findUserById(id: string) {
-    const user = await UserModel.findOne({ id });
+    const user = await UserModel.findById(id).select(["email", "role", "name"]);
 
     return user;
   }
@@ -22,7 +22,7 @@ class UserService {
       password: await this.getHashPassword(password),
     });
 
-    const token = this.createToken({ id: user.id, role: user.role });
+    const token = this.createToken({ id: user.id });
 
     return { token };
   }
@@ -39,7 +39,7 @@ class UserService {
       throw new Error("Invalid email or password");
     }
 
-    const token = this.createToken({ id: user.id, role: user.role });
+    const token = this.createToken({ id: user.id });
 
     return { token };
   }
@@ -64,8 +64,9 @@ class UserService {
         process.env.JWT_SECRET as string,
       ) as {
         id: string;
-        role: "admin" | "user";
+        [key: string]: string | number;
       };
+      console.log("userData: ", userData);
 
       return userData.id;
     } catch (error) {

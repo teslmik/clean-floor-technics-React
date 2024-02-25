@@ -1,6 +1,6 @@
 // Local storage keys
 export const STORAGE_KEYS = {
-  TOKEN: "TOKEN",
+  TOKEN: "token",
 };
 
 export const ROUTER_KEYS = {
@@ -16,5 +16,6 @@ export const ROUTER_KEYS = {
   SERVICES: "services",
   PRODUCTS: "products",
   AUTH: "auth",
+  DASHBOARD: "dashboard",
   NOT_FOUND: "*",
 };

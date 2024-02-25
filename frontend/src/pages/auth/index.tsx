@@ -1,27 +1,26 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Button, Container, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { useFormik } from "formik";
-import { TextField, Button, Typography, Container } from "@mui/material";
-import { loginValidate } from "../../constants/auth-validation";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { CircleLoader } from "../../components";
-import { ROUTER_KEYS } from "../../constants/app-keys";
+import { ROUTER_KEYS, STORAGE_KEYS } from "../../constants/app-keys";
+import { loginValidate } from "../../constants/auth-validation";
+import { useAppDispatch } from "../../redux/store";
+import { fetchUser } from "../../redux/user/asyncActions";
+import { userSelector } from "../../redux/user/selectors";
+import { Status } from "../../redux/user/types";
 
 import styles from "./auth.module.scss";
 
-export const AuthPage: React.FC = () => {
+const AuthPage: React.FC = () => {
   const navigate = useNavigate();
-  // const {
-  //   mutate: login,
-  //   isLoading: loginLoading,
-  //   isSuccess: loginSuccess,
-  // } = useLoginUser();
-  // const {
-  //   mutate: registration,
-  //   isLoading: registerLoading,
-  //   isSuccess: registerSuccess,
-  // } = useRegisterUser();
+  const dispatch = useAppDispatch();
+  const { user, status } = useSelector(userSelector);
 
-  const handleFormSubmit = (
+  const handleFormSubmit = async (
     values: {
       confirmPassword: string;
       email: string;
@@ -30,32 +29,43 @@ export const AuthPage: React.FC = () => {
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     const formValues = { email: values.email, password: values.password };
-    // login(formValues);
+    const { data } = await axios.post<{ token: string }>(
+      `${process.env.REACT_APP_FETCH_URL}/login`,
+      formValues
+    );
+    dispatch(fetchUser(data.token));
+
+    if (data) localStorage.setItem(STORAGE_KEYS.TOKEN, data.token);
 
     setSubmitting(false);
   };
 
-  const { values, handleChange, errors, handleSubmit, isValid, touched } =
-    useFormik({
-      initialValues: {
-        email: "",
-        password: "",
-        confirmPassword: "",
-      },
-      validateOnBlur: false,
-      validate: loginValidate,
-      onSubmit: handleFormSubmit,
-    });
+  const {
+    values,
+    handleChange,
+    errors,
+    handleSubmit,
+    isValid,
+    touched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validateOnBlur: false,
+    validate: loginValidate,
+    onSubmit: handleFormSubmit,
+  });
 
-  // React.useEffect(() => {
-  //   if (loginSuccess) {
-  //     navigate(ROUTER_KEYS.ROOT);
-  //   }
-  // }, [loginSuccess, registerSuccess, navigate]);
+  React.useEffect(() => {
+    if (user && user?.role === "admin") navigate(`/${ROUTER_KEYS.DASHBOARD}`);
+  }, [navigate, user]);
 
-  // if (loginLoading || registerLoading || loginSuccess || registerSuccess) {
-  //   return <CircleLoader />;
-  // }
+  if (status === Status.LOADING || isSubmitting) {
+    return <CircleLoader />;
+  }
 
   return (
     <Container className={styles.container}>
@@ -103,3 +113,5 @@ export const AuthPage: React.FC = () => {
     </Container>
   );
 };
+
+export default AuthPage;

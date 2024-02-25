@@ -1,14 +1,15 @@
 import React, { Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
+import { CircleLoader, PrivateRoute, PublicRoute } from "./components";
+import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import { CircleLoader, PublicRoute } from "./components";
-import { ROUTER_KEYS } from "./constants/app-keys";
+import AuthPage from "./pages/auth";
+import Dashboard from "./pages/dashboard";
 
 import "./scss/app.scss";
-import { AuthPage } from "./pages/auth";
 
 const FullItem = React.lazy(
   () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem")
@@ -51,6 +52,14 @@ const App: React.FC = () => {
           <PublicRoute>
             <AuthPage />
           </PublicRoute>
+        }
+      />
+      <Route
+        path={ROUTER_KEYS.DASHBOARD}
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
         }
       />
       <Route path={ROUTER_KEYS.ROOT} element={<MainLayout />}>

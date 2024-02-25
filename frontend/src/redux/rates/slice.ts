@@ -8,7 +8,7 @@ const initialState: IRatesSliceState = {
   status: Status.LOADING,
 };
 
-export const productsSlice = createSlice({
+export const ratesSlice = createSlice({
   name: "rates",
   initialState,
   reducers: {},
@@ -28,4 +28,4 @@ export const productsSlice = createSlice({
   },
 });
 
-export default productsSlice.reducer;
+export default ratesSlice.reducer;
