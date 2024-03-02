@@ -1,16 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { ROUTER_KEYS } from "../constants/app-keys";
-import { useSelector } from "react-redux";
-import { userSelector } from "../redux/user/selectors";
+import { STORAGE_KEYS, ROUTER_KEYS } from "../constants/app-keys";
 
 export const PublicRoute: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  const { user } = useSelector(userSelector);
+  const isAuthenticated = localStorage.getItem(STORAGE_KEYS.TOKEN) !== null;
 
-  return user ? (
-    <Navigate to={`/${ROUTER_KEYS.DASHBOARD}`} replace />
+  return isAuthenticated ? (
+    <Navigate to={`/${ROUTER_KEYS.ROOT}`} replace />
   ) : (
     children
   );

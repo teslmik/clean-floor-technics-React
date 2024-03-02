@@ -18,3 +18,23 @@
     height: 100%;
   }
 }
+
+.editModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 2px solid $greenColor;
+  border-radius: 16px;
+  padding: 24px;
+  @include adaptiveValue("width", 600, 320, 1, 1);
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

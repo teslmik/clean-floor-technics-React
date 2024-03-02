@@ -1,18 +1,17 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProducts } from './asyncActions';
-import { IProductSliceState, Status } from './types';
+import { fetchProducts, editProduct } from "./asyncActions";
+import { IProductSliceState, Status } from "./types";
 
 const initialState: IProductSliceState = {
   items: [],
-  status: Status.LOADING
-}
+  status: Status.LOADING,
+};
 
 export const productsSlice = createSlice({
-  name: 'product',
+  name: "product",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = Status.LOADING;
@@ -26,7 +25,21 @@ export const productsSlice = createSlice({
       state.status = Status.ERROR;
       state.items = [];
     });
-  }
+    builder.addCase(editProduct.pending, (state) => {
+      state.status = Status.LOADING;
+    });
+    builder.addCase(editProduct.fulfilled, (state, action) => {
+      state.items.forEach((product, i) => {
+        if (product._id === action.payload._id) {
+          state.items[i] = action.payload;
+        }
+      });
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(editProduct.rejected, (state) => {
+      state.status = Status.ERROR;
+    });
+  },
 });
 
 export default productsSlice.reducer;

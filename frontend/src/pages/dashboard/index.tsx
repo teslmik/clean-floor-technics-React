@@ -1,156 +1,109 @@
-import {
-  Container,
-  Toolbar,
-  AppBar,
-  Avatar,
-  Box,
-  Tooltip,
-  Zoom,
-  Typography,
-  Grid,
-  Paper,
-  List,
-  ListItem,
-  ListItemButton,
-  IconButton,
-  ListItemAvatar,
-  ListItemText,
-  ListItemIcon,
-} from "@mui/material";
-import { Edit as EditIcon } from "@mui/icons-material";
+import { Box, Grid, List, Paper, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { userSelector } from "../../redux/user/selectors";
-import { useAppDispatch } from "../../redux/store";
 import { fetchProducts } from "../../redux/products/asyncActions";
 import { productsSelector } from "../../redux/products/selectors";
-import { euroToHrivna } from "../../utils";
+import { IProductItem, Status } from "../../redux/products/types";
+import { useAppDispatch } from "../../redux/store";
+import { userSelector } from "../../redux/user/selectors";
+import DashboardHeader from "./DashboardHeader";
+import ProductItem from "./ProductItem";
+import ProductSkeleton from "./ProductSkeleton";
+import EditModal from "./EditModal";
+import { fetchUser } from "../../redux/user/asyncActions";
+import { STORAGE_KEYS } from "../../constants/app-keys";
 
 import styles from "./dashboard.module.scss";
 
 const Dashboard: React.FC = () => {
+  const [open, setOpen] = React.useState<{
+    product: IProductItem | null;
+    open: boolean;
+  }>({ product: null, open: false });
   const dispatch = useAppDispatch();
   const { user } = useSelector(userSelector);
   const { items: products, status: productsStatus } =
     useSelector(productsSelector);
 
+  const handleOpen = (product: IProductItem | null) => {
+    setOpen({ product, open: true });
+  };
+  const handleClose = () => setOpen({ product: null, open: false });
+
   React.useEffect(() => {
+    if (!user) {
+      const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
+      dispatch(fetchUser(token));
+    }
     dispatch(fetchProducts());
   }, []);
   return (
-    <Box sx={{ maxHeight: "100vh", maxWidth: "100vw" }}>
-      <AppBar color="transparent" position="static">
-        <Container sx={{ width: "100%" }}>
-          <Toolbar disableGutters>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div className={styles.logo}>
-                <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
-              </div>
-              <Tooltip
-                placement="left"
-                TransitionComponent={Zoom}
-                arrow
-                title={
-                  user && (
-                    <>
-                      <p>{`email: ${user?.email}`}</p>
-                      <p>{`role: ${user?.role}`}</p>
-                    </>
-                  )
-                }
+    <>
+      <Box sx={{ maxHeight: "100vh", maxWidth: "100vw" }}>
+        <DashboardHeader user={user} />
+        <Box
+          sx={{
+            flexGrow: 0,
+            marginTop: "1rem",
+            maxWdth: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography textAlign={"center"} variant="h1" fontSize={40}>
+            Dashboard
+          </Typography>
+          <Grid container spacing={4} sx={{ padding: 2 }}>
+            <Grid item xs={12} padding={0}>
+              <Paper
+                sx={{
+                  padding: 2,
+                  paddingRight: 0,
+                  maxHeight: "calc(100vh - 182px)",
+                  overflowY: "auto",
+                }}
               >
-                <Avatar>{user?.name[0]?.toUpperCase()}</Avatar>
-              </Tooltip>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      <Box
-        sx={{
-          flexGrow: 0,
-          marginTop: "1rem",
-          maxWdth: "100%",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Typography textAlign={"center"} variant="h1" fontSize={60}>
-          Dashboard
-        </Typography>
-        <Grid container spacing={4} sx={{ padding: 2 }}>
-          <Grid item xs={6} padding={0}>
-            <Paper
-              sx={{
-                padding: 2,
-                paddingRight: 0,
-                maxHeight: "calc(100vh - 182px)",
-                overflowY: "auto",
-              }}
-            >
-              <Grid container spacing={4} sx={{ padding: 2, paddingRight: 0 }}>
-                <List disablePadding sx={{ width: "100%" }}>
-                  {products.map((product) => (
-                    <Grid key={product._id} item xs={12} padding={0}>
-                      <ListItem disablePadding>
-                        <ListItemButton>
-                          <ListItemAvatar>
-                            <Avatar
-                              variant="rounded"
-                              sx={{ backgroundColor: "transparent" }}
-                            >
-                              <img
-                                src={`assets/img/products/${product.imageUrl}.png`}
-                                alt="product img"
-                                style={{
-                                  width: "100%",
-                                  height: "100%",
-                                  objectFit: "contain",
-                                }}
-                              />
-                            </Avatar>
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={product.title}
-                            secondary={`Price-€: ${
-                              product.price
-                            }€ | Price-uah: ${euroToHrivna(
-                              product.price
-                            ).toLocaleString()}₴`}
+                <Grid
+                  container
+                  spacing={4}
+                  sx={{ padding: 2, paddingRight: 0 }}
+                >
+                  <List disablePadding sx={{ width: "100%" }}>
+                    {productsStatus === Status.LOADING
+                      ? [...new Array(6)].map((_, i) => (
+                          <ProductSkeleton key={i} />
+                        ))
+                      : products.map((product) => (
+                          <ProductItem
+                            key={product._id}
+                            product={product}
+                            handleOpen={() => handleOpen(product)}
                           />
-                        </ListItemButton>
-                        <ListItemIcon>
-                          <Tooltip
-                            placement="right"
-                            TransitionComponent={Zoom}
-                            arrow
-                            title="Edit"
-                          >
-                            <IconButton sx={{ width: 40, height: 40 }}>
-                              <EditIcon color="success" />
-                            </IconButton>
-                          </Tooltip>
-                        </ListItemIcon>
-                      </ListItem>
-                    </Grid>
-                  ))}
-                </List>
-              </Grid>
-            </Paper>
+                        ))}
+                  </List>
+                </Grid>
+                <Grid
+                  container
+                  spacing={4}
+                  sx={{ padding: 2, paddingRight: 0 }}
+                >
+                  <List disablePadding sx={{ width: "100%" }}></List>
+                </Grid>
+              </Paper>
+            </Grid>
+            {/* <Grid item xs={6}>
+              <Grid container spacing={4} sx={{ padding: 2 }}></Grid>
+            </Grid> */}
           </Grid>
-          <Grid item xs={6}>
-            <Grid container spacing={4} sx={{ padding: 2 }}></Grid>
-          </Grid>
-        </Grid>
+        </Box>
       </Box>
-    </Box>
+      <EditModal
+        handleClose={handleClose}
+        open={open.open}
+        product={open.product}
+      />
+    </>
   );
 };
 
