@@ -15,6 +15,7 @@ router.get("/posts/:id", postController.getOnePostById);
 router.post("/post", postController.createPost);
 
 router.get("/rates", ratesController.getRates);
+router.put("/rates", ratesController.editRates);
 
 router.get("/me", userController.getOneUserById);
 router.post("/login", userController.login);
