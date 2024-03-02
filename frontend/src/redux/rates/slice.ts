@@ -4,7 +4,7 @@ import { fetchRates } from "./asyncActions";
 import { IRatesSliceState, Status } from "./types";
 
 const initialState: IRatesSliceState = {
-  items: [],
+  items: { rates: [], bankEuro: null },
   status: Status.LOADING,
 };
 
@@ -15,7 +15,7 @@ export const ratesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchRates.pending, (state) => {
       state.status = Status.LOADING;
-      state.items = [];
+      state.items = { rates: [], bankEuro: null };
     });
     builder.addCase(fetchRates.fulfilled, (state, action) => {
       state.items = action.payload;
@@ -23,7 +23,7 @@ export const ratesSlice = createSlice({
     });
     builder.addCase(fetchRates.rejected, (state) => {
       state.status = Status.ERROR;
-      state.items = [];
+      state.items = { rates: [], bankEuro: null };
     });
   },
 });

@@ -25,13 +25,13 @@ class RatesController {
         >,
       ]);
 
-      const backEuro = Array.isArray(bankRates)
+      const bankEuro = Array.isArray(bankRates)
         ? bankRates.find(
             (rate) => rate.currencyCodeA === 978 && rate.currencyCodeB === 980,
           )
         : { error: bankRates.errorDescription };
 
-      return res.json({ rates, backEuro });
+      return res.json({ rates, bankEuro });
     } catch (error) {
       next(error);
     }
