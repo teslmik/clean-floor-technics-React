@@ -4,30 +4,49 @@ import {
   Box,
   Chip,
   Container,
+  FormControl,
+  IconButton,
+  Input,
+  InputAdornment,
+  InputLabel,
+  Stack,
   Toolbar,
   Tooltip,
   Typography,
   Zoom,
 } from "@mui/material";
-import { Euro } from "@mui/icons-material";
+import { Euro, Edit as EditIcon, CheckCircle } from "@mui/icons-material";
 import React from "react";
 import { useSelector } from "react-redux";
 
 import { UserType } from "../../redux/user/types";
 import { ratesSelector } from "../../redux/rates/selectors";
 import { useAppDispatch } from "../../redux/store";
-import { fetchRates } from "../../redux/rates/asyncActions";
+import { editRate, fetchRates } from "../../redux/rates/asyncActions";
 
 import styles from "./dashboard.module.scss";
-import { Status } from "../../redux/rates/types";
+import { IRatesItem, Status } from "../../redux/rates/types";
 
 const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
   const dispatch = useAppDispatch();
+  const [currency, setCurrency] = React.useState<IRatesItem>();
+  const [onEditCurrency, setOnEditCurrency] = React.useState(false);
   const { items: ratesItems, status } = useSelector(ratesSelector);
 
+  const handleUndisableInput = () => setOnEditCurrency(true);
+  const handleEditRate = () => {
+    setOnEditCurrency(false);
+    if (currency)
+      dispatch(
+        editRate({ currency: currency?.currency, value: currency?.value })
+      );
+  };
+
   React.useEffect(() => {
-    dispatch(fetchRates());
-  }, []);
+    if (status === Status.IDLE) dispatch(fetchRates());
+    if (ratesItems.rates.length > 0)
+      setCurrency(ratesItems.rates.find((rate) => rate.currency === "eu"));
+  }, [ratesItems, status]);
   return (
     <AppBar color="transparent" position="static">
       <Container sx={{ width: "100%" }}>
@@ -38,15 +57,78 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              py: 1,
             }}
           >
             <div className={styles.logo}>
               <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
             </div>
-            {status === Status.SUCCESS && (
-              <Typography color="info">
-                {ratesItems.bankEuro?.rateSell?.toString()}
-              </Typography>
+            {status === Status.SUCCESS && currency && (
+              <Stack direction="row" alignItems="center" gap={2}>
+                <Stack direction="row" alignItems="center" gap={0.5}>
+                  <FormControl variant="standard" sx={{ maxWidth: "112px" }}>
+                    <InputLabel htmlFor="standard-basic" size="small">
+                      Встановлений курс
+                    </InputLabel>
+                    <Input
+                      id="standard-basic"
+                      value={currency.value}
+                      onChange={(e) =>
+                        setCurrency((prev) =>
+                          prev
+                            ? {
+                                ...prev,
+                                value: Number(e.target.value),
+                              }
+                            : undefined
+                        )
+                      }
+                      size="small"
+                      startAdornment={
+                        <InputAdornment position="start">€</InputAdornment>
+                      }
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={
+                              onEditCurrency
+                                ? handleEditRate
+                                : handleUndisableInput
+                            }
+                            edge="end"
+                            size="small"
+                          >
+                            {onEditCurrency ? (
+                              <CheckCircle color="success" />
+                            ) : (
+                              <EditIcon color="success" />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      disabled={!onEditCurrency}
+                    />
+                  </FormControl>
+                </Stack>
+                <Stack direction="column" alignItems="center" gap={0.5}>
+                  <Chip
+                    color="info"
+                    label={
+                      <Stack direction="row" gap={1}>
+                        <Typography>
+                          {ratesItems.bankEuro?.rateSell
+                            ? ratesItems.bankEuro.rateSell.toFixed(2)
+                            : ratesItems.bankEuro?.error || "empty"}
+                        </Typography>
+                        <Euro />
+                      </Stack>
+                    }
+                  />
+                  <Typography variant="subtitle2" fontSize={12}>
+                    Курс € МОНОБАНК
+                  </Typography>
+                </Stack>
+              </Stack>
             )}
             {user && (
               <Tooltip

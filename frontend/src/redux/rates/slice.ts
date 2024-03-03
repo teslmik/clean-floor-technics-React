@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchRates } from "./asyncActions";
+import { editRate, fetchRates } from "./asyncActions";
 import { IRatesSliceState, Status } from "./types";
 
 const initialState: IRatesSliceState = {
   items: { rates: [], bankEuro: null },
-  status: Status.LOADING,
+  status: Status.IDLE,
 };
 
 export const ratesSlice = createSlice({
@@ -24,6 +24,18 @@ export const ratesSlice = createSlice({
     builder.addCase(fetchRates.rejected, (state) => {
       state.status = Status.ERROR;
       state.items = { rates: [], bankEuro: null };
+    });
+    builder.addCase(editRate.pending, (state) => {
+      state.status = Status.LOADING;
+      state.items.rates = [];
+    });
+    builder.addCase(editRate.fulfilled, (state, action) => {
+      state.items.rates = [action.payload];
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(editRate.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.items.rates = [];
     });
   },
 });
