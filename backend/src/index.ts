@@ -1,11 +1,11 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import cors from 'cors';
-import morgan from 'morgan';
-import * as dotenv from 'dotenv';
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import morgan from "morgan";
+import * as dotenv from "dotenv";
 
-import { dbConection } from './database';
-import router from './routers';
+import { dbConection } from "./database";
+import router from "./routers";
 
 dotenv.config();
 
@@ -15,9 +15,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(cors());
-app.use('/api', router);
+app.use("/api", router);
 
 const start = async () => {
   try {
@@ -29,3 +29,5 @@ const start = async () => {
 };
 
 start();
+
+module.exports = app;
