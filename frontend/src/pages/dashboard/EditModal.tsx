@@ -14,6 +14,7 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import { useFormik } from "formik";
 import React from "react";
+import { green } from "@mui/material/colors";
 
 import { editValidate } from "../../constants/edit-validation";
 import { editProduct } from "../../redux/products/asyncActions";
@@ -22,7 +23,6 @@ import { useAppDispatch } from "../../redux/store";
 import { euroToHrivna } from "../../utils";
 
 import styles from "./dashboard.module.scss";
-import { green } from "@mui/material/colors";
 
 type Properties = {
   open: boolean;
@@ -32,6 +32,7 @@ type Properties = {
 
 const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
   const dispatch = useAppDispatch();
+
   const onSubmit = (
     values: {
       price: number;

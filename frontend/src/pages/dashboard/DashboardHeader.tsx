@@ -23,29 +23,47 @@ import { UserType } from "../../redux/user/types";
 import { ratesSelector } from "../../redux/rates/selectors";
 import { useAppDispatch } from "../../redux/store";
 import { editRate, fetchRates } from "../../redux/rates/asyncActions";
+import { Status } from "../../redux/rates/types";
 
 import styles from "./dashboard.module.scss";
-import { IRatesItem, Status } from "../../redux/rates/types";
 
 const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
   const dispatch = useAppDispatch();
-  const [currency, setCurrency] = React.useState<IRatesItem>();
+  const [currency, setCurrency] = React.useState<{
+    currency: string;
+    value: string;
+  }>();
   const [onEditCurrency, setOnEditCurrency] = React.useState(false);
   const { items: ratesItems, status } = useSelector(ratesSelector);
 
   const handleUndisableInput = () => setOnEditCurrency(true);
   const handleEditRate = () => {
     setOnEditCurrency(false);
-    if (currency)
-      dispatch(
-        editRate({ currency: currency?.currency, value: currency?.value })
+    if (currency) {
+      const confirmed = window.confirm(
+        "Якщо змінити поточний курс, то зміняться всі ціни на товарах. Ви впевнені, що хочете внести зміни?"
       );
+      if (confirmed) {
+        dispatch(
+          editRate({ currency: currency?.currency, value: currency?.value })
+        );
+        localStorage.setItem("currentEuro", currency?.value as string);
+      }
+    }
   };
 
   React.useEffect(() => {
     if (status === Status.IDLE) dispatch(fetchRates());
-    if (ratesItems.rates.length > 0)
-      setCurrency(ratesItems.rates.find((rate) => rate.currency === "eu"));
+    if (ratesItems.rates.length > 0) {
+      const rateEuro = ratesItems.rates.find((rate) => rate.currency === "eu");
+      setCurrency(
+        rateEuro as unknown as {
+          currency: string;
+          value: string;
+        }
+      );
+      localStorage.setItem("currentEuro", rateEuro?.value.toString() as string);
+    }
   }, [ratesItems, status]);
   return (
     <AppBar color="transparent" position="static">
@@ -72,13 +90,13 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
                     </InputLabel>
                     <Input
                       id="standard-basic"
-                      value={currency.value}
+                      value={currency.value.toString()}
                       onChange={(e) =>
                         setCurrency((prev) =>
                           prev
                             ? {
                                 ...prev,
-                                value: Number(e.target.value),
+                                value: e.target.value,
                               }
                             : undefined
                         )
@@ -135,6 +153,7 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
                 placement="left"
                 TransitionComponent={Zoom}
                 arrow
+                sx={{ display: { sm: "flex", xs: "none" } }}
                 title={
                   user && (
                     <>

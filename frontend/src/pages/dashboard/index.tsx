@@ -14,8 +14,6 @@ import EditModal from "./EditModal";
 import { fetchUser } from "../../redux/user/asyncActions";
 import { STORAGE_KEYS } from "../../constants/app-keys";
 
-import styles from "./dashboard.module.scss";
-
 const Dashboard: React.FC = () => {
   const [open, setOpen] = React.useState<{
     product: IProductItem | null;

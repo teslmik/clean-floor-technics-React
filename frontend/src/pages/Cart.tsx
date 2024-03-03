@@ -1,15 +1,15 @@
-import React from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import React from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-import { CartItem, IDataMessage } from '../components';
-import { cartSelector } from '../redux/cart/selectors';
-import { clearCart } from '../redux/cart/slice';
-import { ibg, euroToHrivna } from '../utils';
-import { useGlobalContext } from '../hook/useGlobalContext';
-import Head from '../layouts/Head';
+import { CartItem, IDataMessage } from "../components";
+import { cartSelector } from "../redux/cart/selectors";
+import { clearCart } from "../redux/cart/slice";
+import { ibg, euroToHrivna } from "../utils";
+import { useGlobalContext } from "../hook/useGlobalContext";
+import Head from "../layouts/Head";
 
 const Cart: React.FC = () => {
   const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
@@ -24,7 +24,7 @@ const Cart: React.FC = () => {
     ibg();
 
     if (items.length < 1) {
-      navigate('/catalog');
+      navigate("/catalog");
     }
   }, [items, navigate]);
 
@@ -33,7 +33,7 @@ const Cart: React.FC = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<IDataMessage>({ mode: 'onBlur' });
+  } = useForm<IDataMessage>({ mode: "onBlur" });
 
   const onSubmitCallback = (data: IDataMessage) => {
     let message = `<b>Замовлення з сайту!!!</b> &#129297;&#128077;&#128230;\n`;
@@ -45,21 +45,21 @@ const Cart: React.FC = () => {
         (item, i) =>
           `<i>${i + 1}. ${item.title} ${item.count} шт.</i> - <b>${(
             item.count * euroToHrivna(item.price)
-          ).toLocaleString()}</b> грн.\n\n`,
+          ).toLocaleString()}</b> грн.\n\n`
       )
-      .join('');
+      .join("");
     message += `<b>УСЬОГО: ${totalPrice.toLocaleString()} грн.</b>`;
 
     axios
       .post(URL, {
         chat_id: process.env.REACT_APP_CHAT_ID,
-        parse_mode: 'html',
+        parse_mode: "html",
         text: message,
       })
       .then(() => {
         setRequestDone({
           isOpen: true,
-          title: 'Замовлення прийнято!',
+          title: "Замовлення прийнято!",
           text: `Очікуйте на дзвінок від менеджера для уточнення деталей замовлення, способу оплати та доставки...`,
         });
         dispatch(clearCart());
@@ -67,32 +67,42 @@ const Cart: React.FC = () => {
       .catch((error) =>
         setRequestDone({
           isOpen: true,
-          title: 'Виникла помилка! ⚠',
-          text: 'При роботі серверу виникла помилка: ' + error.message + '. Спробуйте пізніше...',
-        }),
+          title: "Виникла помилка! ⚠",
+          text:
+            "При роботі серверу виникла помилка: " +
+            error.message +
+            ". Спробуйте пізніше...",
+        })
       )
       .finally(() => reset());
   };
 
   return (
     <section className="cart">
-      <Head title={'Кошик'} url={pathname} />
+      <Head title={"Кошик"} url={pathname} />
       <div className="cart__container">
         <div className="cart__title">Оформлення замовлення</div>
         <div className="cart__body">
           <div className="cart__user">
-            <form className="cart__form form-cart" onSubmit={handleSubmit(onSubmitCallback)}>
+            <form
+              className="cart__form form-cart"
+              onSubmit={handleSubmit(onSubmitCallback)}
+            >
               <h2 className="form-cart__title">Одержувач замовлення</h2>
               <label htmlFor="nameOrder">
                 <span>Прізвище, Ім'я</span>
                 <input
                   placeholder="Ваше Ім'я та Прізвище"
                   type="text"
-                  {...register('name', {
+                  {...register("name", {
                     required: `Заповніть поле!`,
-                    minLength: { value: 3, message: `Введіть ім'я менше 3-х літер!` },
+                    minLength: {
+                      value: 3,
+                      message: `Введіть ім'я менше 3-х літер!`,
+                    },
                     pattern: {
-                      value: /^([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})[\s]([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})?$/,
+                      value:
+                        /^([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})[\s]([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})?$/,
                       message: `Невірний формат Ім'я та Прізвища!`,
                     },
                   })}
@@ -104,7 +114,7 @@ const Cart: React.FC = () => {
                 <input
                   placeholder="+380970948777 чи 0661416662"
                   type="phone"
-                  {...register('phone', {
+                  {...register("phone", {
                     required: `Заповніть поле!`,
                     pattern: {
                       value: /^\+?[380]?\d{9}/g,

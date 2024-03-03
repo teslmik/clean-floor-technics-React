@@ -4,10 +4,6 @@ import ReactMarkdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
 
 import { Categories, CircleLoader } from "../components";
-import { fetchPosts } from "../redux/posts/asyncActions";
-import { fetchProducts } from "../redux/products/asyncActions";
-import { fetchRates } from "../redux/rates/asyncActions";
-import { useAppDispatch } from "../redux/store";
 
 const SwiperBlock = React.lazy(() =>
   import(/* webpackChunkName: "SwiperBlock" */ "../components").then((m) => ({
@@ -27,13 +23,6 @@ const BlogBlock = React.lazy(() =>
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(fetchRates());
-    dispatch(fetchPosts());
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   return (
     <>
