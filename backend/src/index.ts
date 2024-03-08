@@ -30,4 +30,5 @@ const start = async () => {
 
 start();
 
-module.exports = app;
+// module.exports = app;
+export default app;

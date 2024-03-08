@@ -24,6 +24,7 @@ export const userSlice = createSlice({
     builder.addCase(fetchUser.rejected, (state) => {
       state.status = Status.ERROR;
       state.user = null;
+      localStorage.clear();
     });
   },
 });
