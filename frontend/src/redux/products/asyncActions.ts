@@ -11,8 +11,10 @@ export const fetchProducts = createAsyncThunk<
 >("product/fetchProductsStatus", async (_, thunkApi) => {
   const { filter } = thunkApi.getState();
   const order = filter.sortState.sortProperty === "rating" ? "desc" : "asc";
+  const filterValues = filter.filterState.join(",");
+  console.log("filterValues: ", filterValues);
   const { data } = await axios.get<IProductItem[]>(
-    `${process.env.REACT_APP_FETCH_URL}/products?sortBy=${filter.sortState.sortProperty}&order=${order}`
+    `${process.env.REACT_APP_FETCH_URL}/products?sortBy=${filter.sortState.sortProperty}&order=${order}&filter=${filterValues}`
   );
   return data;
 });

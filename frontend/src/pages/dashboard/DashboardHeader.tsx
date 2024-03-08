@@ -44,9 +44,7 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
         "Якщо змінити поточний курс, то зміняться всі ціни на товарах. Ви впевнені, що хочете внести зміни?"
       );
       if (confirmed) {
-        dispatch(
-          editRate({ currency: currency?.currency, value: currency?.value })
-        );
+        dispatch(editRate(currency));
         localStorage.setItem("currentEuro", currency?.value as string);
       }
     }

@@ -12,8 +12,6 @@ import {
   RouteMap,
 } from "../components";
 import { useAppDispatch } from "../redux/store";
-import { filterSelector } from "../redux/filter/selectors";
-import { setFilter } from "../redux/filter/slice";
 import { ibg, isWebp, bodyLock, bodyUnlock } from "../utils";
 import { MyGlobalContext } from "../hook/useGlobalContext";
 import { CallBackImg } from "../components/CallBackImg";
@@ -24,7 +22,6 @@ import { ratesSelector } from "../redux/rates/selectors";
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { filterState } = useSelector(filterSelector);
   const [isWebpImg, setIsWebpImg] = React.useState<boolean>(false);
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
   const [isOpenCart, setIsOpenCart] = React.useState(false);
@@ -37,24 +34,12 @@ const MainLayout: React.FC = () => {
   const [windowWidth, setWindowWidth] = React.useState(window.screen.width);
   const { items } = useSelector(ratesSelector);
 
-  const handleTooggle = (value: string) => {
-    const currentIndex = filterState.indexOf(value);
-    const newChecked = [...filterState];
-
-    currentIndex === -1
-      ? newChecked.push(value)
-      : newChecked.splice(currentIndex, 1);
-
-    dispatch(setFilter(newChecked));
-  };
-
   const contextValues = React.useMemo(
     () => ({
       isOpenCart,
       setIsOpenCart,
       isOpenCallback,
       setIsOpenCallback,
-      handleTooggle,
       windowWidth,
       isOpenMap,
       setIsOpenMap,
