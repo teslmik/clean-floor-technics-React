@@ -21,7 +21,7 @@ import Head from "../layouts/Head";
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { filterState, sortState } = useSelector(filterSelector);
+  const { sortState } = useSelector(filterSelector);
   const { items, status } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();
   const { pathname } = useLocation();

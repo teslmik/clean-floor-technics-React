@@ -1,6 +1,6 @@
 export interface IRatesItem {
   currency: string;
-  value: number;
+  value: number | string;
 }
 
 export interface IBankRate {

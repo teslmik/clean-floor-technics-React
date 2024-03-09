@@ -23,16 +23,13 @@ import { UserType } from "../../redux/user/types";
 import { ratesSelector } from "../../redux/rates/selectors";
 import { useAppDispatch } from "../../redux/store";
 import { editRate, fetchRates } from "../../redux/rates/asyncActions";
-import { Status } from "../../redux/rates/types";
+import { IRatesItem, Status } from "../../redux/rates/types";
 
 import styles from "./dashboard.module.scss";
 
 const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
   const dispatch = useAppDispatch();
-  const [currency, setCurrency] = React.useState<{
-    currency: string;
-    value: string;
-  }>();
+  const [currency, setCurrency] = React.useState<IRatesItem>();
   const [onEditCurrency, setOnEditCurrency] = React.useState(false);
   const { items: ratesItems, status } = useSelector(ratesSelector);
 
@@ -45,7 +42,8 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
       );
       if (confirmed) {
         dispatch(editRate(currency));
-        localStorage.setItem("currentEuro", currency?.value as string);
+        currency?.value &&
+          localStorage.setItem("currentEuro", currency.value.toString());
       }
     }
   };
@@ -54,13 +52,9 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
     if (status === Status.IDLE) dispatch(fetchRates());
     if (ratesItems.rates.length > 0) {
       const rateEuro = ratesItems.rates.find((rate) => rate.currency === "eu");
-      setCurrency(
-        rateEuro as unknown as {
-          currency: string;
-          value: string;
-        }
-      );
-      localStorage.setItem("currentEuro", rateEuro?.value.toString() as string);
+      setCurrency(rateEuro);
+      rateEuro?.value &&
+        localStorage.setItem("currentEuro", rateEuro.value.toString());
     }
   }, [ratesItems, status]);
   return (
@@ -79,73 +73,71 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
             <div className={styles.logo}>
               <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
             </div>
-            {status === Status.SUCCESS && currency && (
-              <Stack direction="row" alignItems="center" gap={2}>
-                <Stack direction="row" alignItems="center" gap={0.5}>
-                  <FormControl variant="standard" sx={{ maxWidth: "112px" }}>
-                    <InputLabel htmlFor="standard-basic" size="small">
-                      Встановлений курс
-                    </InputLabel>
-                    <Input
-                      id="standard-basic"
-                      value={currency.value.toString()}
-                      onChange={(e) =>
-                        setCurrency((prev) =>
-                          prev
-                            ? {
-                                ...prev,
-                                value: e.target.value,
-                              }
-                            : undefined
-                        )
-                      }
-                      size="small"
-                      startAdornment={
-                        <InputAdornment position="start">€</InputAdornment>
-                      }
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={
-                              onEditCurrency
-                                ? handleEditRate
-                                : handleUndisableInput
-                            }
-                            edge="end"
-                            size="small"
-                          >
-                            {onEditCurrency ? (
-                              <CheckCircle color="success" />
-                            ) : (
-                              <EditIcon color="success" />
-                            )}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      disabled={!onEditCurrency}
-                    />
-                  </FormControl>
-                </Stack>
-                <Stack direction="column" alignItems="center" gap={0.5}>
-                  <Chip
-                    color="info"
-                    label={
-                      <Stack direction="row" gap={1}>
-                        <Typography>
-                          {ratesItems.bankEuro?.rateSell
-                            ? ratesItems.bankEuro.rateSell.toFixed(2)
-                            : ratesItems.bankEuro?.error || "empty"}
-                        </Typography>
-                        <Euro />
-                      </Stack>
+            {/* {currency && ( */}
+            <Stack direction="row" alignItems="center" gap={2}>
+              <Stack direction="row" alignItems="center" gap={0.5}>
+                <FormControl variant="standard" sx={{ maxWidth: "112px" }}>
+                  <InputLabel htmlFor="standard-basic" size="small">
+                    Встановлений курс
+                  </InputLabel>
+                  <Input
+                    id="standard-basic"
+                    value={
+                      currency?.value || localStorage.getItem("currentEuro")
                     }
+                    onChange={(e) =>
+                      setCurrency({
+                        currency: "eu",
+                        value: e.target.value,
+                      })
+                    }
+                    size="small"
+                    startAdornment={
+                      <InputAdornment position="start">€</InputAdornment>
+                    }
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={
+                            onEditCurrency
+                              ? handleEditRate
+                              : handleUndisableInput
+                          }
+                          edge="end"
+                          size="small"
+                        >
+                          {onEditCurrency ? (
+                            <CheckCircle color="success" />
+                          ) : (
+                            <EditIcon color="success" />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    disabled={!onEditCurrency}
                   />
-                  <Typography variant="subtitle2" fontSize={12}>
-                    Курс € МОНОБАНК
-                  </Typography>
-                </Stack>
+                </FormControl>
               </Stack>
-            )}
+              <Stack direction="column" alignItems="center" gap={0.5}>
+                <Chip
+                  color="info"
+                  label={
+                    <Stack direction="row" gap={1}>
+                      <Typography>
+                        {ratesItems.bankEuro?.rateSell
+                          ? ratesItems.bankEuro.rateSell.toFixed(2)
+                          : ratesItems.bankEuro?.error || "empty"}
+                      </Typography>
+                      <Euro />
+                    </Stack>
+                  }
+                />
+                <Typography variant="subtitle2" fontSize={12}>
+                  Курс € МОНОБАНК
+                </Typography>
+              </Stack>
+            </Stack>
+            {/* )} */}
             {user && (
               <Tooltip
                 placement="left"
