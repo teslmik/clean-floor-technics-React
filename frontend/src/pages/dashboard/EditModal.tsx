@@ -10,6 +10,8 @@ import {
   Typography,
   Button,
   CircularProgress,
+  Checkbox,
+  Divider,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import { useFormik } from "formik";
@@ -20,9 +22,10 @@ import { editValidate } from "../../constants/edit-validation";
 import { editProduct } from "../../redux/products/asyncActions";
 import { IProductItem } from "../../redux/products/types";
 import { useAppDispatch } from "../../redux/store";
-import { euroToHrivna } from "../../utils";
+import { euroToHrivna, filterList } from "../../utils";
 
 import styles from "./dashboard.module.scss";
+import { labelKeys } from "../../constants/label-keys";
 
 type Properties = {
   open: boolean;
@@ -37,13 +40,25 @@ const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
     values: {
       price: number;
       availability: boolean;
+      _promo: boolean;
+      _new: boolean;
+      _popular: boolean;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     if (product) {
       const id = product._id;
+      const payload = {
+        price: values.price,
+        availability: values.availability,
+        label: {
+          _promo: values._promo,
+          _new: values._new,
+          _popular: values._popular,
+        },
+      };
       setTimeout(() => {
-        dispatch(editProduct({ payload: values, id }));
+        dispatch(editProduct({ payload, id }));
         handleClose();
         setSubmitting(false);
       }, 500);
@@ -61,6 +76,9 @@ const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
     initialValues: {
       price: product?.price || 0,
       availability: product?.availability || false,
+      _promo: product?.label._promo || false,
+      _new: product?.label._new || false,
+      _popular: product?.label._popular || false,
     },
     validateOnBlur: false,
     validate: editValidate,
@@ -71,12 +89,18 @@ const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
     !isValid ||
     isSubmitting ||
     (values.price === product?.price &&
-      values.availability === product?.availability);
+      values.availability === product?.availability &&
+      product.label._new === values._new &&
+      product.label._popular === values._popular &&
+      product.label._promo === values._promo);
 
   React.useEffect(() => {
     if (product) {
       setFieldValue("price", product.price);
       setFieldValue("availability", product.availability);
+      setFieldValue("_new", product.label._new);
+      setFieldValue("_promo", product.label._promo);
+      setFieldValue("_popular", product.label._popular);
     }
   }, [product]);
   return (
@@ -132,6 +156,38 @@ const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
               label="У наявності"
               labelPlacement="start"
             />
+          </Stack>
+          <Divider />
+          <Stack
+            direction="row"
+            gap={0}
+            flexWrap="wrap"
+            justifyContent="space-between"
+          >
+            {labelKeys.map((key) => (
+              <FormControlLabel
+                style={{ marginRight: 0 }}
+                key={key.name}
+                control={
+                  <Checkbox
+                    name={key.name}
+                    color={key.color}
+                    size="medium"
+                    checked={values[key.name]}
+                    onChange={handleChange}
+                  />
+                }
+                label={
+                  <Chip
+                    label={
+                      filterList.find((list) => list.name === key.name)?.value
+                    }
+                    color={key.color}
+                    size="small"
+                  />
+                }
+              />
+            ))}
           </Stack>
           <Button
             type="submit"

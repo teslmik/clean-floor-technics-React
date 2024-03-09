@@ -18,6 +18,7 @@ import { Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
+import { setFilter } from "../redux/filter/slice";
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +36,11 @@ const Catalog: React.FC = () => {
   React.useEffect(() => {
     window.scroll(0, 0);
     dispatch(fetchProducts());
-  }, [dispatch, sortState]);
+
+    return () => {
+      dispatch(setFilter([]));
+    };
+  }, [sortState]);
 
   return (
     <>

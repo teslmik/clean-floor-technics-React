@@ -1,6 +1,7 @@
 import { Edit as EditIcon } from "@mui/icons-material";
 import {
   Avatar,
+  Chip,
   Grid,
   IconButton,
   ListItem,
@@ -16,9 +17,10 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { IProductItem } from "../../redux/products/types";
-import { euroToHrivna } from "../../utils";
 import { ROUTER_KEYS } from "../../constants/app-keys";
+import { labelKeys } from "../../constants/label-keys";
+import { IProductItem } from "../../redux/products/types";
+import { euroToHrivna, filterList } from "../../utils";
 
 type Properties = {
   product: IProductItem;
@@ -63,6 +65,22 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                 >
                   {`У наявності: ${product.availability ? "Так" : "Ні"}`}
                 </Typography>
+                <Stack direction="row" gap={0.5}>
+                  {labelKeys.map(
+                    (key) =>
+                      product.label[key.name] === true && (
+                        <Chip
+                          key={key.name}
+                          label={
+                            filterList.find((list) => list.name === key.name)
+                              ?.value
+                          }
+                          color={key.color}
+                          size="small"
+                        />
+                      )
+                  )}
+                </Stack>
               </Stack>
             }
           />

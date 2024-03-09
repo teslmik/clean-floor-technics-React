@@ -19,13 +19,6 @@ export const filterSlice = createSlice({
       state.sortState = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(setFilter, (state, action) => {
-      console.log("action: ", action);
-      state.filterState = action.payload;
-      fetchProducts();
-    });
-  },
 });
 
 export const { setFilter, setSort } = filterSlice.actions;
