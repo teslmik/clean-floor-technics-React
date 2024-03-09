@@ -1,6 +1,6 @@
-@use 'sass:math';
-@import '../../scss/lib/variables';
-@import '../../scss/lib/functions';
+@use "sass:math";
+@import "../../scss/lib/variables";
+@import "../../scss/lib/functions";
 
 .filter__title {
   display: none;
@@ -80,6 +80,7 @@
   li {
     display: flex;
     align-items: center;
+    height: 20px;
     transition: color 0.2s ease-in-out;
     @media (any-hover: hover) {
       &:hover {
@@ -92,8 +93,10 @@
   }
 
   label {
+    position: relative;
     margin-left: 8px;
     font-size: 13px;
+    line-height: 1;
     cursor: pointer;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -104,7 +107,9 @@
       font-size: 16px;
     }
     sup {
-      margin-left: 4px;
+      position: absolute;
+      top: -4px;
+      right: -14px;
       font-size: 10px;
       color: #898989;
     }
@@ -228,7 +233,7 @@
         margin: 0;
       }
 
-      &[type='number'] {
+      &[type="number"] {
         -moz-appearance: textfield;
       }
     }
@@ -264,7 +269,7 @@
     }
   }
 
-  input[type='range'] {
+  input[type="range"] {
     width: 220px;
   }
 }

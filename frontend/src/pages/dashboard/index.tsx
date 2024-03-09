@@ -72,7 +72,7 @@ const Dashboard: React.FC = () => {
                       ? [...new Array(6)].map((_, i) => (
                           <ProductSkeleton key={i} />
                         ))
-                      : products.map((product) => (
+                      : products.products.map((product) => (
                           <ProductItem
                             key={product._id}
                             product={product}

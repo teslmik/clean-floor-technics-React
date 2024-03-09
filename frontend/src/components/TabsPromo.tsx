@@ -60,7 +60,7 @@ export const TabsPromo: React.FC = () => {
               >
                 {status === Status.LOADING
                   ? skeleton
-                  : items
+                  : items.products
                       .filter((obj: any) => {
                         if (obj.label[tabObj.name] || obj[tabObj.name])
                           return true;

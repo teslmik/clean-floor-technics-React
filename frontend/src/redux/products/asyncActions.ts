@@ -5,16 +5,22 @@ import { RootState } from "../store";
 import { IProductItem } from "./types";
 
 export const fetchProducts = createAsyncThunk<
-  IProductItem[],
+  {
+    counts: { [key: string]: number };
+    products: IProductItem[];
+  },
   void,
   { state: RootState }
 >("product/fetchProductsStatus", async (_, thunkApi) => {
   const { filter } = thunkApi.getState();
   const order = filter.sortState.sortProperty === "rating" ? "desc" : "asc";
-  const filterValues = filter.filterState.join(",");
-  console.log("filterValues: ", filterValues);
-  const { data } = await axios.get<IProductItem[]>(
-    `${process.env.REACT_APP_FETCH_URL}/products?sortBy=${filter.sortState.sortProperty}&order=${order}&filter=${filterValues}`
+  const { data } = await axios.get<{
+    counts: { [key: string]: number };
+    products: IProductItem[];
+  }>(
+    `${process.env.REACT_APP_FETCH_URL}/products?sortBy=${
+      filter.sortState.sortProperty
+    }&order=${order}&filter=${filter.filterState.join(",")}`
   );
   return data;
 });

@@ -28,9 +28,9 @@ export const Filter: React.FC = () => {
 
   const promoCount = (value: string) => {
     let count = 0;
-    items.map((obj: any) =>
+    items.products.map((obj: any) =>
       obj.label[value] || obj.category === value || obj.availability === true
-        ? (count = count + 1)
+        ? count++
         : count
     );
     return count;
@@ -45,6 +45,11 @@ export const Filter: React.FC = () => {
   const handleToggle = (value: string) => {
     const filter = toggleFilter(value, filterState);
     dispatch(setFilter(filter));
+    dispatch(fetchProducts());
+  };
+
+  const clearFilter = () => {
+    dispatch(setFilter([]));
     dispatch(fetchProducts());
   };
 
@@ -102,10 +107,7 @@ export const Filter: React.FC = () => {
               </div>
               {filterState.length > 0 && (
                 <div className={styles.filter__item}>
-                  <span
-                    onClick={() => dispatch(setFilter([]))}
-                    className={styles.filter__clear}
-                  >
+                  <span onClick={clearFilter} className={styles.filter__clear}>
                     Очистити фільтр
                   </span>
                 </div>
@@ -123,9 +125,13 @@ export const Filter: React.FC = () => {
                     />
                     <label htmlFor={obj.name}>
                       {obj.value}
-                      {promoCount(obj.name) !== 0 && (
-                        <sup>{promoCount(obj.name)}</sup>
-                      )}
+                      {items.counts[obj.name] ||
+                      items.counts[obj.name.substring(1)] ? (
+                        <sup>
+                          {items.counts[obj.name] ||
+                            items.counts[obj.name.substring(1)]}
+                        </sup>
+                      ) : null}
                     </label>
                   </li>
                 ))}
@@ -143,18 +149,14 @@ export const Filter: React.FC = () => {
                       onChange={() => handleToggle(obj.name)}
                       checked={filterState.indexOf(obj.name) !== -1}
                       disabled={
-                        promoCount(obj.name) === 0
-                          ? true
-                          : status === "loading"
-                          ? true
-                          : false
+                        items.counts[obj.name] === 0 || status === "loading"
                       }
                     />
                     <label htmlFor={obj.name}>
                       {obj.value}
-                      {promoCount(obj.name) !== 0 && (
-                        <sup>{promoCount(obj.name)}</sup>
-                      )}
+                      {items.counts[obj.name] ? (
+                        <sup>{items.counts[obj.name]}</sup>
+                      ) : null}
                     </label>
                   </li>
                 ))}

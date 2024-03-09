@@ -4,7 +4,7 @@ import { fetchProducts, editProduct } from "./asyncActions";
 import { IProductSliceState, Status } from "./types";
 
 const initialState: IProductSliceState = {
-  items: [],
+  items: { counts: {}, products: [] },
   status: Status.LOADING,
 };
 
@@ -15,23 +15,26 @@ export const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
       state.status = Status.LOADING;
-      state.items = [];
+      state.items = { counts: {}, products: [] };
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.items = {
+        counts: action.payload.counts,
+        products: action.payload.products,
+      };
       state.status = Status.SUCCESS;
     });
     builder.addCase(fetchProducts.rejected, (state) => {
       state.status = Status.ERROR;
-      state.items = [];
+      state.items.products = [];
     });
     builder.addCase(editProduct.pending, (state) => {
       state.status = Status.LOADING;
     });
     builder.addCase(editProduct.fulfilled, (state, action) => {
-      state.items.forEach((product, i) => {
+      state.items.products.forEach((product, i) => {
         if (product._id === action.payload._id) {
-          state.items[i] = action.payload;
+          state.items.products[i] = action.payload;
         }
       });
       state.status = Status.SUCCESS;
