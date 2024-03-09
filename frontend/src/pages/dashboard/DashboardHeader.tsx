@@ -26,6 +26,7 @@ import { editRate, fetchRates } from "../../redux/rates/asyncActions";
 import { IRatesItem, Status } from "../../redux/rates/types";
 
 import styles from "./dashboard.module.scss";
+import { Link } from "react-router-dom";
 
 const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
   const dispatch = useAppDispatch();
@@ -70,9 +71,9 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
               py: 1,
             }}
           >
-            <div className={styles.logo}>
+            <Link to="/" className={styles.logo}>
               <img src="/assets/img/logo/logo-transparent.png" alt="logo" />
-            </div>
+            </Link>
             {/* {currency && ( */}
             <Stack direction="row" alignItems="center" gap={2}>
               <Stack direction="row" alignItems="center" gap={0.5}>

@@ -27,7 +27,7 @@ const Catalog: React.FC = () => {
   const { windowWidth } = useGlobalContext();
   const { pathname } = useLocation();
 
-  const skeleton = [...new Array(6)].map((_, i) => (
+  const skeleton = [...new Array(8)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
       <SkeletonLoader />
     </div>

@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Breadcrumbs, SwiperItem } from "../components";
+import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
 import { cartSelector } from "../redux/cart/selectors";
 import { addToCart } from "../redux/cart/slice";
 import { ICartItem } from "../redux/cart/types";
@@ -66,11 +66,7 @@ const FullItem: React.FC = () => {
   };
 
   if (!product) {
-    return (
-      <section className="__container">
-        <div className="loader">Loading...</div>
-      </section>
-    );
+    return <CircleLoader />;
   }
 
   return (

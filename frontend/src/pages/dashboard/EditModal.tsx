@@ -23,9 +23,9 @@ import { editProduct } from "../../redux/products/asyncActions";
 import { IProductItem } from "../../redux/products/types";
 import { useAppDispatch } from "../../redux/store";
 import { euroToHrivna, filterList } from "../../utils";
+import { labelKeys } from "../../constants/label-keys";
 
 import styles from "./dashboard.module.scss";
-import { labelKeys } from "../../constants/label-keys";
 
 type Properties = {
   open: boolean;
