@@ -1,13 +1,26 @@
 import RatesModel from "../models/rates.model";
+import { RatesType } from "../types";
 
 class RatesService {
-  async getRates(): Promise<{ value: number }[]> {
-    const rates = await RatesModel.find();
+  async getRates(): Promise<RatesType[]> {
+    const rates = await RatesModel.find().select([
+      "currency",
+      "value",
+      "updatedAt",
+    ]);
 
     return rates;
   }
 
-  // euro 978, usd 840, uah 980
+  async editRate({ currency, value }: { currency: string; value: number }) {
+    const rates = await RatesModel.findOneAndUpdate(
+      { currency },
+      { value },
+      { upsert: true, new: true },
+    ).select(["currency", "value", "updatedAt"]);
+
+    return rates;
+  }
 }
 
 export const ratesService = new RatesService();

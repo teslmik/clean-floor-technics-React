@@ -1,17 +1,17 @@
-import axios from 'axios';
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
+import React from "react";
+import ReactMarkdown from "react-markdown";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { Breadcrumbs, SwiperItem } from '../components';
-import { cartSelector } from '../redux/cart/selectors';
-import { addToCart } from '../redux/cart/slice';
-import { ICartItem } from '../redux/cart/types';
-import { IProductItem } from '../redux/products/types';
-import { tabsItem, euroToHrivna } from '../utils';
-import { useGlobalContext } from '../hook/useGlobalContext';
-import Head from '../layouts/Head';
+import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
+import { cartSelector } from "../redux/cart/selectors";
+import { addToCart } from "../redux/cart/slice";
+import { ICartItem } from "../redux/cart/types";
+import { IProductItem } from "../redux/products/types";
+import { tabsItem, euroToHrivna } from "../utils";
+import { useGlobalContext } from "../hook/useGlobalContext";
+import Head from "../layouts/Head";
 
 const FullItem: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,14 +32,29 @@ const FullItem: React.FC = () => {
       try {
         setProduct(undefined);
         const { data } = await axios.get<IProductItem>(
-          `${process.env.REACT_APP_FETCH_URL}/products/${_id}`,
+          `${process.env.REACT_APP_FETCH_URL}/products/${_id}`
         );
         setProduct(data);
-        const { _id: id, category, imageUrl, title, oldPrice, price }: ICartItem = data;
-        setCartItem({ _id: id, category, imageUrl, title, oldPrice, price, count: 1 });
+        const {
+          _id: id,
+          category,
+          imageUrl,
+          title,
+          oldPrice,
+          price,
+        }: ICartItem = data;
+        setCartItem({
+          _id: id,
+          category,
+          imageUrl,
+          title,
+          oldPrice,
+          price,
+          count: 1,
+        });
       } catch (error) {
-        alert('Товар не знайдено, спробуйте пізніше...');
-        navigate('/catalog');
+        alert("Товар не знайдено, спробуйте пізніше...");
+        navigate("/catalog");
       }
     }
     fetchProduct();
@@ -51,25 +66,31 @@ const FullItem: React.FC = () => {
   };
 
   if (!product) {
-    return (
-      <section className="__container">
-        <div className="loader">Loading...</div>
-      </section>
-    );
+    return <CircleLoader />;
   }
 
   return (
     <section className="fullitem__container">
-      <Head title={product.title} url={pathname} imageUrl={`products/${product.imageUrl}.png`} />
-      {windowWidth < 683 && <Breadcrumbs title={product.title} category={product.category} />}
+      <Head
+        title={product.title}
+        url={pathname}
+        imageUrl={`products/${product.imageUrl}.png`}
+      />
+      {windowWidth < 683 && (
+        <Breadcrumbs title={product.title} category={product.category} />
+      )}
       <div className="fullitem__content">
         {windowWidth < 683 && (
           <div className="body-fullitem__bottom">
             <div className="fullitem__discription discription-fullitem">
-              <div className="discription-fullitem__title">Короткий опис товару</div>
+              <div className="discription-fullitem__title">
+                Короткий опис товару
+              </div>
               <span className="discription-fullitem__text">
                 {product.description &&
-                  product.description.map((str, i) => <ReactMarkdown key={i}>{str}</ReactMarkdown>)}
+                  product.description.map((str, i) => (
+                    <ReactMarkdown key={i}>{str}</ReactMarkdown>
+                  ))}
               </span>
             </div>
             <div className="body-fullitem__specification specification">
@@ -93,9 +114,10 @@ const FullItem: React.FC = () => {
                       onClick={() => setToggleState(i)}
                       className={
                         toggleState === i
-                          ? 'tabs-specification__text active'
-                          : 'tabs-specification__text'
-                      }>
+                          ? "tabs-specification__text active"
+                          : "tabs-specification__text"
+                      }
+                    >
                       {tab}
                     </div>
                   ))}
@@ -104,31 +126,38 @@ const FullItem: React.FC = () => {
                   <div
                     className={
                       toggleState === 0
-                        ? 'tabs-specification__body active'
-                        : 'tabs-specification__body'
-                    }>
+                        ? "tabs-specification__body active"
+                        : "tabs-specification__body"
+                    }
+                  >
                     <p>— Новою поштой по Україні — за тарифами перевізника</p>
                     <p>— Кур'єром по Одесі — безкоштовно</p>
                     <p>
-                      <Link to={'/pay_and_delivery'}>Детальніше про доставку</Link>
+                      <Link to={"/pay_and_delivery"}>
+                        Детальніше про доставку
+                      </Link>
                     </p>
                   </div>
                   <div
                     className={
                       toggleState === 1
-                        ? 'tabs-specification__body active'
-                        : 'tabs-specification__body'
-                    }>
+                        ? "tabs-specification__body active"
+                        : "tabs-specification__body"
+                    }
+                  >
                     <p>— Готівкою при отриманні</p>
-                    <p>— Безготівковий розрахунок для юридичних та фізичних осіб</p>
+                    <p>
+                      — Безготівковий розрахунок для юридичних та фізичних осіб
+                    </p>
                     <p>— Розстрочка до 9 місяців від Укрсиббанку</p>
                   </div>
                   <div
                     className={
                       toggleState === 2
-                        ? 'tabs-specification__body active'
-                        : 'tabs-specification__body'
-                    }>
+                        ? "tabs-specification__body active"
+                        : "tabs-specification__body"
+                    }
+                  >
                     <p>— Гарантія від виробника 12 місяців</p>
                     <p>— Обмін/повернення товару впродовж 14 днів</p>
                   </div>
@@ -149,7 +178,7 @@ const FullItem: React.FC = () => {
           {windowWidth < 683 && (
             <div className="body-fullitem__btn">
               <div className="fullitem-header__availability">
-                {product.availability ? 'В наявності' : 'Під замовлення'}
+                {product.availability ? "В наявності" : "Під замовлення"}
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
@@ -163,9 +192,10 @@ const FullItem: React.FC = () => {
               </div>
               <button
                 onClick={onClickAdd}
-                className={isItemOnCart ? 'inCart' : ''}
-                disabled={isItemOnCart && true}>
-                <span>{isItemOnCart ? 'У кошику' : 'Купити'}</span>
+                className={isItemOnCart ? "inCart" : ""}
+                disabled={isItemOnCart && true}
+              >
+                <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
               </button>
             </div>
           )}
@@ -180,7 +210,7 @@ const FullItem: React.FC = () => {
                 <h1 className="fullitem-header__title">{product.title}</h1>
                 {windowWidth >= 683 && (
                   <div className="fullitem-header__availability">
-                    {product.availability ? 'В наявності' : 'Під замовлення'}
+                    {product.availability ? "В наявності" : "Під замовлення"}
                   </div>
                 )}
               </div>
@@ -209,9 +239,10 @@ const FullItem: React.FC = () => {
               <div className="body-fullitem__btn">
                 <button
                   onClick={onClickAdd}
-                  className={isItemOnCart ? 'inCart' : ''}
-                  disabled={isItemOnCart && true}>
-                  <span>{isItemOnCart ? 'У кошику' : 'Купити'}</span>
+                  className={isItemOnCart ? "inCart" : ""}
+                  disabled={isItemOnCart && true}
+                >
+                  <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
                 </button>
               </div>
               <div className="body-fullitem__specification specification">
@@ -219,11 +250,11 @@ const FullItem: React.FC = () => {
                   <div className="specification__title">Характеристики </div>
                   <div className="specification__list">
                     {product.specification?.map((item, i) => (
-                        <React.Fragment key={i}>
-                          <p className="list-first">{item.name}</p>
-                          <p className="list-second">{item.value}</p>
-                        </React.Fragment>
-                      ))}
+                      <React.Fragment key={i}>
+                        <p className="list-first">{item.name}</p>
+                        <p className="list-second">{item.value}</p>
+                      </React.Fragment>
+                    ))}
                   </div>
                 </div>
                 <div className="specification__tabs tabs-specification">
@@ -234,9 +265,10 @@ const FullItem: React.FC = () => {
                         onClick={() => setToggleState(i)}
                         className={
                           toggleState === i
-                            ? 'tabs-specification__text active'
-                            : 'tabs-specification__text'
-                        }>
+                            ? "tabs-specification__text active"
+                            : "tabs-specification__text"
+                        }
+                      >
                         {tab}
                       </div>
                     ))}
@@ -245,31 +277,42 @@ const FullItem: React.FC = () => {
                     <div
                       className={
                         toggleState === 0
-                          ? 'tabs-specification__body active'
-                          : 'tabs-specification__body'
-                      }>
+                          ? "tabs-specification__body active"
+                          : "tabs-specification__body"
+                      }
+                    >
                       <p>— Новою поштой по Україні — за тарифами перевізника</p>
                       <p>— Кур'єром по Одесі — безкоштовно</p>
                       <p>
-                        <Link to={'/pay_and_delivery'}>Детальніше про доставку</Link>
+                        <Link to={"/pay_and_delivery"}>
+                          Детальніше про доставку
+                        </Link>
                       </p>
                     </div>
                     <div
                       className={
                         toggleState === 1
-                          ? 'tabs-specification__body active'
-                          : 'tabs-specification__body'
-                      }>
+                          ? "tabs-specification__body active"
+                          : "tabs-specification__body"
+                      }
+                    >
                       <p>— Готівкою при отриманні</p>
-                      <p>— Безготівковий розрахунок для юридичних та фізичних осіб</p>
-                      <p>— Розстрочка чи оплата частинами від Приватбанку (тільки для власників кредитких карток Приватбанку)</p>
+                      <p>
+                        — Безготівковий розрахунок для юридичних та фізичних
+                        осіб
+                      </p>
+                      <p>
+                        — Розстрочка чи оплата частинами від Приватбанку (тільки
+                        для власників кредитких карток Приватбанку)
+                      </p>
                     </div>
                     <div
                       className={
                         toggleState === 2
-                          ? 'tabs-specification__body active'
-                          : 'tabs-specification__body'
-                      }>
+                          ? "tabs-specification__body active"
+                          : "tabs-specification__body"
+                      }
+                    >
                       <p>— Гарантія від виробника 12 місяців</p>
                       <p>— Обмін/повернення товару впродовж 14 днів</p>
                     </div>
@@ -282,10 +325,14 @@ const FullItem: React.FC = () => {
       </div>
       {windowWidth >= 683 && (
         <div className="fullitem__discription discription-fullitem">
-          <div className="discription-fullitem__title">Короткий опис товару</div>
+          <div className="discription-fullitem__title">
+            Короткий опис товару
+          </div>
           <span className="discription-fullitem__text">
             {product.description &&
-              product.description.map((str, i) => <ReactMarkdown key={i}>{str}</ReactMarkdown>)}
+              product.description.map((str, i) => (
+                <ReactMarkdown key={i}>{str}</ReactMarkdown>
+              ))}
           </span>
         </div>
       )}

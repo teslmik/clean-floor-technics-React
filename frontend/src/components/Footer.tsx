@@ -1,19 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { useGlobalContext } from '../hook/useGlobalContext';
-import { categoriesList, menuListArr } from '../utils';
+import { useGlobalContext } from "../hook/useGlobalContext";
+import { filterSelector } from "../redux/filter/selectors";
+import { setFilter } from "../redux/filter/slice";
+import { useAppDispatch } from "../redux/store";
+import { categoriesList, menuListArr, toggleFilter } from "../utils";
 
 export const Footer: React.FC = () => {
-  const { setIsOpenCallback, handleTooggle, setIsOpenMap, isWebpImg } = useGlobalContext();
+  const dispatch = useAppDispatch();
+  const { setIsOpenCallback, setIsOpenMap, isWebpImg } = useGlobalContext();
+  const { filterState } = useSelector(filterSelector);
   const [scroll, setScroll] = React.useState(0);
   const currentYear = new Date().getUTCFullYear();
 
   const handleScroll = () => setScroll(window.scrollY);
 
+  const handleToggle = (value: string) => {
+    const filter = toggleFilter(value, filterState);
+    dispatch(setFilter(filter));
+  };
+
   React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -23,7 +34,9 @@ export const Footer: React.FC = () => {
           <div className="footer__copyright copyright">
             <a href="/" className="copyright__logo ibg">
               <img
-                src={`/assets/img/logo/logo-transparent${isWebpImg ? '.webp' : '.png'}`}
+                src={`/assets/img/logo/logo-transparent${
+                  isWebpImg ? ".webp" : ".png"
+                }`}
                 alt="logo"
               />
             </a>
@@ -31,7 +44,8 @@ export const Footer: React.FC = () => {
               <h1>© Інтернет-магазин Clean&nbsp;Floor&nbsp;Technics</h1>
               <p>{`2021-${currentYear}`}</p>
               <p>
-                Created by <a href="https://github.com/teslmik">Mikhaylo&nbsp;Teslenko</a>
+                Created by{" "}
+                <a href="https://github.com/teslmik">Mikhaylo&nbsp;Teslenko</a>
               </p>
             </div>
           </div>
@@ -41,9 +55,10 @@ export const Footer: React.FC = () => {
               {categoriesList.map((obj, i) => (
                 <Link
                   key={i}
-                  onClick={() => handleTooggle(obj.name)}
-                  to={'catalog'}
-                  className="footer__link">
+                  onClick={() => handleToggle(obj.name)}
+                  to={"catalog"}
+                  className="footer__link"
+                >
                   <span>{obj.value}</span>
                 </Link>
               ))}
@@ -70,12 +85,18 @@ export const Footer: React.FC = () => {
                     </a>
                   </div>
                   <div className="phones-list__item">
-                    <a className="_icon-viber" href="viber://chat?number=%2B380661416662/">
+                    <a
+                      className="_icon-viber"
+                      href="viber://chat?number=%2B380661416662/"
+                    >
                       066 141-66-62
                     </a>
                   </div>
                 </div>
-                <div onClick={() => setIsOpenCallback(true)} className="actions__phones-text">
+                <div
+                  onClick={() => setIsOpenCallback(true)}
+                  className="actions__phones-text"
+                >
                   <span>Передзвонити Вам?</span>
                 </div>
               </div>
@@ -103,7 +124,8 @@ export const Footer: React.FC = () => {
               <a
                 href="https://www.instagram.com/clean_floor_technics/"
                 target="_blanck"
-                className="social__link">
+                className="social__link"
+              >
                 <i className="_icon-instagram"></i>
               </a>
             </div>
@@ -112,8 +134,9 @@ export const Footer: React.FC = () => {
       </div>
       <div
         className="page-up"
-        style={scroll > 300 ? { transform: 'translateY(-40px)' } : {}}
-        onClick={() => window.scrollTo({ top: (0), behavior: 'smooth' })}>
+        style={scroll > 300 ? { transform: "translateY(-40px)" } : {}}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
         <div className="upButton-btn _icon-arrow">
           <span>Наверх</span>
         </div>

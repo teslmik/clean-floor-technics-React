@@ -1,21 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchRates } from "./asyncActions";
+import { editRate, fetchRates } from "./asyncActions";
 import { IRatesSliceState, Status } from "./types";
 
 const initialState: IRatesSliceState = {
-  items: [],
-  status: Status.LOADING,
+  items: { rates: [], bankEuro: null },
+  status: Status.IDLE,
 };
 
-export const productsSlice = createSlice({
+export const ratesSlice = createSlice({
   name: "rates",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRates.pending, (state) => {
       state.status = Status.LOADING;
-      state.items = [];
+      state.items = { rates: [], bankEuro: null };
     });
     builder.addCase(fetchRates.fulfilled, (state, action) => {
       state.items = action.payload;
@@ -23,9 +23,21 @@ export const productsSlice = createSlice({
     });
     builder.addCase(fetchRates.rejected, (state) => {
       state.status = Status.ERROR;
-      state.items = [];
+      state.items = { rates: [], bankEuro: null };
+    });
+    builder.addCase(editRate.pending, (state) => {
+      state.status = Status.LOADING;
+      state.items.rates = [];
+    });
+    builder.addCase(editRate.fulfilled, (state, action) => {
+      state.items.rates = [action.payload];
+      state.status = Status.SUCCESS;
+    });
+    builder.addCase(editRate.rejected, (state) => {
+      state.status = Status.ERROR;
+      state.items.rates = [];
     });
   },
 });
 
-export default productsSlice.reducer;
+export default ratesSlice.reducer;

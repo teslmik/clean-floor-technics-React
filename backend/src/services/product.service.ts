@@ -1,18 +1,104 @@
 import { OrderEnum } from "../enums";
 import ProductModel from "../models/product.model";
-import { ProductType, SearchParamsType } from "../types";
+import { LabelType, ProductType, SearchParamsType } from "../types";
 
 class ProductService {
-  public async getAllProducts({
-    sortBy,
-    order,
-  }: SearchParamsType): Promise<ProductType[]> {
+  public async getAllProducts({ sortBy, order, filter }: SearchParamsType) {
     const sortField = sortBy as keyof ProductType;
     const sortOrder = order === OrderEnum.DESC ? -1 : 1;
 
-    const products = await ProductModel.find().sort({ [sortField]: sortOrder });
+    let filterObject = {} as {
+      category?: { $in: string[] };
+      availability?: boolean;
+    };
+    const labels = [] as (keyof LabelType)[];
+    if (filter) {
+      filterObject = filter.split(",").reduce(
+        (acc, item) => {
+          const trimmedItem = item.trim();
+          if (trimmedItem === "availability") {
+            acc.availability = true;
+          } else if (trimmedItem.startsWith("_") && trimmedItem.length > 1) {
+            labels.push(trimmedItem as keyof LabelType);
+          } else if (!trimmedItem.startsWith("_")) {
+            acc.category = {
+              $in: acc.category?.$in
+                ? [...acc.category.$in, trimmedItem]
+                : [trimmedItem],
+            };
+          }
+          return acc;
+        },
+        {} as {
+          category?: { $in: string[] };
+          availability?: boolean;
+        },
+      );
+    }
 
-    return products;
+    const [
+      products,
+      scrubber,
+      rotary,
+      vacuum,
+      extractor,
+      sweeping,
+      fan,
+      accessories,
+      availability,
+      labelsObj,
+    ] = await Promise.all([
+      ProductModel.find(filterObject).sort({
+        [sortField]: sortOrder,
+      }),
+      ProductModel.countDocuments({ category: "scrubber" }),
+      ProductModel.countDocuments({ category: "rotary" }),
+      ProductModel.countDocuments({ category: "vacuum" }),
+      ProductModel.countDocuments({ category: "extractor" }),
+      ProductModel.countDocuments({ category: "sweeping" }),
+      ProductModel.countDocuments({ category: "fan" }),
+      ProductModel.countDocuments({ category: "accessories" }),
+      ProductModel.countDocuments({ availability: true }),
+      ProductModel.find().then((data) =>
+        data.reduce(
+          (acc, product) => {
+            if (product.label["_new"] === true) acc.new++;
+            if (product.label["_promo"] === true) acc.promo++;
+            if (product.label["_popular"] === true) acc.popular++;
+
+            return acc;
+          },
+          { promo: 0, new: 0, popular: 0 },
+        ),
+      ),
+    ]);
+    console.log("labelsObj: ", labelsObj);
+
+    const filteredLabel =
+      labels.length > 0
+        ? products.filter((product) =>
+            labels.every(
+              (label) => product.label[label] && product.label[label] === true,
+            ),
+          )
+        : products;
+
+    return {
+      products: filteredLabel,
+      counts: {
+        scrubber,
+        rotary,
+        vacuum,
+        extractor,
+        sweeping,
+        fan,
+        accessories,
+        availability,
+        new: labelsObj.new,
+        promo: labelsObj.promo,
+        popular: labelsObj.popular,
+      },
+    };
   }
 
   public async getOneById(_id: string) {

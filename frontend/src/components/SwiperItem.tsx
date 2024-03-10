@@ -1,22 +1,29 @@
-import React from 'react';
+import React from "react";
 
-import { useGlobalContext } from '../hook/useGlobalContext';
-import { ibg, euroToHrivna } from '../utils';
+import { useGlobalContext } from "../hook/useGlobalContext";
+import { ibg, euroToHrivna } from "../utils";
 
 interface ISwiperItem {
   title: string;
   article: string;
   imageArr: string[];
   label: {
-    _promo: boolean,
-    _popular: boolean,
-    _new: boolean,
+    _promo: boolean;
+    _popular: boolean;
+    _new: boolean;
   };
   oldPrice: string;
   price: number;
 }
 
-export const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, label, oldPrice, price }) => {
+export const SwiperItem: React.FC<ISwiperItem> = ({
+  title,
+  article,
+  imageArr,
+  label,
+  oldPrice,
+  price,
+}) => {
   const [toggleState, setToggleState] = React.useState(0);
   const { isWebpImg } = useGlobalContext();
 
@@ -39,14 +46,19 @@ export const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, la
                 <p className="label-content">Хіт</p>
               </div>
             )}
-            {oldPrice !== '' ? (
+            {oldPrice !== "" ? (
               <div className="labels__item _discount">
                 <div className="label-content">
-                  -{Math.round((100 * (Number(oldPrice) - euroToHrivna(price))) / Number(oldPrice))}%
+                  -
+                  {Math.round(
+                    (100 * (Number(oldPrice) - euroToHrivna(price))) /
+                      Number(oldPrice)
+                  )}
+                  %
                 </div>
               </div>
             ) : (
-              ''
+              ""
             )}
             {label._new && (
               <div className="labels__item _new">
@@ -57,7 +69,7 @@ export const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, la
         )}
         <img
           src={`/assets/img/products/${article}/${imageArr[toggleState]}${
-            isWebpImg ? '.webp' : '.png'
+            isWebpImg ? ".webp" : ".png"
           }`}
           alt={title}
         />
@@ -66,10 +78,15 @@ export const SwiperItem: React.FC<ISwiperItem> = ({ title, article, imageArr, la
         {imageArr.map((image, i) => (
           <div
             key={i}
-            className={toggleState === i ? 'img-block__tab active' : 'img-block__tab'}
-            onClick={() => setToggleState(i)}>
+            className={
+              toggleState === i ? "img-block__tab active" : "img-block__tab"
+            }
+            onClick={() => setToggleState(i)}
+          >
             <img
-              src={`/assets/img/products/${article}/${image}${isWebpImg ? '.webp' : '.png'}`}
+              src={`/assets/img/products/${article}/${image}${
+                isWebpImg ? ".webp" : ".png"
+              }`}
               alt={title}
             />
           </div>

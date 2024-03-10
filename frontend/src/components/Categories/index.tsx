@@ -1,35 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { useGlobalContext } from '../../hook/useGlobalContext';
-import { categoriesList } from '../../utils';
+import { filterSelector } from "../../redux/filter/selectors";
+import { setFilter } from "../../redux/filter/slice";
+import { useAppDispatch } from "../../redux/store";
+import { categoriesList, toggleFilter } from "../../utils";
 
-import styles from './Categories.module.scss';
+import styles from "./Categories.module.scss";
 
 export const Categories: React.FC = () => {
-  const { handleTooggle } = useGlobalContext();
+  const dispatch = useAppDispatch();
+  const { filterState } = useSelector(filterSelector);
+
+  const handleToggle = (value: string) => {
+    const filter = toggleFilter(value, filterState);
+    dispatch(setFilter(filter));
+  };
 
   return (
     <section className="categories_block__container">
-      {/* <h1 className={styles.categories_block__title}>
-        <Link to={'catalog'}>Всі категорії товарів</Link>
-      </h1> */}
       <Swiper
         className={styles.categories_block__items}
         modules={[Navigation]}
         navigation={true}
-        slidesPerView='auto'
+        slidesPerView="auto"
         watchOverflow={true}
         spaceBetween={30}
-        freeMode={true}>
+        freeMode={true}
+      >
         {categoriesList.map((obj, i) => (
           <SwiperSlide
-            onClick={() => handleTooggle(obj.name)}
+            onClick={() => handleToggle(obj.name)}
             key={i}
-            className={styles.categories_block__item}>
-            <Link to={'catalog'}>
+            className={styles.categories_block__item}
+          >
+            <Link to={"catalog"}>
               <i className={`_icon-${obj.name}`}></i>
               <p>{obj.value}</p>
             </Link>

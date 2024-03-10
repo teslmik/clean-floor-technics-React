@@ -1,10 +1,10 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { useGlobalContext } from '../hook/useGlobalContext';
-import { removeFromCart, decrement, increment } from '../redux/cart/slice';
-import { euroToHrivna } from '../utils';
+import { useGlobalContext } from "../hook/useGlobalContext";
+import { removeFromCart, decrement, increment } from "../redux/cart/slice";
+import { euroToHrivna } from "../utils";
 
 interface ICartItemProps {
   _id: string;
@@ -16,12 +16,20 @@ interface ICartItemProps {
   category: string;
 }
 
-export const CartItem: React.FC<ICartItemProps> = ({ _id, title, imageUrl, oldPrice, price, count, category }) => {
+export const CartItem: React.FC<ICartItemProps> = ({
+  _id,
+  title,
+  imageUrl,
+  oldPrice,
+  price,
+  count,
+  category,
+}) => {
   const dispatch = useDispatch();
   const { isWebpImg } = useGlobalContext();
-  
+
   const onClickRemoveItem = () => {
-    if (window.confirm('Видалити товар з кошика?')) {
+    if (window.confirm("Видалити товар з кошика?")) {
       dispatch(removeFromCart(_id));
     }
   };
@@ -38,7 +46,7 @@ export const CartItem: React.FC<ICartItemProps> = ({ _id, title, imageUrl, oldPr
     <li className="order-list__item item-order">
       <div className="item-order__img ibg">
         <img
-          src={`assets/img/products/${imageUrl}${isWebpImg ? '.webp' : '.png'}`}
+          src={`assets/img/products/${imageUrl}${isWebpImg ? ".webp" : ".png"}`}
           alt="product img"
         />
       </div>
@@ -48,19 +56,29 @@ export const CartItem: React.FC<ICartItemProps> = ({ _id, title, imageUrl, oldPr
           <span onClick={onClickRemoveItem} className="_icon-removeItem"></span>
         </div>
         <div className="item-order__price">
-          {oldPrice !== '' && <span className="old-price">{oldPrice.toLocaleString()} ₴</span>}
-          <span className="actual-price">{euroToHrivna(price).toLocaleString()} ₴</span>
+          {oldPrice !== "" && (
+            <span className="old-price">{oldPrice.toLocaleString()} ₴</span>
+          )}
+          <span className="actual-price">
+            {euroToHrivna(price).toLocaleString()} ₴
+          </span>
         </div>
         <div className="item-order__control">
           <div className="item-order__quantity">
             <button
               disabled={count === 1 ? true : false}
               onClick={() => onClickMinus(_id)}
-              className="btn-item__minus _icon-minus"></button>
+              className="btn-item__minus _icon-minus"
+            ></button>
             <p className="counter">{count}</p>
-            <button onClick={() => onClickPlus(_id)} className="btn-item__plus _icon-plus"></button>
+            <button
+              onClick={() => onClickPlus(_id)}
+              className="btn-item__plus _icon-plus"
+            ></button>
           </div>
-          <div className="item-order__cost">{(euroToHrivna(price) * count).toLocaleString()} ₴</div>
+          <div className="item-order__cost">
+            {(euroToHrivna(price) * count).toLocaleString()} ₴
+          </div>
         </div>
       </div>
     </li>

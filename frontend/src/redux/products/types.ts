@@ -1,7 +1,7 @@
 export interface ISpecification {
   name: string;
   value: string;
-};
+}
 
 export interface IProductItem {
   _id: string;
@@ -21,15 +21,15 @@ export interface IProductItem {
   availability: boolean;
   category: string;
   count: number;
-};
+}
 
 export enum Status {
-  LOADING = 'loading',
-  SUCCESS = 'success',
-  ERROR = 'error'
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
 }
 
 export interface IProductSliceState {
-  items: IProductItem[];
+  items: { counts: { [key: string]: number }; products: IProductItem[] };
   status: Status;
 }
