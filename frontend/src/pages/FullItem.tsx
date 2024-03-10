@@ -87,23 +87,21 @@ const FullItem: React.FC = () => {
                 Короткий опис товару
               </div>
               <span className="discription-fullitem__text">
-                {product.description &&
-                  product.description.map((str, i) => (
-                    <ReactMarkdown key={i}>{str}</ReactMarkdown>
-                  ))}
+                {product?.description?.map((str, i) => (
+                  <ReactMarkdown key={i}>{str}</ReactMarkdown>
+                ))}
               </span>
             </div>
             <div className="body-fullitem__specification specification">
               <div className="specification__text">
                 <div className="specification__title">Характеристики </div>
                 <div className="specification__list">
-                  {product.specification &&
-                    product.specification.map((item, i) => (
-                      <React.Fragment key={i}>
-                        <p className="list-first">{item.name}</p>
-                        <p className="list-second">{item.value}</p>
-                      </React.Fragment>
-                    ))}
+                  {product?.specification?.map((item, i) => (
+                    <React.Fragment key={i}>
+                      <p className="list-first">{item.name}</p>
+                      <p className="list-second">{item.value}</p>
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
               <div className="specification__tabs tabs-specification">
@@ -329,10 +327,9 @@ const FullItem: React.FC = () => {
             Короткий опис товару
           </div>
           <span className="discription-fullitem__text">
-            {product.description &&
-              product.description.map((str, i) => (
-                <ReactMarkdown key={i}>{str}</ReactMarkdown>
-              ))}
+            {product?.description?.map((str, i) => (
+              <ReactMarkdown key={i}>{str}</ReactMarkdown>
+            ))}
           </span>
         </div>
       )}

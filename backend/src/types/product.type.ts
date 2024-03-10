@@ -27,3 +27,18 @@ export type ProductType = {
   createdAt: Date;
   deletedAt: Date;
 };
+
+export type AddProductType = {
+  description: string[];
+  specification: SpecificationType[];
+  rating: number;
+  title: string;
+  article: string;
+  imageUrl: string;
+  imageArr: string[];
+  label: LabelType;
+  oldPrice: string;
+  price: number;
+  availability: boolean;
+  category: CategoriesEnum;
+};
