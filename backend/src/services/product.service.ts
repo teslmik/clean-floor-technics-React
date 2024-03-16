@@ -77,7 +77,6 @@ class ProductService {
         ),
       ),
     ]);
-    console.log("labelsObj: ", labelsObj);
 
     const filteredLabel =
       labels.length > 0
