@@ -15,7 +15,7 @@ export const fetchRates = createAsyncThunk<
   const { data } = await axios.get<{
     rates: IRatesItem[];
     bankEuro: IBankRate;
-  }>(`${process.env.REACT_APP_FETCH_URL}/rates`);
+  }>(`${import.meta.env.VITE_APP_FETCH_URL}/rates`);
   return data;
 });
 
@@ -25,7 +25,7 @@ export const editRate = createAsyncThunk<
   { state: RootState }
 >("product/editProducts", async ({ currency, value }) => {
   const { data } = await axios.put<IRatesItem>(
-    `${process.env.REACT_APP_FETCH_URL}/rates`,
+    `${import.meta.env.VITE_APP_FETCH_URL}/rates`,
     { currency, value }
   );
   return data;

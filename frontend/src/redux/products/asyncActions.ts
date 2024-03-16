@@ -18,7 +18,7 @@ export const fetchProducts = createAsyncThunk<
     counts: { [key: string]: number };
     products: IProductItem[];
   }>(
-    `${process.env.REACT_APP_FETCH_URL}/products?sortBy=${
+    `${import.meta.env.VITE_APP_FETCH_URL}/products?sortBy=${
       filter.sortState.sortProperty
     }&order=${order}&filter=${filter.filterState.join(",")}`
   );
@@ -31,7 +31,7 @@ export const editProduct = createAsyncThunk<
   { state: RootState }
 >("product/editProducts", async ({ payload, id }) => {
   const { data } = await axios.put<IProductItem>(
-    `${process.env.REACT_APP_FETCH_URL}/products/${id}`,
+    `${import.meta.env.VITE_APP_FETCH_URL}/products/${id}`,
     payload
   );
   return data;

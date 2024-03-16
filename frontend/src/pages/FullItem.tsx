@@ -32,7 +32,7 @@ const FullItem: React.FC = () => {
       try {
         setProduct(undefined);
         const { data } = await axios.get<IProductItem>(
-          `${process.env.REACT_APP_FETCH_URL}/products/${_id}`
+          `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
         );
         setProduct(data);
         const {

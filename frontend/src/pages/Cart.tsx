@@ -12,7 +12,9 @@ import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
 
 const Cart: React.FC = () => {
-  const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
+  const URL = `https://api.telegram.org/bot${
+    import.meta.env.REACT_APP_TOKEN_TG
+  }/sendMessage`;
 
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
@@ -52,7 +54,7 @@ const Cart: React.FC = () => {
 
     axios
       .post(URL, {
-        chat_id: process.env.REACT_APP_CHAT_ID,
+        chat_id: import.meta.env.REACT_APP_CHAT_ID,
         parse_mode: "html",
         text: message,
       })

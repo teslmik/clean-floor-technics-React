@@ -20,7 +20,7 @@
       crossorigin="anonymous"
     ></script>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -56,7 +56,7 @@
       content="u05KqqFAKwK9XZRLAQkt8YVmq0ibtTlDPcc1dDxlMKk"
     />
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
 
     <title>
       Інтернет-магазин прибиральної техніки. Вигідні ціни, висока якість,
@@ -91,19 +91,21 @@
       fbq("init", "1539157289950531");
       fbq("track", "PageView");
     </script>
-    <noscript>
+    <!-- <noscript>
       <img
         height="1"
         width="1"
         style="display: none"
         src="https://www.facebook.com/tr?id=1539157289950531&ev=PageView&noscript=1"
       />
-    </noscript>
+    </noscript> -->
     <!-- End Meta Pixel Code -->
   </head>
 
   <body class="lock-padding">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
