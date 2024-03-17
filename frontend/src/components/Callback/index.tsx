@@ -15,7 +15,7 @@ export interface IDataMessage {
 
 export const Callback: React.FC = () => {
   const URL = `https://api.telegram.org/bot${
-    import.meta.env.REACT_APP_TOKEN_TG
+    import.meta.env.VITE_APP_TOKEN_TG
   }/sendMessage`;
 
   const { setIsOpenCallback, setRequestDone } = useGlobalContext();
@@ -34,7 +34,7 @@ export const Callback: React.FC = () => {
 
     axios
       .post(URL, {
-        chat_id: import.meta.env.REACT_APP_CHAT_ID,
+        chat_id: import.meta.env.VITE_APP_CHAT_ID,
         parse_mode: "html",
         text: message,
       })

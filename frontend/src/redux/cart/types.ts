@@ -3,7 +3,7 @@ export interface ICartItem {
   category: string;
   imageUrl: string;
   title: string;
-  oldPrice: string;
+  oldPrice: number | null;
   price: number;
   count: number;
 }

@@ -41,7 +41,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
           <ListItemAvatar>
             <Avatar variant="rounded" sx={{ backgroundColor: "transparent" }}>
               <img
-                src={`assets/img/products/${product.imageUrl}.png`}
+                src={`assets/img/products/${product.imageUrl}.webp`}
                 alt="product img"
                 style={{
                   width: "100%",

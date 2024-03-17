@@ -62,7 +62,7 @@ export const CardItem: React.FC<IProductItem> = ({
               <p className="label-content">Хіт</p>
             </div>
           )}
-          {oldPrice !== "" ? (
+          {oldPrice && (
             <div className="labels__item _discount">
               <div className="label-content">
                 -
@@ -73,8 +73,6 @@ export const CardItem: React.FC<IProductItem> = ({
                 %
               </div>
             </div>
-          ) : (
-            ""
           )}
           {label._new && (
             <div className="labels__item _new">
@@ -105,7 +103,7 @@ export const CardItem: React.FC<IProductItem> = ({
           </Link>
           <div className="card__cost">
             <div className="card__price">
-              {oldPrice !== "" && (
+              {oldPrice && (
                 <div className="card__old-price">
                   {oldPrice?.toLocaleString()} ₴
                 </div>
@@ -117,7 +115,7 @@ export const CardItem: React.FC<IProductItem> = ({
             <button
               onClick={onClickAdd}
               className={isOnCart ? "card__btn inCart" : "card__btn"}
-              disabled={isOnCart && true}
+              disabled={isOnCart}
             >
               <span>{isOnCart ? "У кошику" : "Купити"}</span>
             </button>
