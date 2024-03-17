@@ -57,7 +57,9 @@ export const CartItem: React.FC<ICartItemProps> = ({
         </div>
         <div className="item-order__price">
           {oldPrice && (
-            <span className="old-price">{oldPrice.toLocaleString()} ₴</span>
+            <span className="old-price">
+              {Number(oldPrice).toLocaleString()} ₴
+            </span>
           )}
           <span className="actual-price">
             {euroToHrivna(price).toLocaleString()} ₴

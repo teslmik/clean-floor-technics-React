@@ -120,7 +120,7 @@ export const CartPopup: React.FC = () => {
                       <div className={styles.item__price}>
                         {item.oldPrice && (
                           <div className={styles.item__oldPrice}>
-                            {item.oldPrice.toLocaleString()} ₴
+                            {Number(item.oldPrice).toLocaleString()} ₴
                           </div>
                         )}
                         <div className={styles.item__actualPrice}>

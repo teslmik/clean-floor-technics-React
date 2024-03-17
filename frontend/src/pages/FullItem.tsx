@@ -184,7 +184,7 @@ const FullItem: React.FC = () => {
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">
-                    {product.oldPrice.toLocaleString()} ₴
+                    {Number(product.oldPrice).toLocaleString()} ₴
                   </div>
                 )}
               </div>
@@ -226,7 +226,7 @@ const FullItem: React.FC = () => {
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">
-                    {product.oldPrice.toLocaleString()} ₴
+                    {Number(product.oldPrice).toLocaleString()} ₴
                   </div>
                 )}
               </div>

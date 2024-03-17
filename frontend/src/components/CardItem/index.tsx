@@ -105,7 +105,7 @@ export const CardItem: React.FC<IProductItem> = ({
             <div className="card__price">
               {oldPrice && (
                 <div className="card__old-price">
-                  {oldPrice?.toLocaleString()} ₴
+                  {Number(oldPrice).toLocaleString()} ₴
                 </div>
               )}
               <div className="card__actual-price">
