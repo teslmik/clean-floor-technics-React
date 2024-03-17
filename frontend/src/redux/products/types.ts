@@ -16,7 +16,7 @@ export interface IProductItem {
     _popular: boolean;
     _new: boolean;
   };
-  oldPrice: string;
+  oldPrice: number | null;
   price: number;
   availability: boolean;
   category: string;

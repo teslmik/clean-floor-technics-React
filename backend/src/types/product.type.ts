@@ -23,7 +23,7 @@ export type ProductType = {
   imageUrl: string;
   imageArr: string[];
   label: LabelType;
-  oldPrice: string;
+  oldPrice: number | null;
   price: number;
   availability: boolean;
   category: CategoriesEnum;
