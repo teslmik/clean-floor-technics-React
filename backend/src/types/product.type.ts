@@ -13,7 +13,10 @@ export type LabelType = {
 
 export type ProductType = {
   description: string[];
-  specification: SpecificationType[];
+  specification: {
+    name: string;
+    value: string;
+  }[];
   rating: number;
   title: string;
   article: string;
