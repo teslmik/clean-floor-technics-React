@@ -20,7 +20,7 @@ export interface IProductItem {
   price: number;
   availability: boolean;
   category: string;
-  count: number;
+  rating: number;
 }
 
 export enum Status {

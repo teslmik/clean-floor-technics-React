@@ -93,13 +93,20 @@ const Dashboard: React.FC = () => {
                       ? [...new Array(6)].map((_, i) => (
                           <ProductSkeleton key={i} />
                         ))
-                      : products.products.map((product) => (
-                          <ProductItem
-                            key={product._id}
-                            product={product}
-                            handleOpen={() => handleOpen(product)}
-                          />
-                        ))}
+                      : products.products
+                          .toSorted((a, b) => {
+                            if (a.availability === b.availability) {
+                              return b.rating - a.rating;
+                            }
+                            return a.availability ? -1 : 1;
+                          })
+                          .map((product) => (
+                            <ProductItem
+                              key={product._id}
+                              product={product}
+                              handleOpen={() => handleOpen(product)}
+                            />
+                          ))}
                   </List>
                 </Grid>
                 <Grid
