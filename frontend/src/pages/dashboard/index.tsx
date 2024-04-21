@@ -13,8 +13,14 @@ import ProductSkeleton from "./ProductSkeleton";
 import EditModal from "./EditModal";
 import { fetchUser } from "../../redux/user/asyncActions";
 import { STORAGE_KEYS } from "../../constants/app-keys";
+import { Toast } from "../../components";
 
 const Dashboard: React.FC = () => {
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState("");
+  const [alertType, setAlertType] = React.useState<
+    "success" | "info" | "warning" | "error"
+  >("success");
   const [open, setOpen] = React.useState<{
     product: IProductItem | null;
     open: boolean;
@@ -23,6 +29,21 @@ const Dashboard: React.FC = () => {
   const { user } = useSelector(userSelector);
   const { items: products, status: productsStatus } =
     useSelector(productsSelector);
+
+  const handleClick = () => {
+    setOpenAlert(true);
+  };
+
+  const handleCloseAlert = (
+    _?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
 
   const handleOpen = (product: IProductItem | null) => {
     setOpen({ product, open: true });
@@ -98,8 +119,16 @@ const Dashboard: React.FC = () => {
       </Box>
       <EditModal
         handleClose={handleClose}
+        showAlert={handleClick}
         open={open.open}
         product={open.product}
+        setMessage={setAlertMessage}
+      />
+      <Toast
+        open={openAlert}
+        type={productsStatus === Status.ERROR ? "error" : alertType}
+        handleClose={handleCloseAlert}
+        message={productsStatus === Status.ERROR ? "Error" : alertMessage}
       />
     </>
   );

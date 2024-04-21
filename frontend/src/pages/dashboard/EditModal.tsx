@@ -13,7 +13,7 @@ import {
   Checkbox,
   Divider,
 } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
+import { Save as SaveIcon } from "@mui/icons-material";
 import { useFormik } from "formik";
 import React from "react";
 import { green } from "@mui/material/colors";
@@ -31,9 +31,17 @@ type Properties = {
   open: boolean;
   handleClose: () => void;
   product: IProductItem | null;
+  showAlert: () => void;
+  setMessage: (s: string) => void;
 };
 
-const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
+const EditModal: React.FC<Properties> = ({
+  handleClose,
+  showAlert,
+  setMessage,
+  open,
+  product,
+}) => {
   const dispatch = useAppDispatch();
   const [oldPrice, setOldPrice] = React.useState(false);
 
@@ -64,6 +72,8 @@ const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
         dispatch(editProduct({ payload, id }));
         handleClose();
         setSubmitting(false);
+        setMessage("Product successfully saved!");
+        showAlert();
       }, 500);
     }
   };

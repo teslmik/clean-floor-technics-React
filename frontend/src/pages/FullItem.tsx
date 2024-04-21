@@ -191,7 +191,7 @@ const FullItem: React.FC = () => {
               <button
                 onClick={onClickAdd}
                 className={isItemOnCart ? "inCart" : ""}
-                disabled={isItemOnCart && true}
+                disabled={isItemOnCart}
               >
                 <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
               </button>
