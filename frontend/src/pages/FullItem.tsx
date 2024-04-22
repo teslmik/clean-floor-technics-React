@@ -35,14 +35,7 @@ const FullItem: React.FC = () => {
           `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
         );
         setProduct(data);
-        const {
-          _id: id,
-          category,
-          imageUrl,
-          title,
-          oldPrice,
-          price,
-        }: ICartItem = data;
+        const { _id: id, category, imageUrl, title, oldPrice, price } = data;
         setCartItem({
           _id: id,
           category,
