@@ -1,4 +1,4 @@
-import { Box, Grid, List, Paper, Typography } from "@mui/material";
+import { Box, Grid, List, Paper, Tab, Tabs, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 
@@ -14,6 +14,9 @@ import EditModal from "./EditModal";
 import { fetchUser } from "../../redux/user/asyncActions";
 import { STORAGE_KEYS } from "../../constants/app-keys";
 import { Toast } from "../../components";
+import { tabsMap } from "../../constants/tabs-map";
+
+type TabKey = keyof (typeof tabsMap)[number];
 
 const Dashboard: React.FC = () => {
   const [openAlert, setOpenAlert] = React.useState(false);
@@ -25,6 +28,8 @@ const Dashboard: React.FC = () => {
     product: IProductItem | null;
     open: boolean;
   }>({ product: null, open: false });
+  const [tab, setTab] = React.useState<TabKey>("all");
+
   const dispatch = useAppDispatch();
   const { user } = useSelector(userSelector);
   const { items: products, status: productsStatus } =
@@ -49,6 +54,9 @@ const Dashboard: React.FC = () => {
     setOpen({ product, open: true });
   };
   const handleClose = () => setOpen({ product: null, open: false });
+  const handleChangeTab = (event: React.SyntheticEvent, newValue: TabKey) => {
+    setTab(newValue);
+  };
 
   React.useEffect(() => {
     if (!user) {
@@ -88,6 +96,18 @@ const Dashboard: React.FC = () => {
                   spacing={4}
                   sx={{ padding: 2, paddingRight: 0 }}
                 >
+                  <Tabs
+                    value={tab}
+                    onChange={handleChangeTab}
+                    variant="scrollable"
+                    scrollButtons
+                    allowScrollButtonsMobile
+                  >
+                    {tabsMap.map((item, i) => {
+                      const [value, label] = Object.entries(item)[0];
+                      return <Tab key={i} label={label} value={value} />;
+                    })}
+                  </Tabs>
                   <List disablePadding sx={{ width: "100%" }}>
                     {productsStatus === Status.LOADING
                       ? [...new Array(6)].map((_, i) => (
@@ -100,6 +120,9 @@ const Dashboard: React.FC = () => {
                             }
                             return a.availability ? -1 : 1;
                           })
+                          .filter((product) =>
+                            tab === "all" ? product : product.category === tab
+                          )
                           .map((product) => (
                             <ProductItem
                               key={product._id}
