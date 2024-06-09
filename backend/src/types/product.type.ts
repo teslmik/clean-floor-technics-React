@@ -26,6 +26,7 @@ export type ProductType = {
   oldPrice: number | null;
   price: number;
   availability: boolean;
+  discontinued: boolean;
   category: CategoriesEnum;
   createdAt: Date;
   deletedAt: Date;

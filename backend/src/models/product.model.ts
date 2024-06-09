@@ -49,6 +49,10 @@ const ProductSchema = new Schema<ProductType>(
       type: Boolean,
       default: true,
     },
+    discontinued: {
+      type: Boolean,
+      default: false,
+    },
     category: {
       type: String,
       enum: Object.values(CategoriesEnum),

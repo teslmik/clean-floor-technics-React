@@ -19,6 +19,7 @@ export interface IProductItem {
   oldPrice: number | null;
   price: number;
   availability: boolean;
+  discontinued: boolean;
   category: string;
   rating: number;
 }

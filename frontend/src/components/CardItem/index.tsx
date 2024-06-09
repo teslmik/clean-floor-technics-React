@@ -18,6 +18,7 @@ export const CardItem: React.FC<IProductItem> = ({
   oldPrice,
   price,
   category,
+  discontinued,
 }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
@@ -48,8 +49,14 @@ export const CardItem: React.FC<IProductItem> = ({
     setIsOpenCart(true);
   };
 
+  const onCartOrDisabled = discontinued
+    ? "card__btn disabled"
+    : "card__btn inCart";
+
   return (
-    <div className="catalog__item">
+    <div
+      className={discontinued ? "catalog__item discontinued" : "catalog__item"}
+    >
       <article className="catalog__card card">
         <div className="card__labels labels">
           {label._promo && (
@@ -114,8 +121,10 @@ export const CardItem: React.FC<IProductItem> = ({
             </div>
             <button
               onClick={onClickAdd}
-              className={isOnCart ? "card__btn inCart" : "card__btn"}
-              disabled={isOnCart}
+              className={
+                isOnCart || discontinued ? onCartOrDisabled : "card__btn"
+              }
+              disabled={isOnCart || discontinued}
             >
               <span>{isOnCart ? "У кошику" : "Купити"}</span>
             </button>

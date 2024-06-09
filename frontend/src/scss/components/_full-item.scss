@@ -10,7 +10,7 @@
 
   &__content {
     display: flex;
-    @include adaptiveValue('gap', 60, 0, 1);
+    @include adaptiveValue("gap", 60, 0, 1);
     @media (max-width: $mobile) {
       flex-direction: column-reverse;
     }
@@ -71,9 +71,9 @@
         justify-content: center;
         flex: 1 1 auto;
         width: 100%;
-        @include adaptiveValue('margin-top', 30, 10, 1);
-        @include adaptiveValue('margin-bottom', 30, -12, 1);
-        @include adaptiveValue('height', 400, 287, 1);
+        @include adaptiveValue("margin-top", 30, 10, 1);
+        @include adaptiveValue("margin-bottom", 30, -12, 1);
+        @include adaptiveValue("height", 400, 287, 1);
         background-position: top center;
         @media (max-width: $mobile) {
           margin-top: 0;
@@ -87,7 +87,7 @@
         display: flex;
         justify-content: center;
         gap: 5px;
-        @include adaptiveValue('margin-bottom', 40, 20, 1);
+        @include adaptiveValue("margin-bottom", 40, 20, 1);
       }
 
       &__tab {
@@ -133,7 +133,7 @@
           height: rem(20);
         }
         &::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 99%;
           left: 0;
@@ -171,7 +171,7 @@
   &__top {
     display: flex;
     flex-direction: column;
-    @include adaptiveValue('margin-bottom', 25, 20, 1);
+    @include adaptiveValue("margin-bottom", 25, 20, 1);
   }
 
   // .body-fullitem__header
@@ -249,6 +249,15 @@
       background-color: $greenColor;
       height: 38px;
       padding: 0 16px;
+
+      span {
+        font-family: "Roboto";
+        color: #fff;
+        font-size: 18px;
+        font-weight: normal;
+        white-space: nowrap;
+        width: 100%;
+      }
       @media (any-hover: hover) {
         &:hover {
           background-color: $greenLiteColor;
@@ -257,24 +266,24 @@
       @media (max-width: $mobile) {
         width: 100%;
       }
-      span {
-        font-family: 'Roboto';
-        color: #fff;
-        font-size: 18px;
-        font-weight: normal;
-        white-space: nowrap;
+      &.inCart {
+        border: solid 1px $greenColor;
+        background-color: #fff;
 
-        width: 100%;
+        span {
+          color: $greenColor;
+          width: 100%;
+          white-space: nowrap;
+        }
       }
-    }
-    button.inCart {
-      border: solid 1px #52ad3a;
-      background-color: #fff;
-
-      span {
-        color: #52ad3a;
-        width: 100%;
-        white-space: nowrap;
+      &.disabled {
+        cursor: not-allowed;
+        border: solid 1px $greenColor;
+        background-color: #52ad3a1a;
+        span {
+          color: $greenColor;
+          opacity: 0.5;
+        }
       }
     }
   }
@@ -312,6 +321,10 @@
   &__availability {
     font-size: 12px;
     color: $greenColor;
+
+    &.discontinued {
+      color: red;
+    }
   }
 
   // .fullitem-header__article
@@ -412,7 +425,7 @@
   &__text.active {
     color: #000;
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -1px;
       left: 0;
@@ -480,7 +493,7 @@
       padding-top: 20px;
     }
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -1px;
       left: 0;

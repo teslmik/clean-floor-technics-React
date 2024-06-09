@@ -2,19 +2,19 @@ import { Box, Grid, List, Paper, Tab, Tabs, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { fetchProducts } from "../../redux/products/asyncActions";
-import { productsSelector } from "../../redux/products/selectors";
-import { IProductItem, Status } from "../../redux/products/types";
-import { useAppDispatch } from "../../redux/store";
-import { userSelector } from "../../redux/user/selectors";
-import DashboardHeader from "./DashboardHeader";
-import ProductItem from "./ProductItem";
-import ProductSkeleton from "./ProductSkeleton";
-import EditModal from "./EditModal";
-import { fetchUser } from "../../redux/user/asyncActions";
-import { STORAGE_KEYS } from "../../constants/app-keys";
-import { Toast } from "../../components";
-import { tabsMap } from "../../constants/tabs-map";
+import { Toast } from "../components";
+import DashboardHeader from "../components/Dashboard/DashboardHeader";
+import EditModal from "../components/Dashboard/EditModal";
+import ProductItem from "../components/Dashboard/ProductItem";
+import ProductSkeleton from "../components/Dashboard/ProductSkeleton";
+import { STORAGE_KEYS } from "../constants/app-keys";
+import { tabsMap } from "../constants/tabs-map";
+import { fetchProducts } from "../redux/products/asyncActions";
+import { productsSelector } from "../redux/products/selectors";
+import { IProductItem, Status } from "../redux/products/types";
+import { useAppDispatch } from "../redux/store";
+import { fetchUser } from "../redux/user/asyncActions";
+import { userSelector } from "../redux/user/selectors";
 
 type TabKey = keyof (typeof tabsMap)[number];
 

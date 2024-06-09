@@ -58,6 +58,8 @@ const FullItem: React.FC = () => {
     setIsOpenCart(true);
   };
 
+  const onCartOrDisabled = isItemOnCart ? "inCart" : "disabled";
+
   if (!product) {
     return <CircleLoader />;
   }
@@ -168,8 +170,18 @@ const FullItem: React.FC = () => {
           />
           {windowWidth < 683 && (
             <div className="body-fullitem__btn">
-              <div className="fullitem-header__availability">
-                {product.availability ? "В наявності" : "Під замовлення"}
+              <div
+                className={
+                  product.discontinued
+                    ? "fullitem-header__availability discontinued"
+                    : "fullitem-header__availability"
+                }
+              >
+                {product.discontinued
+                  ? "Знятий з виробництва"
+                  : product.availability
+                  ? "В наявності"
+                  : "Під замовлення"}
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
@@ -200,8 +212,18 @@ const FullItem: React.FC = () => {
               <div className="fullitem-header__text">
                 <h1 className="fullitem-header__title">{product.title}</h1>
                 {windowWidth >= 683 && (
-                  <div className="fullitem-header__availability">
-                    {product.availability ? "В наявності" : "Під замовлення"}
+                  <div
+                    className={
+                      product.discontinued
+                        ? "fullitem-header__availability discontinued"
+                        : "fullitem-header__availability"
+                    }
+                  >
+                    {product.discontinued
+                      ? "Знятий з виробництва"
+                      : product.availability
+                      ? "В наявності"
+                      : "Під замовлення"}
                   </div>
                 )}
               </div>
@@ -230,8 +252,10 @@ const FullItem: React.FC = () => {
               <div className="body-fullitem__btn">
                 <button
                   onClick={onClickAdd}
-                  className={isItemOnCart ? "inCart" : ""}
-                  disabled={isItemOnCart && true}
+                  className={
+                    isItemOnCart || product.discontinued ? onCartOrDisabled : ""
+                  }
+                  disabled={isItemOnCart || product.discontinued}
                 >
                   <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
                 </button>
