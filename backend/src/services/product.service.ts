@@ -106,7 +106,7 @@ class ProductService {
   }
 
   public async getOneById(_id: string) {
-    const product = await ProductModel.findOne({ _id });
+    const product = await ProductModel.findOneAndUpdate({ _id }, { $inc: { rating: 1 }}, {returnDocument: "after"});
 
     return product;
   }
