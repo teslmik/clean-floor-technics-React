@@ -13,7 +13,7 @@ import {
   Checkbox,
   Divider,
 } from "@mui/material";
-import { Save as SaveIcon } from "@mui/icons-material";
+import SaveIcon from "@mui/icons-material/Save";
 import { useFormik } from "formik";
 import React from "react";
 import { green } from "@mui/material/colors";
@@ -31,24 +31,14 @@ type Properties = {
   open: boolean;
   handleClose: () => void;
   product: IProductItem | null;
-  showAlert: () => void;
-  setMessage: (s: string) => void;
 };
 
-const EditModal: React.FC<Properties> = ({
-  handleClose,
-  showAlert,
-  setMessage,
-  open,
-  product,
-}) => {
+const EditModal: React.FC<Properties> = ({ handleClose, open, product }) => {
   const dispatch = useAppDispatch();
-  const [oldPrice, setOldPrice] = React.useState(false);
 
   const onSubmit = (
     values: {
       price: number;
-      oldPrice: number | null;
       availability: boolean;
       _promo: boolean;
       _new: boolean;
@@ -60,7 +50,6 @@ const EditModal: React.FC<Properties> = ({
       const id = product._id;
       const payload = {
         price: values.price,
-        oldPrice: values.oldPrice,
         availability: values.availability,
         label: {
           _promo: values._promo,
@@ -72,8 +61,6 @@ const EditModal: React.FC<Properties> = ({
         dispatch(editProduct({ payload, id }));
         handleClose();
         setSubmitting(false);
-        setMessage("Product successfully saved!");
-        showAlert();
       }, 500);
     }
   };
@@ -88,7 +75,6 @@ const EditModal: React.FC<Properties> = ({
   } = useFormik({
     initialValues: {
       price: product?.price || 0,
-      oldPrice: product?.oldPrice || null,
       availability: product?.availability || false,
       _promo: product?.label._promo || false,
       _new: product?.label._new || false,
@@ -106,23 +92,15 @@ const EditModal: React.FC<Properties> = ({
       values.availability === product?.availability &&
       product.label._new === values._new &&
       product.label._popular === values._popular &&
-      product.label._promo === values._promo &&
-      product.oldPrice === values.oldPrice);
-
-  const handleChangeOldPrice = () => {
-    setOldPrice(!oldPrice);
-    setFieldValue("oldPrice", oldPrice ? null : euroToHrivna(product?.price!));
-  };
+      product.label._promo === values._promo);
 
   React.useEffect(() => {
     if (product) {
       setFieldValue("price", product.price);
-      setFieldValue("oldPrice", product.oldPrice);
       setFieldValue("availability", product.availability);
       setFieldValue("_new", product.label._new);
       setFieldValue("_promo", product.label._promo);
       setFieldValue("_popular", product.label._popular);
-      setOldPrice(product.oldPrice !== null);
     }
   }, [product]);
   return (
@@ -160,31 +138,9 @@ const EditModal: React.FC<Properties> = ({
             />
             <Chip
               size="medium"
-              label={`${euroToHrivna(+values.price).toLocaleString()} ₴`}
-            />
-          </Stack>
-          <Stack direction="row" alignItems="center" gap={2} height={40}>
-            {oldPrice && (
-              <TextField
-                id="oldPrice-label"
-                label="Стара ціна-грн."
-                value={values.oldPrice}
-                name="oldPrice"
-                onChange={handleChange}
-                variant="outlined"
-                size="small"
-              />
-            )}
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={oldPrice}
-                  onChange={handleChangeOldPrice}
-                  color="success"
-                />
-              }
-              label="Стара ціна"
-              labelPlacement="start"
+              label={`${euroToHrivna(
+                values.price as number
+              ).toLocaleString()} ₴`}
             />
           </Stack>
           <Stack direction="row" alignItems="center" gap={2}>

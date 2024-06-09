@@ -16,12 +16,11 @@ export interface IProductItem {
     _popular: boolean;
     _new: boolean;
   };
-  oldPrice: number | null;
+  oldPrice: string;
   price: number;
   availability: boolean;
-  discontinued: boolean;
   category: string;
-  rating: number;
+  count: number;
 }
 
 export enum Status {

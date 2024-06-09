@@ -6,6 +6,8 @@ import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import AuthPage from "./pages/auth";
+import Dashboard from "./pages/dashboard";
 
 import "./scss/app.scss";
 
@@ -40,12 +42,6 @@ const PayAndDelivery = React.lazy(
 const Services = React.lazy(
   () => import(/* webpackChunkName: "Services" */ "./pages/Services")
 );
-const Dashboard = React.lazy(
-  () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard")
-);
-const Auth = React.lazy(
-  () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index")
-);
 
 const App: React.FC = () => {
   return (
@@ -54,7 +50,7 @@ const App: React.FC = () => {
         path={ROUTER_KEYS.AUTH}
         element={
           <PublicRoute>
-            <Auth />
+            <AuthPage />
           </PublicRoute>
         }
       />

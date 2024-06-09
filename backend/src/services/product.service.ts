@@ -1,11 +1,6 @@
 import { OrderEnum } from "../enums";
 import ProductModel from "../models/product.model";
-import {
-  AddProductType,
-  LabelType,
-  ProductType,
-  SearchParamsType,
-} from "../types";
+import { LabelType, ProductType, SearchParamsType } from "../types";
 
 class ProductService {
   public async getAllProducts({ sortBy, order, filter }: SearchParamsType) {
@@ -77,6 +72,7 @@ class ProductService {
         ),
       ),
     ]);
+    console.log("labelsObj: ", labelsObj);
 
     const filteredLabel =
       labels.length > 0
@@ -107,12 +103,6 @@ class ProductService {
 
   public async getOneById(_id: string) {
     const product = await ProductModel.findOne({ _id });
-
-    return product;
-  }
-
-  public async addOne(payload: AddProductType) {
-    const product = await ProductModel.create(payload);
 
     return product;
   }

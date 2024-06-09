@@ -13,27 +13,6 @@ export type LabelType = {
 
 export type ProductType = {
   description: string[];
-  specification: {
-    name: string;
-    value: string;
-  }[];
-  rating: number;
-  title: string;
-  article: string;
-  imageUrl: string;
-  imageArr: string[];
-  label: LabelType;
-  oldPrice: number | null;
-  price: number;
-  availability: boolean;
-  discontinued: boolean;
-  category: CategoriesEnum;
-  createdAt: Date;
-  deletedAt: Date;
-};
-
-export type AddProductType = {
-  description: string[];
   specification: SpecificationType[];
   rating: number;
   title: string;
@@ -45,4 +24,6 @@ export type AddProductType = {
   price: number;
   availability: boolean;
   category: CategoriesEnum;
+  createdAt: Date;
+  deletedAt: Date;
 };

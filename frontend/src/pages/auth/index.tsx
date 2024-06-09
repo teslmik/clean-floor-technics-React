@@ -30,7 +30,7 @@ const AuthPage: React.FC = () => {
   ) => {
     const formValues = { email: values.email, password: values.password };
     const { data } = await axios.post<{ token: string }>(
-      `${import.meta.env.VITE_APP_FETCH_URL}/login`,
+      `${process.env.REACT_APP_FETCH_URL}/login`,
       formValues
     );
     dispatch(fetchUser(data.token));

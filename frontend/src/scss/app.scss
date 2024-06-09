@@ -1,8 +1,8 @@
-@use "sass:math";
-@import "fonts";
-@import "./components/all";
-@import "./lib/normalise";
-@import "./lib/functions";
+@use 'sass:math';
+@import 'fonts';
+@import './components/all';
+@import './lib/normalise';
+@import './lib/functions';
 
 // Подключение шрифтов =======================================================
 // &display=swap - добавить при подключениее через плагин
@@ -12,7 +12,7 @@ body.lockPadding {
   overflow-y: hidden;
 }
 
-[class*="__container"] {
+[class*='__container'] {
   @media (max-width: $tablet) {
     padding: 0 16px !important;
   }
@@ -21,8 +21,8 @@ body.lockPadding {
 // ===== Main =========
 
 .promo {
-  @include adaptiveValue("margin-top", 80, 30, 1);
-  @include adaptiveValue("margin-bottom", 80, 30, 1);
+  @include adaptiveValue('margin-top', 80, 30, 1);
+  @include adaptiveValue('margin-bottom', 80, 30, 1);
 
   &__block {
     display: flex;
@@ -33,7 +33,7 @@ body.lockPadding {
   &__tabs {
     margin-bottom: 25px;
     display: flex;
-    @include adaptiveValue("gap", 36, 10, 1);
+    @include adaptiveValue('gap', 36, 10, 1);
   }
 
   &__content {
@@ -99,7 +99,7 @@ body.lockPadding {
 }
 .catalog {
   &__item {
-    @include adaptiveValue("padding", 15, 10, 1);
+    @include adaptiveValue('padding', 15, 10, 1);
     transition: all 0.2s ease-in-out;
     justify-self: center;
     @media (any-hover: hover) {
@@ -111,9 +111,6 @@ body.lockPadding {
         }
       }
     }
-    &.discontinued {
-      opacity: 0.5;
-    }
   }
 
   &__card {
@@ -123,12 +120,11 @@ body.lockPadding {
 }
 .card {
   position: relative;
-
   &__image {
     display: block;
     width: 100%;
     height: rem(250);
-    @include adaptiveValue("margin-bottom", 15, 10, 1);
+    @include adaptiveValue('margin-bottom', 15, 10, 1);
     transition: transform 0.2s ease-in-out;
     @media (max-width: $mobile) {
       height: rem(200);
@@ -163,7 +159,7 @@ body.lockPadding {
         height: rem(20);
       }
       &::before {
-        content: "";
+        content: '';
         position: absolute;
         top: 99%;
         left: 0;
@@ -282,15 +278,6 @@ body.lockPadding {
         }
       }
     }
-    &.disabled {
-      cursor: not-allowed;
-      color: $greenColor;
-      border: solid 1px $greenColor;
-      background-color: #52ad3a1a;
-      span {
-        opacity: 0.5;
-      }
-    }
   }
 }
 
@@ -299,10 +286,10 @@ body.lockPadding {
 // ----- benefits --------------------------------
 .benefits {
   background-color: #fafafa;
-  @include adaptiveValue("margin-top", 60, 30, 1);
-  @include adaptiveValue("margin-bottom", 60, 30, 1);
-  @include adaptiveValue("padding-top", 40, 10, 1);
-  @include adaptiveValue("padding-bottom", 40, 10, 1);
+  @include adaptiveValue('margin-top', 60, 30, 1);
+  @include adaptiveValue('margin-bottom', 60, 30, 1);
+  @include adaptiveValue('padding-top', 40, 10, 1);
+  @include adaptiveValue('padding-bottom', 40, 10, 1);
 
   &__items {
     display: grid;
@@ -323,8 +310,8 @@ body.lockPadding {
     max-width: rem(260);
     font-size: 16px;
     img {
-      @include adaptiveValue("width", 80, 50, 1);
-      @include adaptiveValue("height", 80, 50, 1);
+      @include adaptiveValue('width', 80, 50, 1);
+      @include adaptiveValue('height', 80, 50, 1);
     }
     p {
       @include adaptiveFont(16, 14);
@@ -338,7 +325,7 @@ body.lockPadding {
     display: flex;
     justify-content: space-between;
     overflow-x: hidden;
-    @include adaptiveValue("gap", 30, 20, 1);
+    @include adaptiveValue('gap', 30, 20, 1);
     @media (max-width: $tablet) {
       flex-direction: column;
     }
@@ -363,7 +350,7 @@ body.lockPadding {
   &__title {
     @include adaptiveFont(20, 18);
     font-weight: bold;
-    @include adaptiveValue("margin-bottom", 15, 10, 1);
+    @include adaptiveValue('margin-bottom', 15, 10, 1);
   }
 
   &__text {
@@ -382,7 +369,7 @@ body.lockPadding {
     color: #333;
     @include adaptiveFont(20, 18);
     font-weight: bold;
-    @include adaptiveValue("margin-bottom", 15, 10, 1);
+    @include adaptiveValue('margin-bottom', 15, 10, 1);
   }
 
   &__items-wrapper {
@@ -394,7 +381,7 @@ body.lockPadding {
     display: flex;
     flex-direction: column-reverse;
     gap: rem(20);
-    @include adaptiveValue("margin-bottom", 20, 10, 1);
+    @include adaptiveValue('margin-bottom', 20, 10, 1);
     @media (max-width: $tablet) {
       flex-direction: row-reverse;
       justify-content: flex-end;

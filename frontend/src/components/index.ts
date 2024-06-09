@@ -25,4 +25,3 @@ export * from "./SwiperItem";
 export * from "./TabsPromo";
 export * from "./PrivateRoutes";
 export * from "./PublicRoutes";
-export * from "./Toast";

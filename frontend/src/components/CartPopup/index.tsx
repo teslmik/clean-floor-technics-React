@@ -118,9 +118,9 @@ export const CartPopup: React.FC = () => {
                         </Link>
                       </div>
                       <div className={styles.item__price}>
-                        {item.oldPrice && (
+                        {item.oldPrice !== "" && (
                           <div className={styles.item__oldPrice}>
-                            {Number(item.oldPrice).toLocaleString()} ₴
+                            {item.oldPrice.toLocaleString()} ₴
                           </div>
                         )}
                         <div className={styles.item__actualPrice}>
@@ -131,7 +131,7 @@ export const CartPopup: React.FC = () => {
                     <div className={styles.item__control}>
                       <div className={styles.item__quantity}>
                         <button
-                          disabled={item.count === 1}
+                          disabled={item.count === 1 ? true : false}
                           onClick={() => onClickMinus(item._id)}
                           className={`${styles.btn_item__minus} _icon-minus`}
                         ></button>

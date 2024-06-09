@@ -50,8 +50,8 @@ class UserService {
   }
 
   createToken(payload: JwtPayload) {
-    const token = jwt.sign(payload, import.meta.env.JWT_SECRET as string, {
-      expiresIn: import.meta.env.JWT_EXPIRATION,
+    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+      expiresIn: process.env.JWT_EXPIRATION,
     });
     return `Bearer ${token}`;
   }
@@ -61,7 +61,7 @@ class UserService {
     try {
       const userData = jwt.verify(
         splitToken,
-        import.meta.env.JWT_SECRET as string,
+        process.env.JWT_SECRET as string,
       ) as {
         id: string;
         [key: string]: string | number;
