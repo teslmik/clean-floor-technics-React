@@ -24,7 +24,7 @@ export const Search: React.FC = () => {
 
   const searchProduct = React.useCallback(async () => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_APP_FETCH_URL}/products`,
+      `${process.env.REACT_APP_FETCH_URL}/products`,
       {
         params: { title: debounced },
       }

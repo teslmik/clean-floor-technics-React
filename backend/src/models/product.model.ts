@@ -40,18 +40,11 @@ const ProductSchema = new Schema<ProductType>(
         default: false,
       },
     },
-    oldPrice: {
-      type: Number,
-      default: null,
-    },
+    oldPrice: String,
     price: Number,
     availability: {
       type: Boolean,
       default: true,
-    },
-    discontinued: {
-      type: Boolean,
-      default: false,
     },
     category: {
       type: String,

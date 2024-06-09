@@ -8,7 +8,6 @@ const router = Router();
 
 router.get("/products", productController.getAllProducts);
 router.get("/products/:id", productController.getOneProductById);
-router.post("/products", productController.addOneProduct);
 router.put("/products/:id", productController.editOne);
 
 router.get("/posts", postController.getAllPosts);

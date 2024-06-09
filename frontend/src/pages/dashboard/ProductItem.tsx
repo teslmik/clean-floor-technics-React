@@ -2,7 +2,6 @@ import { Edit as EditIcon } from "@mui/icons-material";
 import {
   Avatar,
   Chip,
-  Divider,
   Grid,
   IconButton,
   ListItem,
@@ -41,7 +40,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
           <ListItemAvatar>
             <Avatar variant="rounded" sx={{ backgroundColor: "transparent" }}>
               <img
-                src={`assets/img/products/${product.imageUrl}.webp`}
+                src={`assets/img/products/${product.imageUrl}.png`}
                 alt="product img"
                 style={{
                   width: "100%",
@@ -55,25 +54,11 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
             primary={product.title}
             secondary={
               <Stack direction="column">
-                <Stack direction="row" columnGap={1} flexWrap="wrap">
-                  <Typography variant="caption">
-                    {`Price-€: ${product.price}€`}
-                  </Typography>
-                  <Divider orientation="vertical" flexItem />
-                  <Typography variant="caption" sx={{ fontWeight: "bold" }}>
-                    {`Price-uah: ${euroToHrivna(
-                      product.price
-                    ).toLocaleString()}₴`}
-                  </Typography>
-                  {product.oldPrice && (
-                    <>
-                      <Divider orientation="vertical" flexItem />
-                      <Typography variant="caption">
-                        {`Old price-uah: ${product.oldPrice}₴`}
-                      </Typography>
-                    </>
-                  )}
-                </Stack>
+                <Typography variant="caption">
+                  {`Price-€: ${product.price}€ | Price-uah: ${euroToHrivna(
+                    product.price
+                  ).toLocaleString()}₴`}
+                </Typography>
                 <Typography
                   variant="caption"
                   color={product.availability ? "green" : "error"}
@@ -94,20 +79,6 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                           size="small"
                         />
                       )
-                  )}
-                  {product.oldPrice && (
-                    <Chip
-                      label={`-
-                        ${Math.round(
-                          (100 *
-                            (Number(product.oldPrice) -
-                              euroToHrivna(product.price))) /
-                            Number(product.oldPrice)
-                        )}
-                        %`}
-                      color="secondary"
-                      size="small"
-                    />
                   )}
                 </Stack>
               </Stack>

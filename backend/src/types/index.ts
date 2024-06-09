@@ -1,9 +1,4 @@
-export type {
-  ProductType,
-  SpecificationType,
-  LabelType,
-  AddProductType,
-} from "./product.type";
+export type { ProductType, SpecificationType, LabelType } from "./product.type";
 export type { SearchParamsType } from "./search-params.type";
 export type { PostType } from "./post.type";
 export type { CreatePostDtoType } from "./create-post-dto.type";

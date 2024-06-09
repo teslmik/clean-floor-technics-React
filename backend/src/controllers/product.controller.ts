@@ -29,16 +29,6 @@ class ProductController {
     }
   }
 
-  public async addOneProduct(req: Request, res: Response, next: NextFunction) {
-    try {
-      const product = await productService.addOne(req.body);
-
-      return res.json(product);
-    } catch (error) {
-      next(error);
-    }
-  }
-
   public async editOne(req: Request, res: Response, next: NextFunction) {
     try {
       const product = await productService.editById(req.params.id, req.body);

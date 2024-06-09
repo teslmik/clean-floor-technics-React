@@ -1,12 +1,12 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
-import axios from "axios";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useForm} from 'react-hook-form';
+import axios from 'axios';
 
-import { dropIn } from "../../utils";
-import { useGlobalContext } from "../../hook/useGlobalContext";
+import { dropIn } from '../../utils';
+import { useGlobalContext } from '../../hook/useGlobalContext';
 
-import styles from "./Callback.module.scss";
+import styles from './Callback.module.scss';
 
 export interface IDataMessage {
   name: string;
@@ -14,9 +14,7 @@ export interface IDataMessage {
 }
 
 export const Callback: React.FC = () => {
-  const URL = `https://api.telegram.org/bot${
-    import.meta.env.VITE_APP_TOKEN_TG
-  }/sendMessage`;
+  const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
 
   const { setIsOpenCallback, setRequestDone } = useGlobalContext();
 
@@ -25,35 +23,32 @@ export const Callback: React.FC = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<IDataMessage>({ mode: "onBlur" });
+  } = useForm<IDataMessage>({ mode: 'onBlur' });
 
   const onSubmitCallback = (data: IDataMessage) => {
     let message = `<b>Заявка на дзвінок!!!</b> &#128242;&#128242;&#128242;\n`;
     message += `<b>Замовник:</b> ${data.name.trim()}\n`;
-    message += `<b>Номер телефону:</b> ${data.phone.split(" ").join("")}`;
+    message += `<b>Номер телефону:</b> ${data.phone.split(' ').join('')}`;
 
     axios
       .post(URL, {
-        chat_id: import.meta.env.VITE_APP_CHAT_ID,
-        parse_mode: "html",
+        chat_id: process.env.REACT_APP_CHAT_ID,
+        parse_mode: 'html',
         text: message,
       })
       .then(() =>
         setRequestDone({
           isOpen: true,
-          title: "Заявка відправлена!",
+          title: 'Заявка відправлена!',
           text: `Наш менеджер незабором з вами зв'яжеться.`,
-        })
+        }),
       )
       .catch((error) =>
         setRequestDone({
           isOpen: true,
-          title: "Виникла помилка! ⚠",
-          text:
-            "При роботі серверу виникла помилка: " +
-            error.message +
-            ". Спробуйте пізніше...",
-        })
+          title: 'Виникла помилка! ⚠',
+          text: 'При роботі серверу виникла помилка: ' + error.message + '. Спробуйте пізніше...',
+        }),
       )
       .finally(() => {
         setIsOpenCallback(false);
@@ -67,8 +62,7 @@ export const Callback: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className={styles.popup}
-      onClick={() => setIsOpenCallback(false)}
-    >
+      onClick={() => setIsOpenCallback(false)}>
       <div className={styles.body}>
         <motion.div
           className={styles.content}
@@ -76,32 +70,21 @@ export const Callback: React.FC = () => {
           variants={dropIn}
           initial="hidden"
           animate="visible"
-          exit="exit"
-        >
-          <div
-            onClick={() => setIsOpenCallback(false)}
-            className="_icon-close"
-          ></div>
+          exit="exit">
+          <div onClick={() => setIsOpenCallback(false)} className="_icon-close"></div>
           <h2 className={styles.title}>Передзвонити вам?</h2>
           <p className={styles.text}>
-            Вкажіть номер телефону та ім'я. Ми зв'яжемося з вами у найближчий
-            час.
+            Вкажіть номер телефону та ім'я. Ми зв'яжемося з вами у найближчий час.
           </p>
-          <form
-            className={styles.form}
-            onSubmit={handleSubmit(onSubmitCallback)}
-          >
+          <form className={styles.form} onSubmit={handleSubmit(onSubmitCallback)}>
             <label htmlFor="name">
               <span>Ім'я</span>
               <input
                 placeholder="Віше Ім'я"
                 type="text"
-                {...register("name", {
+                {...register('name', {
                   required: `Заповніть поле!`,
-                  minLength: {
-                    value: 3,
-                    message: `Введіть ім'я менше 3-х літер!`,
-                  },
+                  minLength: { value: 3, message: `Введіть ім'я менше 3-х літер!` },
                   pattern: {
                     value:
                       /^([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})[\s]?([А-Яа-яA-Za-z]{1}[А-Яа-яA-Za-zЁёІі]{1,23})?$/,
@@ -117,7 +100,7 @@ export const Callback: React.FC = () => {
               <input
                 placeholder="0661416662"
                 type="phone"
-                {...register("phone", {
+                {...register('phone', {
                   required: `Заповніть поле!`,
                   pattern: {
                     value: /^\+?[380]?\d{10}/g,
