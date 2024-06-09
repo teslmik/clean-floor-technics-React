@@ -32,17 +32,10 @@ const FullItem: React.FC = () => {
       try {
         setProduct(undefined);
         const { data } = await axios.get<IProductItem>(
-          `${process.env.REACT_APP_FETCH_URL}/products/${_id}`
+          `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
         );
         setProduct(data);
-        const {
-          _id: id,
-          category,
-          imageUrl,
-          title,
-          oldPrice,
-          price,
-        }: ICartItem = data;
+        const { _id: id, category, imageUrl, title, oldPrice, price } = data;
         setCartItem({
           _id: id,
           category,
@@ -64,6 +57,8 @@ const FullItem: React.FC = () => {
     cartItem && dispatch(addToCart(cartItem));
     setIsOpenCart(true);
   };
+
+  const onCartOrDisabled = isItemOnCart ? "inCart" : "disabled";
 
   if (!product) {
     return <CircleLoader />;
@@ -87,23 +82,21 @@ const FullItem: React.FC = () => {
                 Короткий опис товару
               </div>
               <span className="discription-fullitem__text">
-                {product.description &&
-                  product.description.map((str, i) => (
-                    <ReactMarkdown key={i}>{str}</ReactMarkdown>
-                  ))}
+                {product?.description?.map((str, i) => (
+                  <ReactMarkdown key={i}>{str}</ReactMarkdown>
+                ))}
               </span>
             </div>
             <div className="body-fullitem__specification specification">
               <div className="specification__text">
                 <div className="specification__title">Характеристики </div>
                 <div className="specification__list">
-                  {product.specification &&
-                    product.specification.map((item, i) => (
-                      <React.Fragment key={i}>
-                        <p className="list-first">{item.name}</p>
-                        <p className="list-second">{item.value}</p>
-                      </React.Fragment>
-                    ))}
+                  {product?.specification?.map((item, i) => (
+                    <React.Fragment key={i}>
+                      <p className="list-first">{item.name}</p>
+                      <p className="list-second">{item.value}</p>
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
               <div className="specification__tabs tabs-specification">
@@ -177,8 +170,18 @@ const FullItem: React.FC = () => {
           />
           {windowWidth < 683 && (
             <div className="body-fullitem__btn">
-              <div className="fullitem-header__availability">
-                {product.availability ? "В наявності" : "Під замовлення"}
+              <div
+                className={
+                  product.discontinued
+                    ? "fullitem-header__availability discontinued"
+                    : "fullitem-header__availability"
+                }
+              >
+                {product.discontinued
+                  ? "Знятий з виробництва"
+                  : product.availability
+                  ? "В наявності"
+                  : "Під замовлення"}
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
@@ -186,14 +189,14 @@ const FullItem: React.FC = () => {
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">
-                    {product.oldPrice.toLocaleString()} ₴
+                    {Number(product.oldPrice).toLocaleString()} ₴
                   </div>
                 )}
               </div>
               <button
                 onClick={onClickAdd}
                 className={isItemOnCart ? "inCart" : ""}
-                disabled={isItemOnCart && true}
+                disabled={isItemOnCart}
               >
                 <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
               </button>
@@ -209,8 +212,18 @@ const FullItem: React.FC = () => {
               <div className="fullitem-header__text">
                 <h1 className="fullitem-header__title">{product.title}</h1>
                 {windowWidth >= 683 && (
-                  <div className="fullitem-header__availability">
-                    {product.availability ? "В наявності" : "Під замовлення"}
+                  <div
+                    className={
+                      product.discontinued
+                        ? "fullitem-header__availability discontinued"
+                        : "fullitem-header__availability"
+                    }
+                  >
+                    {product.discontinued
+                      ? "Знятий з виробництва"
+                      : product.availability
+                      ? "В наявності"
+                      : "Під замовлення"}
                   </div>
                 )}
               </div>
@@ -228,7 +241,7 @@ const FullItem: React.FC = () => {
                 </div>
                 {product.oldPrice && (
                   <div className="body-fullitem__old-price">
-                    {product.oldPrice.toLocaleString()} ₴
+                    {Number(product.oldPrice).toLocaleString()} ₴
                   </div>
                 )}
               </div>
@@ -239,8 +252,10 @@ const FullItem: React.FC = () => {
               <div className="body-fullitem__btn">
                 <button
                   onClick={onClickAdd}
-                  className={isItemOnCart ? "inCart" : ""}
-                  disabled={isItemOnCart && true}
+                  className={
+                    isItemOnCart || product.discontinued ? onCartOrDisabled : ""
+                  }
+                  disabled={isItemOnCart || product.discontinued}
                 >
                   <span>{isItemOnCart ? "У кошику" : "Купити"}</span>
                 </button>
@@ -329,10 +344,9 @@ const FullItem: React.FC = () => {
             Короткий опис товару
           </div>
           <span className="discription-fullitem__text">
-            {product.description &&
-              product.description.map((str, i) => (
-                <ReactMarkdown key={i}>{str}</ReactMarkdown>
-              ))}
+            {product?.description?.map((str, i) => (
+              <ReactMarkdown key={i}>{str}</ReactMarkdown>
+            ))}
           </span>
         </div>
       )}

@@ -12,7 +12,7 @@ interface ISwiperItem {
     _popular: boolean;
     _new: boolean;
   };
-  oldPrice: string;
+  oldPrice: number | null;
   price: number;
 }
 
@@ -46,7 +46,7 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
                 <p className="label-content">Хіт</p>
               </div>
             )}
-            {oldPrice !== "" ? (
+            {oldPrice && (
               <div className="labels__item _discount">
                 <div className="label-content">
                   -
@@ -57,8 +57,6 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
                   %
                 </div>
               </div>
-            ) : (
-              ""
             )}
             {label._new && (
               <div className="labels__item _new">

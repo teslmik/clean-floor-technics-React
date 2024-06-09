@@ -10,7 +10,7 @@ interface ICartItemProps {
   _id: string;
   title: string;
   imageUrl: string;
-  oldPrice: string;
+  oldPrice: number | null;
   price: number;
   count: number;
   category: string;
@@ -56,8 +56,10 @@ export const CartItem: React.FC<ICartItemProps> = ({
           <span onClick={onClickRemoveItem} className="_icon-removeItem"></span>
         </div>
         <div className="item-order__price">
-          {oldPrice !== "" && (
-            <span className="old-price">{oldPrice.toLocaleString()} ₴</span>
+          {oldPrice && (
+            <span className="old-price">
+              {Number(oldPrice).toLocaleString()} ₴
+            </span>
           )}
           <span className="actual-price">
             {euroToHrivna(price).toLocaleString()} ₴

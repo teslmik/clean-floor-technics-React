@@ -10,7 +10,7 @@ export const fetchUser = createAsyncThunk<
   { state: RootState }
 >("user/fetchToken", async (token) => {
   const { data } = await axios.get<UserType | null>(
-    `${process.env.REACT_APP_FETCH_URL}/me`,
+    `${import.meta.env.VITE_APP_FETCH_URL}/me`,
     { headers: { Authorization: token } }
   );
   return data;

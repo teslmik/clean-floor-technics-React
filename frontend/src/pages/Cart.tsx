@@ -12,7 +12,9 @@ import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
 
 const Cart: React.FC = () => {
-  const URL = `https://api.telegram.org/bot${process.env.REACT_APP_TOKEN_TG}/sendMessage`;
+  const URL = `https://api.telegram.org/bot${
+    import.meta.env.VITE_APP_TOKEN_TG
+  }/sendMessage`;
 
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
@@ -35,7 +37,7 @@ const Cart: React.FC = () => {
     reset,
   } = useForm<IDataMessage>({ mode: "onBlur" });
 
-  const onSubmitCallback = (data: IDataMessage) => {
+  const onSubmitCallback = async (data: IDataMessage) => {
     let message = `<b>Замовлення з сайту!!!</b> &#129297;&#128077;&#128230;\n`;
     message += `<b>Замовник:</b> ${data.name}\n`;
     message += `<b>Номер телефону:</b> ${data.phone}\n\n`;
@@ -50,9 +52,9 @@ const Cart: React.FC = () => {
       .join("");
     message += `<b>УСЬОГО: ${totalPrice.toLocaleString()} грн.</b>`;
 
-    axios
+    await axios
       .post(URL, {
-        chat_id: process.env.REACT_APP_CHAT_ID,
+        chat_id: import.meta.env.VITE_APP_CHAT_ID,
         parse_mode: "html",
         text: message,
       })
