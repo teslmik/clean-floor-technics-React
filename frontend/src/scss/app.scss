@@ -20,6 +20,10 @@ body.lockPadding {
 
 // ===== Main =========
 
+main:has(.priceList) {
+  padding-bottom: 0 !important;
+}
+
 .promo {
   @include adaptiveValue("margin-top", 80, 30, 1);
   @include adaptiveValue("margin-bottom", 80, 30, 1);

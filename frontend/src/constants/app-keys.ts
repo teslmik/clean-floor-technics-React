@@ -17,5 +17,6 @@ export const ROUTER_KEYS = {
   PRODUCTS: "products",
   AUTH: "auth",
   DASHBOARD: "dashboard",
+  PRICELIST: "price_list",
   NOT_FOUND: "*",
 };

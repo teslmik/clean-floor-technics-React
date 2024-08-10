@@ -35,8 +35,8 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
       {windowWidth > 881 ? (
         <nav className={styles.menu}>
           <ul className={styles.menu__list}>
-            {menuListArr.map((item, i) => (
-              <li key={i} className={styles.menu__item}>
+            {menuListArr.map((item) => (
+              <li key={item.link} className={styles.menu__item}>
                 <Link to={item.link} className={styles.menu__link}>
                   {item.name}
                 </Link>
@@ -66,8 +66,8 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
                   <p>Назад</p>
                 </div>
                 <ul className={styles.menu__list}>
-                  {menuListArr.map((item, i) => (
-                    <li onClick={() => setIsVisible?.(false)} key={i} className={styles.menu__item}>
+                  {menuListArr.map((item) => (
+                    <li onClick={() => setIsVisible?.(false)} key={item.link} className={styles.menu__item}>
                       <Link to={item.link} className={styles.menu__link}>
                         {item.name}
                       </Link>

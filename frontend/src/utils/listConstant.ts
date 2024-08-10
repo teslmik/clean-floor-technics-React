@@ -16,6 +16,7 @@ export const menuListArr = [
   { link: 'contacts', name: 'Контактна інформація' },
   { link: 'blog', name: 'Блог' },
   { link: 'services', name: 'Послуги' },
+  { link: 'price_list', name: 'Прайсліст' },
 ];
 
 export const categoriesList = [

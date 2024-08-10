@@ -520,3 +520,21 @@
     }
   }
 }
+
+.catalog-link {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding-top: 12px;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.25);
+  transition: all 0.2s ease-in-out;
+  width: max-content;
+  @media (any-hover: hover) {
+    &:hover {
+      color: $greenLiteColor;
+      border-color: $greenLiteColor;
+    }
+  }
+}

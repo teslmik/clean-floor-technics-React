@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 import "./scss/app.scss";
+import { PriceList } from "./pages/PriceList";
 
 const FullItem = React.lazy(
   () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem")
@@ -129,6 +130,14 @@ const App: React.FC = () => {
           element={
             <Suspense fallback={<CircleLoader />}>
               <Services />
+            </Suspense>
+          }
+        />
+        <Route
+          path={ROUTER_KEYS.PRICELIST}
+          element={
+            <Suspense fallback={<CircleLoader />}>
+              <PriceList />
             </Suspense>
           }
         />

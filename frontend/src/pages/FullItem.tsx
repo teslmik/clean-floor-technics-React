@@ -3,6 +3,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { PictureAsPdf } from "@mui/icons-material";
 
 import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
 import { cartSelector } from "../redux/cart/selectors";
@@ -87,6 +88,10 @@ const FullItem: React.FC = () => {
                 ))}
               </span>
             </div>
+            <Link className="catalog-link" to="/price_list">
+              <span>Завантажити повний каталог товарів</span>
+              <PictureAsPdf />
+            </Link>
             <div className="body-fullitem__specification specification">
               <div className="specification__text">
                 <div className="specification__title">Характеристики </div>
@@ -339,16 +344,22 @@ const FullItem: React.FC = () => {
         </div>
       </div>
       {windowWidth >= 683 && (
-        <div className="fullitem__discription discription-fullitem">
-          <div className="discription-fullitem__title">
-            Короткий опис товару
+        <>
+          <div className="fullitem__discription discription-fullitem">
+            <div className="discription-fullitem__title">
+              Короткий опис товару
+            </div>
+            <span className="discription-fullitem__text">
+              {product?.description?.map((str, i) => (
+                <ReactMarkdown key={i}>{str}</ReactMarkdown>
+              ))}
+            </span>
           </div>
-          <span className="discription-fullitem__text">
-            {product?.description?.map((str, i) => (
-              <ReactMarkdown key={i}>{str}</ReactMarkdown>
-            ))}
-          </span>
-        </div>
+          <Link className="catalog-link" to="/price_list">
+            <span>Завантажити повний каталог товарів</span>
+            <PictureAsPdf />
+          </Link>
+        </>
       )}
     </section>
   );
