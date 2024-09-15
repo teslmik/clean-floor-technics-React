@@ -1,6 +1,6 @@
 export const editValidate = (values: {
   price: number | string;
-  oldPrice: number | string | null;
+  oldPrice?: number | string | null;
   availability: boolean;
 }) => {
   const errors: {
