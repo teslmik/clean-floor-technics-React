@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import React from "react";
 
@@ -29,16 +30,20 @@ export const PriceList: React.FC = () => {
             href={priceList}
             download="PriceListTruvox_2024.pdf"
             variant="contained"
+            size="large"
+            startIcon={<CloudDownloadIcon />}
             sx={{
               position: "sticky",
               top,
               left: "100%",
               transform: "translate(-30px, 60px)",
               zIndex: 100,
+              textAlign: "center",
+              backgroundColor: "#52ad3a",
+              ":hover": { backgroundColor: "#6fca4e" },
+              "& span": { m: 0 },
             }}
-          >
-            Скачать прайс-лист
-          </Button>
+          />
           <Worker
             workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
           >
