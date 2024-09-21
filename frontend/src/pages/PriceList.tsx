@@ -1,11 +1,14 @@
-import React from "react";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
 import { Button } from "@mui/material";
+import { Viewer, Worker } from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+import React from "react";
 
+import { useGlobalContext } from "../hook/useGlobalContext";
 import priceList from "/assets/docs/PriceListTruvox_2024.pdf";
 
 export const PriceList: React.FC = () => {
+  const { windowWidth } = useGlobalContext();
+
   const isMobileOrSafari = () => {
     const userAgent = navigator.userAgent;
     return (
@@ -13,6 +16,10 @@ export const PriceList: React.FC = () => {
       (userAgent.includes("Safari") && !userAgent.includes("Chrome"))
     );
   };
+
+  const isTablet = windowWidth <= 881.98 && windowWidth > 681.98 ? 70 : 0;
+  const isMobile = windowWidth <= 681.98 ? 47 : 0;
+  const top = isTablet || isMobile;
 
   return (
     <div className="priceList">
@@ -24,7 +31,7 @@ export const PriceList: React.FC = () => {
             variant="contained"
             sx={{
               position: "sticky",
-              top: 0,
+              top,
               left: "100%",
               transform: "translate(-30px, 60px)",
               zIndex: 100,
