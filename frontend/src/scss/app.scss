@@ -128,6 +128,26 @@ main:has(.priceList) {
 .card {
   position: relative;
 
+  .blinking-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: blinking 4s infinite;
+    filter: blur(2px);
+  }
+
+  @keyframes blinking {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   &__image {
     display: block;
     width: 100%;
