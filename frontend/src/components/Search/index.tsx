@@ -29,7 +29,7 @@ export const Search: React.FC = () => {
         params: { title: debounced },
       }
     );
-    setItems(data);
+    setItems(data.products);
   }, [debounced]);
 
   const onClickSearchItem = (item: IProductItem) => {

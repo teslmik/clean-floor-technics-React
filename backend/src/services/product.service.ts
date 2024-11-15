@@ -8,13 +8,19 @@ import {
 } from "../types";
 
 class ProductService {
-  public async getAllProducts({ sortBy, order, filter }: SearchParamsType) {
+  public async getAllProducts({
+    sortBy,
+    order,
+    filter,
+    title,
+  }: SearchParamsType) {
     const sortField = sortBy as keyof ProductType;
     const sortOrder = order === OrderEnum.DESC ? -1 : 1;
 
     let filterObject = {} as {
       category?: { $in: string[] };
       availability?: boolean;
+      title?: { $regex: RegExp };
     };
     const labels = [] as (keyof LabelType)[];
     if (filter) {
@@ -40,6 +46,10 @@ class ProductService {
         },
       );
     }
+    if (title) {
+      filterObject.title = { $regex: new RegExp(title, "i") };
+    }
+    console.log({ filterObject });
 
     const [
       products,
@@ -106,7 +116,11 @@ class ProductService {
   }
 
   public async getOneById(_id: string) {
-    const product = await ProductModel.findOneAndUpdate({ _id }, { $inc: { rating: 1 }}, {returnDocument: "after"});
+    const product = await ProductModel.findOneAndUpdate(
+      { _id },
+      { $inc: { rating: 1 } },
+      { returnDocument: "after" },
+    );
 
     return product;
   }
