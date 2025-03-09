@@ -34,6 +34,8 @@ const MainLayout: React.FC = () => {
   const [windowWidth, setWindowWidth] = React.useState(window.screen.width);
   const { items } = useSelector(ratesSelector);
 
+  const rate = localStorage.getItem("currentEuro");
+
   const contextValues = React.useMemo(
     () => ({
       isOpenCart,
@@ -62,15 +64,12 @@ const MainLayout: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    const rate = localStorage.getItem("currentEuro");
+    const euroRate = items.rates.find((rate) => rate.currency === "eu")?.value;
 
-    if (!rate) {
-      const euroRate = items.rates.find(
-        (rate) => rate.currency === "eu"
-      )?.value;
+    if (!rate || rate != euroRate) {
       if (euroRate) localStorage.setItem("currentEuro", euroRate.toString());
     }
-  }, [items.rates]);
+  }, [items.rates, rate]);
 
   React.useEffect(() => {
     isOpenCallback === true ||

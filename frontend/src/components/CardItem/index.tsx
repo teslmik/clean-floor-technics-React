@@ -8,6 +8,7 @@ import { addToCart } from "../../redux/cart/slice";
 import { ICartItem } from "../../redux/cart/types";
 import { IProductItem } from "../../redux/products/types";
 import { euroToHrivna, ibg } from "../../utils";
+import { Tooltip } from "@mui/material";
 
 export const CardItem: React.FC<IProductItem> = ({
   _id,
@@ -19,6 +20,7 @@ export const CardItem: React.FC<IProductItem> = ({
   price,
   category,
   discontinued,
+  availability,
 }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
@@ -52,6 +54,11 @@ export const CardItem: React.FC<IProductItem> = ({
   const onCartOrDisabled = discontinued
     ? "card__btn disabled"
     : "card__btn inCart";
+  const blinkingConfig = discontinued
+    ? { color: "red", tooltip: "Знято з виробництва" }
+    : availability
+      ? { color: "green", tooltip: "У наявності" }
+      : { color: "orange", tooltip: "Під замовлення" };
 
   return (
     <div
@@ -75,7 +82,7 @@ export const CardItem: React.FC<IProductItem> = ({
                 -
                 {Math.round(
                   (100 * (Number(oldPrice) - euroToHrivna(price))) /
-                    Number(oldPrice)
+                  Number(oldPrice)
                 )}
                 %
               </div>
@@ -93,9 +100,8 @@ export const CardItem: React.FC<IProductItem> = ({
           title={title}
         >
           <img
-            src={`/assets/img/products/${imageUrl}${
-              isWebpImg ? ".webp" : ".png"
-            }`}
+            src={`/assets/img/products/${imageUrl}${isWebpImg ? ".webp" : ".png"
+              }`}
             alt={title}
           />
         </Link>
@@ -128,6 +134,12 @@ export const CardItem: React.FC<IProductItem> = ({
             >
               <span>{isOnCart ? "У кошику" : "Купити"}</span>
             </button>
+            <Tooltip title={blinkingConfig.tooltip}>
+              <div
+                className="blinking-dot"
+                style={{ backgroundColor: blinkingConfig.color }}
+              />
+            </Tooltip>
           </div>
         </div>
       </article>
