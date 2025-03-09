@@ -9,7 +9,7 @@ import router from "./routers";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT ?? 5000;
 const DB_URL = process.env.MONGO_DB_URI as string;
 const app = express();
 
@@ -30,5 +30,4 @@ const start = async () => {
 
 start();
 
-// module.exports = app;
 export default app;
