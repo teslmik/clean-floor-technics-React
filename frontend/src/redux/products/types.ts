@@ -20,6 +20,7 @@ export interface IProductItem {
   price: number;
   availability: boolean;
   discontinued: boolean;
+  installments: boolean;
   category: string;
   rating: number;
 }

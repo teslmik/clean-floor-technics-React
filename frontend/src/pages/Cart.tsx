@@ -11,25 +11,16 @@ import { ibg, euroToHrivna } from "../utils";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
 
-const Cart: React.FC = () => {
-  const URL = `https://api.telegram.org/bot${
-    import.meta.env.VITE_APP_TOKEN_TG
-  }/sendMessage`;
+const URL = `https://api.telegram.org/bot${
+  import.meta.env.VITE_APP_TOKEN_TG
+}/sendMessage`;
 
+const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
   const { setRequestDone } = useGlobalContext();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  React.useEffect(() => {
-    ibg();
-
-    if (items.length < 1) {
-      navigate("/catalog");
-    }
-  }, [items, navigate]);
-
   const {
     register,
     formState: { errors },
@@ -50,6 +41,11 @@ const Cart: React.FC = () => {
           ).toLocaleString()}</b> грн.\n\n`
       )
       .join("");
+
+    if (data.installments) {
+      message += `&#9989; <b>Оформлення Розстрочки</b>\n\n`;
+    }
+
     message += `<b>УСЬОГО: ${totalPrice.toLocaleString()} грн.</b>`;
 
     await axios
@@ -79,6 +75,14 @@ const Cart: React.FC = () => {
       .finally(() => reset());
   };
 
+  React.useEffect(() => {
+    ibg();
+
+    if (items.length < 1) {
+      navigate("/catalog");
+    }
+  }, [items, navigate]);
+
   return (
     <section className="cart">
       <Head title={"Кошик"} url={pathname} />
@@ -94,6 +98,7 @@ const Cart: React.FC = () => {
               <label htmlFor="nameOrder">
                 <span>Прізвище, Ім'я</span>
                 <input
+                  id="nameOrder"
                   placeholder="Ваше Ім'я та Прізвище"
                   type="text"
                   {...register("name", {
@@ -114,6 +119,7 @@ const Cart: React.FC = () => {
               <label htmlFor="telOrder">
                 <span>Телефон</span>
                 <input
+                  id="telOrder"
                   placeholder="+380970948777 чи 0661416662"
                   type="phone"
                   {...register("phone", {
@@ -125,6 +131,28 @@ const Cart: React.FC = () => {
                   })}
                 />
                 {errors?.phone && <p>{errors?.phone?.message}</p>}
+              </label>
+              <label htmlFor="installments" className="installments">
+                <input
+                  id="installments"
+                  type="checkbox"
+                  {...register("installments")}
+                />
+                <span>
+                  Оформити у{" "}
+                  <img
+                    width={30}
+                    src="/assets/img/installments/2.png"
+                    alt="credit-2"
+                  />{" "}
+                  "Оплату частинами" чи{" "}
+                  <img
+                    width={30}
+                    src="/assets/img/installments/1.png"
+                    alt="credit-1"
+                  />{" "}
+                  "Миттєву розстрочку" від Приватбанку
+                </span>
               </label>
               <div className="btn-block">
                 <button className="btn" type="submit">

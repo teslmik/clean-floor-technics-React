@@ -53,6 +53,10 @@ const ProductSchema = new Schema<ProductType>(
       type: Boolean,
       default: false,
     },
+    installments: {
+      type: Boolean,
+      default: true,
+    },
     category: {
       type: String,
       enum: Object.values(CategoriesEnum),
