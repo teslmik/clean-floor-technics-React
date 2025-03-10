@@ -8,7 +8,7 @@ export const PublicRoute: React.FC<{ children: React.ReactElement }> = ({
   const isAuthenticated = localStorage.getItem(STORAGE_KEYS.TOKEN) !== null;
 
   return isAuthenticated ? (
-    <Navigate to={`/${ROUTER_KEYS.ROOT}`} replace />
+    <Navigate to={ROUTER_KEYS.ROOT} replace />
   ) : (
     children
   );
