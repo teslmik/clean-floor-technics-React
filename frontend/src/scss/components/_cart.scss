@@ -1,15 +1,15 @@
-@import '../lib/variables';
-@import '../lib/functions';
+@import "../lib/variables";
+@import "../lib/functions";
 
 .cart {
-  @include adaptiveValue('margin-top', 30, 20, 1);
+  @include adaptiveValue("margin-top", 30, 20, 1);
 
   // .cart__title
 
   &__title {
     @include adaptiveFont(32, 18);
     line-height: 1.1;
-    @include adaptiveValue('margin-bottom', 18, 10, 1);
+    @include adaptiveValue("margin-bottom", 18, 10, 1);
     @media (max-width: $tablet) {
       text-align: center;
     }
@@ -60,9 +60,9 @@
   &__form {
     display: flex;
     flex-direction: column;
-    @include adaptiveValue('gap', 24, 16, 1);
-    @include adaptiveValue('padding-top', 20, 10, 1);
-    @include adaptiveValue('padding-bottom', 20, 10, 1);
+    @include adaptiveValue("gap", 24, 16, 1);
+    @include adaptiveValue("padding-top", 20, 10, 1);
+    @include adaptiveValue("padding-bottom", 20, 10, 1);
     border: 1px solid #d7d7d7;
     border-radius: 4px;
   }
@@ -80,10 +80,10 @@
     }
 
     h3 {
-      @include adaptiveValue('padding-top', 15, 10, 1);
-      @include adaptiveValue('padding-bottom', 15, 10, 1);
-      @include adaptiveValue('padding-left', 20, 15, 1);
-      @include adaptiveValue('padding-right', 20, 15, 1);
+      @include adaptiveValue("padding-top", 15, 10, 1);
+      @include adaptiveValue("padding-bottom", 15, 10, 1);
+      @include adaptiveValue("padding-left", 20, 15, 1);
+      @include adaptiveValue("padding-right", 20, 15, 1);
       border-bottom: 1px dotted #d7d7d7;
       font-size: 18px;
       font-weight: bold;
@@ -96,20 +96,35 @@
   &__title {
     font-size: 18px;
     font-weight: bold;
-    @include adaptiveValue('padding-left', 30, 10, 1);
-    @include adaptiveValue('padding-right', 30, 10, 1);
+    @include adaptiveValue("padding-left", 30, 10, 1);
+    @include adaptiveValue("padding-right", 30, 10, 1);
+  }
+
+  .installments {
+    input,
+    span {
+      width: auto !important;
+    }
+
+    span {
+      user-select: none;
+
+      img {
+        vertical-align: middle;
+      }
+    }
   }
 
   label {
     position: relative;
     display: flex;
     align-items: center;
-    @include adaptiveValue('gap', 20, 5, 1);
-    @include adaptiveValue('padding-left', 30, 10, 1);
-    @include adaptiveValue('padding-right', 30, 10, 1);
+    @include adaptiveValue("gap", 20, 5, 1);
+    @include adaptiveValue("padding-left", 30, 10, 1);
+    @include adaptiveValue("padding-right", 30, 10, 1);
 
     span {
-      @include adaptiveValue('width', 130, 90, 1);
+      @include adaptiveValue("width", 130, 90, 1);
     }
 
     input {
@@ -133,21 +148,21 @@
       position: absolute;
       @include adaptiveFont(12, 10);
       bottom: -16px;
-      @include adaptiveValue('left', 182, 78, 1);
+      @include adaptiveValue("left", 182, 78, 1);
       color: #bf1650;
 
       &::before {
         display: inline;
-        content: '⚠ ';
+        content: "⚠ ";
       }
     }
   }
 
   .btn-block {
     border-top: 1px dotted #d7d7d7;
-    @include adaptiveValue('padding-top', 20, 10, 1);
-    @include adaptiveValue('padding-left', 30, 10, 1);
-    @include adaptiveValue('padding-right', 30, 10, 1);
+    @include adaptiveValue("padding-top", 20, 10, 1);
+    @include adaptiveValue("padding-left", 30, 10, 1);
+    @include adaptiveValue("padding-right", 30, 10, 1);
   }
   .btn {
     margin-left: 150px;
@@ -213,19 +228,19 @@
   }
 }
 .item-order {
-  @include adaptiveValue('padding-top', 15, 10, 1);
-  @include adaptiveValue('padding-bottom', 15, 10, 1);
-  @include adaptiveValue('padding-left', 20, 15, 1);
-  @include adaptiveValue('padding-right', 20, 15, 1);
+  @include adaptiveValue("padding-top", 15, 10, 1);
+  @include adaptiveValue("padding-bottom", 15, 10, 1);
+  @include adaptiveValue("padding-left", 20, 15, 1);
+  @include adaptiveValue("padding-right", 20, 15, 1);
   border-bottom: 1px dotted #d7d7d7;
   display: flex;
-  @include adaptiveValue('gap', 20, 10, 1);
+  @include adaptiveValue("gap", 20, 10, 1);
 
   // .item-order__img
 
   &__img {
     flex: 0 0 auto;
-    @include adaptiveValue('width', 80, 60, 1);
+    @include adaptiveValue("width", 80, 60, 1);
   }
 
   // .item-order__content

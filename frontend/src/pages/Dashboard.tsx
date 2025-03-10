@@ -141,9 +141,6 @@ const Dashboard: React.FC = () => {
                 </Grid>
               </Paper>
             </Grid>
-            {/* <Grid item xs={6}>
-              <Grid container spacing={4} sx={{ padding: 2 }}></Grid>
-            </Grid> */}
           </Grid>
         </Box>
       </Box>

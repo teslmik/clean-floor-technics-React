@@ -11,6 +11,7 @@ import styles from "./Callback.module.scss";
 export interface IDataMessage {
   name: string;
   phone: string;
+  installments: boolean;
 }
 
 export const Callback: React.FC = () => {
