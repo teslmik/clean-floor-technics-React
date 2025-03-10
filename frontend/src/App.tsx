@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { CircleLoader, PrivateRoute, PublicRoute } from "./components";
@@ -6,49 +6,60 @@ import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import client from "../cms/sanitiClient";
 
 import "./scss/app.scss";
 import { PriceList } from "./pages/PriceList";
 
 const FullItem = React.lazy(
-  () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem")
+  () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem"),
 );
 const Cart = React.lazy(
-  () => import(/* webpackChunkName: "Cart" */ "./pages/Cart")
+  () => import(/* webpackChunkName: "Cart" */ "./pages/Cart"),
 );
 const Blog = React.lazy(
-  () => import(/* webpackChunkName: "Blog" */ "./pages/Blog")
+  () => import(/* webpackChunkName: "Blog" */ "./pages/Blog"),
 );
 const Catalog = React.lazy(
-  () => import(/* webpackChunkName: "Catalog" */ "./pages/Catalog")
+  () => import(/* webpackChunkName: "Catalog" */ "./pages/Catalog"),
 );
 const FullBlogItem = React.lazy(
-  () => import(/* webpackChunkName: "FullBlogItem" */ "./pages/FullBlogItem")
+  () => import(/* webpackChunkName: "FullBlogItem" */ "./pages/FullBlogItem"),
 );
 const Return = React.lazy(
-  () => import(/* webpackChunkName: "Return" */ "./pages/Return")
+  () => import(/* webpackChunkName: "Return" */ "./pages/Return"),
 );
 const Contacts = React.lazy(
-  () => import(/* webpackChunkName: "Contacts" */ "./pages/Contacts")
+  () => import(/* webpackChunkName: "Contacts" */ "./pages/Contacts"),
 );
 const About = React.lazy(
-  () => import(/* webpackChunkName: "About" */ "./pages/About")
+  () => import(/* webpackChunkName: "About" */ "./pages/About"),
 );
 const PayAndDelivery = React.lazy(
   () =>
-    import(/* webpackChunkName: "PayAndDelivery" */ "./pages/PayAndDelivery")
+    import(/* webpackChunkName: "PayAndDelivery" */ "./pages/PayAndDelivery"),
 );
 const Services = React.lazy(
-  () => import(/* webpackChunkName: "Services" */ "./pages/Services")
+  () => import(/* webpackChunkName: "Services" */ "./pages/Services"),
 );
 const Dashboard = React.lazy(
-  () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard")
+  () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard"),
 );
 const Auth = React.lazy(
-  () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index")
+  () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index"),
 );
 
 const App: React.FC = () => {
+  const [data, setData] = useState([]);
+  console.log({ data });
+
+  useEffect(() => {
+    client
+      .fetch('*[_type == "post"]')
+      .then((posts) => setData(posts))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <Routes>
       <Route
@@ -164,6 +175,5 @@ const App: React.FC = () => {
 };
 
 console.log("dev push");
-
 
 export default App;

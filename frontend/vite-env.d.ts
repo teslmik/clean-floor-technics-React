@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_APP_FETCH_URL: string;
+  readonly VITE_APP_SANITY_PROJECT_ID: string;
 }
 
 interface ImportMeta {
