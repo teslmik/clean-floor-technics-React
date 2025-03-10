@@ -226,6 +226,10 @@ main:has(.priceList) {
     left: 0;
     z-index: 9;
     pointer-events: none;
+
+    @media (max-width: $mobileSmall) {
+      max-width: 24px;
+    }
   }
 
   &__content {
