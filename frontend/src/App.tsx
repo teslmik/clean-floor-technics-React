@@ -50,16 +50,6 @@ const Auth = React.lazy(
 );
 
 const App: React.FC = () => {
-  const [data, setData] = useState([]);
-  console.log({ data });
-
-  useEffect(() => {
-    client
-      .fetch('*[_type == "post"]')
-      .then((posts) => setData(posts))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <Routes>
       <Route
@@ -161,7 +151,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path={`${ROUTER_KEYS.BLOG}/:id`}
+          path={`${ROUTER_KEYS.BLOG}/:slug`}
           element={
             <Suspense fallback={<CircleLoader />}>
               <FullBlogItem />

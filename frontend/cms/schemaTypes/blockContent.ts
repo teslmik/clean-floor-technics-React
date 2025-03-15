@@ -1,16 +1,6 @@
 import { defineType, defineArrayMember } from "sanity";
 import { MobileDeviceIcon, EnvelopeIcon } from "@sanity/icons";
 
-/**
- * This is the schema definition for the rich text fields used for
- * for this blog studio. When you import it in schemas.js it can be
- * reused in other parts of the studio with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'blockContent'
- *  }
- */
 export default defineType({
   title: "Block Content",
   name: "blockContent",
@@ -19,10 +9,6 @@ export default defineType({
     defineArrayMember({
       title: "Block",
       type: "block",
-      // Styles let you set what your user can mark up blocks with. These
-      // correspond with HTML tags, but you can set any title or value
-      // you want and decide how you want to deal with it where you want to
-      // use your content.
       styles: [
         { title: "Normal", value: "normal" },
         { title: "H1", value: "h1" },
@@ -32,15 +18,11 @@ export default defineType({
         { title: "Quote", value: "blockquote" },
       ],
       lists: [{ title: "Bullet", value: "bullet" }],
-      // Marks let you mark up inline text in the block editor.
       marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting by editors.
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
         ],
-        // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
             title: "URL",
@@ -48,9 +30,47 @@ export default defineType({
             type: "object",
             fields: [
               {
+                title: "Type",
+                name: "type",
+                type: "string",
+                options: {
+                  list: [
+                    { title: "Relative", value: "relative" },
+                    { title: "Absolute", value: "absolute" },
+                  ],
+                  layout: "radio",
+                },
+                initialValue: "relative",
+              },
+              {
                 title: "URL",
                 name: "href",
+                type: "string",
+                hidden: ({ parent }) =>
+                  parent?.type && parent?.type === "absolute",
+                validation: (Rule) =>
+                  Rule.custom((value: string, context: any) => {
+                    if (context?.parent?.type === "relative") {
+                      if (!value) return "Relative URL is required";
+                      if (!value.startsWith("/"))
+                        return "Relative URL must start with /";
+                    }
+                    return true;
+                  }),
+              },
+              {
+                title: "Absolute URL",
+                name: "absoluteHref",
                 type: "url",
+                hidden: ({ parent }) =>
+                  parent?.type && parent?.type === "relative",
+                validation: (Rule) =>
+                  Rule.custom((value: string, context: any) => {
+                    if (context?.parent?.type === "absolute" && !value) {
+                      return "Absolute URL is required";
+                    }
+                    return true;
+                  }),
               },
             ],
           },
@@ -86,9 +106,6 @@ export default defineType({
         ],
       },
     }),
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
     defineArrayMember({
       type: "image",
       options: { hotspot: true },

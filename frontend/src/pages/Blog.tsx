@@ -1,23 +1,19 @@
-import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
 
-import { Breadcrumbs, LeftMenu, SkeletonBlog, ErrorInfo } from '../components';
-import { useAppDispatch } from '../redux/store';
-import { fetchPosts } from '../redux/posts/asyncActions';
-import { postsSelector } from '../redux/posts/selectors';
-import { IPostItem } from '../redux/posts/types';
-import { Status } from '../redux/products/types';
-import { formatDate, ibg } from '../utils';
-import Head from '../layouts/Head';
-import { useGlobalContext } from '../hook/useGlobalContext';
+import { Breadcrumbs, ErrorInfo, LeftMenu, SkeletonBlog } from "../components";
+import Head from "../layouts/Head";
+import { fetchPosts } from "../redux/posts/asyncActions";
+import { postsSelector } from "../redux/posts/selectors";
+import { Status } from "../redux/products/types";
+import { useAppDispatch } from "../redux/store";
+import { formatDate, ibg } from "../utils";
 
 const Blog: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(postsSelector);
   const { pathname } = useLocation();
-  const { isWebpImg } = useGlobalContext();
 
   const skeleton = [...new Array(4)].map((_, i) => (
     <div className="skeleton__wrapper" key={i}>
@@ -36,11 +32,11 @@ const Blog: React.FC = () => {
 
   return (
     <section className="blog__container">
-      <Head title={'Блог'} url={pathname} />
+      <Head title={"Блог"} url={pathname} />
       <div className="blog__wrapper">
         <LeftMenu />
         <div className="blog__boby">
-          <Breadcrumbs titleBlock={'Блог'} />
+          <Breadcrumbs titleBlock={"Блог"} />
           <div className="blog__content content-blog">
             <div className="content-blog__title">Блог</div>
             {status === Status.ERROR ? (
@@ -49,17 +45,34 @@ const Blog: React.FC = () => {
               <ul className="content-blog__list">
                 {status === Status.LOADING
                   ? skeleton
-                  : [...items as IPostItem[]].map((obj, i) => (
-                    <li key={i} className="content-blog__item">
-                      <Link to={`/blog/${obj._id}`} className="blog-item__img ibg">
-                        <img src={`/assets/img/blog/${obj.imageUrl}${isWebpImg ? '.webp' : '.jpg'}`} alt="blogImage" />
-                      </Link>
-                      <div className="blog-item__date">{formatDate(obj.createdAt)}</div>
-                      <Link to={`/blog/${obj._id}`} className="blog-item__text">
-                        {<ReactMarkdown children={obj.title} />}
-                      </Link>
-                    </li>
-                  ))}
+                  : items.map((obj) => (
+                      <li key={obj._id} className="content-blog__item">
+                        <Link
+                          to={`/blog/${obj.slug?.current}`}
+                          className="blog-item__img ibg"
+                        >
+                          {obj.imageUrl && (
+                            <img src={obj.imageUrl} alt="blog_image" />
+                          )}
+                          {obj.videoUrl && (
+                            <video controls>
+                              <track kind="captions" />
+                              <source src={obj.videoUrl} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                          )}
+                        </Link>
+                        <div className="blog-item__date">
+                          {formatDate(obj.publishedAt)}
+                        </div>
+                        <Link
+                          to={`/blog/${obj.slug?.current}`}
+                          className="blog-item__text"
+                        >
+                          {obj.title}
+                        </Link>
+                      </li>
+                    ))}
               </ul>
             )}
           </div>
