@@ -5,6 +5,7 @@ const client = createClient({
   dataset: "production",
   apiVersion: "2025-03-10",
   useCdn: true,
+  stega: { studioUrl: "/cms" },
 });
 
 export default client;

@@ -92,6 +92,25 @@ export default defineType({
     select: {
       title: "title",
       media: "media.image",
+      publishedAt: "publishedAt",
+    },
+    prepare(selection) {
+      const { title, media, publishedAt } = selection;
+      const date = publishedAt
+        ? new Date(publishedAt).toLocaleDateString()
+        : "No date";
+      return {
+        title,
+        media,
+        subtitle: `Public: ${date}`,
+      };
     },
   },
+  orderings: [
+    {
+      title: "Most recent",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+  ],
 });
