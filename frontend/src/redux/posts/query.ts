@@ -1,9 +1,13 @@
+const transformMediaUrl = `
+  "imageUrl": media.image.asset->url,
+  "videoUrl": media.video.asset->url,
+  "videoLink": media.videoLink
+`;
+
 export const getAllPosts = `
   *[_type == "post"] | order(publishedAt desc) {
     ...,
-    "imageUrl": media.image.asset->url,
-    "videoUrl": media.video.asset->url,
-    "videoLink": media.videoLink
+    ${transformMediaUrl}
   }
 `;
 
@@ -13,17 +17,13 @@ export const getNewPosts = `
     title,
     publishedAt,
     slug,
-    "imageUrl": media.image.asset->url,
-    "videoUrl": media.video.asset->url,
-    "videoLink": media.videoLink
+    ${transformMediaUrl}
   }
 `;
 
 export const getPostBySlug = `
     *[_type == "post" && slug.current == $slug][0] {
     ...,
-    "imageUrl": media.image.asset->url,
-    "videoUrl": media.video.asset->url,
-    "videoLink": media.videoLink
+    ${transformMediaUrl}
   }
 `;
