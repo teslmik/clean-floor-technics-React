@@ -1,4 +1,5 @@
-@import './variables';
+@use "./variables" as var;
+@use "./functions" as fn;
 
 // Обнуление
 *,
@@ -33,12 +34,12 @@ h6 {
 html,
 body {
   height: 100%;
-  color: $mainFontColor;
+  color: var.$mainFontColor;
 }
 body {
-  font-size: $fontSize;
+  font-size: var.$fontSize;
   font-weight: 400;
-  font-family: $fontFamily, sans-serif;
+  font-family: var.$fontFamily, sans-serif;
   font-style: normal;
 }
 .wrapper {
@@ -50,11 +51,11 @@ body {
 .main {
   height: 100%;
   flex: 1 1 auto;
-  @include adaptiveValue('padding-bottom', 40, 32, 1);
-  @media (max-width: $tablet) {
+  @include fn.adaptiveValue("padding-bottom", 40, 32, 1);
+  @media (max-width: fn.$tablet) {
     padding-top: 70px;
   }
-  @media (max-width: $mobile) {
+  @media (max-width: fn.$mobile) {
     padding-top: 47px;
   }
 }

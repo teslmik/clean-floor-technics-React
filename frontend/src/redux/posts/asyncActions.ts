@@ -1,14 +1,28 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
+import client from "../../../cms/lib/sanitiClient";
+import { getAllPosts, getNewPosts } from "./query";
 import { IPostItem } from "./types";
+import { modifyVideoLink } from "../../utils";
 
 export const fetchPosts = createAsyncThunk<IPostItem[]>(
   "post/fetchPostsStatus",
   async () => {
-    const { data } = await axios.get<IPostItem[]>(
-      `${import.meta.env.VITE_APP_FETCH_URL}/posts`
-    );
-    return data;
-  }
+    const data = await client.fetch<IPostItem[]>(getAllPosts);
+    return data.map((post) => ({
+      ...post,
+      videoLink: modifyVideoLink(post.videoLink),
+    }));
+  },
+);
+
+export const fetchNewPosts = createAsyncThunk<IPostItem[]>(
+  "post/fetchNewPostsStatus",
+  async () => {
+    const data = await client.fetch<IPostItem[]>(getNewPosts);
+    return data.map((post) => ({
+      ...post,
+      videoLink: modifyVideoLink(post.videoLink),
+    }));
+  },
 );
