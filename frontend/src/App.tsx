@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import { CircleLoader, PrivateRoute, PublicRoute } from "./components";
 import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
-import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 import "./scss/app.scss";
@@ -46,6 +45,9 @@ const Dashboard = React.lazy(
 );
 const Auth = React.lazy(
   () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index"),
+);
+const Home = React.lazy(
+  () => import(/* webpackChunkName: "Home" */ "./pages/Home"),
 );
 
 const App: React.FC = () => {
