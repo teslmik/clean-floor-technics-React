@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { CircleLoader, PrivateRoute, PublicRoute } from "./components";
@@ -6,7 +6,6 @@ import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
-import client from "../cms/sanitiClient";
 
 import "./scss/app.scss";
 import { PriceList } from "./pages/PriceList";
