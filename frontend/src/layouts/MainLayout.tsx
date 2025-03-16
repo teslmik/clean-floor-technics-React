@@ -1,24 +1,24 @@
+import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
 
 import {
+  Callback,
+  CartPopup,
   Footer,
   Header,
   PopupAnswer,
-  Callback,
-  CartPopup,
   RouteMap,
 } from "../components";
-import { useAppDispatch } from "../redux/store";
-import { ibg, isWebp, bodyLock, bodyUnlock } from "../utils";
-import { MyGlobalContext } from "../hook/useGlobalContext";
 import { CallBackImg } from "../components/CallBackImg";
-import { fetchRates } from "../redux/rates/asyncActions";
-import { fetchPosts } from "../redux/posts/asyncActions";
+import { MyGlobalContext } from "../hook/useGlobalContext";
+import { fetchNewPosts } from "../redux/posts/asyncActions";
 import { fetchProducts } from "../redux/products/asyncActions";
+import { fetchRates } from "../redux/rates/asyncActions";
 import { ratesSelector } from "../redux/rates/selectors";
+import { useAppDispatch } from "../redux/store";
+import { bodyLock, bodyUnlock, ibg, isWebp } from "../utils";
 
 const MainLayout: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -49,7 +49,14 @@ const MainLayout: React.FC = () => {
       setRequestDone,
       isWebpImg,
     }),
-    [isOpenCallback, isOpenCart, isOpenMap, isWebpImg, requestDone, windowWidth]
+    [
+      isOpenCallback,
+      isOpenCart,
+      isOpenMap,
+      isWebpImg,
+      requestDone,
+      windowWidth,
+    ],
   );
 
   React.useEffect(() => {
@@ -59,7 +66,7 @@ const MainLayout: React.FC = () => {
     }
 
     dispatch(fetchRates());
-    dispatch(fetchPosts());
+    dispatch(fetchNewPosts());
     dispatch(fetchProducts());
   }, []);
 

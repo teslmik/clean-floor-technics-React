@@ -1,12 +1,10 @@
+import { Post } from "../../@types/types";
 import { Status } from "../products/types";
 
-export interface IPostItem {
-  createdAt: string;
-  deletedAt: string;
-  _id: string;
-  imageUrl: string;
-  text: string[];
-  title: string;
+export interface IPostItem extends Post {
+  imageUrl?: string;
+  videoUrl?: string;
+  videoLink?: string;
 }
 
 export interface IPostSliceState {

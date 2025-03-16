@@ -8,17 +8,17 @@ import { Categories, CircleLoader } from "../components";
 const SwiperBlock = React.lazy(() =>
   import(/* webpackChunkName: "SwiperBlock" */ "../components").then((m) => ({
     default: m.SwiperBlock,
-  }))
+  })),
 );
 const TabsPromo = React.lazy(() =>
   import(/* webpackChunkName: "TabsPromo" */ "../components").then((m) => ({
     default: m.TabsPromo,
-  }))
+  })),
 );
 const BlogBlock = React.lazy(() =>
   import(/* webpackChunkName: "BlogBlock" */ "../components").then((m) => ({
     default: m.BlogBlock,
-  }))
+  })),
 );
 
 const Home: React.FC = () => {
@@ -88,7 +88,7 @@ const Home: React.FC = () => {
                 трьома дисковими щітками.
               </ReactMarkdown>
               <ReactMarkdown>
-                Офіційним дистриб'ютером **Truvox International** в Україні є
+                Офіційним дистриб`ютером **Truvox International** в Україні є
                 інтернет-магазин **Clean Floor Techics**. Ми на ринку клінінгу
                 та хімчистки більше 10 років та маємо дуже великий досвід в
                 чищені підлог усіх видів, а також знаємось на різноманітних
