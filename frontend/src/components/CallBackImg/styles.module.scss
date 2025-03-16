@@ -1,6 +1,6 @@
-@use 'sass:math';
-@import '../../scss/lib/variables';
-@import '../../scss/lib/functions';
+@use "sass:math";
+@use "../../scss/lib/variables" as var;
+@use "../../scss/lib/functions" as fn;
 
 .callbackBlock {
   cursor: pointer;
@@ -20,16 +20,16 @@
   .hoverText {
     position: absolute;
     width: max-content;
-    right: rem(70);
+    right: fn.rem(70);
     top: 50%;
     font-family: sans-serif;
     font-size: 12px;
-    margin-top: rem(-12);
+    margin-top: fn.rem(-12);
     line-height: 26px;
     background: #333;
-    border-radius: rem(4);
+    border-radius: fn.rem(4);
     color: #fff;
-    padding: 0 rem(12);
+    padding: 0 fn.rem(12);
     text-align: center;
     -webkit-transition: opacity 0.15s;
     -o-transition: opacity 0.15s;
@@ -43,15 +43,14 @@
       position: absolute;
       left: 100%;
       top: 50%;
-      margin-top: rem(-4);
-      content: '';
+      margin-top: fn.rem(-4);
+      content: "";
       border-top: 4px solid transparent;
       border-bottom: 4px solid transparent;
       border-left: 4px solid #333;
     }
   }
 
-  
   @media (any-hover: hover) {
     &:hover img {
       transform: scale(1.1);

@@ -3,7 +3,7 @@ import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 
 import { BlockContent } from "../../@types/types";
-import client from "../../../cms/sanitiClient";
+import client from "../../../cms/lib/sanitiClient";
 
 type Children = { children?: React.ReactNode };
 type Value = { value?: any; children: React.ReactNode };

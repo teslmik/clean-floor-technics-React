@@ -1,35 +1,42 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 
+import client from "../../cms/lib/sanitiClient";
 import { Breadcrumbs, ErrorInfo, LeftMenu } from "../components";
 import SanityTextRenderer from "../components/SanityTextRenderer";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
-import { fetchPosts } from "../redux/posts/asyncActions";
-import { postsSelector } from "../redux/posts/selectors";
+import { getPostBySlug } from "../redux/posts/query";
 import { IPostItem } from "../redux/posts/types";
 import { Status } from "../redux/products/types";
-import { useAppDispatch } from "../redux/store";
-import { formatDate, ibg } from "../utils";
+import { formatDate, ibg, modifyVideoLink } from "../utils";
 
 const FullBlogItem: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { items, status } = useSelector(postsSelector);
-  const [item, setItem] = React.useState<IPostItem>();
+  const [item, setItem] = React.useState<IPostItem | null>(null);
+  const [status, setStatus] = React.useState(Status.LOADING);
   const { windowWidth } = useGlobalContext();
   const { slug } = useParams();
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    const getPost = async (slug?: string) => {
+      try {
+        const post = await client.fetch<IPostItem>(getPostBySlug, { slug });
+        if (!post) throw new Error(`Post by slug: ${slug} not found`);
+        setItem({ ...post, videoLink: modifyVideoLink(post.videoLink) });
+        setStatus(Status.SUCCESS);
+      } catch (error: any) {
+        setStatus(Status.ERROR);
+        console.error({ error });
+      }
+    };
+
+    getPost(slug);
+  }, [slug]);
 
   React.useEffect(() => {
-    items.length > 0 &&
-      items.map((obj) => obj.slug?.current === slug && setItem(obj));
     ibg();
-  }, [items, slug]);
+  }, [item]);
 
   return (
     <section className="blog__container">

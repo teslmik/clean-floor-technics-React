@@ -1,8 +1,9 @@
-@import './functions';
+@use "./functions" as fn;
+@use "sass:math";
 
 // Шрифты по умолчанию =======================================================
-$fontFamily: 'Roboto';
-$fontSize: rem(14);
+$fontFamily: "Roboto";
+$fontSize: fn.rem(14);
 
 // Основные цвета =============================================================
 $headerDark: #2f2f2f;
