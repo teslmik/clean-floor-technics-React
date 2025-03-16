@@ -32,7 +32,7 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
       <div onClick={() => setIsVisible?.(true)} className={styles.menu_icon}>
         <span></span>
       </div>
-      {windowWidth > 881 ? (
+      {windowWidth > 881.98 ? (
         <nav className={styles.menu}>
           <ul className={styles.menu__list}>
             {menuListArr.map((item) => (

@@ -8,6 +8,7 @@ import { addToCart } from "../../redux/cart/slice";
 import { ICartItem } from "../../redux/cart/types";
 import { IProductItem } from "../../redux/products/types";
 import { euroToHrivna, ibg } from "../../utils";
+import { Tooltip } from "@mui/material";
 
 export const CardItem: React.FC<IProductItem> = ({
   _id,
@@ -19,6 +20,8 @@ export const CardItem: React.FC<IProductItem> = ({
   price,
   category,
   discontinued,
+  installments = true,
+  availability,
 }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
@@ -52,12 +55,29 @@ export const CardItem: React.FC<IProductItem> = ({
   const onCartOrDisabled = discontinued
     ? "card__btn disabled"
     : "card__btn inCart";
+  const blinkingConfig = discontinued
+    ? { color: "red", tooltip: "Знято з виробництва" }
+    : availability
+    ? { color: "green", tooltip: "У наявності" }
+    : { color: "orange", tooltip: "Під замовлення" };
 
   return (
     <div
       className={discontinued ? "catalog__item discontinued" : "catalog__item"}
     >
       <article className="catalog__card card">
+        <Link
+          to={`/products/${category}/${_id}`}
+          className="card__image ibg"
+          title={title}
+        >
+          <img
+            src={`/assets/img/products/${imageUrl}${
+              isWebpImg ? ".webp" : ".png"
+            }`}
+            alt={title}
+          />
+        </Link>
         <div className="card__labels labels">
           {label._promo && (
             <div className="labels__item _promo">
@@ -87,18 +107,12 @@ export const CardItem: React.FC<IProductItem> = ({
             </div>
           )}
         </div>
-        <Link
-          to={`/products/${category}/${_id}`}
-          className="card__image ibg"
-          title={title}
-        >
-          <img
-            src={`/assets/img/products/${imageUrl}${
-              isWebpImg ? ".webp" : ".png"
-            }`}
-            alt={title}
-          />
-        </Link>
+        {!discontinued && installments && (
+          <div className="card__installments">
+            <img src="/assets/img/installments/1.png" alt="credit-1" />
+            <img src="/assets/img/installments/2.png" alt="credit-2" />
+          </div>
+        )}
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
           <Link
@@ -128,6 +142,12 @@ export const CardItem: React.FC<IProductItem> = ({
             >
               <span>{isOnCart ? "У кошику" : "Купити"}</span>
             </button>
+            <Tooltip title={blinkingConfig.tooltip}>
+              <div
+                className="blinking-dot"
+                style={{ backgroundColor: blinkingConfig.color }}
+              />
+            </Tooltip>
           </div>
         </div>
       </article>

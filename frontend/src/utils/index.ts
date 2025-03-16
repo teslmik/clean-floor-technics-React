@@ -8,3 +8,4 @@ export * from "./listConstant";
 export * from "./mobileHeightSortElement";
 export * from "./format-data";
 export * from "./toggleFilter";
+export * from "./modifyVideoLink";

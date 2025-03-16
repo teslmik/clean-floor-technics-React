@@ -34,6 +34,9 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
   const handleClickItem = () => {
     navigate(`/${ROUTER_KEYS.PRODUCTS}/${product.category}/${product._id}`);
   };
+  const productInstallments =
+    typeof product?.installments === "boolean" ? product.installments : true;
+
   return (
     <Grid key={product._id} item xs={12} padding={0}>
       <ListItem disablePadding>
@@ -79,6 +82,14 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                   color={product.availability ? "green" : "error"}
                 >
                   {`У наявності: ${product.availability ? "Так" : "Ні"}`}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  color={product.installments ? "green" : "error"}
+                >
+                  {`Оформлення розстрочки: ${
+                    productInstallments ? "Так" : "Ні"
+                  }`}
                 </Typography>
                 <Stack direction="row" gap={0.5}>
                   {labelKeys.map(

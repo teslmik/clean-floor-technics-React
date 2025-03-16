@@ -45,6 +45,9 @@ const EditModal: React.FC<Properties> = ({
   const dispatch = useAppDispatch();
   const [oldPrice, setOldPrice] = React.useState(false);
 
+  const productInstallments =
+    typeof product?.installments === "boolean" ? product.installments : true;
+
   const onSubmit = (
     values: {
       price: number;
@@ -53,6 +56,7 @@ const EditModal: React.FC<Properties> = ({
       _promo: boolean;
       _new: boolean;
       _popular: boolean;
+      installments: boolean;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
@@ -67,6 +71,7 @@ const EditModal: React.FC<Properties> = ({
           _new: values._new,
           _popular: values._popular,
         },
+        installments: values.installments,
       };
       setTimeout(() => {
         dispatch(editProduct({ payload, id }));
@@ -93,6 +98,7 @@ const EditModal: React.FC<Properties> = ({
       _promo: product?.label._promo || false,
       _new: product?.label._new || false,
       _popular: product?.label._popular || false,
+      installments: productInstallments,
     },
     validateOnBlur: false,
     validate: editValidate,
@@ -107,7 +113,8 @@ const EditModal: React.FC<Properties> = ({
       product.label._new === values._new &&
       product.label._popular === values._popular &&
       product.label._promo === values._promo &&
-      product.oldPrice === values.oldPrice);
+      product.oldPrice === values.oldPrice &&
+      product.installments === values.installments);
 
   const handleChangeOldPrice = () => {
     setOldPrice(!oldPrice);
@@ -123,6 +130,7 @@ const EditModal: React.FC<Properties> = ({
       setFieldValue("_promo", product.label._promo);
       setFieldValue("_popular", product.label._popular);
       setOldPrice(product.oldPrice !== null);
+      setFieldValue("installments", productInstallments);
     }
   }, [product]);
   return (
@@ -198,6 +206,20 @@ const EditModal: React.FC<Properties> = ({
                 />
               }
               label="У наявності"
+              labelPlacement="start"
+            />
+          </Stack>
+          <Stack direction="row" alignItems="center" gap={2}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={values.installments}
+                  onChange={handleChange}
+                  name="installments"
+                  color="success"
+                />
+              }
+              label="Оформлення розстрочки"
               labelPlacement="start"
             />
           </Stack>

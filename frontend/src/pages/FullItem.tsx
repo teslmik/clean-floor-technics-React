@@ -1,21 +1,23 @@
+import { PictureAsPdf } from "@mui/icons-material";
 import axios from "axios";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { PictureAsPdf } from "@mui/icons-material";
 
 import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
+import { useGlobalContext } from "../hook/useGlobalContext";
+import Head from "../layouts/Head";
 import { cartSelector } from "../redux/cart/selectors";
 import { addToCart } from "../redux/cart/slice";
 import { ICartItem } from "../redux/cart/types";
 import { IProductItem } from "../redux/products/types";
-import { tabsItem, euroToHrivna } from "../utils";
-import { useGlobalContext } from "../hook/useGlobalContext";
-import Head from "../layouts/Head";
+import { fetchRates } from "../redux/rates/asyncActions";
+import { useAppDispatch } from "../redux/store";
+import { euroToHrivna, tabsItem } from "../utils";
 
 const FullItem: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { items } = useSelector(cartSelector);
   const [product, setProduct] = React.useState<IProductItem>();
   const [cartItem, setCartItem] = React.useState<ICartItem>();
@@ -29,14 +31,19 @@ const FullItem: React.FC = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
+
     async function fetchProduct() {
       try {
+        await dispatch(fetchRates());
         setProduct(undefined);
+
         const { data } = await axios.get<IProductItem>(
           `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
         );
         setProduct(data);
+
         const { _id: id, category, imageUrl, title, oldPrice, price } = data;
+
         setCartItem({
           _id: id,
           category,

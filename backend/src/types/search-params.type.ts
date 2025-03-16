@@ -5,4 +5,5 @@ export type SearchParamsType = {
   sortBy: SortPropertyEnum;
   order: OrderEnum;
   filter: keyof ProductType;
+  title: string;
 };
