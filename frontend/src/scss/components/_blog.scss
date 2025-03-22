@@ -1,5 +1,5 @@
-@import '../lib/variables';
-@import '../lib/functions';
+@import "../lib/variables";
+@import "../lib/functions";
 
 .blog {
   // .blog__wrapper
@@ -90,13 +90,22 @@
         }
       }
     }
-    p, ul {
+    p,
+    ul {
       cursor: text;
       text-align: justify;
       line-height: 1.57143;
       &:not(:last-child) {
         margin-bottom: em(10.8);
       }
+    }
+    ul {
+      margin-bottom: rem(10);
+      list-style-type: disc;
+      padding-left: rem(24);
+    }
+    li {
+      list-style-type: disc;
     }
     @media (any-hover: hover) {
       &:hover {

@@ -4,6 +4,7 @@ import imageUrlBuilder from "@sanity/image-url";
 
 import { BlockContent } from "../../@types/types";
 import client from "../../../cms/lib/sanitiClient";
+import styles from "./styles.module.scss";
 
 type Children = { children?: React.ReactNode };
 type Value = { value?: any; children: React.ReactNode };
