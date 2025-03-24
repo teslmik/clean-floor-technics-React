@@ -22,12 +22,6 @@ export default defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    // defineField({
-    //   name: "author",
-    //   title: "Author",
-    //   type: "reference",
-    //   to: { type: "author" },
-    // }),
     defineField({
       name: "media",
       title: "Main Media",
@@ -70,12 +64,6 @@ export default defineType({
         },
       ],
     }),
-    // defineField({
-    //   name: "categories",
-    //   title: "Categories",
-    //   type: "array",
-    //   of: [{ type: "reference", to: { type: "category" } }],
-    // }),
     defineField({
       name: "publishedAt",
       title: "Published at",
