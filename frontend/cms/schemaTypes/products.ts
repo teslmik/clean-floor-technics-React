@@ -1,12 +1,14 @@
 import { defineField, defineType } from "sanity";
-import { ImageIcon, ImagesIcon } from "@sanity/icons";
+import { ImageIcon, ImagesIcon, TrolleyIcon } from "@sanity/icons";
 
 import { CategoriesEnum } from "../../src/@types/categories.enum";
+import { categoryMap } from "../../src/constants/tabs-map";
 
 export default defineType({
   name: "products",
   title: "Products",
   type: "document",
+  icon: TrolleyIcon,
   groups: [
     {
       name: "pricing",
@@ -24,6 +26,7 @@ export default defineType({
       name: "article",
       title: "Article",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "slug",
@@ -41,7 +44,7 @@ export default defineType({
       type: "string",
       options: {
         list: Object.values(CategoriesEnum).map((cat) => ({
-          title: cat,
+          title: categoryMap[cat],
           value: cat,
         })),
       },
@@ -66,6 +69,7 @@ export default defineType({
     defineField({
       name: "price",
       title: "Price",
+      description: "in euro",
       type: "number",
       fieldset: "pricingGroup",
       validation: (Rule) => Rule.required().positive(),
@@ -73,6 +77,7 @@ export default defineType({
     defineField({
       name: "oldPrice",
       title: "Old Price",
+      description: "in uah",
       type: "number",
       fieldset: "pricingGroup",
       validation: (Rule) => Rule.positive(),
@@ -107,17 +112,21 @@ export default defineType({
       ],
     }),
     defineField({
-      name: "media",
+      name: "mainImage",
       title: "Main Image",
       type: "image",
       icon: ImageIcon,
+      fieldset: "mediaGroup",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "sliderImages",
       title: "Image Gallery",
       type: "array",
       icon: ImagesIcon,
+      fieldset: "mediaGroup",
       of: [{ type: "image" }],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "specification",
@@ -130,13 +139,21 @@ export default defineType({
             { name: "name", title: "Name", type: "string" },
             { name: "value", title: "Value", type: "string" },
           ],
+          preview: {
+            select: {
+              title: "name",
+              subtitle: "value",
+            },
+          },
         },
       ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
       title: "Description",
       type: "productDescription",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "discontinued",
@@ -159,17 +176,23 @@ export default defineType({
       title: "Pricing",
       options: { columns: 2 },
     },
+    {
+      name: "mediaGroup",
+      title: "Images",
+    },
   ],
   preview: {
     select: {
       title: "title",
-      media: "media.image",
+      media: "mainImage",
+      price: "price",
     },
     prepare(selection) {
-      const { title, media } = selection;
+      const { title, media, price } = selection;
       return {
         title,
         media,
+        subtitle: `Price: ${price} €`,
       };
     },
   },
