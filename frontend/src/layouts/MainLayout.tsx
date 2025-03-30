@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import {
   Callback,
@@ -21,6 +21,10 @@ import { useAppDispatch } from "../redux/store";
 import { bodyLock, bodyUnlock, ibg, isWebp } from "../utils";
 
 const MainLayout: React.FC = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log({ currentPath }); //
+
   const dispatch = useAppDispatch();
   const [isWebpImg, setIsWebpImg] = React.useState<boolean>(false);
   const [isOpenCallback, setIsOpenCallback] = React.useState(false);
@@ -65,10 +69,12 @@ const MainLayout: React.FC = () => {
       setIsWebpImg(true);
     }
 
-    dispatch(fetchRates());
-    dispatch(fetchNewPosts());
-    dispatch(fetchProducts());
-  }, []);
+    if (currentPath === "/") {
+      dispatch(fetchRates());
+      dispatch(fetchNewPosts());
+      dispatch(fetchProducts());
+    }
+  }, [currentPath]);
 
   React.useEffect(() => {
     const euroRate = items.rates.find((rate) => rate.currency === "eu")?.value;
