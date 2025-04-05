@@ -9,6 +9,7 @@ import { postsSelector } from "../redux/posts/selectors";
 import { Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
 import { formatDate, ibg } from "../utils";
+import { getYouTubeThumbnail } from "../utils/getYoutubeThumbnail";
 
 const Blog: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -51,8 +52,14 @@ const Blog: React.FC = () => {
                           to={`/blog/${obj.slug?.current}`}
                           className="blog-item__img ibg"
                         >
-                          {obj.imageUrl && (
-                            <img src={obj.imageUrl} alt="blog_image" />
+                          {(obj.imageUrl || obj.videoLink) && (
+                            <img
+                              src={
+                                obj.imageUrl ||
+                                getYouTubeThumbnail(obj.videoLink)
+                              }
+                              alt="blog_image"
+                            />
                           )}
                           {obj.videoUrl && (
                             <video controls>

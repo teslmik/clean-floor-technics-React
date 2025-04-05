@@ -38,7 +38,7 @@ const FullItem: React.FC = () => {
         setProduct(undefined);
 
         const { data } = await axios.get<IProductItem>(
-          `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
+          `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`,
         );
         setProduct(data);
 
@@ -136,7 +136,7 @@ const FullItem: React.FC = () => {
                     }
                   >
                     <p>— Новою поштой по Україні — за тарифами перевізника</p>
-                    <p>— Кур'єром по Одесі — безкоштовно</p>
+                    <p>— Кур&apos;єром по Одесі — безкоштовно</p>
                     <p>
                       <Link to={"/pay_and_delivery"}>
                         Детальніше про доставку
@@ -192,8 +192,8 @@ const FullItem: React.FC = () => {
                 {product.discontinued
                   ? "Знятий з виробництва"
                   : product.availability
-                  ? "В наявності"
-                  : "Під замовлення"}
+                    ? "В наявності"
+                    : "Під замовлення"}
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
@@ -234,8 +234,8 @@ const FullItem: React.FC = () => {
                     {product.discontinued
                       ? "Знятий з виробництва"
                       : product.availability
-                      ? "В наявності"
-                      : "Під замовлення"}
+                        ? "В наявності"
+                        : "Під замовлення"}
                   </div>
                 )}
               </div>
@@ -309,7 +309,7 @@ const FullItem: React.FC = () => {
                       }
                     >
                       <p>— Новою поштой по Україні — за тарифами перевізника</p>
-                      <p>— Кур'єром по Одесі — безкоштовно</p>
+                      <p>— Кур&apos;єром по Одесі — безкоштовно</p>
                       <p>
                         <Link to={"/pay_and_delivery"}>
                           Детальніше про доставку
