@@ -2,11 +2,11 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { IProductItem } from "../../redux/products/types";
 import { useDebounce } from "../../hook/debounce";
 import { useInput } from "../../hook/input";
 import { useGlobalContext } from "../../hook/useGlobalContext";
-import { bodyLock, bodyUnlock, ibg, euroToHrivna } from "../../utils";
+import { ISanityProduct } from "../../redux/products/types";
+import { bodyLock, bodyUnlock, euroToHrivna, ibg } from "../../utils";
 
 import styles from "./Search.module.scss";
 
@@ -27,12 +27,12 @@ export const Search: React.FC = () => {
       `${import.meta.env.VITE_APP_FETCH_URL}/products`,
       {
         params: { title: debounced },
-      }
+      },
     );
     setItems(data.products);
   }, [debounced]);
 
-  const onClickSearchItem = (item: IProductItem) => {
+  const onClickSearchItem = (item: ISanityProduct) => {
     navigate(`/products/${item.category}/${item._id}`);
     setIsVisible(false);
     setValue("");
@@ -51,7 +51,7 @@ export const Search: React.FC = () => {
     (event: KeyboardEvent) => {
       event.key === "Esc" && onClickClose();
     },
-    [onClickClose]
+    [onClickClose],
   );
 
   const onClickVisible = () => {
@@ -122,7 +122,7 @@ export const Search: React.FC = () => {
         <div className={styles.search__overlay}>
           <div className={styles.search__dropdown}>
             <ul>
-              {items.map((item: IProductItem) => (
+              {items.map((item: ISanityProduct) => (
                 <li key={item._id} onClick={() => onClickSearchItem(item)}>
                   <div className={`${styles.dropdown__img} ibg`}>
                     <img

@@ -2,8 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { useGlobalContext } from "../hook/useGlobalContext";
-import { removeFromCart, decrement, increment } from "../redux/cart/slice";
+import { decrement, increment, removeFromCart } from "../redux/cart/slice";
 import { euroToHrivna } from "../utils";
 
 interface ICartItemProps {
@@ -14,6 +13,7 @@ interface ICartItemProps {
   price: number;
   count: number;
   category: string;
+  slug: string;
 }
 
 export const CartItem: React.FC<ICartItemProps> = ({
@@ -24,9 +24,9 @@ export const CartItem: React.FC<ICartItemProps> = ({
   price,
   count,
   category,
+  slug,
 }) => {
   const dispatch = useDispatch();
-  const { isWebpImg } = useGlobalContext();
 
   const onClickRemoveItem = () => {
     if (window.confirm("Видалити товар з кошика?")) {
@@ -45,15 +45,17 @@ export const CartItem: React.FC<ICartItemProps> = ({
   return (
     <li className="order-list__item item-order">
       <div className="item-order__img ibg">
-        <img
-          src={`assets/img/products/${imageUrl}${isWebpImg ? ".webp" : ".png"}`}
-          alt="product img"
-        />
+        <img src={imageUrl} alt="product img" />
       </div>
       <div className="item-order__content">
         <div className="item-order__title">
-          <Link to={`/products/${category}/${_id}`}>{title}</Link>
-          <span onClick={onClickRemoveItem} className="_icon-removeItem"></span>
+          <Link to={`/products/${category}/${slug}`}>{title}</Link>
+          <span
+            onClick={onClickRemoveItem}
+            role="button"
+            tabIndex={0}
+            className="_icon-removeItem"
+          ></span>
         </div>
         <div className="item-order__price">
           {oldPrice && (
@@ -68,7 +70,7 @@ export const CartItem: React.FC<ICartItemProps> = ({
         <div className="item-order__control">
           <div className="item-order__quantity">
             <button
-              disabled={count === 1 ? true : false}
+              disabled={count === 1}
               onClick={() => onClickMinus(_id)}
               className="btn-item__minus _icon-minus"
             ></button>

@@ -1,19 +1,19 @@
-import React from "react";
 import { motion, MotionProps } from "framer-motion";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { euroToHrivna, dropIn, ibg } from "../../utils";
 import { useGlobalContext } from "../../hook/useGlobalContext";
 import { cartSelector } from "../../redux/cart/selectors";
-import { removeFromCart, decrement, increment } from "../../redux/cart/slice";
+import { decrement, increment, removeFromCart } from "../../redux/cart/slice";
+import { dropIn, euroToHrivna, ibg } from "../../utils";
 
 import styles from "./CartPopup.module.scss";
 
 export const CartPopup: React.FC = () => {
   const dispatch = useDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
-  const { setIsOpenCart, windowWidth, isWebpImg } = useGlobalContext();
+  const { setIsOpenCart, windowWidth } = useGlobalContext();
 
   const navigate = useNavigate();
 
@@ -41,7 +41,6 @@ export const CartPopup: React.FC = () => {
     if (windowWidth < 683) {
       setIsOpenCart(false);
     }
-    return;
   };
 
   const animateDesktop: MotionProps = {
@@ -82,8 +81,15 @@ export const CartPopup: React.FC = () => {
           <div
             onClick={() => setIsOpenCart(false)}
             className={`${styles.cart_close} _icon-close`}
-          ></div>
-          <div className={styles.title} onClick={onClickCloseCartMobile}>
+            role="button"
+            tabIndex={0}
+          />
+          <div
+            className={styles.title}
+            onClick={onClickCloseCartMobile}
+            role="button"
+            tabIndex={0}
+          >
             <span className="_icon-arrow"></span>
             <p>Кошик</p>
           </div>
@@ -97,23 +103,22 @@ export const CartPopup: React.FC = () => {
                 <li key={item._id} className={styles.cart_item}>
                   <span
                     onClick={() => onClickRemoveItem(item._id)}
+                    role="button"
+                    tabIndex={0}
                     className={`${styles.removItem} _icon-removeItem`}
-                  ></span>
+                  />
                   <div className={`${styles.item__img} ibg`}>
-                    <img
-                      src={`/assets/img/products/${item.imageUrl}${
-                        isWebpImg ? ".webp" : ".png"
-                      }`}
-                      alt=""
-                    />
+                    <img src={item.imageUrl} alt={item.imageUrl} />
                   </div>
                   <div className={styles.item__body}>
                     <div className={styles.item__content}>
                       <div
                         onClick={() => setIsOpenCart(false)}
+                        role="button"
+                        tabIndex={0}
                         className={styles.item__title}
                       >
-                        <Link to={`/products/${item.category}/${item._id}`}>
+                        <Link to={`/products/${item.category}/${item.slug}`}>
                           {item.title}
                         </Link>
                       </div>
@@ -134,12 +139,12 @@ export const CartPopup: React.FC = () => {
                           disabled={item.count === 1}
                           onClick={() => onClickMinus(item._id)}
                           className={`${styles.btn_item__minus} _icon-minus`}
-                        ></button>
+                        />
                         <p className={styles.counter}>{item.count}</p>
                         <button
                           onClick={() => onClickPlus(item._id)}
                           className={`${styles.btn_item__plus} _icon-plus`}
-                        ></button>
+                        />
                       </div>
                       <div className={styles.item__cost}>
                         <div className="item-order__cost">

@@ -6,23 +6,25 @@ import {
   Breadcrumbs,
   CardItem,
   ErrorInfo,
-  SkeletonLoader,
   Filter,
+  SkeletonLoader,
   Sort,
   SortMobile,
 } from "../components";
+import { useGlobalContext } from "../hook/useGlobalContext";
+import Head from "../layouts/Head";
 import { filterSelector } from "../redux/filter/selectors";
-import { fetchProducts } from "../redux/products/asyncActions";
+import { setFilter } from "../redux/filter/slice";
+import { fetchSanityProducts } from "../redux/products/asyncActions";
 import { productsSelector } from "../redux/products/selectors";
 import { Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
-import { useGlobalContext } from "../hook/useGlobalContext";
-import Head from "../layouts/Head";
-import { setFilter } from "../redux/filter/slice";
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
   const { sortState } = useSelector(filterSelector);
+  console.log({ sortState });
+
   const { items, status } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();
   const { pathname } = useLocation();
@@ -35,7 +37,7 @@ const Catalog: React.FC = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
-    dispatch(fetchProducts());
+    dispatch(fetchSanityProducts());
 
     return () => {
       dispatch(setFilter([]));
@@ -65,7 +67,9 @@ const Catalog: React.FC = () => {
             <div className="catalog__items">
               {status === Status.LOADING
                 ? skeleton
-                : items.products.map((obj, i) => <CardItem key={i} {...obj} />)}
+                : items.products.map((obj) => (
+                    <CardItem key={obj._id} {...obj} />
+                  ))}
             </div>
           )}
         </div>

@@ -1,31 +1,25 @@
 import React from "react";
 
-import { useGlobalContext } from "../hook/useGlobalContext";
-import { ibg, euroToHrivna } from "../utils";
+import { euroToHrivna, ibg } from "../utils";
 
 interface ISwiperItem {
-  title: string;
-  article: string;
   imageArr: string[];
   label: {
-    _promo: boolean;
-    _popular: boolean;
-    _new: boolean;
+    promo?: boolean;
+    popular?: boolean;
+    new?: boolean;
   };
-  oldPrice: number | null;
+  oldPrice?: number | null;
   price: number;
 }
 
 export const SwiperItem: React.FC<ISwiperItem> = ({
-  title,
-  article,
-  imageArr,
+  imageArr = [],
   label,
   oldPrice,
   price,
 }) => {
   const [toggleState, setToggleState] = React.useState(0);
-  const { isWebpImg } = useGlobalContext();
 
   React.useEffect(() => {
     ibg();
@@ -36,12 +30,12 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
       <div className="img-block__img ibg">
         {toggleState === 0 && (
           <div className="img-block__labels labels">
-            {label._promo && (
+            {label.promo && (
               <div className="labels__item _promo">
                 <div className="label-content">Акція</div>
               </div>
             )}
-            {label._popular && (
+            {label.popular && (
               <div className="labels__item _popular">
                 <p className="label-content">Хіт</p>
               </div>
@@ -52,41 +46,33 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
                   -
                   {Math.round(
                     (100 * (Number(oldPrice) - euroToHrivna(price))) /
-                      Number(oldPrice)
+                      Number(oldPrice),
                   )}
                   %
                 </div>
               </div>
             )}
-            {label._new && (
+            {label.new && (
               <div className="labels__item _new">
                 <div className="label-content">Новинка</div>
               </div>
             )}
           </div>
         )}
-        <img
-          src={`/assets/img/products/${article}/${imageArr[toggleState]}${
-            isWebpImg ? ".webp" : ".png"
-          }`}
-          alt={title}
-        />
+        <img src={imageArr[toggleState]} alt={imageArr[toggleState]} />
       </div>
       <div className="img-block__tabs">
-        {imageArr.map((image, i) => (
+        {imageArr.map((url, i) => (
           <div
-            key={i}
+            key={url}
             className={
               toggleState === i ? "img-block__tab active" : "img-block__tab"
             }
             onClick={() => setToggleState(i)}
+            role="button"
+            tabIndex={0}
           >
-            <img
-              src={`/assets/img/products/${article}/${image}${
-                isWebpImg ? ".webp" : ".png"
-              }`}
-              alt={title}
-            />
+            <img src={url} alt={url} />
           </div>
         ))}
       </div>

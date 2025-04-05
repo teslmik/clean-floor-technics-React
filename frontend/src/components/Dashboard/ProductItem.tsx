@@ -20,11 +20,11 @@ import { useNavigate } from "react-router-dom";
 
 import { ROUTER_KEYS } from "../../constants/app-keys";
 import { labelKeys } from "../../constants/label-keys";
-import { IProductItem } from "../../redux/products/types";
+import { ISanityProduct } from "../../redux/products/types";
 import { euroToHrivna, filterList } from "../../utils";
 
 type Properties = {
-  product: IProductItem;
+  product: ISanityProduct;
   handleOpen: () => void;
 };
 
@@ -65,7 +65,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                   <Divider orientation="vertical" flexItem />
                   <Typography variant="caption" sx={{ fontWeight: "bold" }}>
                     {`Price-uah: ${euroToHrivna(
-                      product.price
+                      product.price,
                     ).toLocaleString()}₴`}
                   </Typography>
                   {product.oldPrice && (
@@ -104,7 +104,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                           color={key.color}
                           size="small"
                         />
-                      )
+                      ),
                   )}
                   {product.oldPrice && (
                     <Chip
@@ -113,7 +113,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                           (100 *
                             (Number(product.oldPrice) -
                               euroToHrivna(product.price))) /
-                            Number(product.oldPrice)
+                            Number(product.oldPrice),
                         )}
                         %`}
                       color="secondary"

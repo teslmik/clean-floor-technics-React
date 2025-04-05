@@ -1,11 +1,12 @@
 export interface ICartItem {
   _id: string;
   category: string;
-  imageUrl: string;
   title: string;
-  oldPrice: number | null;
+  oldPrice?: number | null;
   price: number;
   count: number;
+  slug?: string;
+  imageUrl: string;
 }
 
 export interface ICartSliseState {

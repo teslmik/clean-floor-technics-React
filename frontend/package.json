@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "sanity": "sanity dev"
+    "sanity": "sanity dev",
+    "schema": "sanity schema extract",
+    "typegen": "sanity typegen generate"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",

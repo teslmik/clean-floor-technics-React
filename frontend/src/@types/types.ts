@@ -13,6 +13,8 @@
  */
 
 // Source: schema.json
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
 export type SanityImagePaletteSwatch = {
   _type: "sanity.imagePaletteSwatch";
   background?: string;
@@ -46,6 +48,84 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type ProductDescription = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type Products = {
+  _id: string;
+  _type: "products";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  article: string;
+  slug: Slug;
+  category:
+    | "scrubber"
+    | "rotary"
+    | "extractor"
+    | "vacuum"
+    | "sweeping"
+    | "fan"
+    | "accessories";
+  availability: boolean;
+  installments: boolean;
+  price: number;
+  oldPrice?: number;
+  label: {
+    promo?: boolean;
+    popular?: boolean;
+    new?: boolean;
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  sliderImages?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  specification?: Array<{
+    name?: string;
+    value?: string;
+    _key: string;
+  }>;
+  description?: ProductDescription;
+  discontinued?: boolean;
+  rating: number;
+};
+
 export type BlockContent = Array<
   | {
       children?: Array<{
@@ -58,7 +138,9 @@ export type BlockContent = Array<
       listItem?: "bullet";
       markDefs?: Array<
         | {
+            type?: "relative" | "absolute";
             href?: string;
+            absoluteHref?: string;
             _type: "link";
             _key: string;
           }
@@ -217,6 +299,8 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
+  | ProductDescription
+  | Products
   | BlockContent
   | Post
   | SanityFileAsset
@@ -226,4 +310,3 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageMetadata
   | Slug;
-export declare const internalGroqTypeReferenceTo: unique symbol;

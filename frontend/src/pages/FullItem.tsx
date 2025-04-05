@@ -1,17 +1,19 @@
 import { PictureAsPdf } from "@mui/icons-material";
-import axios from "axios";
 import React from "react";
-import ReactMarkdown from "react-markdown";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
+import client from "../../cms/lib/sanitiClient";
 import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
+import SanityTextRenderer from "../components/SanityTextRenderer";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
 import { cartSelector } from "../redux/cart/selectors";
 import { addToCart } from "../redux/cart/slice";
 import { ICartItem } from "../redux/cart/types";
-import { IProductItem } from "../redux/products/types";
+import { fullProductFields } from "../redux/products/query";
+import { productsSelector } from "../redux/products/selectors";
+import { ISanityProduct } from "../redux/products/types";
 import { fetchRates } from "../redux/rates/asyncActions";
 import { useAppDispatch } from "../redux/store";
 import { euroToHrivna, tabsItem } from "../utils";
@@ -19,50 +21,70 @@ import { euroToHrivna, tabsItem } from "../utils";
 const FullItem: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items } = useSelector(cartSelector);
-  const [product, setProduct] = React.useState<IProductItem>();
+  const {
+    items: { products },
+  } = useSelector(productsSelector);
+
+  const [product, setProduct] = React.useState<ISanityProduct | null>(null);
   const [cartItem, setCartItem] = React.useState<ICartItem>();
   const [toggleState, setToggleState] = React.useState(0);
   const { setIsOpenCart, windowWidth } = useGlobalContext();
-  const { _id } = useParams();
+  const { slug } = useParams();
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  const isItemOnCart = items.find((obj) => obj._id === _id) ? true : false;
+  const isItemOnCart = !!items.find((obj) => obj._id === product?._id);
 
   React.useEffect(() => {
     window.scroll(0, 0);
+    setProduct(null);
 
-    async function fetchProduct() {
+    const fetchProduct = async () => {
       try {
-        await dispatch(fetchRates());
-        setProduct(undefined);
+        dispatch(fetchRates());
 
-        const { data } = await axios.get<IProductItem>(
-          `${import.meta.env.VITE_APP_FETCH_URL}/products/${_id}`
-        );
-        setProduct(data);
+        let current = products.find((p) => p.slug.current === slug);
+        if (!current) {
+          const query = `*[_type == "products" && slug.current == $slug][0]{ ${fullProductFields} }`;
+          current = await client.fetch<ISanityProduct>(query, { slug });
+        }
 
-        const { _id: id, category, imageUrl, title, oldPrice, price } = data;
+        if (!current) throw new Error("Product not found");
 
-        setCartItem({
-          _id: id,
+        setProduct(current);
+
+        const {
+          _id,
           category,
           imageUrl,
           title,
           oldPrice,
           price,
+          slug: productSlug,
+        } = current;
+
+        setCartItem({
+          _id,
+          category,
+          imageUrl,
+          title,
+          oldPrice,
+          price,
+          slug: productSlug.current,
           count: 1,
         });
-      } catch (error) {
+      } catch (e: any) {
         alert("Товар не знайдено, спробуйте пізніше...");
+        console.error(e);
         navigate("/catalog");
       }
-    }
+    };
+
     fetchProduct();
-  }, [_id, navigate]);
+  }, [slug]);
 
   const onClickAdd = () => {
-    cartItem && dispatch(addToCart(cartItem));
+    if (cartItem) dispatch(addToCart(cartItem));
     setIsOpenCart(true);
   };
 
@@ -89,11 +111,9 @@ const FullItem: React.FC = () => {
               <div className="discription-fullitem__title">
                 Короткий опис товару
               </div>
-              <span className="discription-fullitem__text">
-                {product?.description?.map((str, i) => (
-                  <ReactMarkdown key={i}>{str}</ReactMarkdown>
-                ))}
-              </span>
+              <div className="discription-fullitem__text">
+                <SanityTextRenderer content={product.description} />
+              </div>
             </div>
             <Link className="catalog-link" to="/price_list">
               <span>Завантажити повний каталог товарів</span>
@@ -103,8 +123,8 @@ const FullItem: React.FC = () => {
               <div className="specification__text">
                 <div className="specification__title">Характеристики </div>
                 <div className="specification__list">
-                  {product?.specification?.map((item, i) => (
-                    <React.Fragment key={i}>
+                  {product?.specification?.map((item) => (
+                    <React.Fragment key={item._key}>
                       <p className="list-first">{item.name}</p>
                       <p className="list-second">{item.value}</p>
                     </React.Fragment>
@@ -117,6 +137,8 @@ const FullItem: React.FC = () => {
                     <div
                       key={tab}
                       onClick={() => setToggleState(i)}
+                      role="button"
+                      tabIndex={0}
                       className={
                         toggleState === i
                           ? "tabs-specification__text active"
@@ -136,7 +158,7 @@ const FullItem: React.FC = () => {
                     }
                   >
                     <p>— Новою поштой по Україні — за тарифами перевізника</p>
-                    <p>— Кур'єром по Одесі — безкоштовно</p>
+                    <p>— Кур&apos;єром по Одесі — безкоштовно</p>
                     <p>
                       <Link to={"/pay_and_delivery"}>
                         Детальніше про доставку
@@ -173,8 +195,6 @@ const FullItem: React.FC = () => {
         )}
         <div className="fullitem__wrapper">
           <SwiperItem
-            title={product.title}
-            article={product.article}
             imageArr={product.imageArr}
             label={product.label}
             oldPrice={product.oldPrice}
@@ -192,8 +212,8 @@ const FullItem: React.FC = () => {
                 {product.discontinued
                   ? "Знятий з виробництва"
                   : product.availability
-                  ? "В наявності"
-                  : "Під замовлення"}
+                    ? "В наявності"
+                    : "Під замовлення"}
               </div>
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
@@ -234,8 +254,8 @@ const FullItem: React.FC = () => {
                     {product.discontinued
                       ? "Знятий з виробництва"
                       : product.availability
-                      ? "В наявності"
-                      : "Під замовлення"}
+                        ? "В наявності"
+                        : "Під замовлення"}
                   </div>
                 )}
               </div>
@@ -276,8 +296,8 @@ const FullItem: React.FC = () => {
                 <div className="specification__text">
                   <div className="specification__title">Характеристики </div>
                   <div className="specification__list">
-                    {product.specification?.map((item, i) => (
-                      <React.Fragment key={i}>
+                    {product.specification?.map((item) => (
+                      <React.Fragment key={item._key}>
                         <p className="list-first">{item.name}</p>
                         <p className="list-second">{item.value}</p>
                       </React.Fragment>
@@ -290,6 +310,8 @@ const FullItem: React.FC = () => {
                       <div
                         key={tab}
                         onClick={() => setToggleState(i)}
+                        role="button"
+                        tabIndex={0}
                         className={
                           toggleState === i
                             ? "tabs-specification__text active"
@@ -309,7 +331,7 @@ const FullItem: React.FC = () => {
                       }
                     >
                       <p>— Новою поштой по Україні — за тарифами перевізника</p>
-                      <p>— Кур'єром по Одесі — безкоштовно</p>
+                      <p>— Кур&apos;єром по Одесі — безкоштовно</p>
                       <p>
                         <Link to={"/pay_and_delivery"}>
                           Детальніше про доставку
@@ -356,11 +378,9 @@ const FullItem: React.FC = () => {
             <div className="discription-fullitem__title">
               Короткий опис товару
             </div>
-            <span className="discription-fullitem__text">
-              {product?.description?.map((str, i) => (
-                <ReactMarkdown key={i}>{str}</ReactMarkdown>
-              ))}
-            </span>
+            <div className="discription-fullitem__text">
+              <SanityTextRenderer content={product.description} />
+            </div>
           </div>
           <Link className="catalog-link" to="/price_list">
             <span>Завантажити повний каталог товарів</span>

@@ -2,15 +2,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { Tooltip } from "@mui/material";
 import { useGlobalContext } from "../../hook/useGlobalContext";
 import { cartSelector } from "../../redux/cart/selectors";
 import { addToCart } from "../../redux/cart/slice";
 import { ICartItem } from "../../redux/cart/types";
-import { IProductItem } from "../../redux/products/types";
+import { ISanityProduct } from "../../redux/products/types";
 import { euroToHrivna, ibg } from "../../utils";
-import { Tooltip } from "@mui/material";
 
-export const CardItem: React.FC<IProductItem> = ({
+export const CardItem: React.FC<ISanityProduct> = ({
   _id,
   label,
   imageUrl,
@@ -22,11 +22,12 @@ export const CardItem: React.FC<IProductItem> = ({
   discontinued,
   installments = true,
   availability,
+  slug,
 }) => {
   const dispatch = useDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
-  const { setIsOpenCart, isWebpImg } = useGlobalContext();
+  const { setIsOpenCart } = useGlobalContext();
 
   React.useEffect(() => {
     items.find((obj) => obj._id === _id)
@@ -46,6 +47,7 @@ export const CardItem: React.FC<IProductItem> = ({
       title,
       oldPrice,
       price,
+      slug: slug.current,
       count: 1,
     };
     dispatch(addToCart(item));
@@ -55,11 +57,12 @@ export const CardItem: React.FC<IProductItem> = ({
   const onCartOrDisabled = discontinued
     ? "card__btn disabled"
     : "card__btn inCart";
-  const blinkingConfig = discontinued
-    ? { color: "red", tooltip: "Знято з виробництва" }
-    : availability
+  const availabilityBlinking = availability
     ? { color: "green", tooltip: "У наявності" }
     : { color: "orange", tooltip: "Під замовлення" };
+  const blinkingConfig = discontinued
+    ? { color: "red", tooltip: "Знято з виробництва" }
+    : availabilityBlinking;
 
   return (
     <div
@@ -67,24 +70,19 @@ export const CardItem: React.FC<IProductItem> = ({
     >
       <article className="catalog__card card">
         <Link
-          to={`/products/${category}/${_id}`}
+          to={`/products/${category}/${slug.current}`}
           className="card__image ibg"
           title={title}
         >
-          <img
-            src={`/assets/img/products/${imageUrl}${
-              isWebpImg ? ".webp" : ".png"
-            }`}
-            alt={title}
-          />
+          <img src={imageUrl} alt={title} />
         </Link>
         <div className="card__labels labels">
-          {label._promo && (
+          {label.promo && (
             <div className="labels__item _promo">
               <div className="label-content">Акція</div>
             </div>
           )}
-          {label._popular && (
+          {label.popular && (
             <div className="labels__item _popular">
               <p className="label-content">Хіт</p>
             </div>
@@ -95,13 +93,13 @@ export const CardItem: React.FC<IProductItem> = ({
                 -
                 {Math.round(
                   (100 * (Number(oldPrice) - euroToHrivna(price))) /
-                    Number(oldPrice)
+                    Number(oldPrice),
                 )}
                 %
               </div>
             </div>
           )}
-          {label._new && (
+          {label.new && (
             <div className="labels__item _new">
               <div className="label-content">Новинка</div>
             </div>

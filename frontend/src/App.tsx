@@ -6,8 +6,8 @@ import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import NotFound from "./pages/NotFound";
 
-import "./scss/app.scss";
 import { PriceList } from "./pages/PriceList";
+import "./scss/app.scss";
 
 const FullItem = React.lazy(
   () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem"),
@@ -144,7 +144,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path={`${ROUTER_KEYS.PRODUCTS}/:category/:_id`}
+          path={`${ROUTER_KEYS.PRODUCTS}/:category/:slug`}
           element={
             <Suspense fallback={<CircleLoader />}>
               <FullItem />

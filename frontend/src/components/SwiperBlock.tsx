@@ -1,13 +1,14 @@
-import React from 'react';
-import { Navigation, EffectFade, Autoplay, Pagination, Lazy } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import React from "react";
+import { Autoplay, EffectFade, Lazy, Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { useGlobalContext } from '../hook/useGlobalContext';
-
-import 'swiper/css/bundle';
+import "swiper/css/bundle";
+import client from "../../cms/lib/sanitiClient";
 
 export const SwiperBlock: React.FC = () => {
-  const { isWebpImg } = useGlobalContext();
+  const [images, setImages] = React.useState<
+    { url: string; alt: string; id: string }[]
+  >([]);
 
   const lazyOptions = {
     enabled: true,
@@ -15,25 +16,44 @@ export const SwiperBlock: React.FC = () => {
     loadPrevNext: true,
   };
 
+  React.useEffect(() => {
+    const fetchImages = async () => {
+      const data = await client.fetch(`*[_type == "config"][0] {
+        mainSliderImages[]{
+          "url": image.asset->url,
+          "alt": altText,
+          "id": _key
+        }
+      }`);
+
+      if (data.mainSliderImages) setImages(data.mainSliderImages);
+    };
+
+    fetchImages();
+  }, []);
+
   return (
     <Swiper
-      tag={'section'}
+      tag={"section"}
       modules={[Navigation, Pagination, EffectFade, Autoplay, Lazy]}
       autoplay={{ delay: 4000 }}
       loop={true}
       effect="fade"
-      pagination={{ type: 'progressbar' }}
+      pagination={{ type: "progressbar" }}
       navigation
       preloadImages={false}
       lazy={lazyOptions}
-      watchSlidesProgress={true}>
-      {[...new Array(10)].map((_, i) => (
-        <SwiperSlide key={i}>
+      watchSlidesProgress={true}
+    >
+      {images.map((image) => (
+        <SwiperSlide key={image.id}>
           <div className="swiper__img">
             <img
-              data-src={`assets/img/slider/${i + 1}${isWebpImg ? '.webp' : '.jpg'}`}
-              src={'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'}
-              alt={'Slide-' + (i + 1)}
+              data-src={image.url}
+              src={
+                "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+              }
+              alt={image.alt}
               className="swiper-lazy"
             />
             <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>

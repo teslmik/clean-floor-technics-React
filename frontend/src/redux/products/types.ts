@@ -1,3 +1,5 @@
+import { Products } from "../../@types/types";
+
 export interface ISpecification {
   name: string;
   value: string;
@@ -25,6 +27,11 @@ export interface IProductItem {
   rating: number;
 }
 
+export interface ISanityProduct extends Products {
+  imageUrl: string;
+  imageArr: string[];
+}
+
 export enum Status {
   LOADING = "loading",
   SUCCESS = "success",
@@ -32,6 +39,6 @@ export enum Status {
 }
 
 export interface IProductSliceState {
-  items: { counts: { [key: string]: number }; products: IProductItem[] };
+  items: { counts: { [key: string]: number }; products: ISanityProduct[] };
   status: Status;
 }

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { IFilterSliceState, SortPropertyEnum, SortTypeState } from "./types";
-import { fetchProducts } from "../products/asyncActions";
 
 const initialState: IFilterSliceState = {
   filterState: [],

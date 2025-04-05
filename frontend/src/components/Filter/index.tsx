@@ -1,22 +1,22 @@
+import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
 
-import { setFilter } from "../../redux/filter/slice";
-import { filterSelector } from "../../redux/filter/selectors";
-import { fetchProducts } from "../../redux/products/asyncActions";
-import { productsSelector } from "../../redux/products/selectors";
 import { useGlobalContext } from "../../hook/useGlobalContext";
+import { filterSelector } from "../../redux/filter/selectors";
+import { setFilter } from "../../redux/filter/slice";
+import { productsSelector } from "../../redux/products/selectors";
 import { useAppDispatch } from "../../redux/store";
 import {
-  mobileHeight,
   bodyLock,
   bodyUnlock,
   categoriesList,
   filterList,
+  mobileHeight,
   toggleFilter,
 } from "../../utils";
 
+import { fetchSanityProducts } from "../../redux/products/asyncActions";
 import styles from "./Filter.module.scss";
 
 export const Filter: React.FC = () => {
@@ -29,9 +29,9 @@ export const Filter: React.FC = () => {
   const promoCount = (value: string) => {
     let count = 0;
     items.products.map((obj: any) =>
-      obj.label[value] || obj.category === value || obj.availability === true
+      obj.label[value] || obj.category === value || obj?.availability === true
         ? count++
-        : count
+        : count,
     );
     return count;
   };
@@ -45,12 +45,12 @@ export const Filter: React.FC = () => {
   const handleToggle = (value: string) => {
     const filter = toggleFilter(value, filterState);
     dispatch(setFilter(filter));
-    dispatch(fetchProducts());
+    dispatch(fetchSanityProducts());
   };
 
   const clearFilter = () => {
     dispatch(setFilter([]));
-    dispatch(fetchProducts());
+    dispatch(fetchSanityProducts());
   };
 
   React.useEffect(() => {

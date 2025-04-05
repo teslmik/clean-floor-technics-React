@@ -1,6 +1,14 @@
 import blockContent from "./blockContent";
+import config, { mainSliderImage } from "./config";
 import post from "./post";
-import products from "./products";
 import productDescription from "./productDescription";
+import products from "./products";
 
-export const schemaTypes = [post, blockContent, products, productDescription];
+export const schemaTypes = [
+  post,
+  blockContent,
+  products,
+  productDescription,
+  config,
+  mainSliderImage,
+];

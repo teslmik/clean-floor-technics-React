@@ -1,36 +1,35 @@
+import { Save as SaveIcon } from "@mui/icons-material";
 import {
   Avatar,
   Box,
+  Button,
+  Checkbox,
   Chip,
+  CircularProgress,
+  Divider,
   FormControlLabel,
   Modal,
   Stack,
   Switch,
   TextField,
   Typography,
-  Button,
-  CircularProgress,
-  Checkbox,
-  Divider,
 } from "@mui/material";
-import { Save as SaveIcon } from "@mui/icons-material";
+import { green } from "@mui/material/colors";
 import { useFormik } from "formik";
 import React from "react";
-import { green } from "@mui/material/colors";
 
 import { editValidate } from "../../constants/edit-validation";
-import { editProduct } from "../../redux/products/asyncActions";
-import { IProductItem } from "../../redux/products/types";
+import { labelKeys } from "../../constants/label-keys";
+import { ISanityProduct } from "../../redux/products/types";
 import { useAppDispatch } from "../../redux/store";
 import { euroToHrivna, filterList } from "../../utils";
-import { labelKeys } from "../../constants/label-keys";
 
 import styles from "./dashboard.module.scss";
 
 type Properties = {
   open: boolean;
   handleClose: () => void;
-  product: IProductItem | null;
+  product: ISanityProduct | null;
   showAlert: () => void;
   setMessage: (s: string) => void;
 };
@@ -53,12 +52,12 @@ const EditModal: React.FC<Properties> = ({
       price: number;
       oldPrice: number | null;
       availability: boolean;
-      _promo: boolean;
-      _new: boolean;
-      _popular: boolean;
+      promo: boolean;
+      new: boolean;
+      popular: boolean;
       installments: boolean;
     },
-    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
   ) => {
     if (product) {
       const id = product._id;
@@ -67,14 +66,14 @@ const EditModal: React.FC<Properties> = ({
         oldPrice: values.oldPrice,
         availability: values.availability,
         label: {
-          _promo: values._promo,
-          _new: values._new,
-          _popular: values._popular,
+          promo: values.promo,
+          new: values.new,
+          popular: values.popular,
         },
         installments: values.installments,
       };
       setTimeout(() => {
-        dispatch(editProduct({ payload, id }));
+        // dispatch(editProduct({ payload, id }));
         handleClose();
         setSubmitting(false);
         setMessage("Product successfully saved!");
@@ -95,9 +94,9 @@ const EditModal: React.FC<Properties> = ({
       price: product?.price || 0,
       oldPrice: product?.oldPrice || null,
       availability: product?.availability || false,
-      _promo: product?.label._promo || false,
-      _new: product?.label._new || false,
-      _popular: product?.label._popular || false,
+      promo: product?.label.promo || false,
+      new: product?.label.new || false,
+      popular: product?.label.popular || false,
       installments: productInstallments,
     },
     validateOnBlur: false,
@@ -110,9 +109,9 @@ const EditModal: React.FC<Properties> = ({
     isSubmitting ||
     (values.price === product?.price &&
       values.availability === product?.availability &&
-      product.label._new === values._new &&
-      product.label._popular === values._popular &&
-      product.label._promo === values._promo &&
+      product.label.new === values.new &&
+      product.label.popular === values.popular &&
+      product.label.promo === values.promo &&
       product.oldPrice === values.oldPrice &&
       product.installments === values.installments);
 
@@ -126,9 +125,9 @@ const EditModal: React.FC<Properties> = ({
       setFieldValue("price", product.price);
       setFieldValue("oldPrice", product.oldPrice);
       setFieldValue("availability", product.availability);
-      setFieldValue("_new", product.label._new);
-      setFieldValue("_promo", product.label._promo);
-      setFieldValue("_popular", product.label._popular);
+      setFieldValue("new", product.label.new);
+      setFieldValue("promo", product.label.promo);
+      setFieldValue("popular", product.label.popular);
       setOldPrice(product.oldPrice !== null);
       setFieldValue("installments", productInstallments);
     }
