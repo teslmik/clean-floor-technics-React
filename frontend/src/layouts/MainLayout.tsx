@@ -23,7 +23,6 @@ import { bodyLock, bodyUnlock, ibg, isWebp } from "../utils";
 const MainLayout: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log({ currentPath }); //
 
   const dispatch = useAppDispatch();
   const [isWebpImg, setIsWebpImg] = React.useState<boolean>(false);
