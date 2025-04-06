@@ -9,7 +9,7 @@ import Head from "../layouts/Head";
 import { getPostBySlug } from "../redux/posts/query";
 import { IPostItem } from "../redux/posts/types";
 import { Status } from "../redux/products/types";
-import { formatDate, ibg, modifyVideoLink } from "../utils";
+import { formatDate, ibg } from "../utils";
 
 const FullBlogItem: React.FC = () => {
   const [item, setItem] = React.useState<IPostItem | null>(null);
@@ -23,7 +23,7 @@ const FullBlogItem: React.FC = () => {
       try {
         const post = await client.fetch<IPostItem>(getPostBySlug, { slug });
         if (!post) throw new Error(`Post by slug: ${slug} not found`);
-        setItem({ ...post, videoLink: modifyVideoLink(post.videoLink) });
+        setItem(post);
         setStatus(Status.SUCCESS);
       } catch (error: any) {
         setStatus(Status.ERROR);

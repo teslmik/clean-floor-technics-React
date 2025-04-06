@@ -1,4 +1,5 @@
-import { defineType, defineArrayMember } from "sanity";
+import { LinkIcon } from "@sanity/icons";
+import { defineArrayMember, defineType } from "sanity";
 
 export default defineType({
   title: "Product Description",
@@ -17,6 +18,22 @@ export default defineType({
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
+        ],
+        annotations: [
+          {
+            name: "internalLink",
+            type: "object",
+            title: "Product link",
+            icon: LinkIcon,
+            fields: [
+              {
+                name: "reference",
+                type: "reference",
+                to: [{ type: "products" }],
+                title: "Product",
+              },
+            ],
+          },
         ],
       },
     }),

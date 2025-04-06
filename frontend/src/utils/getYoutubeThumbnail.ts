@@ -1,16 +1,15 @@
 export const getYouTubeThumbnail = (videoUrl?: string) => {
   if (!videoUrl) return "";
-  console.log({ videoUrl });
 
-  const youtubeRegex =
-    /(?:https?:\/\/(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+))/;
+  const regex =
+    /(?:youtube\.com\/(?:embed|watch\?v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
 
-  const match = RegExp(youtubeRegex).exec(videoUrl);
-  if (match) {
-    const videoId = match[1] || match[2];
-    if (videoId) {
-      return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-    }
+  const match = RegExp(regex).exec(videoUrl);
+
+  if (match?.[1]) {
+    const videoId = match[1];
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
   }
+
   return "";
 };

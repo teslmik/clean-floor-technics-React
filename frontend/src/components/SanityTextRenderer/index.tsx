@@ -1,10 +1,9 @@
-import React from "react";
 import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
+import React, { useEffect } from "react";
 
-import { BlockContent } from "../../@types/types";
 import client from "../../../cms/lib/sanitiClient";
-import styles from "./styles.module.scss";
+import { BlockContent } from "../../@types/types";
 
 type Children = { children?: React.ReactNode };
 type Value = { value?: any; children: React.ReactNode };
@@ -24,6 +23,25 @@ const Link: React.FC<Value> = ({ value, children }) => {
       {children}
     </a>
   );
+};
+const InternalLink: React.FC<Value> = ({ value, children }) => {
+  const [href, setHref] = React.useState<string>("/");
+  console.log({ href });
+
+  useEffect(() => {
+    const fetchLinkData = async (id: string) => {
+      const data = await client.fetch(
+        `*[_type == "products" && _id == $id][0] { slug, category }`,
+        { id },
+      );
+
+      if (data) {
+        setHref(`/products/${data.category}/${data.slug?.current}`);
+      }
+    };
+    fetchLinkData(value?.reference?._ref);
+  }, [value?.reference?._ref]);
+  return <a href={href}>{children}</a>;
 };
 const Phone: React.FC<Value> = ({ value, children }) => (
   <a href={value?.href}>{children}</a>
@@ -63,6 +81,7 @@ const SanityTextRenderer: React.FC<{ content?: BlockContent }> = ({
     marks: {
       strong: Strong,
       link: Link,
+      internalLink: InternalLink,
       phone: Phone,
     },
     list: {

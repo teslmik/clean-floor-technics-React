@@ -518,6 +518,14 @@
         margin-bottom: em(10.8);
       }
     }
+    a {
+      color: $greenColor;
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
   }
 }
 

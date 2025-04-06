@@ -1,5 +1,7 @@
 import { DocumentTextIcon, ImageIcon } from "@sanity/icons";
+import React from "react";
 import { defineField, defineType } from "sanity";
+import { getYouTubeThumbnail } from "../../src/utils/getYoutubeThumbnail";
 
 export default defineType({
   name: "post",
@@ -81,16 +83,36 @@ export default defineType({
     select: {
       title: "title",
       media: "media.image",
+      videoLink: "media.videoLink",
       publishedAt: "publishedAt",
     },
     prepare(selection) {
-      const { title, media, publishedAt } = selection;
+      const { title, media, publishedAt, videoLink } = selection;
+      const PreviewComponent = React.forwardRef<
+        HTMLImageElement,
+        { value: string }
+      >(({ value }, ref) => (
+        <img
+          ref={ref}
+          src={value}
+          alt="preview"
+          style={{ objectFit: "cover" }}
+        />
+      ));
+
+      const mediaItem =
+        media ||
+        (videoLink && (
+          <PreviewComponent value={getYouTubeThumbnail(videoLink)} />
+        )) ||
+        null;
+
       const date = publishedAt
         ? new Date(publishedAt).toLocaleDateString()
         : "No date";
       return {
         title,
-        media,
+        media: mediaItem,
         subtitle: `Public: ${date}`,
       };
     },
