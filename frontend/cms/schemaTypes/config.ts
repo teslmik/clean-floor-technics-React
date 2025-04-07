@@ -1,5 +1,5 @@
 import { CogIcon } from "@sanity/icons";
-import { defineType } from "sanity";
+import { defineField, defineType } from "sanity";
 
 const Config = defineType({
   name: "config",
@@ -7,7 +7,26 @@ const Config = defineType({
   type: "document",
   icon: CogIcon,
   fields: [
-    {
+    defineField({
+      name: "rates",
+      type: "object",
+      title: "Rates",
+      options: { columns: 2 },
+      fields: [
+        {
+          name: "rate",
+          type: "number",
+          title: "Your Euro Rate",
+        },
+        {
+          name: "bankRate",
+          type: "string",
+          title: "Monobank Euro Rate",
+          readOnly: true,
+        },
+      ],
+    }),
+    defineField({
       name: "mainSliderImages",
       type: "array",
       title: "Main Slider Images",
@@ -16,7 +35,7 @@ const Config = defineType({
       options: {
         sortable: true,
       },
-    },
+    }),
   ],
   preview: {
     prepare() {
@@ -30,7 +49,7 @@ export const mainSliderImage = defineType({
   type: "object",
   title: "Main Slider Image",
   fields: [
-    {
+    defineField({
       name: "image",
       type: "image",
       title: "Image",
@@ -38,14 +57,14 @@ export const mainSliderImage = defineType({
         hotspot: true,
       },
       validation: (Rule) => Rule.required(),
-    },
-    {
+    }),
+    defineField({
       name: "altText",
       type: "string",
       title: "Alt Text",
       description: "Alternative text for accessibility",
       validation: (Rule) => Rule.required().min(3).max(100),
-    },
+    }),
   ],
 });
 
