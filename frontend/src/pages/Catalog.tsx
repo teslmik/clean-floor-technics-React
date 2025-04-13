@@ -23,8 +23,6 @@ import { useAppDispatch } from "../redux/store";
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
   const { sortState } = useSelector(filterSelector);
-  console.log({ sortState });
-
   const { items, status } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();
   const { pathname } = useLocation();

@@ -1,14 +1,15 @@
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import { Button } from "@mui/material";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import React from "react";
 
+import client from "../../cms/lib/sanitiClient";
 import { useGlobalContext } from "../hook/useGlobalContext";
-import priceList from "/assets/docs/PriceListTruvox_2024.pdf";
 
 export const PriceList: React.FC = () => {
   const { windowWidth } = useGlobalContext();
+  const [priceList, setPriceList] = React.useState<string | null>(null);
 
   const isMobileOrSafari = () => {
     const userAgent = navigator.userAgent;
@@ -22,13 +23,27 @@ export const PriceList: React.FC = () => {
   const isMobile = windowWidth <= 681.98 ? 47 : 0;
   const top = isTablet || isMobile;
 
+  React.useEffect(() => {
+    const fetchPriceList = async () => {
+      const pdfLink = await client.fetch<{
+        url: string;
+      }>(`*[_type == "config"][0]{ "url": priceList.asset->url }`);
+
+      if (pdfLink.url) setPriceList(pdfLink.url);
+    };
+
+    fetchPriceList();
+  }, []);
+
+  if (!priceList) return null;
+
   return (
     <div className="priceList">
       {isMobileOrSafari() ? (
         <>
           <Button
             href={priceList}
-            download="PriceListTruvox_2024.pdf"
+            download="PriceListTruvox.pdf"
             variant="contained"
             size="large"
             startIcon={<CloudDownloadIcon />}

@@ -69,7 +69,14 @@ const App: React.FC = () => {
           </PrivateRoute>
         }
       />
-      <Route path={ROUTER_KEYS.ROOT} element={<MainLayout />}>
+      <Route
+        path={ROUTER_KEYS.ROOT}
+        element={
+          <Suspense fallback={<CircleLoader />}>
+            <MainLayout />
+          </Suspense>
+        }
+      >
         <Route path={ROUTER_KEYS.HOME} element={<Home />} />
         <Route
           path={ROUTER_KEYS.CATALOG}
@@ -164,7 +171,5 @@ const App: React.FC = () => {
     </Routes>
   );
 };
-
-console.log("dev push");
 
 export default App;
