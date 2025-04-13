@@ -9,10 +9,10 @@ type monoRatesType = {
   rateBuy: number;
 };
 
-const UpdateRateButton: React.FC = () => {
+export const UpdateRateButton = React.forwardRef<HTMLDivElement>((_, ref) => {
   const [rate, setRate] = useState<number | null>(null);
   const [error, setError] = useState<any | null>(null);
-  const client = useClient();
+  const client = useClient({ apiVersion: "2023-01-01" });
 
   const fetchEuroRate = async (): Promise<number | null> => {
     try {
@@ -30,7 +30,7 @@ const UpdateRateButton: React.FC = () => {
         throw new Error((data as { errText: string }).errText);
       }
 
-      return euroRate ? euroRate.rateBuy : null;
+      return euroRate ? euroRate.rateSell : null;
     } catch (error) {
       console.error("Error fetching euro rate:", JSON.stringify(error));
       return null;
@@ -58,7 +58,7 @@ const UpdateRateButton: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div ref={ref}>
       {!error &&
         (rate ? (
           <p style={{ padding: "20px" }}>Курс евро обновлен: {rate} €</p>
@@ -70,6 +70,4 @@ const UpdateRateButton: React.FC = () => {
       )}
     </div>
   );
-};
-
-export default UpdateRateButton;
+});

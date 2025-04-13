@@ -32,9 +32,14 @@ const Config = defineType({
       title: "Main Slider Images",
       description: "Images for the main slider with customizable order",
       of: [{ type: "mainSliderImage" }],
-      options: {
-        sortable: true,
-      },
+      options: { sortable: true },
+    }),
+    defineField({
+      name: "priceList",
+      title: "Price List (PDF)",
+      type: "file",
+      description: "Upload the latest price list in PDF format",
+      options: { accept: "application/pdf" },
     }),
   ],
   preview: {

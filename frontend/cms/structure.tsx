@@ -2,7 +2,7 @@ import { CogIcon } from "@sanity/icons";
 import React from "react";
 import { StructureResolver } from "sanity/structure";
 
-import UpdateRateButton from "./UpdateRate";
+import { UpdateRateButton } from "./components/UpdateRate";
 
 export const structure: StructureResolver = (S, context) =>
   S.list()
@@ -21,7 +21,7 @@ export const structure: StructureResolver = (S, context) =>
         .icon(() => <span>💰</span>)
         .child(
           S.component()
-            .component(UpdateRateButton)
+            .component(() => <UpdateRateButton />)
             .title("Update Monobank Euro Rate"),
         ),
     ]);

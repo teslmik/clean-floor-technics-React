@@ -26,7 +26,26 @@ export default defineType({
       name: "article",
       title: "Article",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().custom(async (value, context) => {
+          if (!value) return true;
+
+          const client = context.getClient({ apiVersion: "2023-01-01" });
+          const id = context?.document?._id.replace(/^drafts\./, "");
+
+          const existing = await client.fetch(
+            `*[_type == "products" && article == $value && !(_id in [$id, "drafts." + $id])][0]._id`,
+            { value, id },
+          );
+
+          return existing ? "Article must be unique" : true;
+        }),
+    }),
+    defineField({
+      name: "rating",
+      title: "Rating",
+      type: "number",
+      initialValue: 1,
     }),
     defineField({
       name: "slug",
@@ -163,11 +182,12 @@ export default defineType({
       initialValue: false,
     }),
     defineField({
-      name: "rating",
-      title: "Rating",
-      type: "number",
-      initialValue: 1,
-      hidden: true,
+      name: "configRate",
+      title: "Config Rate",
+      description: "This is setting, not change!",
+      type: "reference",
+      to: [{ type: "config" }],
+      initialValue: { _ref: "config" },
     }),
   ],
   fieldsets: [
@@ -186,13 +206,16 @@ export default defineType({
       title: "title",
       media: "mainImage",
       price: "price",
+      article: "article",
+      rate: "configRate.rates.rate",
     },
     prepare(selection) {
-      const { title, media, price } = selection;
+      const { title, media, price, article, rate } = selection;
+
       return {
         title,
         media,
-        subtitle: `Price: ${price} €`,
+        subtitle: `${article ?? ""} | €${price?.toLocaleString() || ""} | ₴${rate ? (Math.floor((price * rate) / 10) * 10).toLocaleString() : "-"}`,
       };
     },
   },
