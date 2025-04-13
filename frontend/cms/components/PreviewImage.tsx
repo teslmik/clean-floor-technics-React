@@ -13,16 +13,22 @@ export const PreviewImage = React.forwardRef<
   const client = useClient({ apiVersion: "2023-01-01" });
   const builder = imageUrlBuilder(client);
 
-  return (
-    <img
-      ref={ref}
-      src={
-        typeof value === "string"
-          ? value
-          : builder.image(value).width(300).url()
-      }
-      alt="preview"
-      style={{ objectFit }}
-    />
-  );
+  let src: string | undefined;
+
+  if (typeof value === "string") {
+    src = value;
+  } else if ("asset" in value && (value.asset?._ref || value.asset?._id)) {
+    src = builder.image(value).width(300).url();
+  } else if (
+    typeof value === "object" &&
+    value !== null &&
+    "_upload" in value &&
+    (value as any)._upload?.previewImage
+  ) {
+    src = (value as any)._upload.previewImage;
+  }
+
+  if (!src) return null;
+
+  return <img ref={ref} src={src} alt="preview" style={{ objectFit }} />;
 });

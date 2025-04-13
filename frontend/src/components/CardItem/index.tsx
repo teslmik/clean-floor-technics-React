@@ -87,7 +87,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
               <p className="label-content">Хіт</p>
             </div>
           )}
-          {oldPrice && (
+          {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
             <div className="labels__item _discount">
               <div className="label-content">
                 -
@@ -114,7 +114,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
           <Link
-            to={`/products/${category}/${_id}`}
+            to={`/products/${category}/${slug.current}`}
             className="card__title"
             title={title}
           >
@@ -122,7 +122,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
           </Link>
           <div className="card__cost">
             <div className="card__price">
-              {oldPrice && (
+              {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
                 <div className="card__old-price">
                   {Number(oldPrice).toLocaleString()} ₴
                 </div>

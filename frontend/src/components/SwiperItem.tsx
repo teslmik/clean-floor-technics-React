@@ -40,7 +40,7 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
                 <p className="label-content">Хіт</p>
               </div>
             )}
-            {oldPrice && (
+            {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
               <div className="labels__item _discount">
                 <div className="label-content">
                   -

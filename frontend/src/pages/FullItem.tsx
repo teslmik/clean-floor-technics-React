@@ -219,11 +219,12 @@ const FullItem: React.FC = () => {
                 <div className="body-fullitem__actual-price">
                   {euroToHrivna(product.price).toLocaleString()} ₴
                 </div>
-                {product.oldPrice && (
-                  <div className="body-fullitem__old-price">
-                    {Number(product.oldPrice).toLocaleString()} ₴
-                  </div>
-                )}
+                {product.oldPrice &&
+                  Number(product.oldPrice) > euroToHrivna(product.price) && (
+                    <div className="body-fullitem__old-price">
+                      {Number(product.oldPrice).toLocaleString()} ₴
+                    </div>
+                  )}
               </div>
               <button
                 onClick={onClickAdd}
@@ -271,11 +272,12 @@ const FullItem: React.FC = () => {
                 <div className="body-fullitem__actual-price">
                   {euroToHrivna(product.price).toLocaleString()} ₴
                 </div>
-                {product.oldPrice && (
-                  <div className="body-fullitem__old-price">
-                    {Number(product.oldPrice).toLocaleString()} ₴
-                  </div>
-                )}
+                {product.oldPrice &&
+                  Number(product.oldPrice) > euroToHrivna(product.price) && (
+                    <div className="body-fullitem__old-price">
+                      {Number(product.oldPrice).toLocaleString()} ₴
+                    </div>
+                  )}
               </div>
             )}
           </div>

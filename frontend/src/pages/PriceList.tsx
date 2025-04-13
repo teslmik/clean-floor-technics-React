@@ -38,7 +38,10 @@ export const PriceList: React.FC = () => {
   if (!priceList) return null;
 
   return (
-    <div className="priceList">
+    <div
+      className="priceList"
+      style={isMobileOrSafari() ? { transform: "translateY(-36px)" } : {}}
+    >
       {isMobileOrSafari() ? (
         <>
           <Button
