@@ -15,12 +15,19 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "vite-plugin-svgr/client"]
+    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@cms/*": ["cms/*"]
+    }
   },
   "include": [
     "src",
     "src/@types",
     "vite-env.d.ts",
-    "cms/components/UpdateRate.tsx"
+    "cms",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

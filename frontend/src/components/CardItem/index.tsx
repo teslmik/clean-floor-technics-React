@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Tooltip } from "@mui/material";
-import { useGlobalContext } from "../../hook/useGlobalContext";
-import { cartSelector } from "../../redux/cart/selectors";
-import { addToCart } from "../../redux/cart/slice";
-import { ICartItem } from "../../redux/cart/types";
-import { ISanityProduct } from "../../redux/products/types";
-import { euroToHrivna, ibg } from "../../utils";
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { cartSelector } from "@src/redux/cart/selectors";
+import { addToCart } from "@src/redux/cart/slice";
+import { ICartItem } from "@src/redux/cart/types";
+import { ISanityProduct } from "@src/redux/products/types";
+import { euroToHrivna, ibg } from "@src/utils";
 
 export const CardItem: React.FC<ISanityProduct> = ({
   _id,

@@ -2,8 +2,8 @@ import React from "react";
 import { Autoplay, EffectFade, Lazy, Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import client from "@cms/lib/sanitiClient";
 import "swiper/css/bundle";
-import client from "../../cms/lib/sanitiClient";
 
 export const SwiperBlock: React.FC = () => {
   const [images, setImages] = React.useState<

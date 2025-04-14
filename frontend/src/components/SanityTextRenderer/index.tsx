@@ -2,8 +2,8 @@ import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import imageUrlBuilder from "@sanity/image-url";
 import React, { forwardRef, useEffect } from "react";
 
-import client from "../../../cms/lib/sanitiClient";
-import { BlockContent } from "../../@types/types";
+import client from "@cms/lib/sanitiClient";
+import { BlockContent } from "@src/@types/types";
 
 type Children = { children?: React.ReactNode };
 type Value = { value?: any; children: React.ReactNode };

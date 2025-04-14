@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ibg } from "../../utils";
-import { getYouTubeThumbnail } from "../../utils/getYoutubeThumbnail";
+import { ibg } from "@src/utils";
+import { getYouTubeThumbnail } from "@src/utils/getYoutubeThumbnail";
 
 export interface IBlogItemProps {
   slug?: string;

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import client from "../../../cms/lib/sanitiClient";
+import client from "@cms/lib/sanitiClient";
 import { getAllPosts, getNewPosts } from "./query";
 import { IPostItem } from "./types";
 

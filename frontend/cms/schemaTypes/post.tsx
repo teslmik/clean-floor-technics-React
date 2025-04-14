@@ -1,6 +1,6 @@
 import { DocumentTextIcon, ImageIcon } from "@sanity/icons";
-import React from "react";
 import { defineField, defineType } from "sanity";
+
 import { getYouTubeThumbnail } from "../../src/utils/getYoutubeThumbnail";
 import { PreviewImage } from "../components/PreviewImage";
 

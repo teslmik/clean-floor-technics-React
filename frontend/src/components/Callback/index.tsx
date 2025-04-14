@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
 import axios from "axios";
+import { motion } from "framer-motion";
+import React from "react";
+import { useForm } from "react-hook-form";
 
-import { dropIn } from "../../utils";
-import { useGlobalContext } from "../../hook/useGlobalContext";
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { dropIn } from "@src/utils";
 
 import styles from "./Callback.module.scss";
 
@@ -44,7 +44,7 @@ export const Callback: React.FC = () => {
           isOpen: true,
           title: "Заявка відправлена!",
           text: `Наш менеджер незабором з вами зв'яжеться.`,
-        })
+        }),
       )
       .catch((error) =>
         setRequestDone({
@@ -54,7 +54,7 @@ export const Callback: React.FC = () => {
             "При роботі серверу виникла помилка: " +
             error.message +
             ". Спробуйте пізніше...",
-        })
+        }),
       )
       .finally(() => {
         setIsOpenCallback(false);
@@ -85,15 +85,15 @@ export const Callback: React.FC = () => {
           ></div>
           <h2 className={styles.title}>Передзвонити вам?</h2>
           <p className={styles.text}>
-            Вкажіть номер телефону та ім'я. Ми зв'яжемося з вами у найближчий
-            час.
+            Вкажіть номер телефону та ім&apos;я. Ми зв&apos;яжемося з вами у
+            найближчий час.
           </p>
           <form
             className={styles.form}
             onSubmit={handleSubmit(onSubmitCallback)}
           >
             <label htmlFor="name">
-              <span>Ім'я</span>
+              <span>Ім&apos;я</span>
               <input
                 placeholder="Віше Ім'я"
                 type="text"

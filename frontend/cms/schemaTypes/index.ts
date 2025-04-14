@@ -1,5 +1,6 @@
 import blockContent from "./blockContent";
-import config, { mainSliderImage } from "./config";
+import config from "./config";
+import mainSliderImage from "./mainSliderImage";
 import post from "./post";
 import productDescription from "./productDescription";
 import products from "./products";

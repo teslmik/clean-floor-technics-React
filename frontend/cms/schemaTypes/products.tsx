@@ -1,5 +1,4 @@
 import { ImageIcon, ImagesIcon, TrolleyIcon } from "@sanity/icons";
-import React from "react";
 import { defineField, defineType } from "sanity";
 
 import { CategoriesEnum } from "../../src/@types/categories.enum";

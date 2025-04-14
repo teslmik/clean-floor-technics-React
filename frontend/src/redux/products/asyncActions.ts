@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import client from "../../../cms/lib/sanitiClient";
+import client from "@cms/lib/sanitiClient";
 import { RootState } from "../store";
 import {
   fullProductFields,
