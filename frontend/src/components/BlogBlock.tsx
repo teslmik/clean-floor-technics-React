@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { postsSelector } from "../redux/posts/selectors";
 import { BlogItem } from "../components";
+import { postsSelector } from "../redux/posts/selectors";
 import { formatDate } from "../utils";
 
 export const BlogBlock: React.FC = () => {

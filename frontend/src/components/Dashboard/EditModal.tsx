@@ -18,12 +18,11 @@ import { green } from "@mui/material/colors";
 import { useFormik } from "formik";
 import React from "react";
 
-import { editValidate } from "../../constants/edit-validation";
-import { labelKeys } from "../../constants/label-keys";
-import { ISanityProduct } from "../../redux/products/types";
-import { useAppDispatch } from "../../redux/store";
-import { euroToHrivna, filterList } from "../../utils";
-
+import { editValidate } from "@src/constants/edit-validation";
+import { labelKeys } from "@src/constants/label-keys";
+import { ISanityProduct } from "@src/redux/products/types";
+import { useAppDispatch } from "@src/redux/store";
+import { euroToHrivna, filterList } from "@src/utils";
 import styles from "./dashboard.module.scss";
 
 type Properties = {
@@ -94,9 +93,9 @@ const EditModal: React.FC<Properties> = ({
       price: product?.price || 0,
       oldPrice: product?.oldPrice || null,
       availability: product?.availability || false,
-      promo: product?.label.promo || false,
-      new: product?.label.new || false,
-      popular: product?.label.popular || false,
+      promo: product?.label?.promo || false,
+      new: product?.label?.new || false,
+      popular: product?.label?.popular || false,
       installments: productInstallments,
     },
     validateOnBlur: false,
@@ -109,7 +108,7 @@ const EditModal: React.FC<Properties> = ({
     isSubmitting ||
     (values.price === product?.price &&
       values.availability === product?.availability &&
-      product.label.new === values.new &&
+      product?.label?.new === values.new &&
       product.label.popular === values.popular &&
       product.label.promo === values.promo &&
       product.oldPrice === values.oldPrice &&
@@ -125,9 +124,9 @@ const EditModal: React.FC<Properties> = ({
       setFieldValue("price", product.price);
       setFieldValue("oldPrice", product.oldPrice);
       setFieldValue("availability", product.availability);
-      setFieldValue("new", product.label.new);
-      setFieldValue("promo", product.label.promo);
-      setFieldValue("popular", product.label.popular);
+      setFieldValue("new", product?.label?.new);
+      setFieldValue("promo", product?.label?.promo);
+      setFieldValue("popular", product?.label?.popular);
       setOldPrice(product.oldPrice !== null);
       setFieldValue("installments", productInstallments);
     }

@@ -1,9 +1,9 @@
 export interface ICartItem {
   _id: string;
-  category: string;
-  title: string;
+  category?: string;
+  title?: string;
   oldPrice?: number | null;
-  price: number;
+  price?: number;
   count: number;
   slug?: string;
   imageUrl: string;

@@ -2,11 +2,11 @@ import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDebounce } from "../../hook/debounce";
-import { useInput } from "../../hook/input";
-import { useGlobalContext } from "../../hook/useGlobalContext";
-import { ISanityProduct } from "../../redux/products/types";
-import { bodyLock, bodyUnlock, euroToHrivna, ibg } from "../../utils";
+import { useDebounce } from "@src/hook/debounce";
+import { useInput } from "@src/hook/input";
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { ISanityProduct } from "@src/redux/products/types";
+import { bodyLock, bodyUnlock, euroToHrivna, ibg } from "@src/utils";
 
 import styles from "./Search.module.scss";
 
@@ -135,7 +135,8 @@ export const Search: React.FC = () => {
                   <div className={styles.dropdown__content}>
                     <h3 className={styles.title}>{item.title}</h3>
                     <p className={styles.price}>
-                      {euroToHrivna(item.price).toLocaleString()} ₴
+                      {item.price && euroToHrivna(item.price).toLocaleString()}{" "}
+                      ₴
                     </p>
                   </div>
                 </li>

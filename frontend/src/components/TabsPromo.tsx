@@ -64,7 +64,7 @@ export const TabsPromo: React.FC = () => {
                       .filter(
                         (obj) =>
                           !!(
-                            obj.label[tabObj.name as "popular" | "new"] ||
+                            obj.label?.[tabObj.name as "popular" | "new"] ||
                             obj[tabObj.name as "availability"]
                           ),
                       )

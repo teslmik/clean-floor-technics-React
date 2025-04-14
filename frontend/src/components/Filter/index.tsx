@@ -2,11 +2,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { useGlobalContext } from "../../hook/useGlobalContext";
-import { filterSelector } from "../../redux/filter/selectors";
-import { setFilter } from "../../redux/filter/slice";
-import { productsSelector } from "../../redux/products/selectors";
-import { useAppDispatch } from "../../redux/store";
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { filterSelector } from "@src/redux/filter/selectors";
+import { setFilter } from "@src/redux/filter/slice";
+import { fetchSanityProducts } from "@src/redux/products/asyncActions";
+import { productsSelector } from "@src/redux/products/selectors";
+import { useAppDispatch } from "@src/redux/store";
 import {
   bodyLock,
   bodyUnlock,
@@ -14,9 +15,7 @@ import {
   filterList,
   mobileHeight,
   toggleFilter,
-} from "../../utils";
-
-import { fetchSanityProducts } from "../../redux/products/asyncActions";
+} from "@src/utils";
 import styles from "./Filter.module.scss";
 
 export const Filter: React.FC = () => {

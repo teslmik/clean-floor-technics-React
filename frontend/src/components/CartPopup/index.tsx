@@ -3,11 +3,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useGlobalContext } from "../../hook/useGlobalContext";
-import { cartSelector } from "../../redux/cart/selectors";
-import { decrement, increment, removeFromCart } from "../../redux/cart/slice";
-import { dropIn, euroToHrivna, ibg } from "../../utils";
-
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { cartSelector } from "@src/redux/cart/selectors";
+import { decrement, increment, removeFromCart } from "@src/redux/cart/slice";
+import { dropIn, euroToHrivna, ibg } from "@src/utils";
 import styles from "./CartPopup.module.scss";
 
 export const CartPopup: React.FC = () => {
@@ -129,7 +128,7 @@ export const CartPopup: React.FC = () => {
                           </div>
                         )}
                         <div className={styles.item__actualPrice}>
-                          {euroToHrivna(item.price).toLocaleString()} ₴
+                          {euroToHrivna(item.price || 0).toLocaleString()} ₴
                         </div>
                       </div>
                     </div>
@@ -149,7 +148,7 @@ export const CartPopup: React.FC = () => {
                       <div className={styles.item__cost}>
                         <div className="item-order__cost">
                           {(
-                            euroToHrivna(item.price) * item.count
+                            euroToHrivna(item.price || 0) * item.count
                           ).toLocaleString()}{" "}
                           ₴
                         </div>

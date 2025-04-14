@@ -18,10 +18,10 @@ import {
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { ROUTER_KEYS } from "../../constants/app-keys";
-import { labelKeys } from "../../constants/label-keys";
-import { ISanityProduct } from "../../redux/products/types";
-import { euroToHrivna, filterList } from "../../utils";
+import { ROUTER_KEYS } from "@src/constants/app-keys";
+import { labelKeys } from "@src/constants/label-keys";
+import { ISanityProduct } from "@src/redux/products/types";
+import { euroToHrivna, filterList } from "@src/utils";
 
 type Properties = {
   product: ISanityProduct;
@@ -65,7 +65,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                   <Divider orientation="vertical" flexItem />
                   <Typography variant="caption" sx={{ fontWeight: "bold" }}>
                     {`Price-uah: ${euroToHrivna(
-                      product.price,
+                      product?.price || 0,
                     ).toLocaleString()}₴`}
                   </Typography>
                   {product.oldPrice && (
@@ -94,7 +94,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                 <Stack direction="row" gap={0.5}>
                   {labelKeys.map(
                     (key) =>
-                      product.label[key.name] === true && (
+                      product?.label?.[key.name] === true && (
                         <Chip
                           key={key.name}
                           label={
@@ -112,7 +112,7 @@ const ProductItem: React.FC<Properties> = ({ product, handleOpen }) => {
                         ${Math.round(
                           (100 *
                             (Number(product.oldPrice) -
-                              euroToHrivna(product.price))) /
+                              euroToHrivna(product?.price || 0))) /
                             Number(product.oldPrice),
                         )}
                         %`}

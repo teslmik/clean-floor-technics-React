@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 
 import { useGlobalContext } from "@src/hook/useGlobalContext";
 import { dropIn } from "@src/utils";
-
 import styles from "./Callback.module.scss";
 
 export interface IDataMessage {

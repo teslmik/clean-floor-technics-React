@@ -47,7 +47,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
       title,
       oldPrice,
       price,
-      slug: slug.current,
+      slug: slug?.current,
       count: 1,
     };
     dispatch(addToCart(item));
@@ -70,36 +70,36 @@ export const CardItem: React.FC<ISanityProduct> = ({
     >
       <article className="catalog__card card">
         <Link
-          to={`/products/${category}/${slug.current}`}
+          to={`/products/${category}/${slug?.current}`}
           className="card__image ibg"
           title={title}
         >
           <img src={imageUrl} alt={title} />
         </Link>
         <div className="card__labels labels">
-          {label.promo && (
+          {label?.promo && (
             <div className="labels__item _promo">
               <div className="label-content">Акція</div>
             </div>
           )}
-          {label.popular && (
+          {label?.popular && (
             <div className="labels__item _popular">
               <p className="label-content">Хіт</p>
             </div>
           )}
-          {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
+          {oldPrice && Number(oldPrice) > euroToHrivna(price || 0) && (
             <div className="labels__item _discount">
               <div className="label-content">
                 -
                 {Math.round(
-                  (100 * (Number(oldPrice) - euroToHrivna(price))) /
+                  (100 * (Number(oldPrice) - euroToHrivna(price || 0))) /
                     Number(oldPrice),
                 )}
                 %
               </div>
             </div>
           )}
-          {label.new && (
+          {label?.new && (
             <div className="labels__item _new">
               <div className="label-content">Новинка</div>
             </div>
@@ -114,7 +114,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
         <div className="card__content">
           <div className="card__article">Артикул: {article}</div>
           <Link
-            to={`/products/${category}/${slug.current}`}
+            to={`/products/${category}/${slug?.current}`}
             className="card__title"
             title={title}
           >
@@ -122,13 +122,13 @@ export const CardItem: React.FC<ISanityProduct> = ({
           </Link>
           <div className="card__cost">
             <div className="card__price">
-              {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
+              {oldPrice && Number(oldPrice) > euroToHrivna(price || 0) && (
                 <div className="card__old-price">
                   {Number(oldPrice).toLocaleString()} ₴
                 </div>
               )}
               <div className="card__actual-price">
-                {euroToHrivna(price).toLocaleString()} ₴
+                {euroToHrivna(price || 0).toLocaleString()} ₴
               </div>
             </div>
             <button
