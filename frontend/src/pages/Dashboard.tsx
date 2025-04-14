@@ -9,12 +9,12 @@ import ProductItem from "../components/Dashboard/ProductItem";
 import ProductSkeleton from "../components/Dashboard/ProductSkeleton";
 import { STORAGE_KEYS } from "../constants/app-keys";
 import { tabsMap } from "../constants/tabs-map";
+import { fetchSanityProducts } from "../redux/products/asyncActions";
 import { productsSelector } from "../redux/products/selectors";
 import { ISanityProduct, Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
 import { fetchUser } from "../redux/user/asyncActions";
 import { userSelector } from "../redux/user/selectors";
-import { fetchSanityProducts } from "../redux/products/asyncActions";
 
 type TabKey = keyof (typeof tabsMap)[number];
 
@@ -116,7 +116,7 @@ const Dashboard: React.FC = () => {
                       : products.products
                           .toSorted((a, b) => {
                             if (a.availability === b.availability) {
-                              return b.rating - a.rating;
+                              return b.rating! - a.rating!;
                             }
                             return a.availability ? -1 : 1;
                           })

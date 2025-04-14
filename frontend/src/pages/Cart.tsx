@@ -1,15 +1,15 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 import { CartItem, IDataMessage } from "../components";
-import { cartSelector } from "../redux/cart/selectors";
-import { clearCart } from "../redux/cart/slice";
-import { ibg, euroToHrivna } from "../utils";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
+import { cartSelector } from "../redux/cart/selectors";
+import { clearCart } from "../redux/cart/slice";
+import { euroToHrivna, ibg } from "../utils";
 
 const URL = `https://api.telegram.org/bot${
   import.meta.env.VITE_APP_TOKEN_TG
@@ -38,7 +38,7 @@ const Cart: React.FC = () => {
         (item, i) =>
           `<i>${i + 1}. ${item.title} ${item.count} шт.</i> - <b>${(
             item.count * euroToHrivna(item.price)
-          ).toLocaleString()}</b> грн.\n\n`
+          ).toLocaleString()}</b> грн.\n\n`,
       )
       .join("");
 
@@ -70,7 +70,7 @@ const Cart: React.FC = () => {
             "При роботі серверу виникла помилка: " +
             error.message +
             ". Спробуйте пізніше...",
-        })
+        }),
       )
       .finally(() => reset());
   };
@@ -96,7 +96,7 @@ const Cart: React.FC = () => {
             >
               <h2 className="form-cart__title">Одержувач замовлення</h2>
               <label htmlFor="nameOrder">
-                <span>Прізвище, Ім'я</span>
+                <span>Прізвище, Ім&apos;я</span>
                 <input
                   id="nameOrder"
                   placeholder="Ваше Ім'я та Прізвище"
@@ -145,13 +145,13 @@ const Cart: React.FC = () => {
                     src="/assets/img/installments/2.png"
                     alt="credit-2"
                   />{" "}
-                  "Оплату частинами" чи{" "}
+                  &quot;Оплату частинами&quot; чи{" "}
                   <img
                     width={30}
                     src="/assets/img/installments/1.png"
                     alt="credit-1"
                   />{" "}
-                  "Миттєву розстрочку" від Приватбанку
+                  &quot;Миттєву розстрочку&quot; від Приватбанку
                 </span>
               </label>
               <div className="btn-block">

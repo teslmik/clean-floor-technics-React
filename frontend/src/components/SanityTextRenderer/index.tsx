@@ -92,7 +92,7 @@ const CustomImage = forwardRef<HTMLDivElement, { value: any }>(
   },
 );
 
-const SanityTextRenderer: React.FC<{ content?: BlockContent }> = ({
+const SanityTextRenderer: React.FC<{ content: BlockContent | undefined }> = ({
   content,
 }) => {
   const components: Partial<PortableTextReactComponents> = {

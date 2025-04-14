@@ -4,13 +4,13 @@ import { euroToHrivna, ibg } from "../utils";
 
 interface ISwiperItem {
   imageArr: string[];
-  label: {
+  label?: {
     promo?: boolean;
     popular?: boolean;
     new?: boolean;
   };
   oldPrice?: number | null;
-  price: number;
+  price?: number;
 }
 
 export const SwiperItem: React.FC<ISwiperItem> = ({
@@ -30,29 +30,29 @@ export const SwiperItem: React.FC<ISwiperItem> = ({
       <div className="img-block__img ibg">
         {toggleState === 0 && (
           <div className="img-block__labels labels">
-            {label.promo && (
+            {label?.promo && (
               <div className="labels__item _promo">
                 <div className="label-content">Акція</div>
               </div>
             )}
-            {label.popular && (
+            {label?.popular && (
               <div className="labels__item _popular">
                 <p className="label-content">Хіт</p>
               </div>
             )}
-            {oldPrice && Number(oldPrice) > euroToHrivna(price) && (
+            {oldPrice && Number(oldPrice) > euroToHrivna(price || 0) && (
               <div className="labels__item _discount">
                 <div className="label-content">
                   -
                   {Math.round(
-                    (100 * (Number(oldPrice) - euroToHrivna(price))) /
+                    (100 * (Number(oldPrice) - euroToHrivna(price || 0))) /
                       Number(oldPrice),
                   )}
                   %
                 </div>
               </div>
             )}
-            {label.new && (
+            {label?.new && (
               <div className="labels__item _new">
                 <div className="label-content">Новинка</div>
               </div>

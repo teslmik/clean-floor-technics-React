@@ -7,13 +7,13 @@ import { euroToHrivna } from "../utils";
 
 interface ICartItemProps {
   _id: string;
-  title: string;
+  title?: string;
   imageUrl: string;
-  oldPrice: number | null;
-  price: number;
+  oldPrice?: number | null;
+  price?: number;
   count: number;
-  category: string;
-  slug: string;
+  category?: string;
+  slug?: string;
 }
 
 export const CartItem: React.FC<ICartItemProps> = ({

@@ -43,7 +43,7 @@ const FullItem: React.FC = () => {
       try {
         dispatch(fetchRates());
 
-        let current = products.find((p) => p.slug.current === slug);
+        let current = products.find((p) => p.slug?.current === slug);
         if (!current) {
           const query = `*[_type == "products" && slug.current == $slug][0]{ ${fullProductFields} }`;
           current = await client.fetch<ISanityProduct>(query, { slug });
@@ -70,7 +70,7 @@ const FullItem: React.FC = () => {
           title,
           oldPrice,
           price,
-          slug: productSlug.current,
+          slug: productSlug?.current,
           count: 1,
         });
       } catch (e: any) {
@@ -97,7 +97,7 @@ const FullItem: React.FC = () => {
   return (
     <section className="fullitem__container">
       <Head
-        title={product.title}
+        title={product.title || ""}
         url={pathname}
         imageUrl={`products/${product.imageUrl}.png`}
       />
@@ -270,10 +270,11 @@ const FullItem: React.FC = () => {
             {windowWidth >= 683 && (
               <div className="body-fullitem__price">
                 <div className="body-fullitem__actual-price">
-                  {euroToHrivna(product.price).toLocaleString()} ₴
+                  {euroToHrivna(product.price || 0).toLocaleString()} ₴
                 </div>
                 {product.oldPrice &&
-                  Number(product.oldPrice) > euroToHrivna(product.price) && (
+                  Number(product.oldPrice) >
+                    euroToHrivna(product.price || 0) && (
                     <div className="body-fullitem__old-price">
                       {Number(product.oldPrice).toLocaleString()} ₴
                     </div>
