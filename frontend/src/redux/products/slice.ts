@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchProducts, editProduct } from "./asyncActions";
+import { fetchSanityProducts, fetchSanityPromoProducts } from "./asyncActions";
 import { IProductSliceState, Status } from "./types";
 
 const initialState: IProductSliceState = {
@@ -13,35 +13,50 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchProducts.pending, (state) => {
+    builder.addCase(fetchSanityProducts.pending, (state) => {
       state.status = Status.LOADING;
       state.items = { counts: {}, products: [] };
     });
-    builder.addCase(fetchProducts.fulfilled, (state, action) => {
+    builder.addCase(fetchSanityProducts.fulfilled, (state, action) => {
       state.items = {
         counts: action.payload.counts,
         products: action.payload.products,
       };
       state.status = Status.SUCCESS;
     });
-    builder.addCase(fetchProducts.rejected, (state) => {
+    builder.addCase(fetchSanityProducts.rejected, (state) => {
       state.status = Status.ERROR;
       state.items.products = [];
     });
-    builder.addCase(editProduct.pending, (state) => {
+    builder.addCase(fetchSanityPromoProducts.pending, (state) => {
       state.status = Status.LOADING;
+      state.items = { counts: {}, products: [] };
     });
-    builder.addCase(editProduct.fulfilled, (state, action) => {
-      state.items.products.forEach((product, i) => {
-        if (product._id === action.payload._id) {
-          state.items.products[i] = action.payload;
-        }
-      });
+    builder.addCase(fetchSanityPromoProducts.fulfilled, (state, action) => {
+      state.items = {
+        counts: {},
+        products: action.payload.products,
+      };
       state.status = Status.SUCCESS;
     });
-    builder.addCase(editProduct.rejected, (state) => {
+    builder.addCase(fetchSanityPromoProducts.rejected, (state) => {
       state.status = Status.ERROR;
+      state.items.products = [];
     });
+    // builder.addCase(editProduct.pending, (state) => {
+    //   state.status = Status.LOADING;
+    // });
+    // builder.addCase(editProduct.fulfilled, (state, action) => {
+    //   state.items.products.forEach((product, i) => {
+    //     if (product._id === action.payload._id) {
+    //       state.items.products[i] = action.payload;
+    //     }
+    //   });
+    //   state.status = Status.SUCCESS;
+    // });
+    // builder.addCase(editProduct.rejected, (state) => {
+    //   state.status = Status.ERROR;
+    // });
   },
 });
 

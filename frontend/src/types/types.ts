@@ -141,7 +141,7 @@ export type Products = {
     value?: string;
     _key: string;
   }>;
-  description?: ProductDescription;
+  description?: BlockContent;
   discontinued?: boolean;
   configRate?: {
     _ref: string;

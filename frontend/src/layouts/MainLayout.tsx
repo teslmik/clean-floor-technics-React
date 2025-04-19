@@ -14,7 +14,7 @@ import {
 import { CallBackImg } from "../components/CallBackImg";
 import { MyGlobalContext } from "../hook/useGlobalContext";
 import { fetchNewPosts } from "../redux/posts/asyncActions";
-import { fetchProducts } from "../redux/products/asyncActions";
+import { fetchSanityPromoProducts } from "../redux/products/asyncActions";
 import { fetchRates } from "../redux/rates/asyncActions";
 import { ratesSelector } from "../redux/rates/selectors";
 import { useAppDispatch } from "../redux/store";
@@ -71,7 +71,7 @@ const MainLayout: React.FC = () => {
     if (currentPath === "/") {
       dispatch(fetchRates());
       dispatch(fetchNewPosts());
-      dispatch(fetchProducts());
+      dispatch(fetchSanityPromoProducts());
     }
   }, [currentPath]);
 

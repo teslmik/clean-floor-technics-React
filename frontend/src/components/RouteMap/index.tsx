@@ -1,9 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import React from "react";
 
-import { useGlobalContext } from '../../hook/useGlobalContext';
-
-import styles from './RouteMap.module.scss';
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import styles from "./RouteMap.module.scss";
 
 export const RouteMap: React.FC = () => {
   const { setIsOpenMap } = useGlobalContext();
@@ -14,10 +13,17 @@ export const RouteMap: React.FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className={styles.popup}
-      onClick={() => setIsOpenMap(false)}>
+      onClick={() => setIsOpenMap(false)}
+    >
       <div className={styles.body}>
-        <motion.div className={styles.content} onClick={(e) => e.stopPropagation()}>
-          <div onClick={() => setIsOpenMap(false)} className="_icon-close"></div>
+        <motion.div
+          className={styles.content}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div
+            onClick={() => setIsOpenMap(false)}
+            className="_icon-close"
+          ></div>
           <h2 className={styles.title}>Розташування магазину в м. Одеса</h2>
           <div className={styles.mapResponsive}>
             <iframe
@@ -27,7 +33,8 @@ export const RouteMap: React.FC = () => {
               height={450}
               style={{ border: 0 }}
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"></iframe>
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </motion.div>
       </div>

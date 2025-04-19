@@ -1,3 +1,4 @@
+import { CheckCircle, Edit as EditIcon, Euro } from "@mui/icons-material";
 import {
   AppBar,
   Avatar,
@@ -15,18 +16,16 @@ import {
   Typography,
   Zoom,
 } from "@mui/material";
-import { Euro, Edit as EditIcon, CheckCircle } from "@mui/icons-material";
 import React from "react";
 import { useSelector } from "react-redux";
-
-import { UserType } from "../../redux/user/types";
-import { ratesSelector } from "../../redux/rates/selectors";
-import { useAppDispatch } from "../../redux/store";
-import { editRate, fetchRates } from "../../redux/rates/asyncActions";
-import { IRatesItem, Status } from "../../redux/rates/types";
-
-import styles from "./dashboard.module.scss";
 import { Link } from "react-router-dom";
+
+import { editRate, fetchRates } from "@src/redux/rates/asyncActions";
+import { ratesSelector } from "@src/redux/rates/selectors";
+import { IRatesItem, Status } from "@src/redux/rates/types";
+import { useAppDispatch } from "@src/redux/store";
+import { UserType } from "@src/redux/user/types";
+import styles from "./dashboard.module.scss";
 
 const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
   const dispatch = useAppDispatch();
@@ -39,7 +38,7 @@ const DashboardHeader: React.FC<{ user: UserType | null }> = ({ user }) => {
     setOnEditCurrency(false);
     if (currency) {
       const confirmed = window.confirm(
-        "Якщо змінити поточний курс, то зміняться всі ціни на товарах. Ви впевнені, що хочете внести зміни?"
+        "Якщо змінити поточний курс, то зміняться всі ціни на товарах. Ви впевнені, що хочете внести зміни?",
       );
       if (confirmed) {
         dispatch(editRate(currency));

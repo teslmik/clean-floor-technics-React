@@ -1,13 +1,13 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { filterSelector } from '../../redux/filter/selectors';
-import { setSort } from '../../redux/filter/slice';
-import { SortPropertyEnum } from '../../redux/filter/types';
-import { mobileHeight, bodyLock, bodyUnlock } from '../../utils';
+import { filterSelector } from "@src/redux/filter/selectors";
+import { setSort } from "@src/redux/filter/slice";
+import { SortPropertyEnum } from "@src/redux/filter/types";
+import { bodyLock, bodyUnlock, mobileHeight } from "@src/utils";
 
-import styles from './Sort.module.scss';
+import styles from "./Sort.module.scss";
 
 interface ISortList {
   name: string;
@@ -15,9 +15,9 @@ interface ISortList {
 }
 
 const sortList: ISortList[] = [
-  { name: 'по популярності', sortProperty: SortPropertyEnum.RATING },
-  { name: 'спочатку дешевщі', sortProperty: SortPropertyEnum.PRICE },
-  { name: 'по назві', sortProperty: SortPropertyEnum.TITLE },
+  { name: "по популярності", sortProperty: SortPropertyEnum.RATING },
+  { name: "спочатку дешевщі", sortProperty: SortPropertyEnum.PRICE },
+  { name: "по назві", sortProperty: SortPropertyEnum.TITLE },
 ];
 
 export const Sort: React.FC = () => {
@@ -31,8 +31,11 @@ export const Sort: React.FC = () => {
         {sortList.map((obj, i) => (
           <li
             onClick={() => dispatch(setSort(obj))}
-            className={sortState.sortProperty === obj.sortProperty ? styles.active : ''}
-            key={i}>
+            className={
+              sortState.sortProperty === obj.sortProperty ? styles.active : ""
+            }
+            key={i}
+          >
             {obj.name}
           </li>
         ))}
@@ -54,9 +57,9 @@ export const SortMobile = () => {
   React.useEffect(() => {
     mobileHeight();
     setIsVisible(false);
-    window.addEventListener('resize', mobileHeight);
+    window.addEventListener("resize", mobileHeight);
     return () => {
-      window.removeEventListener('resize', mobileHeight);
+      window.removeEventListener("resize", mobileHeight);
     };
   }, []);
 
@@ -73,8 +76,8 @@ export const SortMobile = () => {
   return (
     <>
       <div className={styles.sort__title} onClick={() => setIsVisible(true)}>
-        <i className="_icon-sort"></i><p>{sortState.name}</p>
-        
+        <i className="_icon-sort"></i>
+        <p>{sortState.name}</p>
       </div>
       <AnimatePresence>
         {isVisible && (
@@ -84,21 +87,28 @@ export const SortMobile = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className={styles.wrapper}
-            onClick={() => setIsVisible(false)}>
+            onClick={() => setIsVisible(false)}
+          >
             <motion.div
-              initial={{ transform: 'translateY({320px})' }}
-              animate={{ transform: 'translateY(0px)' }}
-              exit={{ transform: 'translateY(320px)' }}
+              initial={{ transform: "translateY({320px})" }}
+              animate={{ transform: "translateY(0px)" }}
+              exit={{ transform: "translateY(320px)" }}
               transition={{ duration: 0.3 }}
               className={styles.sort}
-              onClick={(e) => e.stopPropagation()}>
+              onClick={(e) => e.stopPropagation()}
+            >
               <p>Сортування</p>
               <ul className={styles.sort__btn}>
                 {sortList.map((obj, i) => (
                   <li
                     onClick={() => onClickSort(obj)}
-                    className={sortState.sortProperty === obj.sortProperty ? styles.active : ''}
-                    key={i}>
+                    className={
+                      sortState.sortProperty === obj.sortProperty
+                        ? styles.active
+                        : ""
+                    }
+                    key={i}
+                  >
                     {obj.name}
                   </li>
                 ))}
