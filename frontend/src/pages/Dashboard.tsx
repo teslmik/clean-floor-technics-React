@@ -9,9 +9,9 @@ import ProductItem from "../components/Dashboard/ProductItem";
 import ProductSkeleton from "../components/Dashboard/ProductSkeleton";
 import { STORAGE_KEYS } from "../constants/app-keys";
 import { tabsMap } from "../constants/tabs-map";
-import { fetchProducts } from "../redux/products/asyncActions";
+import { fetchSanityProducts } from "../redux/products/asyncActions";
 import { productsSelector } from "../redux/products/selectors";
-import { IProductItem, Status } from "../redux/products/types";
+import { ISanityProduct, Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
 import { fetchUser } from "../redux/user/asyncActions";
 import { userSelector } from "../redux/user/selectors";
@@ -25,7 +25,7 @@ const Dashboard: React.FC = () => {
     "success" | "info" | "warning" | "error"
   >("success");
   const [open, setOpen] = React.useState<{
-    product: IProductItem | null;
+    product: ISanityProduct | null;
     open: boolean;
   }>({ product: null, open: false });
   const [tab, setTab] = React.useState<TabKey>("all");
@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
 
   const handleCloseAlert = (
     _?: React.SyntheticEvent | Event,
-    reason?: string
+    reason?: string,
   ) => {
     if (reason === "clickaway") {
       return;
@@ -50,7 +50,7 @@ const Dashboard: React.FC = () => {
     setOpenAlert(false);
   };
 
-  const handleOpen = (product: IProductItem | null) => {
+  const handleOpen = (product: ISanityProduct | null) => {
     setOpen({ product, open: true });
   };
   const handleClose = () => setOpen({ product: null, open: false });
@@ -63,7 +63,7 @@ const Dashboard: React.FC = () => {
       const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
       dispatch(fetchUser(token));
     }
-    dispatch(fetchProducts());
+    dispatch(fetchSanityProducts());
   }, []);
   return (
     <>
@@ -116,12 +116,12 @@ const Dashboard: React.FC = () => {
                       : products.products
                           .toSorted((a, b) => {
                             if (a.availability === b.availability) {
-                              return b.rating - a.rating;
+                              return b.rating! - a.rating!;
                             }
                             return a.availability ? -1 : 1;
                           })
                           .filter((product) =>
-                            tab === "all" ? product : product.category === tab
+                            tab === "all" ? product : product.category === tab,
                           )
                           .map((product) => (
                             <ProductItem

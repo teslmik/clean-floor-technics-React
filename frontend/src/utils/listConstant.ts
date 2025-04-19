@@ -31,16 +31,15 @@ export const categoriesList = [
 
 export const filterList = [
   { name: "availability", value: "У навності" },
-  { name: "_promo", value: "Акція" },
-  { name: "_popular", value: "Хіт" },
-  { name: "_new", value: "Новинка" },
+  { name: "promo", value: "Акція" },
+  { name: "popular", value: "Хіт" },
+  { name: "new", value: "Новинка" },
 ];
 
 export const tabsPromo = [
-  { name: "availability", value: "У навності" },
-  { name: "_popular", value: "Хіти" },
-  // { name: 'oldPrice', value: 'Розпродаж' },
-  { name: "_new", value: "Новинки" },
+  { name: "availability" as const, value: "У навності" },
+  { name: "popular" as const, value: "Хіти" },
+  { name: "new" as const, value: "Новинки" },
 ];
 
 export const tabsItem = ["Доставка", "Оплата", "Гарантія"];

@@ -4,11 +4,10 @@ import { Link } from "react-router-dom";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { filterSelector } from "../../redux/filter/selectors";
-import { setFilter } from "../../redux/filter/slice";
-import { useAppDispatch } from "../../redux/store";
-import { categoriesList, toggleFilter } from "../../utils";
-
+import { filterSelector } from "@src/redux/filter/selectors";
+import { setFilter } from "@src/redux/filter/slice";
+import { useAppDispatch } from "@src/redux/store";
+import { categoriesList, toggleFilter } from "@src/utils";
 import styles from "./Categories.module.scss";
 
 export const Categories: React.FC = () => {

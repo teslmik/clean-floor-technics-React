@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Scrollbar } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { CardItem, SkeletonLoader, ErrorInfo } from "../components";
+import { CardItem, ErrorInfo, SkeletonLoader } from "../components";
 import { productsSelector } from "../redux/products/selectors";
 import { Status } from "../redux/products/types";
 import { tabsPromo } from "../utils";
@@ -42,7 +42,7 @@ export const TabsPromo: React.FC = () => {
           <div className="promo__content">
             {tabsPromo.map((tabObj, i) => (
               <Swiper
-                key={i}
+                key={tabObj.name}
                 className={
                   toggleState === i
                     ? "catalog promo__catalog __container _active-content"
@@ -61,13 +61,15 @@ export const TabsPromo: React.FC = () => {
                 {status === Status.LOADING
                   ? skeleton
                   : items.products
-                      .filter((obj: any) => {
-                        if (obj.label[tabObj.name] || obj[tabObj.name])
-                          return true;
-                        return false;
-                      })
+                      .filter(
+                        (obj) =>
+                          !!(
+                            obj.label?.[tabObj.name as "popular" | "new"] ||
+                            obj[tabObj.name as "availability"]
+                          ),
+                      )
                       .map((obj) => (
-                        <SwiperSlide key={obj._id}>
+                        <SwiperSlide key={obj._id + obj.title}>
                           <CardItem {...obj} />
                         </SwiperSlide>
                       ))}

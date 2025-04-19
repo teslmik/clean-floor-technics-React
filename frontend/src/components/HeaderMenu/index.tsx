@@ -1,11 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import { useGlobalContext } from '../../hook/useGlobalContext';
-import { bodyLock, bodyUnlock, ibg, menuListArr } from '../../utils';
-
-import styles from './HeaderMenu.module.scss';
+import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { bodyLock, bodyUnlock, ibg, menuListArr } from "@src/utils";
+import styles from "./HeaderMenu.module.scss";
 
 interface IHeaderMenuProps {
   windowWidth: number;
@@ -13,8 +12,11 @@ interface IHeaderMenuProps {
   setIsVisible?: (state: boolean) => void;
 }
 
-export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible, setIsVisible }) => {
-
+export const HeaderMenu: React.FC<IHeaderMenuProps> = ({
+  windowWidth,
+  isVisible,
+  setIsVisible,
+}) => {
   const { setIsOpenCallback, isOpenCallback } = useGlobalContext();
 
   const menuHandler = () => {
@@ -53,21 +55,30 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className={styles.popup}
-              onClick={() => setIsVisible?.(false)}>
+              onClick={() => setIsVisible?.(false)}
+            >
               <motion.nav
-                initial={{ transform: 'translateX({-320px})' }}
-                animate={{ transform: 'translateX(0px)' }}
-                exit={{ transform: 'translateX(-320px)' }}
+                initial={{ transform: "translateX({-320px})" }}
+                animate={{ transform: "translateX(0px)" }}
+                exit={{ transform: "translateX(-320px)" }}
                 transition={{ duration: 0.2 }}
                 className={styles.menu__burger}
-                onClick={(e) => e.stopPropagation()}>
-                <div onClick={() => setIsVisible?.(false)} className={styles.menu__title}>
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div
+                  onClick={() => setIsVisible?.(false)}
+                  className={styles.menu__title}
+                >
                   <span className="_icon-arrow"></span>
                   <p>Назад</p>
                 </div>
                 <ul className={styles.menu__list}>
                   {menuListArr.map((item) => (
-                    <li onClick={() => setIsVisible?.(false)} key={item.link} className={styles.menu__item}>
+                    <li
+                      onClick={() => setIsVisible?.(false)}
+                      key={item.link}
+                      className={styles.menu__item}
+                    >
                       <Link to={item.link} className={styles.menu__link}>
                         {item.name}
                       </Link>
@@ -87,7 +98,10 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
                       066 141-66-62
                     </a>
                   </div>
-                  <button onClick={menuHandler} className={styles.burger__phones_btn}>
+                  <button
+                    onClick={menuHandler}
+                    className={styles.burger__phones_btn}
+                  >
                     <span>Замовити здвінок</span>
                   </button>
                 </div>
@@ -98,14 +112,16 @@ export const HeaderMenu: React.FC<IHeaderMenuProps> = ({ windowWidth, isVisible,
                       href="/"
                       className="social__link"
                       aria-label="Link to facebook page"
-                      target="_blanck">
+                      target="_blanck"
+                    >
                       <i className="_icon-fb"></i>
                     </a>
                     <a
                       href="https://www.instagram.com/clean_floor_technics/"
                       target="_blanck"
                       className="social__link"
-                      aria-label="Link to instagram page">
+                      aria-label="Link to instagram page"
+                    >
                       <i className="_icon-instagram"></i>
                     </a>
                   </div>

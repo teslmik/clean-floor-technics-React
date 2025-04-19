@@ -6,8 +6,8 @@ import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import NotFound from "./pages/NotFound";
 
-import "./scss/app.scss";
 import { PriceList } from "./pages/PriceList";
+import "./scss/app.scss";
 
 const FullItem = React.lazy(
   () => import(/* webpackChunkName: "FullItem" */ "./pages/FullItem"),
@@ -69,7 +69,14 @@ const App: React.FC = () => {
           </PrivateRoute>
         }
       />
-      <Route path={ROUTER_KEYS.ROOT} element={<MainLayout />}>
+      <Route
+        path={ROUTER_KEYS.ROOT}
+        element={
+          <Suspense fallback={<CircleLoader />}>
+            <MainLayout />
+          </Suspense>
+        }
+      >
         <Route path={ROUTER_KEYS.HOME} element={<Home />} />
         <Route
           path={ROUTER_KEYS.CATALOG}
@@ -144,7 +151,7 @@ const App: React.FC = () => {
           }
         />
         <Route
-          path={`${ROUTER_KEYS.PRODUCTS}/:category/:_id`}
+          path={`${ROUTER_KEYS.PRODUCTS}/:category/:slug`}
           element={
             <Suspense fallback={<CircleLoader />}>
               <FullItem />
@@ -164,7 +171,5 @@ const App: React.FC = () => {
     </Routes>
   );
 };
-
-console.log("dev push");
 
 export default App;

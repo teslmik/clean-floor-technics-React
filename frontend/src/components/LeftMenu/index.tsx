@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { menuListArr } from '../../utils';
-
-import styles from './LeftMenu.module.scss';
+import { menuListArr } from "@src/utils";
+import styles from "./LeftMenu.module.scss";
 
 interface ILeftMenuProps {
   id?: string;
@@ -19,13 +18,14 @@ export const LeftMenu: React.FC<ILeftMenuProps> = ({ id }) => {
           <li
             key={i}
             className={
-              pathname === '/' + item.link
+              pathname === "/" + item.link
                 ? `${styles.blog__item} ${styles.active}`
                 : pathname === `/${item.link}/${id}`
-                ? `${styles.blog__item} ${styles.active}`
-                : styles.blog__item
-            }>
-            <Link to={'/' + item.link} className={styles.blog__link}>
+                  ? `${styles.blog__item} ${styles.active}`
+                  : styles.blog__item
+            }
+          >
+            <Link to={"/" + item.link} className={styles.blog__link}>
               {item.name}
             </Link>
           </li>

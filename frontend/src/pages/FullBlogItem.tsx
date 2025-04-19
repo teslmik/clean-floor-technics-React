@@ -10,6 +10,7 @@ import { getPostBySlug } from "../redux/posts/query";
 import { IPostItem } from "../redux/posts/types";
 import { Status } from "../redux/products/types";
 import { formatDate, ibg } from "../utils";
+import { getYoutubeVideoId } from "../utils/getYoutubeVideoId";
 
 const FullBlogItem: React.FC = () => {
   const [item, setItem] = React.useState<IPostItem | null>(null);
@@ -90,7 +91,7 @@ const FullBlogItem: React.FC = () => {
                           <iframe
                             width="100%"
                             height="100%"
-                            src={item.videoLink}
+                            src={`https://www.youtube.com/embed/${getYoutubeVideoId(item.videoLink)}`}
                             title="Embedded Video"
                             referrerPolicy="strict-origin-when-cross-origin"
                             allowFullScreen

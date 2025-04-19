@@ -518,6 +518,29 @@
         margin-bottom: em(10.8);
       }
     }
+    a {
+      color: $greenColor;
+      @media (any-hover: hover) {
+        &:hover {
+          color: $greenLiteColor;
+        }
+      }
+    }
+  }
+
+  ul {
+    cursor: text;
+    text-align: justify;
+    line-height: 1.57143;
+    margin-bottom: rem(10);
+    list-style-type: disc !important;
+    padding-left: rem(24);
+    &:not(:last-child) {
+      margin-bottom: em(10.8);
+    }
+  }
+  li {
+    list-style-type: disc !important;
   }
 }
 
