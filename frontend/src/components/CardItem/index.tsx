@@ -20,7 +20,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
   price,
   category,
   discontinued,
-  installments = true,
+  installments,
   availability,
   slug,
 }) => {

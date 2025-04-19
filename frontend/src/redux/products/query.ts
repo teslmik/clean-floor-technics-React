@@ -41,6 +41,7 @@ export const fullProductFields = `
   label,
   availability,
   discontinued,
+  installments,
   "imageArr": sliderImages[].asset->url,
   "imageUrl": mainImage.asset->url
 `;
