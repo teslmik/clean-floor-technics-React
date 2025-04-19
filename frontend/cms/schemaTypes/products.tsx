@@ -1,8 +1,8 @@
 import { ImageIcon, ImagesIcon, TrolleyIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
-import { CategoriesEnum } from "../../src/types/categories.enum";
 import { categoryMap } from "../../src/constants/tabs-map";
+import { CategoriesEnum } from "../../src/types/categories.enum";
 import { PreviewImage } from "../components/PreviewImage";
 
 export default defineType({

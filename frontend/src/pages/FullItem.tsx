@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
+import { BlockContent } from "@src/types/types";
 import client from "../../cms/lib/sanitiClient";
 import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
 import SanityTextRenderer from "../components/SanityTextRenderer";
@@ -112,7 +113,9 @@ const FullItem: React.FC = () => {
                 Короткий опис товару
               </div>
               <div className="discription-fullitem__text">
-                <SanityTextRenderer content={product.description} />
+                <SanityTextRenderer
+                  content={product.description as BlockContent}
+                />
               </div>
             </div>
             <Link className="catalog-link" to="/price_list">
@@ -382,7 +385,9 @@ const FullItem: React.FC = () => {
               Короткий опис товару
             </div>
             <div className="discription-fullitem__text">
-              <SanityTextRenderer content={product.description} />
+              <SanityTextRenderer
+                content={product.description as BlockContent}
+              />
             </div>
           </div>
           <Link className="catalog-link" to="/price_list">
