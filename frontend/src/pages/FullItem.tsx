@@ -73,7 +73,7 @@ const FullItem: React.FC = () => {
           slug: productSlug?.current,
           count: 1,
         });
-      } catch (e: any) {
+      } catch (e: unknown) {
         alert("Товар не знайдено, спробуйте пізніше...");
         console.error(e);
         navigate("/catalog");

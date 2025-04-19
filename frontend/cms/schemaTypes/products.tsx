@@ -1,7 +1,7 @@
 import { ImageIcon, ImagesIcon, TrolleyIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 
-import { CategoriesEnum } from "../../src/@types/categories.enum";
+import { CategoriesEnum } from "../../src/types/categories.enum";
 import { categoryMap } from "../../src/constants/tabs-map";
 import { PreviewImage } from "../components/PreviewImage";
 
@@ -189,7 +189,7 @@ export default defineType({
       type: "reference",
       to: [{ type: "config" }],
       initialValue: { _ref: "config" },
-      readOnly: true,
+      // readOnly: true,
     }),
   ],
   fieldsets: [

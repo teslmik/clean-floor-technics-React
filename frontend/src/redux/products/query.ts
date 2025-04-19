@@ -1,4 +1,4 @@
-import { CategoriesEnum } from "../../@types/categories.enum";
+import { CategoriesEnum } from "../../types/categories.enum";
 
 const categoryCounts = Object.values(CategoriesEnum)
   .map((c) => `"${c}": count(*[_type == "products" && category == '${c}'])`)

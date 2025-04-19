@@ -1,4 +1,4 @@
-import { Post } from "../../@types/types";
+import { Post } from "../../types/types";
 import { Status } from "../products/types";
 
 export interface IPostItem extends Post {

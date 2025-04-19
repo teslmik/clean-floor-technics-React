@@ -1,4 +1,4 @@
-import { Products } from "../../@types/types";
+import { Products } from "../../types/types";
 
 export interface ISpecification {
   name: string;
