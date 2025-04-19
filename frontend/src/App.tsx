@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { CircleLoader, PrivateRoute, PublicRoute } from "./components";
+import { CircleLoader } from "./components";
 import { ROUTER_KEYS } from "./constants/app-keys";
 import MainLayout from "./layouts/MainLayout";
 import NotFound from "./pages/NotFound";
@@ -40,9 +40,9 @@ const PayAndDelivery = React.lazy(
 const Services = React.lazy(
   () => import(/* webpackChunkName: "Services" */ "./pages/Services"),
 );
-const Dashboard = React.lazy(
-  () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard"),
-);
+// const Dashboard = React.lazy(
+//   () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard"),
+// );
 const Auth = React.lazy(
   () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index"),
 );
@@ -53,7 +53,7 @@ const Home = React.lazy(
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route
+      {/* <Route
         path={ROUTER_KEYS.AUTH}
         element={
           <PublicRoute>
@@ -68,7 +68,7 @@ const App: React.FC = () => {
             <Dashboard />
           </PrivateRoute>
         }
-      />
+      /> */}
       <Route
         path={ROUTER_KEYS.ROOT}
         element={

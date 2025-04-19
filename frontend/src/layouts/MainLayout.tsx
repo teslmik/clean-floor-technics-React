@@ -76,12 +76,12 @@ const MainLayout: React.FC = () => {
   }, [currentPath]);
 
   React.useEffect(() => {
-    const euroRate = items.rates.find((rate) => rate.currency === "eu")?.value;
+    const euroRate = items.rate;
 
-    if (!rate || rate != euroRate) {
+    if (!rate || +rate != euroRate) {
       if (euroRate) localStorage.setItem("currentEuro", euroRate.toString());
     }
-  }, [items.rates, rate]);
+  }, [items.rate, rate]);
 
   React.useEffect(() => {
     isOpenCallback === true ||

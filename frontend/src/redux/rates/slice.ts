@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { editRate, fetchRates } from "./asyncActions";
+import { fetchRates } from "./asyncActions";
 import { IRatesSliceState, Status } from "./types";
 
 const initialState: IRatesSliceState = {
-  items: { rates: [], bankEuro: null },
+  items: { rate: null, bankRate: null },
   status: Status.IDLE,
 };
 
@@ -15,7 +15,7 @@ export const ratesSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchRates.pending, (state) => {
       state.status = Status.LOADING;
-      state.items = { rates: [], bankEuro: null };
+      state.items = { rate: null, bankRate: null };
     });
     builder.addCase(fetchRates.fulfilled, (state, action) => {
       state.items = action.payload;
@@ -23,20 +23,20 @@ export const ratesSlice = createSlice({
     });
     builder.addCase(fetchRates.rejected, (state) => {
       state.status = Status.ERROR;
-      state.items = { rates: [], bankEuro: null };
+      state.items = { rate: null, bankRate: null };
     });
-    builder.addCase(editRate.pending, (state) => {
-      state.status = Status.LOADING;
-      state.items.rates = [];
-    });
-    builder.addCase(editRate.fulfilled, (state, action) => {
-      state.items.rates = [action.payload];
-      state.status = Status.SUCCESS;
-    });
-    builder.addCase(editRate.rejected, (state) => {
-      state.status = Status.ERROR;
-      state.items.rates = [];
-    });
+    // builder.addCase(editRate.pending, (state) => {
+    //   state.status = Status.LOADING;
+    //   state.items.rates = [];
+    // });
+    // builder.addCase(editRate.fulfilled, (state, action) => {
+    //   state.items.rates = [action.payload];
+    //   state.status = Status.SUCCESS;
+    // });
+    // builder.addCase(editRate.rejected, (state) => {
+    //   state.status = Status.ERROR;
+    //   state.items.rates = [];
+    // });
   },
 });
 

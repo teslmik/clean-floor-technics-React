@@ -21,8 +21,8 @@ export enum Status {
 
 export interface IRatesSliceState {
   items: {
-    rates: IRatesItem[];
-    bankEuro: IBankRate | null;
+    rate: number | null;
+    bankRate: string | null;
   };
   status: Status;
 }
