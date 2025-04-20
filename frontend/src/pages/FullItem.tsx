@@ -52,6 +52,8 @@ const FullItem: React.FC = () => {
 
         if (!current) throw new Error("Product not found");
 
+        await client.patch(current._id).inc({ rating: 1 }).commit();
+
         setProduct(current);
 
         const {
