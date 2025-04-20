@@ -6,18 +6,34 @@ import client from "@cms/lib/sanitiClient";
 import { BlockContent } from "@src/types/types";
 
 type Children = { children?: React.ReactNode };
-type Value = { value?: any; children: React.ReactNode };
+type Value = {
+  value?: {
+    href?: string;
+    reference?: { _ref: string };
+  };
+  children: React.ReactNode;
+};
+
+type ImageValue = {
+  value: {
+    asset?: { _ref: string };
+    alt?: string;
+  };
+};
 
 const Strong = forwardRef<HTMLElement, Children>(({ children }, ref) => (
   <strong ref={ref}>{children}</strong>
 ));
+Strong.displayName = "Strong";
+
 const Link = forwardRef<HTMLAnchorElement, Value>(
   ({ value, children }, ref) => {
+    const href = value?.href || "#";
     const isAbsolute =
-      value?.href?.startsWith("http://") || value?.href?.startsWith("https://");
+      href.startsWith("http://") || href.startsWith("https://");
     return (
       <a
-        href={value?.href}
+        href={href}
         target={isAbsolute ? "_blank" : "_self"}
         rel={isAbsolute ? "noopener noreferrer" : undefined}
         ref={ref}
@@ -27,6 +43,8 @@ const Link = forwardRef<HTMLAnchorElement, Value>(
     );
   },
 );
+Link.displayName = "Link";
+
 const InternalLink = forwardRef<HTMLAnchorElement, Value>(
   ({ value, children }, ref) => {
     const [href, setHref] = React.useState<string>("/");
@@ -42,7 +60,10 @@ const InternalLink = forwardRef<HTMLAnchorElement, Value>(
           setHref(`/products/${data.category}/${data.slug?.current}`);
         }
       };
-      fetchLinkData(value?.reference?._ref);
+      const ref = value?.reference?._ref;
+      if (ref) {
+        fetchLinkData(ref);
+      }
     }, [value?.reference?._ref]);
     return (
       <a href={href} ref={ref}>
@@ -51,22 +72,32 @@ const InternalLink = forwardRef<HTMLAnchorElement, Value>(
     );
   },
 );
+InternalLink.displayName = "InternalLink";
+
 const Phone = forwardRef<HTMLAnchorElement, Value>(
   ({ value, children }, ref) => (
-    <a ref={ref} href={value?.href}>
+    <a ref={ref} href={value?.href || "#"}>
       {children}
     </a>
   ),
 );
+Phone.displayName = "Phone";
+
 const BulletList = forwardRef<HTMLUListElement, Children>(
   ({ children }, ref) => <ul ref={ref}>{children}</ul>,
 );
+BulletList.displayName = "BulletList";
+
 const NormalBlock = forwardRef<HTMLParagraphElement, Children>(
   ({ children }, ref) => <p ref={ref}>{children}</p>,
 );
+NormalBlock.displayName = "NormalBlock";
+
 const QuoteBlock = forwardRef<HTMLQuoteElement, Children>(
   ({ children }, ref) => <blockquote ref={ref}>{children}</blockquote>,
 );
+QuoteBlock.displayName = "QuoteBlock";
+
 const Heading = forwardRef<
   HTMLElement,
   { children: React.ReactNode; level: number }
@@ -74,23 +105,24 @@ const Heading = forwardRef<
   const Tag = `h${level}` as keyof JSX.IntrinsicElements;
   return React.createElement(Tag, { ref }, children);
 });
-const CustomImage = forwardRef<HTMLDivElement, { value: any }>(
-  ({ value }, ref) => {
-    if (!value?.asset?._ref) return null;
-    const builder = imageUrlBuilder(client);
-    const imageUrl = builder.image(value.asset).width(300).height(200).url();
-    return (
-      <div ref={ref} style={{ maxWidth: "100%", textAlign: "center" }}>
-        <img
-          src={imageUrl}
-          alt={value.alt || "Sanity Image"}
-          width={600}
-          height={400}
-        />
-      </div>
-    );
-  },
-);
+Heading.displayName = "Heading";
+
+const CustomImage = forwardRef<HTMLDivElement, ImageValue>(({ value }, ref) => {
+  if (!value?.asset?._ref) return null;
+  const builder = imageUrlBuilder(client);
+  const imageUrl = builder.image(value.asset).width(300).height(200).url();
+  return (
+    <div ref={ref} style={{ maxWidth: "100%", textAlign: "center" }}>
+      <img
+        src={imageUrl}
+        alt={value.alt || "Sanity Image"}
+        width={600}
+        height={400}
+      />
+    </div>
+  );
+});
+CustomImage.displayName = "CustomImage";
 
 const SanityTextRenderer: React.FC<{ content: BlockContent | undefined }> = ({
   content,

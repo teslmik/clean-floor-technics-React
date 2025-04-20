@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import client from "../../cms/lib/sanitiClient";
+import client from "@cms/lib/sanitiClient";
 import { Breadcrumbs, ErrorInfo, LeftMenu } from "../components";
 import SanityTextRenderer from "../components/SanityTextRenderer";
 import { useGlobalContext } from "../hook/useGlobalContext";
@@ -26,7 +26,7 @@ const FullBlogItem: React.FC = () => {
         if (!post) throw new Error(`Post by slug: ${slug} not found`);
         setItem(post);
         setStatus(Status.SUCCESS);
-      } catch (error: any) {
+      } catch (error: unknown) {
         setStatus(Status.ERROR);
         console.error({ error });
       }

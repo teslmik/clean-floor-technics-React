@@ -31,16 +31,38 @@ export const fetchSanityProducts = createAsyncThunk<
   const { filter } = thunkApi.getState();
   const orderField = filter.sortState.sortProperty;
   const orderDirection = orderField === "rating" ? "desc" : "asc";
-  const filterQuery = filter.filterState.length
-    ? `&& category in [${filter.filterState.map((cat) => `"${cat}"`).join(",")}]`
+  const selectedFilters = filter.filterState;
+
+  const categories = selectedFilters.filter(
+    (f) => !["availability", "promo", "popular", "new"].includes(f),
+  );
+  const categoryQuery = categories.length
+    ? `category in [${categories.map((c) => `"${c}"`).join(",")}]`
     : "";
+
+  const availabilityQuery = selectedFilters.includes("availability")
+    ? `availability == true`
+    : "";
+
+  const labelFlags = ["promo", "popular", "new"]
+    .filter((l) => selectedFilters.includes(l))
+    .map((l) => `label.${l} == true`);
+
+  const labelsQuery = labelFlags.join(" && ");
+
+  const combinedQuery = [categoryQuery, availabilityQuery, labelsQuery]
+    .filter(Boolean)
+    .map((q) => `(${q})`)
+    .join(" && ");
+
+  const whereClause = combinedQuery ? `&& ${combinedQuery}` : "";
 
   const pageSize = 10;
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
 
   return await client.fetch(`{
-    "products": *[_type == "products" ${filterQuery}] | order(${orderField} ${orderDirection})[${start}...${end}] {
+    "products": *[_type == "products" ${whereClause}] | order(${orderField} ${orderDirection})[${start}...${end}] {
       ${fullProductFields}
     },
     ${productsCategoryCount}

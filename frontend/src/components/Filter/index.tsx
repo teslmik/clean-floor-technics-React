@@ -7,6 +7,7 @@ import { filterSelector } from "@src/redux/filter/selectors";
 import { setFilter } from "@src/redux/filter/slice";
 import { fetchSanityProducts } from "@src/redux/products/asyncActions";
 import { productsSelector } from "@src/redux/products/selectors";
+import { resetProducts } from "@src/redux/products/slice";
 import { useAppDispatch } from "@src/redux/store";
 import {
   bodyLock,
@@ -34,11 +35,13 @@ export const Filter: React.FC = () => {
   const handleToggle = (value: string) => {
     const filter = toggleFilter(value, filterState);
     dispatch(setFilter(filter));
+    dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
   };
 
   const clearFilter = () => {
     dispatch(setFilter([]));
+    dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
   };
 
@@ -70,6 +73,8 @@ export const Filter: React.FC = () => {
       <div
         className={styles.filter__title}
         onClick={() => setIsVisible(!isVisible)}
+        role="button"
+        tabIndex={0}
       >
         Фільтр<i className="_icon-filter"></i>
       </div>
@@ -94,13 +99,20 @@ export const Filter: React.FC = () => {
               <div
                 className={styles.filter__header}
                 onClick={() => setIsVisible(!isVisible)}
+                role="button"
+                tabIndex={0}
               >
                 <span className="_icon-arrow"></span>
                 <p>Фільтр</p>
               </div>
               {filterState.length > 0 && (
                 <div className={styles.filter__item}>
-                  <span onClick={clearFilter} className={styles.filter__clear}>
+                  <span
+                    onClick={clearFilter}
+                    className={styles.filter__clear}
+                    role="button"
+                    tabIndex={0}
+                  >
                     Очистити фільтр
                   </span>
                 </div>

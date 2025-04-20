@@ -1,13 +1,13 @@
-import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import client from "@cms/lib/sanitiClient";
 import { useDebounce } from "@src/hook/debounce";
 import { useInput } from "@src/hook/input";
 import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { fullProductFields } from "@src/redux/products/query";
 import { ISanityProduct } from "@src/redux/products/types";
 import { bodyLock, bodyUnlock, euroToHrivna, ibg } from "@src/utils";
-
 import styles from "./Search.module.scss";
 
 export const Search: React.FC = () => {
@@ -17,23 +17,21 @@ export const Search: React.FC = () => {
   const [dropdown, setDropdown] = React.useState(false);
   const [items, setItems] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(false);
-  const { windowWidth, isWebpImg } = useGlobalContext();
+  const { windowWidth } = useGlobalContext();
   const debounced = useDebounce(value, 250);
 
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const searchProduct = React.useCallback(async () => {
-    const { data } = await axios.get(
-      `${import.meta.env.VITE_APP_FETCH_URL}/products`,
-      {
-        params: { title: debounced },
-      },
+    const products = await client.fetch(
+      `*[_type == "products" && title match $pattern] {${fullProductFields}}`,
+      { pattern: `*${debounced}*` },
     );
-    setItems(data.products);
+    setItems(products);
   }, [debounced]);
 
   const onClickSearchItem = (item: ISanityProduct) => {
-    navigate(`/products/${item.category}/${item._id}`);
+    navigate(`/products/${item.category}/${item.slug?.current}`);
     setIsVisible(false);
     setValue("");
   };
@@ -49,7 +47,9 @@ export const Search: React.FC = () => {
 
   const onClickEsc = React.useCallback(
     (event: KeyboardEvent) => {
-      event.key === "Esc" && onClickClose();
+      if (event.key === "Esc") {
+        onClickClose();
+      }
     },
     [onClickClose],
   );
@@ -79,7 +79,11 @@ export const Search: React.FC = () => {
   }, [debounced, value, dropdown, searchProduct]);
 
   React.useEffect(() => {
-    isVisible === true ? bodyLock() : bodyUnlock();
+    if (isVisible === true) {
+      bodyLock();
+    } else {
+      bodyUnlock();
+    }
   }, [isVisible]);
 
   return (
@@ -94,7 +98,9 @@ export const Search: React.FC = () => {
         <div
           className={`_icon-search ${styles.search__label}`}
           onClick={onClickVisible}
-        ></div>
+          role="button"
+          tabIndex={0}
+        />
         <input
           id="inputMain"
           ref={inputRef}
@@ -108,13 +114,17 @@ export const Search: React.FC = () => {
           <div
             className={`${styles.close} _icon-close`}
             onClick={onClickClose}
-          ></div>
+            role="button"
+            tabIndex={0}
+          />
         ) : (
           value && (
             <div
               className={`${styles.close} _icon-close`}
               onClick={onClickClose}
-            ></div>
+              role="button"
+              tabIndex={0}
+            />
           )
         )}
       </div>
@@ -125,12 +135,7 @@ export const Search: React.FC = () => {
               {items.map((item: ISanityProduct) => (
                 <li key={item._id} onClick={() => onClickSearchItem(item)}>
                   <div className={`${styles.dropdown__img} ibg`}>
-                    <img
-                      src={`/assets/img/products/${item.imageUrl}${
-                        isWebpImg ? ".webp" : ".png"
-                      }`}
-                      alt={item.title}
-                    />
+                    <img src={item.imageUrl} alt={item.title} />
                   </div>
                   <div className={styles.dropdown__content}>
                     <h3 className={styles.title}>{item.title}</h3>
