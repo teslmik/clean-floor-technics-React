@@ -25,16 +25,6 @@ export const Filter: React.FC = () => {
   const { windowWidth } = useGlobalContext();
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const promoCount = (value: string) => {
-    let count = 0;
-    items.products.map((obj: any) =>
-      obj.label[value] || obj.category === value || obj?.availability === true
-        ? count++
-        : count,
-    );
-    return count;
-  };
-
   const onClickIsVisible = () => {
     if (windowWidth < 882) {
       setIsVisible(false);
@@ -44,16 +34,20 @@ export const Filter: React.FC = () => {
   const handleToggle = (value: string) => {
     const filter = toggleFilter(value, filterState);
     dispatch(setFilter(filter));
-    dispatch(fetchSanityProducts());
+    dispatch(fetchSanityProducts({ page: 1 }));
   };
 
   const clearFilter = () => {
     dispatch(setFilter([]));
-    dispatch(fetchSanityProducts());
+    dispatch(fetchSanityProducts({ page: 1 }));
   };
 
   React.useEffect(() => {
-    isVisible === true && windowWidth < 882 ? bodyLock() : bodyUnlock();
+    if (isVisible && windowWidth < 882) {
+      bodyLock();
+    } else {
+      bodyUnlock();
+    }
   }, [isVisible, windowWidth]);
 
   React.useEffect(() => {
