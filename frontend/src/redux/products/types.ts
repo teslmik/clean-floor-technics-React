@@ -41,4 +41,6 @@ export enum Status {
 export interface IProductSliceState {
   items: { counts: { [key: string]: number }; products: ISanityProduct[] };
   status: Status;
+  page: number;
+  hasMore: boolean;
 }

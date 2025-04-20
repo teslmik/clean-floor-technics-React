@@ -25,18 +25,6 @@ export const ratesSlice = createSlice({
       state.status = Status.ERROR;
       state.items = { rate: null, bankRate: null };
     });
-    // builder.addCase(editRate.pending, (state) => {
-    //   state.status = Status.LOADING;
-    //   state.items.rates = [];
-    // });
-    // builder.addCase(editRate.fulfilled, (state, action) => {
-    //   state.items.rates = [action.payload];
-    //   state.status = Status.SUCCESS;
-    // });
-    // builder.addCase(editRate.rejected, (state) => {
-    //   state.status = Status.ERROR;
-    //   state.items.rates = [];
-    // });
   },
 });
 

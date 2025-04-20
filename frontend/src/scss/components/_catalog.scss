@@ -1,5 +1,5 @@
-@import '../lib/variables';
-@import '../lib/functions';
+@import "../lib/variables";
+@import "../lib/functions";
 
 .catalog {
   display: grid;
@@ -37,12 +37,18 @@
     }
   }
 
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
   // .catalog__body
 
   &__body {
     display: flex;
     gap: 14px;
-    @include adaptiveValue('margin-bottom', 40, 20, 1);
+    // @include adaptiveValue("margin-bottom", 40, 20, 1);
   }
 
   // .catalog__items

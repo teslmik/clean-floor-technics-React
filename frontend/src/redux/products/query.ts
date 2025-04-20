@@ -47,7 +47,7 @@ export const fullProductFields = `
 `;
 
 export const getPromoProducts = `
-  *[_type == "products" && (availability == true || label.new == true || label.popular == true)] {
+  *[_type == "products" && (availability == true || label.new == true || label.popular == true)] | order(rating desc) {
     ${fullProductFields}
   }
 `;
