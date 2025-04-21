@@ -40,6 +40,7 @@ const Catalog: React.FC = () => {
 
   React.useEffect(() => {
     window.scroll(0, 0);
+    dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
 
     return () => {
