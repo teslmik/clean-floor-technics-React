@@ -46,6 +46,11 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type InstagramPost = {
+  _type: "instagramPost";
+  url?: string;
+};
+
 export type MainSliderImage = {
   _type: "mainSliderImage";
   image?: {
@@ -222,6 +227,9 @@ export type BlockContent = Array<
       _type: "image";
       _key: string;
     }
+  | ({
+      _key: string;
+    } & InstagramPost)
 >;
 
 export type Post = {
@@ -350,6 +358,7 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
+  | InstagramPost
   | MainSliderImage
   | ProductDescription
   | Products

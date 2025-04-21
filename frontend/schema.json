@@ -190,6 +190,29 @@
     }
   },
   {
+    "name": "instagramPost",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "instagramPost"
+          }
+        },
+        "url": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "mainSliderImage",
     "type": "type",
     "value": {
@@ -1281,6 +1304,21 @@
                   }
                 }
               }
+            }
+          },
+          {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "instagramPost"
             }
           }
         ]
