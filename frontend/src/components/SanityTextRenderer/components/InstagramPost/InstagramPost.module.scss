@@ -1,5 +1,7 @@
+@use "../../../../scss/lib/functions" as *;
+
 .instagram {
-  max-width: 402px;
+  max-width: 401px;
   background: #fff;
   border-radius: 12px;
   border: 1px solid #dbdbdb;
@@ -7,4 +9,19 @@
   overflow: hidden;
   min-height: 710px;
   height: 710px;
+
+  @media (max-width: $mobileSmall) {
+    max-width: 342px;
+    min-height: 640px;
+    height: 640px;
+  }
+
+  &__frame {
+    width: 400px;
+    height: -webkit-fill-available;
+
+    @media (max-width: $mobileSmall) {
+      width: 343px;
+    }
+  }
 }

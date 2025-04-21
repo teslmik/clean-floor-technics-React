@@ -129,6 +129,13 @@
         color: inherit;
       }
     }
+
+    @media (max-width: $mobile) {
+      p,
+      ul {
+        padding-left: 0;
+      }
+    }
   }
 
   .blog-img {

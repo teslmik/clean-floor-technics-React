@@ -19,10 +19,9 @@ export const InstagramPost: React.FC<Props> = ({ value }) => {
     <div className={styles.instagram}>
       <iframe
         src={`https://www.instagram.com/p/${postId}/embed`}
-        width="400"
         allow="encrypted-media"
         title="Instagram post"
-        style={{ height: "-webkit-fill-available" }}
+        className={styles.instagram__frame}
       />
     </div>
   );
