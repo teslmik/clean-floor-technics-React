@@ -1,5 +1,6 @@
 import blockContent from "./blockContent";
 import config from "./config";
+import instagramPost from "./instagramPost";
 import mainSliderImage from "./mainSliderImage";
 import post from "./post";
 import productDescription from "./productDescription";
@@ -12,4 +13,5 @@ export const schemaTypes = [
   productDescription,
   config,
   mainSliderImage,
+  instagramPost,
 ];

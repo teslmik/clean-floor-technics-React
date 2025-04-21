@@ -1,5 +1,5 @@
-import { defineType, defineArrayMember } from "sanity";
-import { MobileDeviceIcon, EnvelopeIcon } from "@sanity/icons";
+import { EnvelopeIcon, ImageIcon, MobileDeviceIcon } from "@sanity/icons";
+import { defineArrayMember, defineType } from "sanity";
 
 export default defineType({
   title: "Block Content",
@@ -49,8 +49,10 @@ export default defineType({
                 hidden: ({ parent }) =>
                   parent?.type && parent?.type === "absolute",
                 validation: (Rule) =>
-                  Rule.custom((value: string, context: any) => {
-                    if (context?.parent?.type === "relative") {
+                  Rule.custom((value: string, context: unknown) => {
+                    const parent = (context as { parent?: { type?: string } })
+                      ?.parent;
+                    if (parent?.type === "relative") {
                       if (!value) return "Relative URL is required";
                       if (!value.startsWith("/"))
                         return "Relative URL must start with /";
@@ -65,8 +67,10 @@ export default defineType({
                 hidden: ({ parent }) =>
                   parent?.type && parent?.type === "relative",
                 validation: (Rule) =>
-                  Rule.custom((value: string, context: any) => {
-                    if (context?.parent?.type === "absolute" && !value) {
+                  Rule.custom((value: string, context: unknown) => {
+                    const parent = (context as { parent?: { type?: string } })
+                      ?.parent;
+                    if (parent?.type === "absolute" && !value) {
                       return "Absolute URL is required";
                     }
                     return true;
@@ -109,6 +113,10 @@ export default defineType({
     defineArrayMember({
       type: "image",
       options: { hotspot: true },
+      icon: ImageIcon,
+    }),
+    defineArrayMember({
+      type: "instagramPost",
     }),
   ],
 });

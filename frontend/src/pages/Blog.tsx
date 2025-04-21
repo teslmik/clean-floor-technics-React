@@ -68,6 +68,12 @@ const Blog: React.FC = () => {
                               Your browser does not support the video tag.
                             </video>
                           )}
+                          {!obj.imageUrl && !obj.videoLink && !obj.videoUrl && (
+                            <img
+                              src="/assets/img/logo/logo_insta.png"
+                              alt="blog_image"
+                            />
+                          )}
                         </Link>
                         <div className="blog-item__date">
                           {formatDate(obj.publishedAt)}

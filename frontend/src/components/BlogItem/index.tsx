@@ -53,6 +53,11 @@ export const BlogItem: React.FC<IBlogItemProps> = ({
           )}
         </div>
       )}
+      {!isMedia && (
+        <div className="blog-item__img ibg">
+          <img src="/assets/img/logo/logo_insta.png" alt="blog_image" />
+        </div>
+      )}
       <div className="blog-item__content">
         <div className="blog-item__date">{date}</div>
         <div className="blog-item__text">{title}</div>
