@@ -82,14 +82,12 @@ const MainLayout: React.FC = () => {
       if (euroRate) localStorage.setItem("currentEuro", euroRate.toString());
     }
   }, [items.rate, rate]);
-
   React.useEffect(() => {
-    isOpenCallback === true ||
-    isOpenCart === true ||
-    isOpenMap === true ||
-    requestDone.isOpen === true
-      ? bodyLock()
-      : bodyUnlock();
+    if (isOpenCallback || isOpenCart || isOpenMap || requestDone.isOpen) {
+      bodyLock();
+    } else {
+      bodyUnlock();
+    }
     ibg();
   }, [isOpenCallback, isOpenCart, isOpenMap, requestDone]);
 

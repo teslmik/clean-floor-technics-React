@@ -1,9 +1,10 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useAppDispatch } from "@src/redux/store";
 import { CartItem, IDataMessage } from "../components";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
@@ -11,12 +12,11 @@ import { cartSelector } from "../redux/cart/selectors";
 import { clearCart } from "../redux/cart/slice";
 import { euroToHrivna, ibg } from "../utils";
 
-const URL = `https://api.telegram.org/bot${
-  import.meta.env.VITE_APP_TOKEN_TG
-}/sendMessage`;
+const token = import.meta.env.VITE_APP_TOKEN_TG;
+const URL = `https://api.telegram.org/bot${token}/sendMessage`;
 
 const Cart: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
   const { setRequestDone } = useGlobalContext();
   const navigate = useNavigate();

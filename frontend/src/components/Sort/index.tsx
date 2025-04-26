@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { filterSelector } from "@src/redux/filter/selectors";
 import { setSort } from "@src/redux/filter/slice";
 import { SortPropertyEnum } from "@src/redux/filter/types";
+import { fetchSanityProducts } from "@src/redux/products/asyncActions";
+import { resetProducts } from "@src/redux/products/slice";
+import { useAppDispatch } from "@src/redux/store";
 import { bodyLock, bodyUnlock, mobileHeight } from "@src/utils";
-
 import styles from "./Sort.module.scss";
 
 interface ISortList {
@@ -21,20 +23,26 @@ const sortList: ISortList[] = [
 ];
 
 export const Sort: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { sortState } = useSelector(filterSelector);
+
+  const handleSort = (obj: ISortList) => {
+    dispatch(setSort(obj));
+    dispatch(resetProducts());
+    dispatch(fetchSanityProducts({ page: 1 }));
+  };
 
   return (
     <div className={styles.sort}>
       <p>Сортування:</p>
       <ul className={styles.sort__btn}>
-        {sortList.map((obj, i) => (
+        {sortList.map((obj) => (
           <li
-            onClick={() => dispatch(setSort(obj))}
+            onClick={() => handleSort(obj)}
             className={
               sortState.sortProperty === obj.sortProperty ? styles.active : ""
             }
-            key={i}
+            key={obj.name}
           >
             {obj.name}
           </li>
@@ -45,12 +53,14 @@ export const Sort: React.FC = () => {
 };
 
 export const SortMobile = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { sortState } = useSelector(filterSelector);
   const [isVisible, setIsVisible] = React.useState(false);
 
   const onClickSort = (obj: ISortList) => {
     dispatch(setSort(obj));
+    dispatch(resetProducts());
+    dispatch(fetchSanityProducts({ page: 1 }));
     setIsVisible(false);
   };
 
@@ -69,13 +79,22 @@ export const SortMobile = () => {
     const bodyStyle: CSSStyleDeclaration = document.body.style;
 
     if (bodyStyle) {
-      isVisible === true ? bodyLock() : bodyUnlock();
+      if (isVisible) {
+        bodyLock();
+      } else {
+        bodyUnlock();
+      }
     }
   }, [isVisible]);
 
   return (
     <>
-      <div className={styles.sort__title} onClick={() => setIsVisible(true)}>
+      <div
+        className={styles.sort__title}
+        onClick={() => setIsVisible(true)}
+        role="button"
+        tabIndex={0}
+      >
         <i className="_icon-sort"></i>
         <p>{sortState.name}</p>
       </div>
@@ -99,15 +118,15 @@ export const SortMobile = () => {
             >
               <p>Сортування</p>
               <ul className={styles.sort__btn}>
-                {sortList.map((obj, i) => (
+                {sortList.map((obj) => (
                   <li
+                    key={obj.name}
                     onClick={() => onClickSort(obj)}
                     className={
                       sortState.sortProperty === obj.sortProperty
                         ? styles.active
                         : ""
                     }
-                    key={i}
                   >
                     {obj.name}
                   </li>

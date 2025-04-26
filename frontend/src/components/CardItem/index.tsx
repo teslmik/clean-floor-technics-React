@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Tooltip } from "@mui/material";
@@ -8,6 +8,7 @@ import { cartSelector } from "@src/redux/cart/selectors";
 import { addToCart } from "@src/redux/cart/slice";
 import { ICartItem } from "@src/redux/cart/types";
 import { ISanityProduct } from "@src/redux/products/types";
+import { useAppDispatch } from "@src/redux/store";
 import { euroToHrivna, ibg } from "@src/utils";
 
 export const CardItem: React.FC<ISanityProduct> = ({
@@ -24,16 +25,14 @@ export const CardItem: React.FC<ISanityProduct> = ({
   availability,
   slug,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { items } = useSelector(cartSelector);
   const [isOnCart, setIsOnCart] = React.useState(false);
   const { setIsOpenCart } = useGlobalContext();
 
   React.useEffect(() => {
-    items.find((obj) => obj._id === _id)
-      ? setIsOnCart(true)
-      : setIsOnCart(false);
-  }, [_id, isOnCart, items]);
+    setIsOnCart(items.some((obj) => obj._id === _id));
+  }, [_id, items]);
 
   React.useEffect(() => {
     ibg();

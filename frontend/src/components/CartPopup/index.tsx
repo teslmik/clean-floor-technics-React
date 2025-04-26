@@ -1,16 +1,17 @@
 import { motion, MotionProps } from "framer-motion";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useGlobalContext } from "@src/hook/useGlobalContext";
 import { cartSelector } from "@src/redux/cart/selectors";
 import { decrement, increment, removeFromCart } from "@src/redux/cart/slice";
+import { useAppDispatch } from "@src/redux/store";
 import { dropIn, euroToHrivna, ibg } from "@src/utils";
 import styles from "./CartPopup.module.scss";
 
 export const CartPopup: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { items, totalPrice } = useSelector(cartSelector);
   const { setIsOpenCart, windowWidth } = useGlobalContext();
 
@@ -24,7 +25,9 @@ export const CartPopup: React.FC = () => {
   const onClickRemoveItem = (id: string) => {
     if (window.confirm("Видалити товар з кошика?")) {
       dispatch(removeFromCart(id));
-      items.length === 1 && setIsOpenCart(false);
+      if (items.length === 1) {
+        setIsOpenCart(false);
+      }
     }
   };
 

@@ -15,7 +15,6 @@ import {
 } from "../components";
 import { useGlobalContext } from "../hook/useGlobalContext";
 import Head from "../layouts/Head";
-import { filterSelector } from "../redux/filter/selectors";
 import { setFilter } from "../redux/filter/slice";
 import { fetchSanityProducts } from "../redux/products/asyncActions";
 import { productsSelector } from "../redux/products/selectors";
@@ -24,7 +23,6 @@ import { useAppDispatch } from "../redux/store";
 
 const Catalog: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { sortState } = useSelector(filterSelector);
   const { items, status, page, hasMore } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();
   const { pathname } = useLocation();
@@ -47,7 +45,7 @@ const Catalog: React.FC = () => {
       dispatch(setFilter([]));
       dispatch(resetProducts());
     };
-  }, [sortState]);
+  }, []);
 
   React.useEffect(() => {
     if (

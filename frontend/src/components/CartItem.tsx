@@ -1,7 +1,7 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { useAppDispatch } from "@src/redux/store";
 import { decrement, increment, removeFromCart } from "../redux/cart/slice";
 import { euroToHrivna } from "../utils";
 
@@ -26,7 +26,7 @@ export const CartItem: React.FC<ICartItemProps> = ({
   category,
   slug,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onClickRemoveItem = () => {
     if (window.confirm("Видалити товар з кошика?")) {

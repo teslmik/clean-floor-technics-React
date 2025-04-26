@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { setFilter } from "@src/redux/filter/slice";
 import { categoriesList } from "@src/utils";
 import styles from "./Breadcrumbs.module.scss";
+import { useAppDispatch } from "@src/redux/store";
 
 interface IBreadcrumbsProps {
   title?: string;
@@ -19,7 +19,7 @@ export const Breadcrumbs: React.FC<IBreadcrumbsProps> = ({
   category,
   endItem,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <nav className={styles.breadcrumbs}>
