@@ -52,7 +52,7 @@ const FullItem: React.FC = () => {
 
         if (!current) throw new Error("Product not found");
 
-        await client.patch(current._id).inc({ rating: 1 }).commit();
+        client.patch(current._id).inc({ rating: 1 }).commit();
 
         setProduct(current);
 
@@ -64,6 +64,7 @@ const FullItem: React.FC = () => {
           oldPrice,
           price,
           slug: productSlug,
+          installments,
         } = current;
 
         setCartItem({
@@ -75,6 +76,7 @@ const FullItem: React.FC = () => {
           price,
           slug: productSlug?.current,
           count: 1,
+          installments,
         });
       } catch (e: unknown) {
         alert("Товар не знайдено, спробуйте пізніше...");

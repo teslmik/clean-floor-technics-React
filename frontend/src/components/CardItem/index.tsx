@@ -48,6 +48,7 @@ export const CardItem: React.FC<ISanityProduct> = ({
       price,
       slug: slug?.current,
       count: 1,
+      installments,
     };
     dispatch(addToCart(item));
     setIsOpenCart(true);

@@ -132,28 +132,30 @@ const Cart: React.FC = () => {
                 />
                 {errors?.phone && <p>{errors?.phone?.message}</p>}
               </label>
-              <label htmlFor="installments" className="installments">
-                <input
-                  id="installments"
-                  type="checkbox"
-                  {...register("installments")}
-                />
-                <span>
-                  Оформити у{" "}
-                  <img
-                    width={30}
-                    src="/assets/img/installments/2.png"
-                    alt="credit-2"
-                  />{" "}
-                  &quot;Оплату частинами&quot; чи{" "}
-                  <img
-                    width={30}
-                    src="/assets/img/installments/1.png"
-                    alt="credit-1"
-                  />{" "}
-                  &quot;Миттєву розстрочку&quot; від Приватбанку
-                </span>
-              </label>
+              {items.some((p) => p.installments) && (
+                <label htmlFor="installments" className="installments">
+                  <input
+                    id="installments"
+                    type="checkbox"
+                    {...register("installments")}
+                  />
+                  <span>
+                    Оформити у{" "}
+                    <img
+                      width={30}
+                      src="/assets/img/installments/2.png"
+                      alt="credit-2"
+                    />{" "}
+                    &quot;Оплату частинами&quot; чи{" "}
+                    <img
+                      width={30}
+                      src="/assets/img/installments/1.png"
+                      alt="credit-1"
+                    />{" "}
+                    &quot;Миттєву розстрочку&quot; від Приватбанку
+                  </span>
+                </label>
+              )}
               <div className="btn-block">
                 <button className="btn" type="submit">
                   <span>Оформити замовлення</span>

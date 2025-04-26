@@ -49,6 +49,7 @@ body {
   flex-direction: column;
 }
 .main {
+  position: relative;
   height: 100%;
   flex: 1 1 auto;
   @include fn.adaptiveValue("padding-bottom", 40, 32, 1);

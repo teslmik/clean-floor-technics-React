@@ -7,6 +7,7 @@ export interface ICartItem {
   count: number;
   slug?: string;
   imageUrl: string;
+  installments?: boolean;
 }
 
 export interface ICartSliseState {
