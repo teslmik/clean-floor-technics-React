@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "serviceworker": true
+  },
+  "globals": {
+    "caches": "readonly",
+    "self": "readonly",
+    "fetch": "readonly"
+  }
+}
