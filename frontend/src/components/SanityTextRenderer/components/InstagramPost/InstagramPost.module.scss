@@ -17,11 +17,11 @@
   }
 
   &__frame {
-    width: 400px;
+    width: 414px;
     height: -webkit-fill-available;
 
     @media (max-width: $mobileSmall) {
-      width: 343px;
+      width: 355px;
     }
   }
 }
