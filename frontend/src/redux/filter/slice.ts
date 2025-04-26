@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getUrlParams } from "@src/utils/urlParams";
 
-import { IFilterSliceState, SortPropertyEnum, SortTypeState } from "./types";
+import { IFilterSliceState, SortTypeState } from "./types";
+
+const { filters, sortState } = getUrlParams();
 
 const initialState: IFilterSliceState = {
-  filterState: [],
-  sortState: { name: "по популярності", sortProperty: SortPropertyEnum.RATING },
+  filterState: filters,
+  sortState,
 };
 
 export const filterSlice = createSlice({

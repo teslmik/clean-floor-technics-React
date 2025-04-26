@@ -17,12 +17,13 @@ import {
   mobileHeight,
   toggleFilter,
 } from "@src/utils";
+import { updateUrlParams } from "@src/utils/urlParams";
 import styles from "./Filter.module.scss";
 
 export const Filter: React.FC = () => {
   const dispatch = useAppDispatch();
   const { items, status } = useSelector(productsSelector);
-  const { filterState } = useSelector(filterSelector);
+  const { filterState, sortState } = useSelector(filterSelector);
   const { windowWidth } = useGlobalContext();
   const [isVisible, setIsVisible] = React.useState(false);
 
@@ -37,12 +38,14 @@ export const Filter: React.FC = () => {
     dispatch(setFilter(filter));
     dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
+    updateUrlParams(filter, sortState);
   };
 
   const clearFilter = () => {
     dispatch(setFilter([]));
     dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
+    updateUrlParams([], sortState);
   };
 
   React.useEffect(() => {

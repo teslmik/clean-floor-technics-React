@@ -2,34 +2,26 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 
+import { sortList } from "@src/constants/sort-list";
 import { filterSelector } from "@src/redux/filter/selectors";
 import { setSort } from "@src/redux/filter/slice";
-import { SortPropertyEnum } from "@src/redux/filter/types";
+import { SortTypeState } from "@src/redux/filter/types";
 import { fetchSanityProducts } from "@src/redux/products/asyncActions";
 import { resetProducts } from "@src/redux/products/slice";
 import { useAppDispatch } from "@src/redux/store";
 import { bodyLock, bodyUnlock, mobileHeight } from "@src/utils";
+import { updateUrlParams } from "@src/utils/urlParams";
 import styles from "./Sort.module.scss";
-
-interface ISortList {
-  name: string;
-  sortProperty: SortPropertyEnum;
-}
-
-const sortList: ISortList[] = [
-  { name: "по популярності", sortProperty: SortPropertyEnum.RATING },
-  { name: "спочатку дешевщі", sortProperty: SortPropertyEnum.PRICE },
-  { name: "по назві", sortProperty: SortPropertyEnum.TITLE },
-];
 
 export const Sort: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { sortState } = useSelector(filterSelector);
+  const { sortState, filterState } = useSelector(filterSelector);
 
-  const handleSort = (obj: ISortList) => {
+  const handleSort = (obj: SortTypeState) => {
     dispatch(setSort(obj));
     dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
+    updateUrlParams(filterState, obj);
   };
 
   return (
@@ -54,14 +46,15 @@ export const Sort: React.FC = () => {
 
 export const SortMobile = () => {
   const dispatch = useAppDispatch();
-  const { sortState } = useSelector(filterSelector);
+  const { sortState, filterState } = useSelector(filterSelector);
   const [isVisible, setIsVisible] = React.useState(false);
 
-  const onClickSort = (obj: ISortList) => {
+  const onClickSort = (obj: SortTypeState) => {
     dispatch(setSort(obj));
     dispatch(resetProducts());
     dispatch(fetchSanityProducts({ page: 1 }));
     setIsVisible(false);
+    updateUrlParams(filterState, obj);
   };
 
   React.useEffect(() => {
