@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import client from "@cms/lib/sanitiClient";
-import { useDebounce } from "@src/hook/debounce";
-import { useInput } from "@src/hook/input";
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useDebounce } from "@src/hooks/debounce";
+import { useInput } from "@src/hooks/input";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { fullProductFields } from "@src/redux/products/query";
 import { ISanityProduct } from "@src/redux/products/types";
 import { bodyLock, bodyUnlock, euroToHrivna, ibg } from "@src/utils";

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 import { HeaderMenu, Search } from "../components";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { cartSelector } from "../redux/cart/selectors";
 
 export const Header: React.FC = () => {

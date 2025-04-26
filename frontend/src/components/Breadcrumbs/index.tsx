@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { setFilter } from "@src/redux/filter/slice";
+import { useAppDispatch } from "@src/redux/store";
 import { categoriesList } from "@src/utils";
 import styles from "./Breadcrumbs.module.scss";
-import { useAppDispatch } from "@src/redux/store";
 
 interface IBreadcrumbsProps {
   title?: string;

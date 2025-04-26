@@ -5,7 +5,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import React from "react";
 
 import client from "../../cms/lib/sanitiClient";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 export const PriceList: React.FC = () => {
   const { windowWidth } = useGlobalContext();

@@ -7,7 +7,7 @@ import { BlockContent } from "@src/types/types";
 import client from "../../cms/lib/sanitiClient";
 import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
 import SanityTextRenderer from "../components/SanityTextRenderer";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { cartSelector } from "../redux/cart/selectors";
 import { addToCart } from "../redux/cart/slice";

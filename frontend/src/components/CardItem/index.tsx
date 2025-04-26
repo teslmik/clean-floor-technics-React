@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Tooltip } from "@mui/material";
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { cartSelector } from "@src/redux/cart/selectors";
 import { addToCart } from "@src/redux/cart/slice";
 import { ICartItem } from "@src/redux/cart/types";

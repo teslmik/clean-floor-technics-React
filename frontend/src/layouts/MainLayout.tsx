@@ -12,7 +12,7 @@ import {
   RouteMap,
 } from "../components";
 import { CallBackImg } from "../components/CallBackImg";
-import { MyGlobalContext } from "../hook/useGlobalContext";
+import { MyGlobalContext } from "../hooks/useGlobalContext";
 import { fetchNewPosts } from "../redux/posts/asyncActions";
 import { fetchSanityPromoProducts } from "../redux/products/asyncActions";
 import { fetchRates } from "../redux/rates/asyncActions";

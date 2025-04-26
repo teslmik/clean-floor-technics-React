@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { dropIn } from "@src/utils";
 import styles from "./Callback.module.scss";
 

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { dropIn } from "@src/utils";
 import styles from "./PopupAnswer.module.scss";
 

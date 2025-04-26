@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import { filterSelector } from "../redux/filter/selectors";
 import { setFilter } from "../redux/filter/slice";
 import { useAppDispatch } from "../redux/store";

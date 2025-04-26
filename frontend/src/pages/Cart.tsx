@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { useAppDispatch } from "@src/redux/store";
 import { CartItem, IDataMessage } from "../components";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { cartSelector } from "../redux/cart/selectors";
 import { clearCart } from "../redux/cart/slice";

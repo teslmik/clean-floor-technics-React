@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import { ThreeDotsLoader } from "@src/components/ThreeDotsLoader";
+import { useSyncUrlParams } from "@src/hooks/useSyncUrlParams";
 import { incrementPage, resetProducts } from "@src/redux/products/slice";
 import {
   Breadcrumbs,
@@ -13,7 +14,7 @@ import {
   Sort,
   SortMobile,
 } from "../components";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { setFilter } from "../redux/filter/slice";
 import { fetchSanityProducts } from "../redux/products/asyncActions";
@@ -22,6 +23,7 @@ import { Status } from "../redux/products/types";
 import { useAppDispatch } from "../redux/store";
 
 const Catalog: React.FC = () => {
+  useSyncUrlParams();
   const dispatch = useAppDispatch();
   const { items, status, page, hasMore } = useSelector(productsSelector);
   const { windowWidth } = useGlobalContext();

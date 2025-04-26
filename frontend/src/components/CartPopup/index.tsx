@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { cartSelector } from "@src/redux/cart/selectors";
 import { decrement, increment, removeFromCart } from "@src/redux/cart/slice";
 import { useAppDispatch } from "@src/redux/store";

@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { useGlobalContext } from "@src/hook/useGlobalContext";
+import { useGlobalContext } from "@src/hooks/useGlobalContext";
 import { filterSelector } from "@src/redux/filter/selectors";
 import { setFilter } from "@src/redux/filter/slice";
 import { fetchSanityProducts } from "@src/redux/products/asyncActions";

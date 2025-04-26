@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import client from "@cms/lib/sanitiClient";
 import { Breadcrumbs, ErrorInfo, LeftMenu } from "../components";
 import SanityTextRenderer from "../components/SanityTextRenderer";
-import { useGlobalContext } from "../hook/useGlobalContext";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { getPostBySlug } from "../redux/posts/query";
 import { IPostItem } from "../redux/posts/types";
