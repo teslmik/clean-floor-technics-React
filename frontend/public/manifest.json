@@ -21,6 +21,21 @@
       "purpose": "any"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/screenshot540x810.png",
+      "sizes": "540x810",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+
+    {
+      "src": "/screenshot720x1080.png",
+      "sizes": "720x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
