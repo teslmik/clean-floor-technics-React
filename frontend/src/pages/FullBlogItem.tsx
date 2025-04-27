@@ -2,8 +2,12 @@ import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 
 import client from "@cms/lib/sanitiClient";
-import { Breadcrumbs, ErrorInfo, LeftMenu } from "../components";
-import SanityTextRenderer from "../components/SanityTextRenderer";
+import {
+  Breadcrumbs,
+  ErrorInfo,
+  LeftMenu,
+  SanityTextRenderer,
+} from "../components";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { getPostBySlug } from "../redux/posts/query";

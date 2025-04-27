@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { ThreeDotsLoader } from "@src/components/ThreeDotsLoader";
 import { useSyncUrlParams } from "@src/hooks/useSyncUrlParams";
 import { incrementPage, resetProducts } from "@src/redux/products/slice";
 import {
@@ -13,6 +12,7 @@ import {
   SkeletonLoader,
   Sort,
   SortMobile,
+  ThreeDotsLoader,
 } from "../components";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";

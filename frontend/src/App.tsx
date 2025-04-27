@@ -40,12 +40,6 @@ const PayAndDelivery = React.lazy(
 const Services = React.lazy(
   () => import(/* webpackChunkName: "Services" */ "./pages/Services"),
 );
-// const Dashboard = React.lazy(
-//   () => import(/* webpackChunkName: "Dashboard" */ "./pages/Dashboard"),
-// );
-const Auth = React.lazy(
-  () => import(/* webpackChunkName: "Auth" */ "./pages/auth/index"),
-);
 const Home = React.lazy(
   () => import(/* webpackChunkName: "Home" */ "./pages/Home"),
 );
@@ -53,22 +47,6 @@ const Home = React.lazy(
 const App: React.FC = () => {
   return (
     <Routes>
-      {/* <Route
-        path={ROUTER_KEYS.AUTH}
-        element={
-          <PublicRoute>
-            <Auth />
-          </PublicRoute>
-        }
-      />
-      <Route
-        path={ROUTER_KEYS.DASHBOARD}
-        element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-        }
-      /> */}
       <Route
         path={ROUTER_KEYS.ROOT}
         element={

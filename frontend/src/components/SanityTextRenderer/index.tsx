@@ -13,9 +13,9 @@ import Phone from "./components/Phone";
 import QuoteBlock from "./components/QuoteBlock";
 import Strong from "./components/Strong";
 
-const SanityTextRenderer: React.FC<{ content: BlockContent | undefined }> = ({
-  content,
-}) => {
+export const SanityTextRenderer: React.FC<{
+  content: BlockContent | undefined;
+}> = ({ content }) => {
   const components: Partial<PortableTextReactComponents> = {
     marks: {
       strong: Strong,
@@ -44,5 +44,3 @@ const SanityTextRenderer: React.FC<{ content: BlockContent | undefined }> = ({
 
   return <PortableText value={content} components={components} />;
 };
-
-export default SanityTextRenderer;

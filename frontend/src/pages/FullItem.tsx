@@ -5,8 +5,12 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { BlockContent } from "@src/types/types";
 import client from "../../cms/lib/sanitiClient";
-import { Breadcrumbs, CircleLoader, SwiperItem } from "../components";
-import SanityTextRenderer from "../components/SanityTextRenderer";
+import {
+  Breadcrumbs,
+  CircleLoader,
+  SanityTextRenderer,
+  SwiperItem,
+} from "../components";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import Head from "../layouts/Head";
 import { cartSelector } from "../redux/cart/selectors";

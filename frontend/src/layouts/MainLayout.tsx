@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -115,6 +116,7 @@ const MainLayout: React.FC = () => {
         </AnimatePresence>
         <CallBackImg setIsOpenCallback={setIsOpenCallback} />
       </MyGlobalContext.Provider>
+      <SpeedInsights />
     </div>
   );
 };
