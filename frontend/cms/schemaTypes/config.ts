@@ -35,6 +35,14 @@ const Config = defineType({
       options: { sortable: true },
     }),
     defineField({
+      name: "partnerSlider",
+      type: "array",
+      title: "Partners Slider",
+      description: "Images for the partners slider with customizable order",
+      of: [{ type: "partnerSlider" }],
+      options: { sortable: true },
+    }),
+    defineField({
       name: "priceList",
       title: "Price List (PDF)",
       type: "file",

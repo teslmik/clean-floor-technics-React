@@ -46,6 +46,23 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type PartnerSlider = {
+  _type: "partnerSlider";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  altText?: string;
+  url?: string;
+};
+
 export type InstagramPost = {
   _type: "instagramPost";
   url?: string;
@@ -170,6 +187,11 @@ export type Config = {
     {
       _key: string;
     } & MainSliderImage
+  >;
+  partnerSlider?: Array<
+    {
+      _key: string;
+    } & PartnerSlider
   >;
   priceList?: {
     asset?: {
@@ -358,6 +380,7 @@ export type AllSanitySchemaTypes =
   | SanityImagePalette
   | SanityImageDimensions
   | Geopoint
+  | PartnerSlider
   | InstagramPost
   | MainSliderImage
   | ProductDescription
