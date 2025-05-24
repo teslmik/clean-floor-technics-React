@@ -16,6 +16,7 @@ export * from "./Header";
 export * from "./HeaderMenu";
 export * from "./LeftMenu";
 export * from "./NotFoundBlock";
+export * from "./PartnersSlider";
 export * from "./PopupAnswer";
 export * from "./PrivateRoutes";
 export * from "./PublicRoutes";
